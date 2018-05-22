@@ -50,13 +50,17 @@ const loadTrip = () => {
   const singleTrip = $('#single-trip');
   singleTrip.empty();
 
-  axios.get(URL + '1')
+  axios.get(URL + '\/200')
     .then((response) => {
       reportStatus(`Successfully loaded trip data`);
       let trip = response.data;
       singleTrip.append(`<li>Name: ${trip.name}</li>`);
       singleTrip.append(`<li>Continent: ${trip.continent}</li>`);
-      console.log('Doing a thing');
+      singleTrip.append(`<li>About: ${trip.about}</li>`);
+      singleTrip.append(`<li>Category: ${trip.category}</li>`);
+      singleTrip.append(`<li>Weeks: ${trip.weeks}</li>`);
+      singleTrip.append(`<li>Cost: ${trip.cost}</li>`);
+      console.log('Getting a single trip');
     })
     .catch((error) => {
       reportStatus(`Encountered an error while loading trips: ${error.message}`);
@@ -129,4 +133,5 @@ $(document).ready(() => {
   $('#trip-table').on('click', "td", function() {
     alert($(this).text());
   } )
+  $('#trip-table').on('click', "td", loadTrip());
 });
