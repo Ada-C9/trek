@@ -38,10 +38,17 @@ const loadTrips = () => {
     reportStatus(`Error loading trips: ${error.message}`);
     console.log(error);
   });
-
 };
 
+//
+// View Trip Details
+//
+const loadDetails = function loadDetails(trip) {
+
+  $('#trip-details').html(`Trip Details`)
+};
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
+  $('li').click(loadDetails);
 });

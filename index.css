@@ -1,0 +1,50 @@
+body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 25vw 30vw 30vw 10vw;
+  grid-gap: 1em;
+  margin: 0;
+}
+
+header,
+footer {
+  grid-column: 1 / 4;
+  background-color: rgb(146,159,173);
+  color: rgb(245,245,245);
+}
+
+header {
+  grid-row: 1 / 2;
+  background-image: url(header.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  font-family: 'Kavivanar', cursive;
+  font-weight: bolder;
+  font-size: 8em;
+  margin: .5em 0 0 1.75em;
+  text-shadow:
+  0px 4px 3px rgba(14,98,81,0.4),
+  0px 8px 13px rgba(14,98,81,0.4),
+  0px 18px 23px rgba(14,98,81,0.4);
+}
+
+footer {
+  grid-row: 4 / 5;
+}
+
+section.current-trips {
+  grid-column: 1 / 2;
+}
+
+section.trip-details {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+section.new-trip {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
