@@ -16,6 +16,8 @@ const loadTrips = () => {
     reportStatus(`Successfully loaded ${response.data.length} trips.`);
     response.data.forEach((trip) => {
       trips.append(`<li>${trip.name}</li>`);
+      trips.append(`<span>${trip.id}</span>`);
+      $('span').hide();
     });
   })
   .catch((error) => {
@@ -29,6 +31,7 @@ $(document).ready(() => {
     loadTrips();
   });
   $('ul').on('click', 'li', function() {
-    let tripName = $(this).text();
+    let tripId = $(this).next().text();
+    console.log(tripId);
   });
 });
