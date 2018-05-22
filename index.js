@@ -11,7 +11,15 @@ const loadTrips = () => {
   reportStatus("Loading trips...")
 
   axios.get(URL)
-
+  .then((response) => {
+    response.data.forEach((trip) => {
+      $('#trip-list').append(`<li>${trip.name}</trip>`);
+    });
+    reportStatus('Trips loaded :)');
+  })
+  .catch((error) => {
+    reportStatus(`Error: ${error.message}`);
+  })
 };
 
 
