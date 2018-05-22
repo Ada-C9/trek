@@ -11,7 +11,7 @@ const reportError = (message, errors) => {
 
 
 // axios.get(allTripsUrl)
-const getTrips = function getTrips() {
+const loadTrips = function loadTrips() {
   // console.log("Am i inside?");
   let tripList = $('.trips')
 
@@ -24,9 +24,21 @@ const getTrips = function getTrips() {
     });
     reportStatus('Trips Loaded!');
   })
+  .catch((error) => {
+    console.log(error);
+    if (error.response.data && error.response.data.errors) {
+      // User our new helper method
+      reportError(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Error: ${error.message }`);
+    }
+  });
 };
 
 $(document).ready(() => {
-  // $('#load').click(loadWonders);
-  getTrips()
+  $('#load').click(loadTrips);
+  // loadTrips()
 });
