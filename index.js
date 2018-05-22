@@ -26,6 +26,38 @@ const loadTrips = () => {
   });
 };
 
+const loadTrip = (id) => {
+  reportStatus(`Loading trip ${id}`);
+
+  const trip = $('#trip');
+  trip.empty();
+
+  axios.get(URL + '/' + id)
+  .then((response) => {
+    console.log(response.status);
+    if (response.status == 200) {
+      reportStatus(`Successfully loaded trip ${id}.`);
+      let data = response.data;
+      $('#trip').append(`
+        <h3>Name: ${data.name}</h3>
+        <div>
+        <p><strong>Continent: </strong>${data.continent}</p>
+        <p><strong>Category: </strong>${data.category}</p>
+        <p><strong>Weeks: </strong>${data.weeks}</p>
+        <p><strong>Cost: </strong>$${data.cost}</p>
+        <p><strong>About: </strong><p>${data.about}</p>
+        </div>
+        `);
+    } else {
+      reportStatus(`There was a problem loading the trip: ${response.statusText}.`);
+    }
+  })
+  .catch((error) => {
+    reportStatus(`There was a problem loading the trip: ${error.message}`);
+    console.log(error);
+  });
+}
+
 $(document).ready(() => {
   $('#display-trips').click(() => {
     loadTrips();
@@ -33,5 +65,6 @@ $(document).ready(() => {
   $('ul').on('click', 'li', function() {
     let tripId = $(this).next().text();
     console.log(tripId);
+    loadTrip(tripId);
   });
 });
