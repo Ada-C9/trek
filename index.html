@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Get Outta Here</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Trek</h1>
+      </header>
+
+      <button class="hollow button" id="trips-button">See All Trips</button>
+
+      <section class="data grid-container">
+        <section class="all-trips grid-item">
+          <ul id="trip-list"></ul>
+        </section>
+
+        <aside class="trip-details grid-item">
+          <section id="details">
+            <h2>Trip Details</h2>
+          </section>
+
+          <section class="reserve-form" id="reserve">
+            <h2>Reserve Trip</h2>
+            <form id="pet-form">
+              <div>
+                <label for="name">Name</label>
+                <input id="name" type="text" name="name" />
+              </div>
+              <input type="submit" name="reserve" value="Reserve" />
+            </form>
+          </section>
+
+        </aside>
+      </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>

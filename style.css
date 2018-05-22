@@ -1,0 +1,13 @@
+header {
+  border-bottom: solid 1px;
+}
+
+h2 {
+  text-align: center;
+  border-bottom: solid 1px;
+}
+
+.grid-container {
+  display: grid;
+  grid-gap: 50px;
+}
