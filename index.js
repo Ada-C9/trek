@@ -34,7 +34,6 @@ const loadTrip = (id) => {
 
   axios.get(URL + '/' + id)
   .then((response) => {
-    console.log(response.status);
     if (response.status == 200) {
       reportStatus(`Successfully loaded trip ${id}.`);
       let data = response.data;
@@ -64,7 +63,6 @@ $(document).ready(() => {
   });
   $('ul').on('click', 'li', function() {
     let tripId = $(this).next().text();
-    console.log(tripId);
     loadTrip(tripId);
   });
 });
