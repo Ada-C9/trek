@@ -1,6 +1,8 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
+//
 // Report Status and Errors to User
+//
 const reportStatus = (message) => {
   $('#status-message').html(message)
 };
@@ -29,7 +31,7 @@ const loadTrips = () => {
   .then((response) => {
     reportStatus(`Successfully loaded ${response.data.length} trips`);
     response.data.forEach((trip) => {
-      tripList.append(`<li>${trip.name}</li>`);
+      tripList.append(`<li><a href='#'>${trip.name}</a></li>`);
     });
   })
   .catch((error) => {
