@@ -1,7 +1,7 @@
 body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 25vw 30vw 30vw 10vw;
+  grid-template-rows: 25vw 30vw 30vw 20vw;
   grid-gap: 1em;
   margin: 0;
 }
@@ -11,6 +11,7 @@ footer {
   grid-column: 1 / 4;
   background-color: rgb(146,159,173);
   color: rgb(245,245,245);
+  font-family: 'Kavivanar', cursive;
 }
 
 header {
@@ -21,7 +22,6 @@ header {
 }
 
 h1 {
-  font-family: 'Kavivanar', cursive;
   font-weight: bolder;
   font-size: 8em;
   margin: .5em 0 0 1.75em;
@@ -33,6 +33,11 @@ h1 {
 
 footer {
   grid-row: 4 / 5;
+  background: linear-gradient( rgba(20, 20, 20, .5), rgba(20, 20, 20, .5)), url(footer.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  font-size: 2em;
 }
 
 section.current-trips {
