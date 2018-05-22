@@ -12,8 +12,9 @@ const loadTrips = () => {
 
   axios.get(URL)
   .then((response) => {
+    $('#trips-table').append("<tr><th>All Trips</th></tr>")
     response.data.forEach((trip) => {
-      $('#trip-list').append(`<li>${trip.name}</trip>`);
+      $('#trips-table').append(`<tr><td>${trip.name}</td></tr>`);
     });
     reportStatus('Trips loaded :)');
   })
