@@ -16,7 +16,30 @@ const reportError = (message, errors) => {
   reportStatus(content)
 };
 
+//
+// Load all Trips
+//
+const loadTrips = () => {
+  reportStatus('Please wait, we\'re gathering our Trips...');
+
+  const tripList = $('#trip-list');
+  tripList.empty();
+
+  axios.get(URL)
+  .then((response) => {
+    reportStatus(`Successfully loaded ${response.data.length} trips`);
+    response.data.forEach((trip) => {
+      tripList.append(`<li>${trip.name}</li>`);
+    });
+  })
+  .catch((error) => {
+    reportStatus(`Error loading trips: ${error.message}`);
+    console.log(error);
+  });
+
+};
+
 
 $(document).ready(() => {
-
+  $('#load').click(loadTrips);
 });
