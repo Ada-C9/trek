@@ -28,4 +28,7 @@ $(document).ready(() => {
   $('#display-trips').click(() => {
     loadTrips();
   });
+  $('ul').on('click', 'li', function() {
+    let tripName = $(this).text();
+  });
 });
