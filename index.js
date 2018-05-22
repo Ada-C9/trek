@@ -126,4 +126,7 @@ $(document).ready(() => {
   $('#load-all-trips').click(loadTrips);
   $('#reserve-trip').submit(reserveTrip);
   //need event for loading single trip on click of ul link from trip-table
+  $('#trip-table').on('click', "td", function() {
+    alert($(this).text());
+  } )
 });
