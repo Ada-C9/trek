@@ -23,7 +23,11 @@
 
     <section class="trips">
       <h3>All Trips</h3>
-      <ul id="trip-list"></ul>
+      <table id="trip-table">
+        <tr>
+          <td></td>
+        </tr>
+      </table>
     </section>
 
     <section class="specific-trip">
@@ -33,8 +37,19 @@
 
     <section class="reserve-trip">
       <h3>Reserve Trip</h3>
+      <form id="reserve-trip">
+        <div>
+          <label for"name">Your Name</label>
+          <input type="text" name="name" />
+        </div>
+        <div>
+          <label for"trip">Trip</label>
+          <input type="text" name="trip" disabled>
+        </div>
+
+        <input type="submit" name="reserve-trip" value="Reserve Trip" />
+      </form>
       <p>This should be hidden unless there has been a click event on a trip-list ul</p>
-      <p>Field for your name</p>
       <p>Pre-filled in Trip: <trip name> from whatever was clicked</p>
     </section>
   </main>

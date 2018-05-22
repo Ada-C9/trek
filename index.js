@@ -24,14 +24,21 @@ const reportError = (message, errors) => {
 const loadTrips = () => {
   reportStatus('One sec! Loading trips...');
 
-  const tripList = $('#trip-list');
+  // const tripList = $('#trip-list');
+  const tripList = $('#trip-table');
   tripList.empty();
 
   axios.get(URL)
+    // .then((response) => {
+    //   reportStatus(`Successfully loaded ${response.data.length} trips`);
+    //   response.data.forEach((trip) => {
+    //     tripList.append(`<li>${trip.name}</li>`);
+    //   });
+    // })
     .then((response) => {
       reportStatus(`Successfully loaded ${response.data.length} trips`);
       response.data.forEach((trip) => {
-        tripList.append(`<li>${trip.name}</li>`);
+        tripList.append(`<tr><td>${trip.name}</tr></td>`);
       });
     })
     .catch((error) => {
