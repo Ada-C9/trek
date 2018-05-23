@@ -32,7 +32,8 @@ const loadTrips = () => {
     .then((response) => {
       reportStatus(`Successfully loaded ${response.data.length} trips`);
       response.data.forEach((trip) => {
-        tripList.append(`<tr><td>${trip.name}</tr></td>`);
+        let id = trip.id
+        tripList.append(`<tr><td data-id=${id}>${trip.name}</tr></td>`);
       });
     })
     .catch((error) => {
@@ -50,7 +51,13 @@ const loadTrip = () => {
   const singleTrip = $('#single-trip');
   singleTrip.empty();
 
-  axios.get(URL + '\/200')
+  let tripId = $('#trip-table td').attr('data-id')
+
+
+  console.log(tripId)
+  axios.get(URL + '\/${tripID}')
+  // axios.get(URL + '\/200') //need to change this to not be hardcoded to trip 200
+  // axios.get(URL + '\/${tripID}')
     .then((response) => {
       reportStatus(`Successfully loaded trip data`);
       let trip = response.data;
@@ -133,5 +140,10 @@ $(document).ready(() => {
   $('#trip-table').on('click', "td", function() {
     alert($(this).text());
   } )
-  $('#trip-table').on('click', "td", loadTrip());
+  // $('#trip-table').on('click', "td", loadTrip);
+  $('#trip-table').on('click', 'td', function() {
+    let tripId = $(this).attr('data-id');
+
+    alert(tripId);
+  })
 });
