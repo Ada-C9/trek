@@ -1,13 +1,32 @@
 header {
-  border-bottom: solid 1px;
+  border-bottom: 1px solid;
 }
 
 h2 {
   text-align: center;
-  border-bottom: solid 1px;
+  border-bottom: 1px solid;
+}
+
+p {
+  text-align: center;
+  border-bottom: 1px solid;
+}
+
+p:last-of-type {
+  border-bottom: none;
 }
 
 .grid-container {
   display: grid;
-  grid-gap: 50px;
+  grid-gap: 20px;
+  grid-template-columns: auto auto;
+}
+
+.details, .reserve-form, .all-trips {
+  border: 1px solid;
+  margin-bottom: 3rem;
+}
+
+.display-none {
+  display: none;
 }

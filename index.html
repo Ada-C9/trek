@@ -14,20 +14,22 @@
       </header>
 
       <button class="hollow button" id="trips-button">See All Trips</button>
+      <p id="status-message"></p>
 
       <section class="data grid-container">
-        <section class="all-trips grid-item">
-          <ul id="trip-list"></ul>
+        <section class="all-trips display-none grid-item">
+          <h2>All Trips</h2>
+          <div id="trip-list"></div>
         </section>
 
-        <aside class="trip-details grid-item">
-          <section id="details">
+        <aside class="trip-details display-none grid-item">
+          <section class="details" id="details">
             <h2>Trip Details</h2>
           </section>
 
           <section class="reserve-form" id="reserve">
             <h2>Reserve Trip</h2>
-            <form id="pet-form">
+            <form id="reserve-form">
               <div>
                 <label for="name">Name</label>
                 <input id="name" type="text" name="name" />
