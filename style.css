@@ -1,9 +1,18 @@
 body {
   font-family: sans-serif;
+}
+
+.list-container {
   padding-left: 1em;
   padding-right: 1em;
 }
 
+h1 {
+  padding: .5em;
+  padding-bottom: .25em;
+  border-bottom: solid 1px black;
+  margin: 0;
+}
 .table {
   max-width: 20%;
   text-align: center;
@@ -11,4 +20,5 @@ body {
 
 .btn.btn-outline-info {
   margin-bottom: 2em;
+  margin-top: 1em;
 }
