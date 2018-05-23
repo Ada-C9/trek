@@ -26,6 +26,8 @@ const loadTrips = () => {
       console.log(error);
       reportStatus(`Error: ${error.message}`);
     });
+
+
 }
 
 $(document).ready(() => {
