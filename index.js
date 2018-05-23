@@ -108,12 +108,12 @@ const clearForm = () => {
 
    reportStatus('Reserving trip...');
 
-   //url will be different and need to interpolate the trip ID that was selected
-   axios.post(URL + '200' + '\/reservations', tripData)
+   // axios.post(URL + '200' + '\/reservations', tripData)
+   axios.post(URL + tripData.trip_id + '\/reservations', tripData)
    // axios.post(URL + tripData[trip_id] + '\/reservations', tripData)
      .then((response) => {
-       reportStatus(`Successfully reserved a trip with ID ${response.data.id}!`);
-       console.log('Posting a trip');
+       reportStatus(`Successfully reserved a trip with ID ${response.data.trip_id}!`);
+
        clearForm();
      })
      .catch((error) => {
