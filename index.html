@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>Trek with axios</title>
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script type="text/javascript" src="trek.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
+  <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+  <!-- <script type="text/javascript" src="trek.js"></script> -->
   <link rel="stylesheet" href="trek.css">
 </head>
 <body>
@@ -19,7 +19,13 @@
 
     <section class="current-treks">
       <button id="load">See All Trips!</button>
-      <ul id="trek-list"></ul>
+      <ul id="trek-list">
+        <!-- <li id="trek-detail"></li> -->
+      </ul>
+    </section>
+
+    <section class="current-trip">
+      <ul id="trek-detail"></ul>
     </section>
 
     <!-- <section class="new-pet"> -->
@@ -48,5 +54,12 @@
   <footer>
     <h6>©2018, Luxi Lindsey</h6>
   </footer>
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="trek.js"></script>
 </body>
 </html>
