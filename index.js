@@ -51,12 +51,14 @@ const getTripData = (trip_id) => {
   .then((response) => {
     console.log(response);
     reportStatus(`Successfully loaded trip details for: ${response.data.name}`);
-    tripDetails.append(`<li>Trip Name: ${response.data.name}</li>`);
-    tripDetails.append(`<li>Travel Category: ${response.data.category}</li>`);
-    tripDetails.append(`<li>Continent: ${response.data.continent}</li>`);
-    tripDetails.append(`<li>Cost: $${response.data.cost}</li>`);
-    tripDetails.append(`<li>Weeks of Travel: ${response.data.weeks}</li>`);
-    tripDetails.append(`<li>About this trip: ${response.data.about}</li>`);
+    tripDetails.append(
+      `<li><strong>Trip Name: ${response.data.name}</strong></li>
+      <li>Travel Category: ${response.data.category}</li>
+      <li>Continent: ${response.data.continent}</li>
+      <li>Cost: $${response.data.cost}</li>
+      <li>Weeks of Travel: ${response.data.weeks}</li>
+      <li>About this Trip:</li>
+      <li>${response.data.about}</li>`);
   });
 }
 

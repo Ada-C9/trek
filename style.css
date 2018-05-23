@@ -5,6 +5,11 @@ body {
     background-attachment: fixed;
 }
 
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 h1 {
   color: #213F38;
   text-align: center;
@@ -21,4 +26,43 @@ h1 {
   font-family: 'Cabin Sketch', cursive;
   font-size: 40px;
 
+}
+
+button {
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #773252;
+  color: white;
+}
+
+#status-message {
+  text-align: center;
+  background-color: rgba(231, 242, 147,.4);
+  padding: 10px;
+  border-radius: 15px;
+}
+
+#load {
+  margin-top: 10px;
+  margin-left: 200px;
+}
+
+#trip-details li {
+  list-style-type: none;
+}
+
+#trip-details {
+  background-color: rgba(249, 247, 252,.4);
+  padding: 10px;
+  border-radius: 15px;
+  margin: 20px;
+  margin-top: 50px;
+}
+
+#trip-list {
+  background-color: rgba(249, 247, 252,.4);
+  padding: 20px;
+  padding-left: 40px;
+  border-radius: 15px;
+  margin: 20px;
 }
