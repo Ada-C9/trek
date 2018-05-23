@@ -1,4 +1,4 @@
-const URL = 'https://ada-backtrek-api.herokuapp.com/trips'
+const URL = 'https://ada-backtrek-api.herokuapp.com/trips/'
 
 const reportStatus = (message) => {
   $('#status-message').html(message);
@@ -13,9 +13,14 @@ const loadTrips = () => {
   axios.get(URL)
   .then((response) => {
     $('#trips-table').append("<tr><th>All Trips</th></tr>")
+
     response.data.forEach((trip) => {
       $('#trips-table').append(`<tr><td>${trip.name}</td></tr>`);
-    });
+
+      $(`tr:nth-child(${trip.id + 1})`).click(function() {
+        showTrip(trip.id);
+      })
+    })
     reportStatus('Trips loaded :)');
   })
   .catch((error) => {
@@ -23,9 +28,27 @@ const loadTrips = () => {
   })
 };
 
+const showTrip = (id) => {
+  const tripInfo = $('#details-container');
+  tripInfo.empty();
 
+  axios.get(URL + id)
+  .then((response) => {
+    let tripData = ["name", "continent", "category", "weeks", "cost", "about"];
+
+    tripData.forEach((item) => {
+      let info = response.data[item];
+
+      tripInfo.append(`<p> <strong>${item}:</strong> ${info} </p>`);
+    })
+
+  })
+  .catch((error) => {
+    reportStatus(`Error: ${error.message}`);
+  })
+};
 
 
 $(document).ready(() => {
-  $('#get-trips').click(loadTrips)
+  $('#get-trips').click(loadTrips);
 })
