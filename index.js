@@ -10,13 +10,6 @@ const clearContent = (id) => {
   return $(`#${id}`);
 };
 
-const getFormData = () => {
-  let data = {};
-  data['name'] = $('input[name="name"]').val();
-  data['email'] = $('input[name="email"]').val();
-  return data;
-};
-
 const clearForm = () => {
   $('input[name="name"]').val('');
   $('input[name="email"]').val('');
@@ -25,6 +18,7 @@ const clearForm = () => {
 const getTrips = () => {
   clearContent('trip-list').empty();
   clearContent('show-trip').empty();
+  $('#reserve-trip').css('display', 'none');
 
   reportStatus('Loading Trips...');
 

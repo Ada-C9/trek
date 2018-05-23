@@ -40,6 +40,7 @@ h1, button[name] {
 
 #trip-list li {
   margin: 1em 0em;
+  height: 40px;
 }
 
 #trip-list li:first-child {
