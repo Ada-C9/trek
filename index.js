@@ -38,8 +38,7 @@ const showTrip = (event) => {
   axios.get(URL + `/${tripId}`)
     .then((response) => {
       console.log(response.data);
-      // let html = buildTrip(response.data);
-      $('#show-trip').append(buildTrip(response.data));
+      $('#show-trip').append( buildTrip(response.data) );
       reportStatus(`Trip #${tripId} Loaded!`);
     })
     .catch((error) => {
@@ -50,13 +49,13 @@ const showTrip = (event) => {
 
 const buildTrip = (tripData) => {
   return (`<div>
-            <h3>Name: ${tripData.name} </h3>
-            <p>Continent: ${tripData.continent} </p>
-            <p>Category: ${tripData.category} </p>
-            <p>Weeks: ${tripData.weeks} </p>
-            <p>Cost: $${tripData.cost} </p>
-            <p>About: ${tripData.about} </p>
-          </div>`);
+    <h3>Name: ${tripData.name} </h3>
+    <p>Continent: ${tripData.continent} </p>
+    <p>Category: ${tripData.category} </p>
+    <p>Weeks: ${tripData.weeks} </p>
+    <p>Cost: $${tripData.cost} </p>
+    <p>About: ${tripData.about} </p>
+    </div>`);
 };
 
 $(document).ready(() => {
