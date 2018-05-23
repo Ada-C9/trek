@@ -14,8 +14,10 @@ const reportError = (message, errors) => {
       content += `<li>${field}: ${problem}</li>`;
     }
   }
-  content += "</ul>";
-  reportStatus(content);
+  content += "</ul> <button class='button' data-open='reserveModal' data-close aria-label='Close modal'>Try again!</button>";
+  console.log(`Contend---> ${content}`);
+  $(`#reservation-message`).html(content);
+  // reportStatus(content);
 };
 
 //______________________________________________________
@@ -99,7 +101,7 @@ const loadATrip = (tripID) => {
   }
 
   const reserve = (event) => {
-    // to avoid a page reload:
+    // to avoid the page to reload:
     event.preventDefault();
 
     const reservationData = readFormData();
@@ -108,26 +110,31 @@ const loadATrip = (tripID) => {
     const reserveURL = `${allTripsURL}/${$('#trip-id').html()}/reservations`;
     // console.log(reserveURL);
 
-    reportStatus('Making reservation...');
+    // reportStatus('Making reservation...');
 
     axios.post(reserveURL, reservationData)
     .then((response) => {
-      reportStatus(`Successfully created a reservation with id ${response.data.trip_id}!`);
+      // reportStatus(`Successfully created a reservation with id ${response.data.trip_id}!`);
       // console.log(response);
       clearForm();
+      $(`#reservation-message`).html(`Successfully created a reservation with id <span id="trip-id-confirm">${response.data.trip_id}</span>!`)
     })
     .catch((error) => {
       console.log(error.response);
       if (error.response.data && error.response.data.errors) {
-        reportError(
-          `Encountered an error: ${error.message}`,
-          error.response.data.errors
-        );
+        reportError(`Encountered an error: ${error.message}`,
+          error.response.data.errors);
+        // $(`#reservation-message`).html(`put error....!`)
       } else {
-        reportStatus(`Encountered an error: ${error.message}`);
+        // reportStatus(`Encountered an error: ${error.message}`);
+        $(`#reservation-message`).html(`Encountered an error: ${error.message}`)
       }
     });
+
+
   };
+
+  // $('.reveal').html(`<p id="reservation-message">Successfully created a reservation with id ${response.data.trip_id}!</p>`)
 
 
   // ______________________________________________________
@@ -150,10 +157,12 @@ const loadATrip = (tripID) => {
     // this is where I was getting the Modal error.
     $(document).foundation();
 
+
+
   });
 
 
-  
+
 
 
 

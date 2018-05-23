@@ -49,7 +49,7 @@
             <ul id="single-trip"></ul>
 
             <div class="make-reser-btn">
-            <button class="button" data-open="reserveModal">Reserve this Trip!</button>
+              <button class="button" data-open="reserveModal">Reserve this Trip!</button>
             </div>
           </div>
         </div>
@@ -78,7 +78,8 @@
             <div>
               <label for="trip">Trip name:</label>
               <label id="trip-name"></label>
-              <input class="button" type="submit" name="add-reservation" value="Reserve!" />
+              <input class="button" type="submit" name="add-reservation" value="Reserve!" data-open="makeReservation" data-close aria-label="Close modal"/>
+              <!-- Submit the form to create a new reservation and closes the modal as well. Also calls for another modal to open with the confirmation that the reservation was created or not. -->
             </div>
           </form>
 
@@ -87,8 +88,16 @@
           </button>
         </div>
 
-        <label class="hidden" id="trip-id"></label></div>
+        <!-- Modal for confirmation/error message after reservation is created.  -->
+        <div class="reveal reserve-trip" id="makeReservation" data-reveal>
+          <h4 id="reservation-message"><!--  message will go here (see js)--></h4>
+          <button class="close-button" data-close aria-label="Close reveal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
+        <!-- trip id info for making a post request -->
+        <label class="hidden" id="trip-id"></label></div>
       </div>
     </div>
   </div>

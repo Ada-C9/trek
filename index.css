@@ -16,7 +16,7 @@ main {
   border: ;
 }
 
-li.trip{
+li.trip, #reservation-message li{
   list-style: none;
   padding-bottom: 10px;
 }
@@ -41,4 +41,16 @@ div.header.medium-cell-block-container{
 
 .make-reser-btn{
   text-align: center;
+}
+
+#reservation-message {
+  font-weight: bold;
+}
+
+div#makeReservation.reveal.reserve-trip{
+  background-color: #d7ecfa;
+  text-align: center;
+}
+#trip-id-confirm{
+  color: #1779ba;
 }
