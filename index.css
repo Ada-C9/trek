@@ -17,7 +17,7 @@ body {
 }
 
 #trips-info {
-  height: 88vh;
+  height: 80vh;
   overflow: scroll;
   min-width: 400px;
 }
@@ -27,12 +27,12 @@ body {
 }
 
 #trip {
-  height: 70vh;
+  height: 40vh;
   overflow: scroll;
 }
 
 #reservation {
-  height: 18vh;
+  height: 20vh;
 }
 
 /* dynamic display styles  */
