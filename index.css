@@ -88,6 +88,8 @@ button#display-trips, input[type="submit"] {
   margin: 0 auto 1em auto;
   font-size: 1em;
   padding: 5px 30px;
+  background-color: #EADEDB;
+  color: #333;
 }
 
 #trips-info, #trip-info {
@@ -98,7 +100,7 @@ button#display-trips, input[type="submit"] {
 #trips-info h2, #trip-info h2 {
   margin: 0;
   line-height: 5em;
-  background-color: #ffffff;
+  background-color: #EADEDB;
   color: #944743;
   position: sticky;
   top: 0;
