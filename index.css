@@ -125,6 +125,19 @@ li {
   border-top: solid 1px #ffffff;
 }
 
+/* error styles  */
+.error {
+  background-color: #EADEDB;
+  color: #944743;
+}
+
+.error li {
+  display: block;
+  border: none;
+  height: 2em;
+  line-height: 2em;
+}
+
 /* media queries  */
 @media only screen and (max-width: 820px) {
     /* For smaller screens: */

@@ -17,6 +17,7 @@ const reportError = (message, errors) => {
   }
   content += '</ul>';
   reportStatus(content);
+  $('#display-status ul').addClass('error');
 };
 
 // Load Trips
@@ -37,8 +38,8 @@ const loadTrips = () => {
     });
   })
   .catch((error) => {
-    reportStatus(`There was a problem loading trips: ${error.message}`);
     console.log(error);
+    reportStatus(`There was a problem loading the trips: ${error.response.statusText}.`);
   });
 };
 
@@ -51,6 +52,7 @@ const loadTrip = (id) => {
   axios.get(URL + '/' + id)
   .then((response) => {
     if (response.status == 200) {
+      console.log();
       reportStatus(`Successfully loaded trip ${id}.`);
       let data = response.data;
       $('#trip').append(`
@@ -60,17 +62,16 @@ const loadTrip = (id) => {
         <p><strong>Category: </strong>${data.category}</p>
         <p><strong>Weeks: </strong>${data.weeks}</p>
         <p><strong>Cost: </strong>$${data.cost}</p></div>
-      `);
-      $('#about-trip').html(`        <strong>About: </strong><p>${data.about}</p>`);
-      $('#trip').append(`<span>${id}</span>`);
-      $('span').hide();
+        `);
+        $('#about-trip').html(`        <strong>About: </strong><p>${data.about}</p>`);
+        $('#trip').append(`<span>${id}</span>`);
+        $('span').hide();
     } else {
-      reportStatus(`There was a problem loading the trip: ${response.statusText}.`);
+      reportStatus(`There was a problem loading the trip: ${response.statusText}`);
     }
   })
   .catch((error) => {
-    reportStatus(`There was a problem loading the trip: ${error.message}`);
-    console.log(error);
+    reportStatus(`There was a problem loading the trip: ${error.response.statusText}`);
   });
 };
 
@@ -118,7 +119,7 @@ const reserveTrip = (event) => {
     if (error.response.data && error.response.data.errors) {
       reportError(`There was an error reserving the trip: ${error}`, error.response.data.errors);
     } else {
-      reportStatus(`There was a problem reserving the trip: ${error.response.statusText}.`);
+      reportError(`There was a problem reserving the trip: ${error.response.statusText}.`, null);
     }
   });
 
