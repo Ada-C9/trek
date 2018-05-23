@@ -61,7 +61,6 @@ footer {
   grid-column-end: 2;
   grid-row-start: 3;
   grid-row-end: 4;
-  width: 100%;
   border: black solid 1px;
 }
 

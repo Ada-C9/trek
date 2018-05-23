@@ -51,7 +51,9 @@ const loadDetails = function loadDetails(event) {
 
   axios.get(tripLink)
     .then((response) => {
+      reportStatus('Trip Details successfully retrieved.');
       const trip = response.data;
+      tripDetails.empty();
       tripDetails.append(
         `<ul>
         <li>Name: ${trip.name}</li>
@@ -62,9 +64,10 @@ const loadDetails = function loadDetails(event) {
         <li>Price: $${trip.cost}</li>
         <li>Description: ${trip.about}</li>
         </ul>
-        <button>Click to Book </button>
+        <button id='show-form'>Let's Go!</button>
         `
       );
+
     })
     .catch((error) => {
       reportStatus ( `Error loading trip: ${error.message}`);
@@ -73,6 +76,8 @@ const loadDetails = function loadDetails(event) {
 };
 
 $(document).ready(() => {
+  $('form').hide();
   $('#load').click(loadTrips);
   $('#trip-list').on('click', 'a', loadDetails);
+  // $('#show-form').on('click', 'button, ')
 });
