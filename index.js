@@ -33,7 +33,6 @@ const loadTrip = (id) => {
   axios.get(URL + `/${id}`)
     .then((response) => {
       let data = response.data;
-      console.log(data.name);
       tripDetails.append(`<h2>Trip Details</h2>`);
       tripDetails.append(`<h3><strong>ID:</strong> ${data.id}</h3>`);
       tripDetails.append(`<h3><strong>Name:</strong> ${data.name}</h3>`);
@@ -45,12 +44,16 @@ const loadTrip = (id) => {
 
       reservationForm.append(`<h2>Reserve Trip</h2>`);
       reservationForm.append(
-        `<label class="user-name">Your Name:</label>
-        <input type="text" name="name" class="user-name" />`
+        `<label class="user">Your Name:</label>
+        <input type="text" name="name" class="user" />`
+      );
+      reservationForm.append(
+        `<label class="user">Your Email:</label>
+        <input type="text" name="email" class="user" />`
       );
       reservationForm.append(`<label>Trip: ${data.name}</label>`);
       reservationForm.append(
-        `<input type="submit" name="reserve-trip" value="Reserve" class="button reserve" />`
+        `<input type="submit" name="reserve-trip" value="Reserve" class="button reserve" id="res${data.id}" />`
       );
 
       reportStatus('Trip Details Loaded!');
@@ -60,10 +63,33 @@ const loadTrip = (id) => {
     })
 }
 
+const reserveTrip = (id) => {
+  let tripData = {
+    'name': $('input[name="name"]').val(),
+    'email': $('input[name="email"]').val()
+  }
+
+  reportStatus('Reserving The Trip...');
+
+  axios.post(URL + `/${id}/reservations`, tripData)
+  .then((response) => {
+    console.log(response);
+    reportStatus(`Successfully reserved this trip with the name ${response.data.name}`);
+    })
+  .catch((error) => {
+    console.log(error.response);
+    reportStatus(`Encountered an error: ${error.message}`);
+    });
+}
+
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('#trip-list').on('click', 'li', function() {
     let id = $(this).attr('id');
     loadTrip(id);
+  });
+  $('#reservation-form').on('click', '.reserve', function(){
+    let id = $(this).attr('id').substr(3);
+    reserveTrip(id);
   });
 })
