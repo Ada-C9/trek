@@ -1,8 +1,4 @@
 
-
-
-
-
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
 const showTrips = () => {
@@ -11,6 +7,8 @@ const showTrips = () => {
 
   $('#all-trips > h2').html('All Trips');
   $('#all-trips > h2').addClass('bordered-bottom')
+
+  $('#trip-list').empty();
   axios.get(URL)
   .then((response) => {
     let collection = response.data
@@ -34,14 +32,15 @@ const showDetails = (event) => {
   event.preventDefault();
   const detailsLink = event.currentTarget.getAttribute('href');
 
+  $('#trip-details').addClass('bordered');
+  $('#trip-details').empty();
+
+
+  $('#trip-details').html('<h2>Trip Details</h2>');
+  $('#trip-details > h2').addClass('bordered-bottom')
+
   axios.get(detailsLink)
     .then((response) => {
-      $('#trip-details').addClass('bordered');
-      $('#trip-details').empty();
-
-
-      $('#trip-details > h2').html('Trip Details');
-      $('#trip-details > h2').addClass('bordered-bottom')
       $('#trip-details').append(
         `<ul>
           <li><strong>Name: ${response.data.name}</strong></li>
