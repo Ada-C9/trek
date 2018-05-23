@@ -41,15 +41,15 @@ const loadTrips = () => {
   });
 };
 
-$(`#trips-list`).on(`click`, `li`, function(){
+const individualTrip = (id) => {
   console.log(this.id);
-  const tripId = this.id
+  // const tripId = this.id
   reportStatus("Loading trip details...");
 
   const trip = $('#trip');
   trip.empty();
 
-  let urlTrip = URL + tripId;
+  let urlTrip = URL + id;
   axios.get(urlTrip)
   .then((response) => {
 
@@ -69,7 +69,7 @@ $(`#trips-list`).on(`click`, `li`, function(){
     reportStatus(`Encountered an error while loading trips: ${error.message}`);
     console.log(error);
   });
-});
+};
 
 
 
@@ -80,5 +80,8 @@ $(`#trips-list`).on(`click`, `li`, function(){
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
+  $(`#trips-list`).on(`click`, `li`, function(){
+    individualTrip(this.id);
+  });
 
 });
