@@ -8,7 +8,6 @@
 }
 
 .trips:hover { background-color: #661920; }
-
 .trips:active, .trips.active { background-color: #db1d2d; }
 
 .navigation {
@@ -24,6 +23,9 @@
   display: none;
 }
 
+.content-split {
+  width: 40%;
+}
 
 body {
   background-color: #FFF7F9;
@@ -35,13 +37,8 @@ body, html {
 }
 
 .img {
-    /* The image used */
     background-image: url('etienne-desclides-119070-unsplash.jpg');
-
-    /* Full height */
     height: 30%;
-
-    /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

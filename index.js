@@ -6,8 +6,13 @@ const reportStatus = (message) => {
 
 // GET LIST HELPER
 const apiGET = (url) => {
+  const chosenTrip = $('#chosen-trip');
+  chosenTrip.empty()
+  const reservedTrip = $('#trip-id');
+  reservedTrip.empty()
   const tripList = $('#trips-list');
   tripList.empty()
+  $('#additionals').addClass(['hidden'])
 
   reportStatus('Loading Trips! Please Wait...');
 
@@ -15,7 +20,7 @@ const apiGET = (url) => {
   .then((response) => {
     response.data.forEach((adventure) => {
       tripList.append(`<li id="${adventure.id}">${adventure.name}</li>`);
-      reportStatus('Asia Trips Loaded!')
+      reportStatus(`${adventure.continent} Trips Loaded!`)
     })
   })
   .catch((error) => {
