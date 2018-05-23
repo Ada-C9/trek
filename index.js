@@ -1,5 +1,6 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips/';
 
+
 //
 // Status Management
 //
@@ -27,6 +28,7 @@ const loadTrips = () => {
   const tripList = $('#trip-table');
   tripList.empty();
 
+
   axios.get(URL)
     .then((response) => {
       reportStatus(`Successfully loaded ${response.data.length} trips`);
@@ -41,36 +43,6 @@ const loadTrips = () => {
       console.log(error);
     });
  };
-
-//
-// Loading Single Trip
-//
-// const loadTrip = () => {
-//   reportStatus('Finding that trip...');
-//
-//   const singleTrip = $('#single-trip');
-//   singleTrip.empty();
-//
-//   let tripId = $(this).attr('data-id');
-//   let tripName = $(this).attr('data-name');
-//
-//   axios.get(URL + '${tripID}')
-//     .then((response) => {
-//       reportStatus(`Successfully loaded trip data`);
-//       let trip = response.data;
-//       singleTrip.append(`<li>Name: ${trip.name}</li>`);
-//       singleTrip.append(`<li>Continent: ${trip.continent}</li>`);
-//       singleTrip.append(`<li>About: ${trip.about}</li>`);
-//       singleTrip.append(`<li>Category: ${trip.category}</li>`);
-//       singleTrip.append(`<li>Weeks: ${trip.weeks}</li>`);
-//       singleTrip.append(`<li>Cost: ${trip.cost}</li>`);
-//       console.log('Getting a single trip');
-//     })
-//     .catch((error) => {
-//       reportStatus(`Encountered an error while loading trips: ${error.message}`);
-//       console.log(error);
-//     });
-//  };
 
 //
 // Reserving Trips
@@ -132,6 +104,7 @@ $(document).ready(() => {
 
   $('#load-all-trips').click(loadTrips);
 
+  $('#trip-table tr').css('background-color', '#ffffff');
   $('.specific-trip').hide();
   $('.reserve-trip').hide();
   $('#reserve-trip').submit(reserveTrip);
