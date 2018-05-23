@@ -17,7 +17,7 @@ const reportError = (message, errors) => {
 
 
 // Load ALL Trips
-const loadTreks = () => {
+const loadTrips = () => {
   reportStatus('Loading trips...');
 
   const trekList = $('#trek-list');
@@ -31,51 +31,52 @@ const loadTreks = () => {
     reportStatus(`Successfully loaded ${response.data.length} trips!`);
     trekList.html('<h4>All Trips</h4>')
     response.data.forEach((trip) => {
-      let listTrip = $(`<li><a href=${URL}${trip.id}>${trip.name}</a></li>`);
+      let listTrip = $(`<li><a href=#>${trip.name}</a></li>`);
+
       trekList.append(listTrip);
+
+      listTrip.click(() => {
+        displayTrek(trip);
+      });
     });
   })
 
   .catch((error) => {
-    reportStatus(`Encountered an error while loading pets: ${error.message}`);
+    reportStatus(`Encountered an error while loading trips: ${error.message}`);
     console.log(error);
   });
 };
 
 
+// Show one trip's detail
+const displayTrek = (trip) => {
 
-// Show ONE Trip
-const displayTrek = (event) => {
+  const trekList = $('#trek-detail');
 
-  const trekList = $('trek-list');
-
-  axios.get(URL + id)
+  axios.get(URL + trip.id)
 
   .then((response) => {
 
-    console.log('whaatttt');
-    console.log(response);
+    // console.log('whaatttt');
+    // console.log(response.data);
 
-    const result = response.data
+    // const result = response.data
 
-    if(result) {
+    if(response) {
 
       trekList.html('<h4>Trip Details</h4>')
-      result.forEach((trip) => {
-        let html = '<li>';
-        html += `<strong>${trip.name}</strong>: `;
-        html += `${trip.continent}`;
-        html += '</li>';
+      let html = '<li>';
+        html += `Name: <strong>${trip.name}</strong>`,
+        html += `Continent: ${trip.continent}`,
+        html += '</li>',
 
-        trekList.append(html);
-      })
-
+      trekList.append(html);
     }
 
   })
 
   .catch((error) => {
-    reportStatus(`Encountered an error while loading seven wonders: ${error.message}`);
+    reportStatus(`Encountered an error while loading trip's details: ${error.message}`);
     console.log(error);
   })
 
@@ -84,6 +85,6 @@ const displayTrek = (event) => {
 
 
 $(document).ready(() => {
-  $('#load').click(loadTreks);
-  // $('#trek-list').click(displayTrek);
+  $('#load').click(loadTrips);
+  // $('#trek-detail').append(displayTrek);
 });
