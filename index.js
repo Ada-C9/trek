@@ -37,7 +37,7 @@ const showTrip = (event) => {
 
   axios.get(URL + `/${tripId}`)
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       $('#show-trip').append( buildTrip(response.data) );
       $('#reserve-trip').css('display', 'block');
       reportStatus(`Trip #${tripId} Loaded!`);
@@ -49,7 +49,7 @@ const showTrip = (event) => {
 };
 
 const buildTrip = (tripData) => {
-  return (`<div>
+  return (`<div id='${tripData.id}'>
     <h3>Name: ${tripData.name} </h3>
     <p>Continent: ${tripData.continent} </p>
     <p>Category: ${tripData.category} </p>
@@ -59,7 +59,26 @@ const buildTrip = (tripData) => {
     </div>`);
 };
 
+const reserveTrip = (event) => {
+  event.preventDefault();
+  let tripId = parseInt( $('#show-trip div')[0].id );
+  console.log(tripId);
+  // get data -> tripData
+  // console.log(event.target);
+
+  axios.post(URL + `/${tripId}/reservations`, {name: 'p', email:'p'} )
+    .then((response) => {
+      reportStatus('Trip Reserved!');
+      console.log(response);
+    })
+    .catch((error) => {
+      reportStatus('Error: trip reservation failed');
+      console.log(error.message);
+    });
+};
+
 $(document).ready(() => {
   $('#all-trips').click(getTrips);
   $('#trip-list').on('click', 'li', showTrip);
+  $('#reserve-form').submit(reserveTrip)
 });
