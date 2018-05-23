@@ -23,6 +23,10 @@
   display: none;
 }
 
+.additionals {
+  margin-left: 5%;
+}
+
 .content-split {
   width: 40%;
 }
@@ -56,10 +60,12 @@ body, html {
 ul {
   max-height: 75vh;
   overflow: scroll;
+  list-style-type: none;
 }
 li {
   padding: .5em;
   margin-left: 1em;
+  font-style: bold;
 }
 
 /* * {

@@ -19,7 +19,7 @@ const apiGET = (url) => {
   axios.get(url)
   .then((response) => {
     response.data.forEach((adventure) => {
-      tripList.append(`<li id="${adventure.id}">${adventure.name}</li>`);
+      tripList.append(`<li id="${adventure.id}">🏝 ${adventure.name} </li>`);
       reportStatus(`${adventure.continent} Trips Loaded!`)
     })
   })
@@ -85,7 +85,7 @@ const getTrip = (id) => {
   axios.get(url)
   .then((response) => {
     console.log(response)
-    chosenTrip.append(`<h1>${response.data.name}</h1><p>Continent: ${response.data.continent}</p><p>About: ${response.data.about}</p><p>Weeks: ${response.data.weeks}</p><p>Cost: $${response.data.cost}</p>`);
+    chosenTrip.append(`<h1>🏜 ${response.data.name} 🏜</h1><p>Continent: ${response.data.continent}</p><p>Weeks: ${response.data.weeks}</p><p>Cost: $${response.data.cost}</p><p>About: ${response.data.about}</p>`);
 
     reservedTrip.append(`<input type="hidden" name="trip_id" value="${response.data.id}" />`)
 
