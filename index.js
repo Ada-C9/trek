@@ -4,7 +4,7 @@ const userMessage = (message) => {
   $('#user-message').html(message)
 }
 
-const loadTrips = () => {
+const loadTrips = function loadTrips() {
   const tripList = $('#trips-list');
   tripList.empty();
   userMessage('Loading in trips..')
@@ -24,7 +24,7 @@ const loadTrips = () => {
   });
 };
 
-function loadClickedTrip(trip) {
+const loadClickedTrip = function loadClickedTrip(trip) {
    // id, name, continent, about, category, weeks and cost
   console.log(trip);
   axios.get(URL + `/${trip.id}`)
@@ -47,6 +47,18 @@ function loadClickedTrip(trip) {
     });
 
 }
+
+const reserveTrip = reserveTrip(desiredTrip) {
+  axios.get(URL + `/${trip.id}/reservations`)
+    .then((response) {
+      console.log(response);
+    })
+    .catch((error) {
+      userMessage(`Hrmm.. something has gone wrong booking this trip! ${error.message}`)
+      console.log(error);
+    })
+}
+
 
 $(document).ready (() => {
   $('#trips-button').click(loadTrips);
