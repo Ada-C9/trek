@@ -30,6 +30,7 @@ const loadTrips = () => {
   axios.get(URL)
     .then((response) => {
       reportStatus(`Successfully loaded ${response.data.length} trips`);
+      tripList.append(`<h3>All Trips</h3>`);
       response.data.forEach((trip) => {
         let id = trip.id
         tripList.append(`<tr><td data-id=${id} data-name='${trip.name}'>${trip.name}</tr></td>`);
@@ -97,6 +98,8 @@ const readFormData = () => {
 const clearForm = () => {
   FORM_FIELDS.forEach((field) => {
     inputField(field).val('');
+    //added trigger reset to clear the disabled field
+    $('#reserve-trip').trigger('reset');
   });
 }
 
@@ -130,7 +133,11 @@ const clearForm = () => {
 };
 
 $(document).ready(() => {
+
   $('#load-all-trips').click(loadTrips);
+
+  $('.specific-trip').hide();
+  $('.reserve-trip').hide();
   $('#reserve-trip').submit(reserveTrip);
 
   $('#trip-table').on('click', 'td', function() {
