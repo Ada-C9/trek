@@ -38,7 +38,7 @@ const loadTrip = function loadTrip(tripID) {
       <tr><td><strong>Weeks: </strong>${response.data.weeks}</td></tr>
       <tr><td><strong>Cost: </strong>${response.data.cost}</td></tr>
       <tr><td><strong>About: </strong></br>${response.data.about}</td></tr>`);
-      tripId.append(`<span id="${response.data.id}">Trip Name: ${response.data.name}</span>`);
+      tripId.append(`<span id="${response.data.id}"><span class="tripName">Trip Name: </span> ${response.data.name}</span>`);
       reportStatus(`Trip ${response.data.name} loaded!`)
     })
     .catch((error) => {
