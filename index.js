@@ -28,13 +28,11 @@ const loadTrips = (event) => {
   axios.get(URL) // returns a promise
     .then((response) => {
       response.data.forEach((trip) => {
-        // console.log(response.data);
-        tripList.append(`<p>${trip.name}<span>${trip.id}</span></p>`);
+        tripList.append(`<p id="${trip.id}">${trip.name}</p>`);
       });
       reportStatus('Trips loaded!')
     })
     .catch((error) => {
-      // console.log(error);
       reportStatus(`${error.message}`)
     });
 }
@@ -46,15 +44,19 @@ const loadDetails = function(event) {
   tripDetails.empty();
   tripResNum.empty();
 
-  let trip = $(this).find('span').html()
-console.log(trip);
+  let trip = event.target.id
+
   $('.trip-details').removeClass('display-none');
+
+  $('input[type="text"]').removeClass('highlight') // removes and previous error outlining from form
+
+  $('#reservation-status').html('');
+  $('#reservation-status').removeClass('status-message'); // removes previous reservation status if new trip selected
 
   reportStatus('Loading trip details! Please wait...')
 
   axios.get(`${URL}\\${trip}`) // returns a promise
     .then((response) => {
-      console.log(response.data);
       let tripData = response.data
       tripDetails.append(
         `<h2>Trip Details</h2>
@@ -66,7 +68,7 @@ console.log(trip);
         <p>About: <br/> ${tripData.about}</p>`);
 
       tripResNum.append(
-        `<p>${tripData.name}<span>${tripData.id}</span></p>`
+        `<p id="${tripData.id}">${tripData.name}</p>`
       );
 
       reportStatus('Trip details loaded!')
@@ -109,10 +111,8 @@ const reserveTrip = (event) => {
   $('p:first-of-type').removeClass('status-message');
   $('#reservation-status').addClass('status-message');
 
-  const tripID = $(`#trip-reservation-num`).find('span').html();
-
+  const tripID = $('#trip-reservation-num p').attr('id');
   const tripData = readFormData();
-  console.log(tripData);
 
   reportStatus('Making reservation...');
 
