@@ -7,65 +7,110 @@
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <section id="status-message"></section>
+  <section class="callout" id="status-message"></section>
 
-  <!-- ____________________________________
-  ALL TRIPS: -->
+
   <main>
-    <section class="all-trips">
-      <h1>All Trips</h1>
-      <button id="load">Get trips!</button>
-      <ul id="trip-list"></ul>
-    </section>
+    <div class="grid-y medium-grid-frame">
+      <div class="cell shrink header medium-cell-block-container">
+        <!-- <h1>All Trips</h1> -->
+        <div class="grid-x grid-padding-x">
+          <div class="cell medium-4">
+            <button class="small button" id="load">Get trips!</button>
+          </div>
+          <div class="cell medium-4 medium-cell-block">
+            <!-- Trip Details -->
+          </div>
+          <!-- <div class="cell medium-4">
+          A medium 4 cell
+        </div> -->
+      </div>
+    </div>
+
+
+    <div class="cell medium-auto medium-cell-block-container">
+      <div class="grid-x grid-padding-x">
+
+        <!-- ____________________________________
+        ALL TRIPS: -->
+        <div class="all-trips cell medium-4 medium-cell-block-y">
+          <h2>All Trips</h2>
+          <ul id="trip-list"></ul>
+        </div>
+
+        <!-- ____________________________________
+        DETAILS OF A SPECIFIC TRIP: -->
+        <div class="trip-details cell medium-8 medium-cell-block-y">
+          <h2>Trip Details</h2>
+          <div class="trip-info">
+            <ul id="single-trip"></ul>
+          </div>
+
+          <!-- ____________________________________
+          MAKE A RESERVATION: -->
+          <section class="reserve-trip">
+            <h1>Reserve Trip</h1>
+            <form id="reserve-block">
+              <div>
+                <label for="name">Your name:</label>
+                <input type="text" name="name" />
+              </div>
+
+              <div>
+                <label for="age">Your age:</label>
+                <input type="text" name="age" />
+              </div>
+
+              <div>
+                <label for="email">Your email:</label>
+                <input type="text" name="email" />
+              </div>
+
+              <div>
+                <label for="trip">Trip name:</label>
+                <label id="trip-name"></label></div>
+                <input class="button" type="submit" name="add-reservation" value="Reserve!" />
+              </div>
+
+              <!-- <div>
+                <input class="button" type="submit" name="add-reservation" value="Reserve!" />
+              </div> -->
+
+            </form>
+          </section>
+
+          <label class="hidden" id="trip-id"></label></div>
+
+        </div>
+      </div>
+    </div>
 
     <!-- ____________________________________
-    DETAILS OF A SPECIFIC TRIP: -->
-    <section id="details">
-      <section class="trip-details">
-        <h1>Trip Details</h1>
-        <div class="trip-info">
-          <ul id="single-trip"></ul>
-        </div>
-      </section>
+    FOOTER: -->
+    <div class="cell shrink footer">
+      <!-- <h3>Footer</h3> -->
+    </div>
+  </div>
 
-      <!-- ____________________________________
-      MAKE A RESERVATION: -->
-      <section class="reserve-trip">
-        <h1>Reserve Trip</h1>
-        <form id="reserve-block">
-          <div>
-            <label for="name">Your name:</label>
-            <input type="text" name="name" />
-          </div>
+</main>
 
-          <div>
-            <label for="age">Your age:</label>
-            <input type="text" name="age" />
-          </div>
 
-          <div>
-            <label for="email">Your email:</label>
-            <input type="text" name="email" />
-          </div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-          <div>
-            <label for="trip">Trip name:</label>
-            <label id="trip-name"></label></div>
-          </div>
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+<!-- <script src="pagination-with-styles.js"></script> -->
 
-          <input type="submit" name="add-reservation" value="Reserve!" />
-        </form>
-      </section>
+<!-- ____________________________________
+FOUNDATION: -->
+<!-- Compressed CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
 
-      <label class="hidden" id="trip-id"></label></div>
+<!-- Compressed JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script>
+<!-- ________________________________-->
 
-    </main>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
-    <!-- <script src="pagination-with-styles.js"></script> -->
-
-    <script type="text/javascript" src="index.js"></script>
-  </body>
-  </html>
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>
