@@ -26,10 +26,27 @@ body {
   min-width: 400px;
 }
 
+#trip {
+  height: 70vh;
+  overflow: scroll;
+}
+
+#reservation {
+  height: 18vh; 
+}
+
 /* dynamic display styles  */
 
 .hidden {
   display: none;
+}
+
+/* page styles  */
+
+body {
+  background-color: #944743;
+  font-family: 'Open Sans', sans-serif;
+  color: #ffffff;
 }
 
 /* media queries  */
