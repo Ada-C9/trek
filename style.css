@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Faster+One|Playfair+Display:400,400i,700,700i,900,900i');
+/* font-family: 'Playfair Display', serif;
+font-family: 'Faster One', cursive; */
+
+/* color: #BBECE8; light-green;
+color: #079BA4; green;
+color: #024B5A; blue; */
+
+body {
+  padding: 2rem;
+  text-align: center;
+  background-image: url("background.jpeg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+h1 {
+  font-family: 'Faster One', cursive;
+  font-size: 5rem;
+  color: #024B5A;
+}
+
+h2 {
+  font-size: 1.7rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+}
+
+h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+}
+
+.button {
+  background-color: #079BA4;
+  font-size: 1.5rem;
+  padding: 10px;
+}
+
+main {
+  min-height: 75%;
+}
+
+.all-trips, .trip-details, .reserve-trip {
+  background-color: rgba(255, 255, 255, 0.4);
+}
