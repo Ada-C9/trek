@@ -11,8 +11,14 @@
 
 
 
-<body id="body">
-  <aside class="current-trips">
+<body>
+
+  <header>Trek</header>
+  <section id='status-message'> </section>
+  <main id="main">
+
+
+  <aside class="current-tripss">
     <h1>All Trips</h1>
     <button type="button" name="button" id="load">Get Trips!</button>
     <ul id="trip-list"></ul>
@@ -22,15 +28,34 @@
     <article id="trip-details">
       <h1>Trip Details</h1>
 
-      <tablebody>
+      <tablebody id="tablebody">
 
       </tablebody>
     </article>
     <article id="reserve-trip">
       <h1>Reserve Trip</h1>
+      <form id="reserve-form">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" name="name" />
+        </div>
+
+        <div>
+          <label for="age">Age</label>
+          <input type="number" name="age" />
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input type="text" name="email" />
+        </div>
+
+        <input type="submit" name="add-reservation" value="Add Reservation" />
+      </form>
     </article>
   </aside>
-  <section="status-message"></section>
+    </main>
+
 </body>
 
 <script type="text/javascript" src="index.js"></script>

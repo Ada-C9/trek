@@ -2,7 +2,7 @@ const URL = 'https://ada-backtrek-api.herokuapp.com/trips/'
 
 
 const reportStatus = (message) => {
-  $('status-message').html(message);
+  $('#status-message').html(message);
 };
 
 const reportError = (message, errors) => {
@@ -59,19 +59,18 @@ const clickTrip = (trip) => {
 
     console.log('appending to table body');
 
-    $('tablebody').append(`<tr><th>Name</th><td>${response.data.name}</td></tr>`);
-
-    $('tablebody').append(`<tr><th>Id</th><td>${response.data.id}</td></tr>`); $('tablebody').append(`<tr><th>Continent</th><td>${response.data.continent}</td></tr>`);  $('tablebody').append(`<tr><th>About</th><td>${response.data.about}</td></tr>`);
-    $('tablebody').append(`<tr><th>Category</th><td>${response.data.category}</td></tr>`);
-    $('tablebody').append(`<tr><th>Weeks</th><td>${response.data.weeks}</td></tr>`);
-    $('tablebody').append(`<tr><th>Cost</th><td>${response.data.cost}</td></tr>`);
+    $('#tablebody').append(`<p>Name: ${response.data.name}</p>`);
+    $('#tablebody').append(`<p>Id: ${response.data.id}</p>`); $('#tablebody').append(`<p>Continent: ${response.data.continent}</p>`);  $('#tablebody').append(`<p>About: ${response.data.about}</p>`);
+    $('#tablebody').append(`<p>Category: ${response.data.category}</p>`);
+    $('#tablebody').append(`<p>Week: ${response.data.weeks}</p>`);
+    $('#tablebody').append(`<p>Cost: ${response.data.cost}</p>`);
 
 
 
   })
 
   .catch((error) => {
-    reportStatus(`Encountered an error while loading pets: ${error.message}`);
+    reportStatus(`Encountered an error while loading trips: ${error.message}`);
     reportError(error.message, error.response.data.errors)
     console.log(error);
 
@@ -79,18 +78,69 @@ const clickTrip = (trip) => {
 
 };
 
+const FORM_FIELDS = ['name', 'age', 'email'];
+const inputField = name => $(`#reserve-form input[name="${name}"]`);
 
+const readFormData = () => {
+  const getInput = name => {
+    const input = inputField(name).val();
+    return input ? input : undefined;
+  };
+
+  const formData = {};
+  FORM_FIELDS.forEach((field) => {
+    formData[field] = getInput(field);
+    console.log('formData')
+  });
+
+  console.log(formData)
+  return formData;
+};
+
+const clearForm = () => {
+  FORM_FIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+}
+
+const createReservation = (id) => {
+
+  const tripData = readFormData();
+  console.log(tripData);
+
+  reportStatus('Sending trip data...');
+
+  let url = URL + id + '/reservations'
+
+  axios.post(url, tripData)
+  .then((response) => {
+    console.log('success')
+    reportStatus(`Successfully made a reservation for ${response.data.name}!`);
+    clearForm();
+  })
+  .catch((error) => {
+    console.log(error.response);
+    if (error.response.data && error.response.data.errors) {
+      reportError(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}`);
+    }
+  });
+};
 
 
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('ul').on('click', 'li', function() {
-    console.log(this)
     console.log(this.id)
     clickTrip(this.id)
+    $('#reserve-form').submit((event) => {
+      event.preventDefault();
+      createReservation(this.id);
+    })
   });
-
-
-
 });
