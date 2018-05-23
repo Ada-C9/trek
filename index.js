@@ -9,7 +9,6 @@ const statusColors = {
 const reportStatus = (message, status) => {
   let color = statusColors[status];
   return $('#status-message').show(1000).html(message).css('background-color', color);
-  // $('#status-message').fadeOut(2000);
 };
 
 const clearContent = (id) => {
@@ -20,6 +19,46 @@ const clearForm = () => {
   $('input[name="reservation-name"]').val('');
   $('input[name="email"]').val('');
 };
+
+const getFormData = () => {
+  let data = {};
+  data['name'] = $('input[name="reservation-name"]').val();
+  data['email'] = $('input[name="email"]').val();
+  return data;
+};
+
+const clearTripForm = () => {
+  $('input[name="name"]').val('');
+  $('input[name="continent"]').val('');
+  $('input[name="category"]').val('');
+  $('input[name="weeks"]').val('');
+  $('input[name="cost"]').val('');
+  $('input[name="about"]').val('');
+};
+
+const getTripFormData = () => {
+  let data = {};
+  data['name'] = $('input[name="name"]').val();
+  data['continent'] = $('input[name="continent"]').val();
+  data['category'] = $('input[name="category"]').val();
+  data['weeks'] = $('input[name="weeks"]').val();
+  data['cost'] = $('input[name="cost"]').val();
+  data['about'] = $('input[name="about"]').val();
+  return data;
+};
+
+const buildTrip = (tripData) => {
+  return (`<div id='${tripData.id}'>
+    <h3>${tripData.name} </h3>
+    <p>Continent: ${tripData.continent} </p>
+    <p>Category: ${tripData.category} </p>
+    <p>Weeks: ${tripData.weeks} </p>
+    <p>Cost: $${tripData.cost} </p>
+    <p>About: ${tripData.about} </p>
+    </div>`);
+};
+
+// EVENT LISTENER FUNCTIONS
 
 const getTrips = () => {
   clearContent('trip-list').empty();
@@ -65,24 +104,6 @@ const showTrip = (event) => {
     });
 };
 
-const buildTrip = (tripData) => {
-  return (`<div id='${tripData.id}'>
-    <h3>${tripData.name} </h3>
-    <p>Continent: ${tripData.continent} </p>
-    <p>Category: ${tripData.category} </p>
-    <p>Weeks: ${tripData.weeks} </p>
-    <p>Cost: $${tripData.cost} </p>
-    <p>About: ${tripData.about} </p>
-    </div>`);
-};
-
-const getFormData = () => {
-  let data = {};
-  data['name'] = $('input[name="reservation-name"]').val();
-  data['email'] = $('input[name="email"]').val();
-  return data;
-};
-
 const reserveTrip = (event) => {
   event.preventDefault();
   let tripId = parseInt( $('#show-trip div')[0].id );
@@ -115,33 +136,12 @@ const addTrip = () => {
     .then((response) => {
       console.log(response.data);
       reportStatus('Trip Added', 'success').delay(2000).hide(1000);
-      // clear trip form
       clearTripForm();
     })
     .catch((error) => {
       console.log(error.message);
       reportStatus('Error: Trip not added', 'fail');
     });
-};
-
-const clearTripForm = () => {
-  $('input[name="name"]').val('');
-  $('input[name="continent"]').val('');
-  $('input[name="category"]').val('');
-  $('input[name="weeks"]').val('');
-  $('input[name="cost"]').val('');
-  $('input[name="about"]').val('');
-};
-
-const getTripFormData = () => {
-  let data = {};
-  data['name'] = $('input[name="name"]').val();
-  data['continent'] = $('input[name="continent"]').val();
-  data['category'] = $('input[name="category"]').val();
-  data['weeks'] = $('input[name="weeks"]').val();
-  data['cost'] = $('input[name="cost"]').val();
-  data['about'] = $('input[name="about"]').val();
-  return data;
 };
 
 $(document).ready(() => {
