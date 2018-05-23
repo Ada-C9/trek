@@ -134,7 +134,7 @@ $(document).ready(() => {
   $('ul').on('click', 'li', function() {
     let tripId = $(this).next().text();
     loadTrip(tripId);
-    $('#reservation').show();
+    $('#trip-info').show();
   });
   $('#reservation-form').submit(reserveTrip);
 });

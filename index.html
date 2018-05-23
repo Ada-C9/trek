@@ -7,33 +7,37 @@
   </head>
   <body>
 
-    <section id="display-status">
-    </section>
+    <section id="top-nav">
+      <section id="display-status">
+      </section>
 
-    <button id="display-trips">Display All Trips</button>
+      <button id="display-trips">Display All Trips</button>
+    </section><!-- top nav -->
 
-    <section>
+    <section id="trips-info">
       <ul id="all-trips"></ul>
-    </section>
+    </section><!-- trips info -->
 
-    <section id="trip">
-    </section>
+    <section id="trip-info" class="hidden">
 
-    <section id="reservation" class="hidden">
+      <section id="trip">
+      </section>
 
-      <form id="reservation-form">
-        <div>
-          <label for="name">Name</label>
-          <input type="text" name="name" />
-        </div>
-        <div>
-          <label for="email">Email</label>
-          <input type="text" name="email" />
-        </div>
-        <input type="submit" name="make-reservation" value="Reserve" />
-      </form>
+      <section id="reservation">
+        <form id="reservation-form">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="text" name="email" />
+          </div>
+          <input type="submit" name="make-reservation" value="Reserve" />
+        </form>
+      </section><!-- reservation form -->
 
-    </section>
+    </section><!-- trip info -->
 
     <!-- JS -->
     <script
