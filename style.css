@@ -3,8 +3,9 @@
 font-family: 'Faster One', cursive; */
 
 /* color: #BBECE8; light-green;
-color: #079BA4; green;
-color: #024B5A; blue; */
+color: #4EA8AC; green;
+color: #024B5A; blue;
+color: #5B4C40; brown; */
 
 body {
   padding: 2rem;
@@ -27,17 +28,27 @@ h2 {
   font-size: 1.7rem;
   font-family: 'Playfair Display', serif;
   font-weight: bold;
+  color: #5B4C40;
+  padding: 10px 0;
 }
 
-h4 {
+h4, li {
   font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
+  color: #5B4C40;
+  padding: 5px;
 }
 
 .button {
-  background-color: #079BA4;
+  background-color: #4EA8AC;
   font-size: 1.5rem;
   padding: 10px;
+}
+
+#status-message {
+  padding-bottom: 20px;
+  font-size: 1.5rem;
+  color: #5B4C40;
 }
 
 main {
@@ -46,4 +57,10 @@ main {
 
 .all-trips, .trip-details, .reserve-trip {
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+ul {
+  text-align: center;
+  list-style-type: none;
+  padding: 0;
 }
