@@ -37,6 +37,8 @@ const showDetails = (event) => {
   axios.get(detailsLink)
     .then((response) => {
       $('#trip-details').addClass('bordered');
+      $('#trip-details').empty();
+
 
       $('#trip-details > h2').html('Trip Details');
       $('#trip-details > h2').addClass('bordered-bottom')
