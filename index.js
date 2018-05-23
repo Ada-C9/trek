@@ -3,6 +3,7 @@ const allTripsURL = 'https://ada-backtrek-api.herokuapp.com/trips';
 //______________________________________________________
 // STATUS MANAGEMENT:
 const reportStatus = (message) => {
+  $('#status-message').addClass('callout primary');
   $('#status-message').html(message);
 };
 
@@ -73,8 +74,6 @@ const loadATrip = (tripID) => {
 
   // ______________________________________________________
   // MAKE A RESERVATION:
-  // let reserveURL = `${allTripsURL}/${$('#trip-id').html()}/reservations`;
-  // console.log(reserveURL);
 
   const FORM_FIELDS = ['name', 'age', 'email'];
   const inputField = name => $(`#reserve-block input[name="${name}"]`);
@@ -100,9 +99,7 @@ const loadATrip = (tripID) => {
   }
 
   const reserve = (event) => {
-    // Note that reserve is a handler for a `submit`
-    // event, which means we need to call `preventDefault`
-    // to avoid a page reload
+    // to avoid a page reload:
     event.preventDefault();
 
     const reservationData = readFormData();
@@ -116,7 +113,7 @@ const loadATrip = (tripID) => {
     axios.post(reserveURL, reservationData)
     .then((response) => {
       reportStatus(`Successfully created a reservation with id ${response.data.trip_id}!`);
-        // console.log(response);
+      // console.log(response);
       clearForm();
     })
     .catch((error) => {
@@ -148,10 +145,15 @@ const loadATrip = (tripID) => {
 
     // Reserve a Trip:
     $('#reserve-block').submit(reserve);
+
+    // Load foundation on entire document
+    // this is where I was getting the Modal error.
+    $(document).foundation();
+
   });
 
 
-
+  
 
 
 
