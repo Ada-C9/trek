@@ -35,13 +35,16 @@ h1, button[name] {
 
 #trip-list li {
   margin: 1em 0em;
-  background-color: lightblue;
 }
 
 div.left {
   margin-left: 4em;
   overflow: auto;
   max-height: 100vh;
+}
+
+button.trip {
+  width: 100%;
 }
 
 /* .left {

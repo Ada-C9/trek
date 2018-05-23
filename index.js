@@ -15,7 +15,7 @@ const getTrips = () => {
   axios.get(URL)
     .then((response) => {
       response.data.forEach((trip) =>{
-        tripList.append(`<li><button id="trip class="button">${trip.name}</button></li>`)
+        tripList.append(`<li><button id="${trip.id}" class="button trip">${trip.name}</button></li>`)
       });
       reportStatus('Trips Loaded!');
     })
@@ -25,6 +25,22 @@ const getTrips = () => {
     });
 };
 
+const showTrip = (event) => {
+  reportStatus('Loading Trip...');
+  console.log(event.target.id);
+  const tripId = event.target.id;
+  // console.log('Trip clicked');
+  axios.get(URL + `/${tripId}`)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+
+};
+
 $(document).ready(() => {
   $('#all-trips').click(getTrips);
+  $('#trip-list').on('click', 'li', showTrip);
 });
