@@ -10,6 +10,18 @@ const clearContent = (id) => {
   return $(`#${id}`);
 };
 
+const getFormData = () => {
+  let data = {};
+  data['name'] = $('input[name="name"]').val();
+  data['email'] = $('input[name="email"]').val();
+  return data;
+};
+
+const clearForm = () => {
+  $('input[name="name"]').val('');
+  $('input[name="email"]').val('');
+};
+
 const getTrips = () => {
   clearContent('trip-list').empty();
   clearContent('show-trip').empty();
@@ -31,20 +43,20 @@ const getTrips = () => {
 
 const showTrip = (event) => {
   reportStatus('Loading Trip...');
-  // console.log(event.target.id);
-  const tripId = event.target.id;
   clearContent('show-trip').empty();
+
+  const tripId = event.target.id;
 
   axios.get(URL + `/${tripId}`)
     .then((response) => {
-      // console.log(response.data);
       $('#show-trip').append( buildTrip(response.data) );
+
       $('#reserve-trip').css('display', 'block');
       $('#reserve-trip-id').text(response.data.name);
+
       reportStatus(`Trip #${tripId} Loaded!`);
     })
     .catch((error) => {
-      console.log(error.message);
       reportStatus(`Error: ${error.message}`);
     });
 };
@@ -63,8 +75,6 @@ const buildTrip = (tripData) => {
 const reserveTrip = (event) => {
   event.preventDefault();
   let tripId = parseInt( $('#show-trip div')[0].id );
-  console.log(tripId);
-  // let reservationData = getFormData();
 
   axios.post(URL + `/${tripId}/reservations`, getFormData())
     .then((response) => {
@@ -76,18 +86,6 @@ const reserveTrip = (event) => {
       reportStatus('Error: trip reservation failed');
       console.log(error.message);
     });
-};
-
-const clearForm = () => {
-  $('input[name="name"]').val('');
-  $('input[name="email"]').val('');
-};
-
-const getFormData = () => {
-  let data = {};
-  data['name'] = $('input[name="name"]').val();
-  data['email'] = $('input[name="email"]').val();
-  return data;
 };
 
 $(document).ready(() => {

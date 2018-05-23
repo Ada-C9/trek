@@ -2,7 +2,6 @@
 body {
   margin-left: 4em;
   margin-right: 4em;
-  /* overflow: hidden; */
 }
 
 .header-flex {
@@ -48,7 +47,6 @@ h1, button[name] {
 }
 
 .right, .left {
-  /* width: 40vw; */
   margin-top: 1em;
 }
 
