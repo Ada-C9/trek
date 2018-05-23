@@ -1,9 +1,15 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
 // add status in order to add colors??
+const statusColors = {
+  'success': 'lightgreen',
+  'fail': 'indianred',
+  'loading': 'sandybrown'
+}
 // const reportStatus = (message, status) => {}..
-const reportStatus = (message) => {
-  $('#status-message').html(message);
+const reportStatus = (message, status) => {
+  let color = statusColors[status];
+  $('#status-message').html(message).css('background-color', color);
 };
 
 const clearContent = (id) => {
@@ -20,23 +26,23 @@ const getTrips = () => {
   clearContent('show-trip').empty();
   $('#reserve-trip').css('display', 'none');
 
-  reportStatus('Loading Trips...');
+  reportStatus('Loading Trips...', 'loading');
 
   axios.get(URL)
     .then((response) => {
       response.data.forEach((trip) =>{
         $('#trip-list').append(`<li><button id="${trip.id}" class="button trip">${trip.name}</button></li>`)
       });
-      reportStatus('Trips Loaded!');
+      reportStatus('Trips Loaded!', 'success');
     })
     .catch((error) => {
       console.log(error.message);
-      reportStatus(`Error: ${error.message}`);
+      reportStatus(`Error: ${error.message}`, 'fail');
     });
 };
 
 const showTrip = (event) => {
-  reportStatus('Loading Trip...');
+  reportStatus('Loading Trip...', 'loading');
   clearContent('show-trip').empty();
 
   const tripId = event.target.id;
@@ -48,10 +54,10 @@ const showTrip = (event) => {
       $('#reserve-trip').css('display', 'block');
       $('#reserve-trip-id').text(response.data.name);
 
-      reportStatus(`Trip #${tripId} Loaded!`);
+      reportStatus(`Trip #${tripId} Loaded!`, 'success');
     })
     .catch((error) => {
-      reportStatus(`Error: ${error.message}`);
+      reportStatus(`Error: ${error.message}`, 'fail');
     });
 };
 
@@ -66,18 +72,26 @@ const buildTrip = (tripData) => {
     </div>`);
 };
 
+const getFormData = () => {
+  let data = {};
+  data['name'] = $('input[name="name"]').val();
+  data['email'] = $('input[name="email"]').val();
+  return data;
+};
+
 const reserveTrip = (event) => {
   event.preventDefault();
   let tripId = parseInt( $('#show-trip div')[0].id );
+  reportStatus('Reserving trip...', 'loading');
 
   axios.post(URL + `/${tripId}/reservations`, getFormData())
     .then((response) => {
-      reportStatus(`Trip #${tripId} Reserved!`);
+      reportStatus(`Trip #${tripId} Reserved!`, 'success');
       console.log(response);
       clearForm();
     })
     .catch((error) => {
-      reportStatus('Error: trip reservation failed');
+      reportStatus('Error: trip reservation failed', 'fail');
       console.log(error.message);
     });
 };
