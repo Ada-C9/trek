@@ -9,6 +9,7 @@ body {
 
 .header-flex {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 
@@ -78,10 +79,23 @@ section#show-trip {
   overflow: auto;
 }
 
+/* display none until single trip is clicked */
 section#reserve-trip {
   display: none;
   border-top: 1px solid black;
   padding-top: 2em;
+  border-bottom: 1px solid black;
+  padding-bottom: 2em;
+}
+
+/* display none until add trip is clicked */
+section#new-trip {
+  display: none;
+}
+
+button#add-trip {
+  margin-top: 2em;
+  margin-left: 0;
 }
 
 /* FOOTER */

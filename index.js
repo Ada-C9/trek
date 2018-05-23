@@ -25,6 +25,7 @@ const getTrips = () => {
   clearContent('trip-list').empty();
   clearContent('show-trip').empty();
   $('#reserve-trip').css('display', 'none');
+  // $('#new-trip').hide();
 
   reportStatus('Loading Trips...', 'loading');
 
@@ -33,7 +34,7 @@ const getTrips = () => {
       response.data.forEach((trip) =>{
         $('#trip-list').append(`<li><button id="${trip.id}" class="button trip">${trip.name}</button></li>`)
       });
-      reportStatus('Trips Loaded!', 'success').delay(2000).hide(1000);
+      reportStatus('Trips Loaded!', 'success').hide(1000);
     })
     .catch((error) => {
       console.log(error.message);
@@ -43,6 +44,9 @@ const getTrips = () => {
 
 const showTrip = (event) => {
   clearContent('show-trip').empty();
+  $('#show-trip').css('display', 'block');
+  $('#reserve-trip').css('display', 'block');
+  $('#new-trip').css('display', 'none');
   reportStatus('Loading Trip...', 'loading');
 
   const tripId = event.target.id;
@@ -96,8 +100,18 @@ const reserveTrip = (event) => {
     });
 };
 
+const addTrip = () => {
+  // console.log('add trip clicked');
+  getTrips();
+  $('#reserve-trip').css('display', 'none');
+  $('#show-trip').css('display', 'none');
+  $('#new-trip').css('display', 'block');
+
+};
+
 $(document).ready(() => {
   $('#all-trips').click(getTrips);
   $('#trip-list').on('click', 'li', showTrip);
-  $('#reserve-form').submit(reserveTrip)
+  $('#reserve-form').submit(reserveTrip);
+  $('#add-trip').click(addTrip);
 });
