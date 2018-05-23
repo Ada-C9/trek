@@ -71,8 +71,11 @@ const showTripDetails = (id) => {
 }
 
 const buildReservationForm = (id) => {
-  $(".hidden-display").removeClass("hidden-display").addClass("show").attr("id",id)
+  const reserveTrip = $('#reserve-trip');
+  reserveTrip.empty();
 
+  $(".reserve-trip").removeClass("hidden-display").addClass("trip-form-container")
+  $(".trip-form").removeAttr( "id" ).attr("id", id);
 }
 
 
@@ -84,12 +87,11 @@ $(document).ready(() => {
     event.preventDefault();
     let id = $(this).attr('id');
 
+
     showTripDetails(id);
     buildReservationForm(id);
 
-    $(".hidden-display").removeClass("hidden-display").addClass("trip-form");
-
   });
-
+  
   $('#trip-form').submit(createReservation);
 });
