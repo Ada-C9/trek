@@ -7,7 +7,7 @@ ul {
   cursor: pointer;
 }
 
-body main {
+main {
   display: grid;
   grid-template-columns: 2;
   grid-template-rows: 2;

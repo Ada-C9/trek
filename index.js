@@ -98,8 +98,8 @@ const buildDetails = (tripData) => {
   let tripDetails = $('#trip-details');
 
   let details = '<h3>Trip Details</h3><ul>';
-  details += '<li>' + tripData.name + '<li>';
-  details += '<li>' + tripData.continent + '<li>';
+  details += '<li #tdName>' + tripData.name + '<li>';
+  details += '<li #tdContinent>' + tripData.continent + '<li>';
   details += '<li>' + tripData.category + '<li>';
   details += '<li>' + tripData.weeks + '<li>';
   details += '<li>' + tripData.cost + '<li>';
@@ -109,6 +109,14 @@ const buildDetails = (tripData) => {
 
   tripDetails.html(details);
 };
+
+// function populateListItems(trip) {
+//   for (key : trip.getKeys()) {
+//     $("li #td"+key.toUpper()).text( trip[key]);
+//   }
+// }
+//
+// populateListItems({'name': "To Zanzibar!", 'continent': "Atlantis"})
 
 
 $(document).ready(() => {
