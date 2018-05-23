@@ -153,6 +153,9 @@ $(document).ready(() => {
     const singleTrip = $('#single-trip');
     singleTrip.empty();
 
+    $('.specific-trip').show();
+    $('.reserve-trip').show();
+
     let tripId = $(this).attr('data-id');
     let tripName = $(this).attr('data-name');
     alert(tripName)
