@@ -40,11 +40,10 @@ const loadTrips = () => {
   console.log('this is said after the get request and will run before the api responds');
 }
 
-const loadTripDetails = () => {
+const loadTripDetails = (id) => {
   const tripDetails = $('#tripDetails');
   tripDetails.empty();
 
-  let id = 1;
   const tripId = `/trips/${id}`;
 
   let reportStatus = (message) => {
@@ -54,7 +53,6 @@ const loadTripDetails = () => {
   reportStatus('Loading Trip Details!  Please Wait...!');
 
   axios.get(URL + tripId)
-  // axios.get('https://ada-backtrek-api.herokuapp.com/trips/1')
 
   .then((response) => {
     console.log('Responding');
@@ -72,7 +70,7 @@ const loadTripDetails = () => {
 
   .catch((error) => {
     console.log(error);
-    // reportStatus(`Error: ${error.message }`);
+    reportStatus(`Error: ${error.message }`);
 
   });
 
@@ -82,10 +80,10 @@ const loadTripDetails = () => {
 
 $(document).ready(() => {
   $('#seetrips').click(loadTrips);
-  /// or can I do it like:
-  $('#showtrips').on( 'click', 'tr', function( event ) {
+  $('#showtrips').on( 'click', 'td', function(event) {
     console.log('code runs for 2nd click event');
+    let id = $(this).attr('id');
     event.preventDefault();
-    loadTripDetails();
+    loadTripDetails(id);
   });
 });
