@@ -1,8 +1,5 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips/';
 
-//
-// Status Management
-//
 const reportStatus = (message) => {
   $('#status-message').html(message);
 };
@@ -18,9 +15,6 @@ const reportError = (message, errors) => {
   reportStatus(content);
 };
 
-//
-// Loading Trips
-//
 const loadTrips = () => {
   reportStatus('Loading trips...');
 
@@ -42,7 +36,7 @@ const loadTrips = () => {
 };
 
 const individualTrip = (id) => {
-  console.log(this.id);
+  console.log(id);
   reportStatus("Loading trip details...");
 
   const trip = $('#trip');
@@ -55,11 +49,13 @@ const individualTrip = (id) => {
     reportStatus(`Successfully loaded trip to: ${response.data.name}`);
 
     trip.append(
-      `<tr><th>${response.data.name}</th></tr>
-      <tr><th>${response.data.continent} weeks</th></tr>
+      `
+      <tr><th>Trip Details:</th></tr>
+      <tr><th>${response.data.name}</th></tr>
+      <tr><th>Continent</th><td>${response.data.continent}</td></tr>
       <tr><th>Category</th><td>${response.data.category}</td></tr>
-      <tr><th>Continent</th><td>${response.data.weeks}</td></tr>
       <tr><th>Cost</th><td>${response.data.cost}</td></tr>
+      <tr><th>Cost</th><td>${response.data.weeks}</td></tr>
       <tr><th>About</th><td>${response.data.about}</td></tr>
       `
     );
@@ -81,6 +77,14 @@ const individualTrip = (id) => {
         </form>
       </section>`
     );
+
+
+    $('#trip-form').submit(function(event) {
+      console.log(event);
+      event.preventDefault();
+      createReservation(urlTrip);
+
+    });
   })
   .catch((error) => {
     reportStatus(`Encountered an error while loading this trip: ${error.message}`);
@@ -103,7 +107,9 @@ const readFormData = () => {
   });
 
   return formData;
+
 };
+
 
 const clearForm = () => {
   FORM_FIELDS.forEach((field) => {
@@ -111,17 +117,15 @@ const clearForm = () => {
   });
 }
 
-const createReservation = (event) => {
-
-  event.preventDefault();
+const createReservation = (urlTrip) => {
 
   const reservationData = readFormData();
   console.log(reservationData);
 
   reportStatus('Doing your reservation...');
 
-  let urlReservation = 'urlTrip + /reservations'
-  axios.post(urlReservation)
+  let urlReservation = urlTrip + '/reservations'
+  axios.post(urlReservation, reservationData)
   .then((response) => {
     reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
     clearForm();
@@ -144,6 +148,5 @@ $(document).ready(() => {
   $(`#trips-list`).on(`click`, `li`, function(){
     individualTrip(this.id);
   });
-  $('#reservation-form').submit(createReservation);
 
 });

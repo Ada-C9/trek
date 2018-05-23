@@ -1,0 +1,16 @@
+body {
+  background-color: lightgray;
+  font-family: Arial;
+}
+
+#trip {
+  display: grid;
+  grid-column: 1fr 1fr;
+}
+main {
+  padding: 4vh 0;
+  margin-bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: .60fr 4fr 4fr;
+}
