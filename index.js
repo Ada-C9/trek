@@ -63,10 +63,9 @@ const reserveTrip = (event) => {
   event.preventDefault();
   let tripId = parseInt( $('#show-trip div')[0].id );
   console.log(tripId);
-  // get data -> tripData
-  // console.log(event.target);
+  // let reservationData = getFormData();
 
-  axios.post(URL + `/${tripId}/reservations`, {name: 'p', email:'p'} )
+  axios.post(URL + `/${tripId}/reservations`, getFormData())
     .then((response) => {
       reportStatus('Trip Reserved!');
       console.log(response);
@@ -75,6 +74,13 @@ const reserveTrip = (event) => {
       reportStatus('Error: trip reservation failed');
       console.log(error.message);
     });
+};
+
+const getFormData = () => {
+  let data = {};
+  data['name'] = $('input[name="name"]').val();
+  data['email'] = $('input[name="email"]').val();
+  return data;
 };
 
 $(document).ready(() => {
