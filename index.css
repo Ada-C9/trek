@@ -3,15 +3,21 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-areas:
-  "one two";
+  "one two"
+  "three two";
 }
 
 #status-message {
   grid-area: one;
 }
 
+li:hover {
+  cursor: default;
+}
+
 .all-trips {
-  grid-area: one;
+  grid-area: three;
+
 }
 
 #trip-details {

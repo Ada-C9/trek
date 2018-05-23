@@ -1,8 +1,19 @@
-const TRIPSURL = "https://ada-backtrek-api.herokuapp.com/trips";
+const TRIPSURL = "https://ada-backtrek-api.herokuapp.com/trips/";
 
 const reportStatus = (message) => {
   $('#status-message').html(message);
-}
+};
+
+const reportError = (message, errors) => {
+  let content = `<p>${message}</p><ul>`;
+  for (const field in errors) {
+    for (const problem of errors[field]) {
+      content += `<li>${field}: ${problem}</li>`;
+    }
+  }
+  content += "</ul>";
+  reportStatus(content);
+};
 
 
 const loadTrips = () => {
@@ -17,35 +28,55 @@ const loadTrips = () => {
   axios.get(TRIPSURL)
     .then((response) => {
       response.data.forEach((trip) => {
-        tripList.append(`<li><a href="" class="trip-link" id="${trip.id}">${trip.name}</a></li>`);
+        tripList.append(`<li class="trip-link" id="${trip.id}">${trip.name}</li>`);
       });
 
       reportStatus('Trips loaded :)');
     })
       // axios is giving us this error object to use
     .catch((error) => {
-      console.log(error);
-      reportStatus(`Error: ${error.message}`)
+      console.log(error.response);
+    if (error.response.data && error.response.data.errors) {
+      reportError(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}`);
+    }
     });
 };
 
 
 const createReservation = (event) => {
   event.preventDefault();
+  console.log(event);
+  let tripID = $(".trip-form").attr('id');
 
-  let tripID = $(`input[name="id"]`).val();
   let tripData = {
     name: $(`input[name="name"]`).val(),
     age: $(`input[name="age"]`).val(),
     email: $(`input[name="email"]`).val()
   };
 
-  axios.post(`${URL}/${tripID}`, tripData)
+  let postURL = TRIPSURL + tripID + '/reservations'
+  console.log(postURL);
+  console.log(tripData)
+
+  axios.post(postURL, tripData)
     .then((response) => {
       console.log('we successed it!')
     })
     .catch((error) => {
-      console.log('dangit');
+      console.log(error.response);
+    if (error.response.data && error.response.data.errors) {
+      reportError(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}`);
+    }
     });
 };
 
@@ -64,10 +95,17 @@ const showTripDetails = (id) => {
         reportStatus('Trip details loaded :)');
       })
         // axios is giving us this error object to use
-      .catch((error) => {
-        console.log(error);
-        reportStatus(`Error: ${error.message}`);
-      });
+        .catch((error) => {
+          console.log(error.response);
+        if (error.response.data && error.response.data.errors) {
+          reportError(
+            `Encountered an error: ${error.message}`,
+            error.response.data.errors
+          );
+        } else {
+          reportStatus(`Encountered an error: ${error.message}`);
+        }
+        });
 }
 
 const buildReservationForm = (id) => {
@@ -92,6 +130,6 @@ $(document).ready(() => {
     buildReservationForm(id);
 
   });
-  
-  $('#trip-form').submit(createReservation);
+
+  $('.trip-form').submit(createReservation);
 });
