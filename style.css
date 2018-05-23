@@ -26,7 +26,22 @@ h1, button[name] {
 /* MAIN */
 .main-flex {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+#trip-list {
+  list-style-type: none;
+}
+
+#trip-list li {
+  margin: 1em 0em;
+  background-color: lightblue;
+}
+
+div.left {
+  margin-left: 4em;
+  overflow: auto;
+  max-height: 100vh;
 }
 
 /* .left {

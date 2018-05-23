@@ -15,7 +15,7 @@ const getTrips = () => {
   axios.get(URL)
     .then((response) => {
       response.data.forEach((trip) =>{
-        tripList.append(`<li>${trip.name}</li>`)
+        tripList.append(`<li><button id="trip class="button">${trip.name}</button></li>`)
       });
       reportStatus('Trips Loaded!');
     })
