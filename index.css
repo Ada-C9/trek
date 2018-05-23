@@ -1,4 +1,43 @@
 main {
+  padding: 30px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-gap: 2px;
+}
+
+#all-trips{
+  grid-column: 1;
+}
+#trip-details{
+    grid-column: 2;
+}
+#reserve-trip{
+    grid-column: 2;
+}
+
+/* #details {
+  text-align: center;
+} */
+
+/* .trip-details{
+  padding: 10px;
+  display: grid;
+  grid-row: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 15px;
+
+} */
+
+h1, button, .reserve-block {
+  text-align: center;
+}
+.reserve-block{
+  padding: 10px;
+  display: grid;
+  grid-row: 1fr 1fr 1fr;
+    grid-gap: 15px;
+}
+
+
+.hidden{
+   visibility:hidden;
 }

@@ -9,6 +9,8 @@
 <body>
   <section id="status-message"></section>
 
+  <!-- ____________________________________
+  ALL TRIPS: -->
   <main>
     <section class="all-trips">
       <h1>All Trips</h1>
@@ -16,14 +18,54 @@
       <ul id="trip-list"></ul>
     </section>
 
-    <section class="trip-details">
-      <h1>Trip Details</h1>
-      <ul id="single-trip"></ul>
-    </section>
+    <!-- ____________________________________
+    DETAILS OF A SPECIFIC TRIP: -->
+    <section id="details">
+      <section class="trip-details">
+        <h1>Trip Details</h1>
+        <div class="trip-info">
+          <ul id="single-trip"></ul>
+        </div>
+      </section>
 
-  </main>
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script type="text/javascript" src="index.js"></script>
-</body>
-</html>
+      <!-- ____________________________________
+      MAKE A RESERVATION: -->
+      <section class="reserve-trip">
+        <h1>Reserve Trip</h1>
+        <form id="reserve-block">
+          <div>
+            <label for="name">Your name:</label>
+            <input type="text" name="name" />
+          </div>
+
+          <div>
+            <label for="age">Your age:</label>
+            <input type="text" name="age" />
+          </div>
+
+          <div>
+            <label for="email">Your email:</label>
+            <input type="text" name="email" />
+          </div>
+
+          <div>
+            <label for="trip">Trip name:</label>
+            <label id="trip-name"></label></div>
+          </div>
+
+          <input type="submit" name="add-reservation" value="Reserve!" />
+        </form>
+      </section>
+
+      <label class="hidden" id="trip-id"></label></div>
+
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+    <!-- <script src="pagination-with-styles.js"></script> -->
+
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+  </html>
