@@ -5,19 +5,26 @@
     <title>Trek</title>
 
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Belleza" rel="stylesheet">
   </head>
   <body>
-    <section id="status-message"></section>
+    <header>
+      <h1>TREK</h1>
+    </header>
 
-      <main>
-        <section class='all-trips'>
+    <button id="load">Trips</button>
 
-          <h1>TREK</h1>
-          <button id="load">Trips</button>
-          <ul id="trip-list"></ul>
-        </section>
+    <main>
+      <section id="status-message"></section>
 
-        <div id='trip-info'>
+      <section class='all-trips'>
+
+
+        <ul id="trip-list"></ul>
+
+      </section>
+
+      <div id='trip-info'>
         <section id='trip'>
 
         </section>
@@ -40,10 +47,8 @@
         </section>
       </div>
 
-
-        </section>
-
       </main>
+
       <script
     src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
