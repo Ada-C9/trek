@@ -4,33 +4,32 @@
   <meta charset="utf-8">
   <title>Tripsssssssss</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed" rel="stylesheet">
 </head>
 <body>
-  <div id-="status-message"></div>
-  </div>
+  <section id="status-message"></section>
+
   <main>
 
-    <button id="load"></button>
-    <ul id="trips-list"></ul>
+    <section class="current-trips">
+      <h1>List-o-Trips</h1>
+      <button id="load">Get Trips!</button>
+      <ul id="trips-list"></ul>
+    </section>
 
-    <section id="trip-details">
-      <h1>Trip Name</h1>
-        <p id="continent">continent</p>
-        <p id="about">about</p>
-        <p id="category">category</p>
-        <p id="weeks">weeks</p>
-        <p id="cost">cost</p>    
+    <section class="trip-details-section">
+      <ul id="trip-details"></ul>
+
     </section>
 
   </main>
 
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript" src="index.js"></script>
 
 </body>
 </html>

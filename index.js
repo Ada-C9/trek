@@ -1,10 +1,28 @@
 
-
-// TODO refine these URLs
 const TRIPS_URL = "https://ada-backtrek-api.herokuapp.com/trips"
-const TRIP_URL = "https://ada-backtrek-api.herokuapp.com/trips/1"
+const TRIP_URL = "https://ada-backtrek-api.herokuapp.com/trips/"
 
-// TODO define reportStatus
+const reportStatus = message => {
+  $("#status-message").html(message);
+};
+
+const reportError = (message, errors) => {
+  let content = `<p>${message}</p><ul>`;
+  for (const field in errors) {
+    for (const problem of errors[field]) {
+      content += `<li>${field}: ${problem}</li>`;
+    }
+  }
+  content += "</ul>";
+  reportStatus(content);
+};
+
+// TODO implement this when the 'create trip' is implemented
+// const clearForm = () => {
+//   FORM_FIELDS.forEach(field => {
+//     inputField(field).val("");
+//   });
+// };
 
 // To call more than one trip
 const loadTrips = () => {
@@ -13,43 +31,62 @@ const loadTrips = () => {
   const tripList = $('#trips-list');
   tripList.empty();
 
-    axios.get(URL)
-      // if this happens
-      .then((response) => {
-        console.log(response);
-        let location = response.data.results[0].geometry.location
-        reportStatus(`Yay we successfully added ${response.data.length} trip(s)!`)
+  axios.get(TRIPS_URL)
+  // success (think of it as an "if")
+  .then(response => {
 
-        response.data.forEach(trip) => {
-          const tripObject = $(`<li id="${trip.id}"></li>`);
-          tripList.append(tripObject);
-          tripObject.click(() => {
-            const TRIPS_URL = "https://ada-backtrek-api.herokuapp.com/trips" + trip.id;
-          })
-        }); //ends forEach loop
-      })
+    let location = response.data.results
 
-      // else this other thing
-      .catch(error => {
-        reportStatus(`Encountered an error while loading trips: ${error.message}`);
-        console.log(error);
-      });
+    console.log(location);
 
+    reportStatus(`Yay we successfully added ${response.data.length} trip(s)!`);
 
-)}; // ends const loadTrips
+    response.data.forEach(trip => {
+      console.log(trip);
+      tripList.append(`<li id="${trip.id}">${trip.name}</li>`);
+    }); //ends forEach loop
+  }) // ends .then
+
+  // failure ("else this other thing")
+  .catch(error => {
+    reportStatus(`Encountered an error while loading trips: ${error.message}`);
+    console.log(error);
+  }); // ends .catch
+}; // ends const loadTrips
 
 // To call only one trip
-const loadTrip = () => {
+const loadTrip = function loadTrip(selectedTrip) {
   reportStatus('Loading one trip...');
-  // TODO make sure this URL below is correct
-  axios.get(TRIP_URL + trip.id)
-}
+  console.log(selectedTrip);
+  axios.get(TRIP_URL + `${selectedTrip}`) // <- TODO should this include the trip ID inside the params??
+  .then(response => {
+    // reportStatus(`Successfully added trip with ID ${response.data.id}!`);
+    // clearForm(); // TODO <-- do we need this???
+    console.log(response);
+    const tripDetails = $('#trip-details');
+    // tripDetails.append(`<li id="${selectedTrip.name}">Name</li>`);
+    tripDetails.append(`<li><strong>Trip Name: </strong>${response.data.name}</li>`);
+    tripDetails.append(`<li><strong>Continent: </strong>${response.data.continent}</li>`);
+    tripDetails.append(`<li><strong>About: </strong>${response.data.about}</li>`);
+    tripDetails.append(`<li><strong>Category: </strong>${response.data.category}</li>`);
+    tripDetails.append(`<li><strong>Weeks: </strong>${response.data.weeks}</li>`);
+    tripDetails.append(`<li><strong>Cost: </strong>${response.data.cost}</li>`);
+  })
+
+  .catch(error => {
+    reportStatus(`Encountered an error while loading trips: ${error.message}`);
+    console.log(error);
+  });
+} // ends const loadTrip
 
 $(document).ready(() => {
-  loadTrips()
-});
+  $('#load').click(loadTrips);
+  $('#trips-list').on( "click", "li", function() {
+    let selectedTrip = (this.id)
+    console.log(selectedTrip);
+    loadTrip(selectedTrip);
+  });
 
+}); // ends (document).ready
 
 // When we add li to the page we can include the id attribute or class or data attribute that you can put in the DOM using "data-name" or "data-owner"
-
-// make a click handler inside the .then in a forEach loop...
