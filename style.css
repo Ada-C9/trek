@@ -2,6 +2,15 @@ body {
   font-family: 'Belleza', sans-serif;
 }
 
+.head {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  margin-bottom: 1em;
+  background-color: white;
+}
+
 ul {
   list-style-type: none;
   text-align: center;
@@ -12,6 +21,7 @@ li {
   border: 1px solid black;
   line-height: 4em;
 }
+
 header {
 
   border-bottom: 2px solid black
@@ -38,6 +48,7 @@ button {
 }
 
 main {
+  margin-top: 20%;
   display: grid;
   grid-template-columns: 50% 50%;
   width: 90%;
@@ -81,6 +92,18 @@ main {
 input[type="text"] {
     width: 40%;
     padding: 1.5em;;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  margin-left: 2em;
 }
 
 #trip-info {

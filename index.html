@@ -8,14 +8,16 @@
   <link href="https://fonts.googleapis.com/css?family=Belleza" rel="stylesheet">
   </head>
   <body>
+    <div class='head'>
     <header>
       <h1>TREK</h1>
     </header>
 
     <button id="load">Trips</button>
+    <section id="status-message"></section>
 
+    </div>
     <main>
-      <section id="status-message"></section>
 
       <section class='all-trips'>
 
@@ -31,16 +33,17 @@
 
         <section id='reservations'>
           <form id="reserve">
+            
+            <div class='trip-name'>
+              <label for="trip-name"></label>
+            </div>
+
             <div class='name'>
                 <label for="name"></label>
             </div>
             <div class='email'>
               <label for="email"></label>
 
-            </div>
-
-            <div class='trip-name'>
-              <label for="trip-name"></label>
             </div>
 
             </form>

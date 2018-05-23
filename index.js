@@ -30,7 +30,7 @@ const loadOneTrip = (id) => {
   if (!$('#trip').hasClass('occupied')) {
     axios.get(`${TripURL}${id}`)
     .then((response) => {
-      $('#trip').addClass('occupied')
+
       $('#trip').addClass(id)
       $('#trip').append(`<h1>Trip Details</h1>`);
       $('#trip').append(`<h3> <span>${response.data.name}</span></h3>`);
@@ -48,11 +48,11 @@ const loadOneTrip = (id) => {
 
 const LoadReservationForm = (id) => {
   $('#reservations').prepend(`<h1>Reserve This Trip</h1>`);
+  $('.trip-name label').html(`${$('#trip span').html()}`);
   $('.name label').html('Name: ');
   $('.name label').append('<input type="text" name="name" />');
   $('.email label').html('Email: ');
   $('.email label').append('<input type="text" name="email" />');
-  $('.trip-name label').html(`Trip: ${$('#trip span').html()}`);
   $('#reserve').append('<input type="submit" name="reserve-trip" value="Reserve Trip" />')
 
 }
@@ -72,6 +72,7 @@ const reserveTrip = (event) => {
   const ReserveURL = 'https://ada-backtrek-api.herokuapp.com/trips/'
 
   const reservationData = {'name': `${$('#reserve .name input').val()}`, 'email': `${$('#reserve .email input').val()}` }
+
   let id = $('#trip').attr("class")
 
   axios.post(`${ReserveURL}${id}/reservations`, reservationData)
