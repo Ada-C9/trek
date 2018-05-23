@@ -15,11 +15,9 @@ const loadTrips = () => {
   });
 }
 
-const loadTrip = function sayItTwice(tripID) {
+const loadTrip = function loadTrip(tripID) {
   const tripInfo = $('#detailBody')
   tripInfo.empty();
-  // console.log(tripID);
-  // console.log(`${URL}/${tripID}`);
   axios.get(`${URL}/${tripID}`)
   .then((response) => {
     $("#trip-info").show();
