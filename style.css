@@ -62,7 +62,6 @@ main {
 }
 
 #trip {
-
   grid-column-start: 2;
   grid-column-end: 3;
 }
@@ -76,6 +75,7 @@ main {
 #trip p {
   font-size: 1.2em;
   margin-left: 2em;
+
 }
 
 #reserve {
@@ -117,4 +117,8 @@ main h1 {
   line-height: 4em;
   text-align: center;
   font-weight: bold;
+}
+
+ul h1 {
+  margin-bottom: 0;
 }

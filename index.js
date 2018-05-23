@@ -27,10 +27,9 @@ const loadTrips = () => {
 
 const loadOneTrip = (id) => {
   const TripURL = 'https://ada-backtrek-api.herokuapp.com/trips/'
-  if (!$('#trip').hasClass('occupied')) {
+
     axios.get(`${TripURL}${id}`)
     .then((response) => {
-
       $('#trip').addClass(id)
       $('#trip').append(`<h1>Trip Details</h1>`);
       $('#trip').append(`<h3> <span>${response.data.name}</span></h3>`);
@@ -43,7 +42,6 @@ const loadOneTrip = (id) => {
     .catch((error) => {
       reportStatus(`Error: ${error.message}`)
     });
-  }
 };
 
 const LoadReservationForm = (id) => {
@@ -90,7 +88,6 @@ $(document).ready(() => {
   $('#load').click(loadTrips);
 
   $('ul').on('click', 'li', function(event) {
-    $('#trip').removeClass()
     loadOneTrip($(this).attr('id'));
     $('#reserve').submit(reserveTrip);
   });
