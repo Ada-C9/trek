@@ -26,6 +26,7 @@ const loadTrips = function loadTrips() {
 
 const loadClickedTrip = function loadClickedTrip(trip) {
    // id, name, continent, about, category, weeks and cost
+   $('#selected-trip').empty();
   console.log(trip);
   axios.get(URL + `/${trip.id}`)
     .then((response) => {
@@ -40,6 +41,8 @@ const loadClickedTrip = function loadClickedTrip(trip) {
       $('#trip-table').append(`<p>Cost: $${selectedTrip.cost}</p>`)
       $('#trip-table').append(`<p>Description: ${selectedTrip.about}</p>`)
 
+      // Load form
+      buildForm(selectedTrip)
     })
     .catch((error) => {
       userMessage(`Hrmm.. something has gone wrong loading this trip! ${error.message}`)
@@ -48,15 +51,31 @@ const loadClickedTrip = function loadClickedTrip(trip) {
 
 }
 
-const reserveTrip = reserveTrip(desiredTrip) {
-  axios.get(URL + `/${trip.id}/reservations`)
-    .then((response) {
+const buildForm = (selectedTrip) => {
+  $('#trip-booking').empty();
+  $("#trip-booking").append('<h4>Book A Trip!</h4>')
+  $("#trip-booking").append(
+    `<form><p>Trip: ${selectedTrip.name}</p><p>Name:<input type= "text" name="name"></p><p>Email:<input type="text" name="email"></p><input type="hidden" name="id" value="${selectedTrip.id}"><input type="submit" value="Submit"></form>`
+  )
+}
+
+const reserveTrip = (event) => {
+  event.preventDefault();
+  const tripID = $('form')[0][2].value
+  const reservationData = $('form').serialize()
+  console.log($('form'));
+  console.log(tripID);
+  console.log(reservationData);
+  axios.post(URL + `/${tripID}/reservations?${reservationData}`)
+    .then((response) => {
       console.log(response);
+      userMessage("Hooray! You've booked an exciting adventure!")
     })
-    .catch((error) {
+    .catch((error) => {
       userMessage(`Hrmm.. something has gone wrong booking this trip! ${error.message}`)
       console.log(error);
     })
+    $('form')[0].reset();
 }
 
 
@@ -67,9 +86,6 @@ $(document).ready (() => {
     console.log(trip);
     loadClickedTrip(trip);
   });
+  $('#trip-booking').submit(reserveTrip);
 
 });
-//   $(".note").click(function(){
-//       let note = $(this).html();
-//       playNote (note);
-//   })
