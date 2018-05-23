@@ -28,17 +28,17 @@ const loadTrips = () => {
   tripList.empty();
 
   axios.get(URL)
-    .then((response) => {
-      console.log(response);
-      reportStatus(`Successfully loaded ${response.data.length} trips`);
-      response.data.forEach((trip) => {
-        tripList.append(`<li id="${trip.id}">${trip.name}</li>`);
-      });
-    })
-    .catch((error) => {
-      reportStatus(`Encountered an error while loading trips: ${error.message}`);
-      console.log(error);
+  .then((response) => {
+    console.log(response);
+    reportStatus(`Successfully loaded ${response.data.length} trips`);
+    response.data.forEach((trip) => {
+      tripList.append(`<li id="${trip.id}">${trip.name}</li>`);
     });
+  })
+  .catch((error) => {
+    reportStatus(`Encountered an error while loading trips: ${error.message}`);
+    console.log(error);
+  });
 };
 
 $(`#trips-list`).on(`click`, `li`, function(){
@@ -53,16 +53,21 @@ $(`#trips-list`).on(`click`, `li`, function(){
   axios.get(urlTrip)
   .then((response) => {
 
-     reportStatus(`Successfully loaded trip to: ${response.data.name}`);
+    reportStatus(`Successfully loaded trip to: ${response.data.name}`);
 
-     trip.append(
-       `<tr><th>${response.data.name}</th></tr>
-       <tr><th>${response.data.continent} weeks</th></tr>
-       <tr><th>Category</th><td>${response.data.category}</td></tr>
-       <tr><th>Continent</th><td>${response.data.weeks}</td></tr>
-       <tr><th>Cost</th><td>${response.data.cost}</td></tr>
-       <tr><th>About</th><td>${response.data.about}</td></tr>
-       `);
+    trip.append(
+      `<tr><th>${response.data.name}</th></tr>
+      <tr><th>${response.data.continent} weeks</th></tr>
+      <tr><th>Category</th><td>${response.data.category}</td></tr>
+      <tr><th>Continent</th><td>${response.data.weeks}</td></tr>
+      <tr><th>Cost</th><td>${response.data.cost}</td></tr>
+      <tr><th>About</th><td>${response.data.about}</td></tr>
+      `
+    );
+  })
+  .catch((error) => {
+    reportStatus(`Encountered an error while loading trips: ${error.message}`);
+    console.log(error);
   });
 });
 
