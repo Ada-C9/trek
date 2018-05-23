@@ -61,9 +61,13 @@ const loadTripDetails = (id) => {
     tripDetails.append(`<tr><th>Trip Details</th></tr>`);
 
     let detail = response.data;
-    tripDetails.append(`<tr ><td>${detail.name}</td></tr>`);
-    tripDetails.append(`<tr ><td>${detail.cost}</td></tr>`);
-    tripDetails.append(`<tr ><td>${detail.about}</td></tr>`);
+    tripDetails.append(`<tr><td>Name: ${detail.name}</td></tr>`);
+    tripDetails.append(`<tr><td>Trip Id:${detail.id}</td></tr>`);
+    tripDetails.append(`<tr><td>Continent:${detail.continent}</td></tr>`);
+    tripDetails.append(`<tr><td>Category:${detail.category}</td></tr>`);
+    tripDetails.append(`<tr><td>Weeks:${detail.weeks}</td></tr>`);
+    tripDetails.append(`<tr><td>Cost: $${detail.cost}</td></tr>`);
+    tripDetails.append(`<tr><td>${detail.about}</td></tr>`);
 
     reportStatus('Trip Details Loaded');
   })
@@ -81,7 +85,6 @@ const loadTripDetails = (id) => {
 $(document).ready(() => {
   $('#seetrips').click(loadTrips);
   $('#showtrips').on( 'click', 'td', function(event) {
-    console.log('code runs for 2nd click event');
     let id = $(this).attr('id');
     event.preventDefault();
     loadTripDetails(id);
