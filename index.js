@@ -47,81 +47,92 @@ $(`#trips-list`).on(`click`, `li`, function(){
 
   const trip = $('#trip');
   trip.empty();
+  const reservation = $(`#reserve-form`);
+  reservation.empty();
+
 
   axios.get(URL+tripid)
   .then((response) => {
     console.log(response);
-     reportStatus(`Successfully loaded trip to: ${response.data.name}`);
+    reportStatus(`Successfully loaded trip to: ${response.data.name}`);
 
-     trip.append(
-       `<tr><th>${response.data.name}</th></tr>
-       <tr><th>${response.data.weeks} weeks</th></tr>
-       <tr><th>Category</th><td>${response.data.category}</td></tr>
-       <tr><th>Continent</th><td>${response.data.continent}</td></tr>
-       <tr><th>Cost</th><td>${response.data.cost}</td></tr>
-       `);
-  });
-});
+    trip.append(
+      `<tr><th>${response.data.name}</th></tr>
+      <tr><th>${response.data.weeks} weeks</th></tr>
+      <tr><th>Category</th><td>${response.data.category}</td></tr>
+      <tr><th>Continent</th><td>${response.data.continent}</td></tr>
+      <tr><th>Cost</th><td>${response.data.cost}</td></tr>
+      `);
+      reservation.addClass(tripid)
+      reservation.html(
+        `<div>
+        <label for="name">Name</label>
+        <input type="text" name="name" />
+        </div>
+        <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" />
+        </div>
+        <input type="submit" name="add-pet" value="Reserve!" />`);
+      });
+    });
 
-//
-// Creating Pets
-//
-// const FORM_FIELDS = ['name', 'age', 'owner'];
-// const inputField = name => $(`#pet-form input[name="${name}"]`);
-//
-// const readFormData = () => {
-//   const getInput = name => {
-//     const input = inputField(name).val();
-//     return input ? input : undefined;
-//   };
-//
-//   const formData = {};
-//   FORM_FIELDS.forEach((field) => {
-//     formData[field] = getInput(field);
-//   });
-//
-//   return formData;
-// };
-//
-// const clearForm = () => {
-//   FORM_FIELDS.forEach((field) => {
-//     inputField(field).val('');
-//   });
-// }
-//
-// const createPet = (event) => {
-//   // Note that createPet is a handler for a `submit`
-//   // event, which means we need to call `preventDefault`
-//   // to avoid a page reload
-//   event.preventDefault();
-//
-//   const petData = readFormData();
-//   console.log(petData);
-//
-//   reportStatus('Sending pet data...');
-//
-//   axios.post(URL, petData)
-//     .then((response) => {
-//       reportStatus(`Successfully added a pet with ID ${response.data.id}!`);
-//       clearForm();
-//     })
-//     .catch((error) => {
-//       console.log(error.response);
-//       if (error.response.data && error.response.data.errors) {
-//         reportError(
-//           `Encountered an error: ${error.message}`,
-//           error.response.data.errors
-//         );
-//       } else {
-//         reportStatus(`Encountered an error: ${error.message}`);
-//       }
-//     });
-// };
-//
-// //
-// OK GO!!!!!
-//
-$(document).ready(() => {
-  $('#load').click(loadTrips);
-  // $('#pet-form').submit(createPet);
-});
+
+    const FORM_FIELDS = ['name', 'email'];
+    const inputField = name => $(`#reserve-form input[name="${name}"]`);
+  //  const inputemailField = email => $(`#reserve-form input[email="${email}"]`);
+    console.log();
+    const readFormData = () => {
+      const getInput = name => {
+        const input = inputField(name).val();
+        return input ? input : undefined;
+      };
+
+      const formData = {};
+      FORM_FIELDS.forEach((field) => {
+        formData[field] = getInput(field);
+      });
+
+      return formData;
+    };
+
+    const clearForm = () => {
+      FORM_FIELDS.forEach((field) => {
+        console.log(field);
+        inputField(field).val('');
+      });
+    }
+
+    const createReservation = (event) => {
+      console.log(event.target.className);
+      const tripid = event.target.className;
+
+      event.preventDefault();
+      
+       const reservationData = readFormData();
+
+      reportStatus('Making reservation...');
+
+      axios.post(URL+tripid+`/reservations`, reservationData)
+      .then((response) => {
+        console.log(response);
+        reportStatus(`Your reservation has been made!`);
+        clearForm();
+      })
+      .catch((error) => {
+        console.log(error.response);
+        if (error.response.data && error.response.data.errors) {
+          reportError(
+            `Encountered an error: ${error.message}`,
+            error.response.data.errors
+          );
+        } else {
+          reportStatus(`Encountered an error: ${error.message}`);
+        }
+      });
+    };
+
+    $(document).ready(() => {
+      $('#load').click(loadTrips);
+      $('#reserve-form').submit(createReservation);
+    });
