@@ -28,7 +28,8 @@ const loadTrips = () => {
       reportStatus(`Successfully loaded ${response.data.length} trips`);
       response.data.forEach((trip) => {
         console.log(response);
-        tripList.append(`<li>${trip.name}</li>`);
+        tripList.append(`<li>
+          <button>${trip.name}</button></li>`);
       });
     })
     .catch((error) => {
