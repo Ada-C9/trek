@@ -150,8 +150,65 @@ const reserveTrip = (event) => {
   });
 }
 
+
+
+
+
+// MAKE TRIP HELPERS
+const tripFIELDS = ['name', 'continent', 'about', 'category', 'weeks', 'cost'];
+const givenField = name => $(`#new-trip-form input[name="${name}"]`);
+
+const readTripData = () => {
+  const myInput = name => {
+    const tInput = givenField(name).val();
+    return tInput ? tInput : undefined;
+  };
+
+  const newTripData = {};
+  tripFIELDS.forEach((field) => {
+    newTripData[field] = myInput(field);
+  });
+
+  return newTripData;
+};
+
+// const clearForm = () => {
+//   tripFIELDS.forEach((field) => {
+//     givenField(field).val('');
+//   });
+// }
+
+
+// MAKE TRIP
+const createTrip = (event) => {
+  event.preventDefault();
+  console.log(event);
+  const nTripData = readTripData()
+  console.log(nTripData);
+
+  axios.post(URL, nTripData)
+  .then((response) => {
+    console.log(response);
+    reportStatus(`Successfully created new trip: ${response.data.name}!`);
+    // clearForm();
+  })
+  .catch((error) => {
+    console.log(error.response);
+    if (error.response.data && error.response.data.errors) {
+      reportStatus(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}`);
+    }
+  });
+}
+
+
 // ACTION PLAN
 $(document).ready(() => {
+  // load trips
   $('#load').click(loadTrips);
   $('#asia').click(asiaTrips);
   $('#africa').click(africaTrips);
@@ -161,9 +218,31 @@ $(document).ready(() => {
   $('#n-amer').click(nAmericaTrips);
   $('#s-amer').click(sAmericaTrips);
 
+  //get details for a trip
   $('body').delegate( 'li', 'click', function() {
     console.log(this)
     getTrip(this.id)
   });
+
+  // submit forms
   $('#trip-form').submit(reserveTrip)
-})
+  $('#new-trip-form').submit(createTrip)
+
+  // open the modal
+  $('#create-trip').click(function() {
+      $('#tripModal').css('display','block');
+  })
+
+  // close the modal
+  $('#close').click(function() {
+      $('#tripModal').css('display','none');
+  })
+
+  // doesn't currently close modal
+  $(document).click(function(event) {
+    if (!$(event.target).closest('#tripModal,#create-trip')) {
+          $("#tripModal").css('display','none');
+      }
+    // console.log(event);
+  })
+});
