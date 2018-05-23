@@ -133,12 +133,12 @@ $(document).ready(() => {
       .then((response) => {
         reportStatus(`Successfully loaded trip data`);
         let trip = response.data;
-        singleTrip.append(`<li>Name: ${trip.name}</li>`);
-        singleTrip.append(`<li>Continent: ${trip.continent}</li>`);
-        singleTrip.append(`<li>About: ${trip.about}</li>`);
-        singleTrip.append(`<li>Category: ${trip.category}</li>`);
-        singleTrip.append(`<li>Weeks: ${trip.weeks}</li>`);
-        singleTrip.append(`<li>Cost: ${trip.cost}</li>`);
+        singleTrip.append(`<li><span class="important">Name:</span> ${trip.name}</li>`);
+        singleTrip.append(`<li><span class="important">Continent:</span> ${trip.continent}</li>`);
+        singleTrip.append(`<li><span class="important">About:</span> ${trip.about}</li>`);
+        singleTrip.append(`<li><span class="important">Category:</span> ${trip.category}</li>`);
+        singleTrip.append(`<li><span class="important">Weeks:</span> ${trip.weeks}</li>`);
+        singleTrip.append(`<li><span class="important">Cost:</span> ${trip.cost}</li>`);
         console.log('Getting a single trip');
       })
       .catch((error) => {

@@ -14,7 +14,7 @@
 <body>
   <header>
     <nav>
-      <h1>Trek!</h1>
+      <h1><a href="index.html">Trek!</a></h1>
     </nav>
   </header>
   <section id="status-message"></section>
@@ -39,22 +39,22 @@
         <h3>Reserve Trip</h3>
         <form id="reserve-trip">
           <div>
-            <label for"name">Your Name</label>
+            <label for"name"><span class="important">Your Name</span></label>
             <input type="text" name="name" />
           </div>
           <div>
-            <label for"email">Your Email</label>
+            <label for"email"><span class="important">Your Email</span></label>
             <input type="text" name="email" />
           </div>
           <div>
-            <label for"trip">Trip</label>
+            <label for"trip"><span class="important">Trip</span></label>
             <input type="text" id="trip_name" name="trip" disabled>
           </div>
           <div>
             <input type="hidden" id="trip_id" name="trip_id" value="200">
           </div>
 
-          <input type="submit" name="reserve-trip" value="Reserve Trip" />
+          <input class="button" type="submit" name="reserve-trip" value="Reserve Trip" />
         </form>
       </section>
     </section>
