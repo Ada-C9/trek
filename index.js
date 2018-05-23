@@ -62,6 +62,7 @@ const loadTrip = (id) => {
 };
 
 // Get form data
+
 const FORM_FIELDS = ['name', 'email'];
 const inputField = name => $(`#reservation-form input[name="${name}"]`);
 
@@ -79,6 +80,12 @@ const getFormData = () => {
   return formData;
 };
 
+const clearForm = () => {
+  FORM_FIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+}
+
 // Reserve Trip
 
 const reserveTrip = (event) => {
@@ -92,7 +99,7 @@ const reserveTrip = (event) => {
   axios.post(reservationUrl, reservationData)
   .then((response) => {
     reportStatus(`Successfully reserved trip ${tripId}`);
-    console.log(response);
+    clearForm();
   })
   .catch((error) => {
     console.log(error.response);
