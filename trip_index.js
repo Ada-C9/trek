@@ -2,11 +2,10 @@ let numTrips = 0;
 
 const loadTrips = () => {
   const URL = "https://ada-backtrek-api.herokuapp.com/trips"
-  //FIXME: Reporting status supposed to be loading here. But currently not displaying trips that have loaded
   reportStatus('Loading trip...');
 
   // Setting up trip table that will correspond to the table with the given id in HTML and it empties out at the beginning
-  const tripsList = $('#trip-table');
+  const tripsList = $('#trips-table');
   tripsList.empty();
 
   // GET request time
@@ -19,7 +18,7 @@ const loadTrips = () => {
     reportStatus(`Successfully loaded ${numTrips} trips.`);
     // from the response, I want the data. From Data I want trip name
     response.data.forEach((trip) => {
-      tripsList.append(`<li>${trip.name}</li>`);
+      tripsList.append(`<li class="${trip.id}">${trip.id}: ${trip.name}</li>`);
     });
   })
   // do this if the response is not successful
@@ -29,6 +28,37 @@ const loadTrips = () => {
   });
 };
 
+// TODO: Figure out how to pass the id of the thing we clicked on as a parameter
+const displayTrip = (event) => {
+  console.log(event);
+
+  let id = event.target.className;
+
+  const tripURL = 'https://ada-backtrek-api.herokuapp.com/trips/';
+  // making sure we clear out all trip deets
+
+  const tripDetails = $('#trip-deets');
+  tripDetails.empty();
+
+  // GET request, need to include the id of the
+  axios.get(tripURL + id)
+
+  .then((response) => {
+    reportStatus('Successfully loaded trip details');
+
+    // from the response I want the data. from the data I want all of the current values
+    // FIXME: Want to display the detail name before it by accessing the name of the keys
+    
+    // for (let key in response.data) {
+    //   tripDetails.append(`<li> ${response.data('key')} </li>`);
+    // }
+    for (let detail1 in response.data) {
+      tripDetails.append(`<li> ${response.data[detail1]} </li>`);
+    }
+  })
+};
+
+
 const reportStatus = (message) => {
   $('#status-messages').html(message);
 };
@@ -36,7 +66,9 @@ const reportStatus = (message) => {
 $(document).ready(() => {
   // on button click display all trips
   // TODO: eventually will put in a portion that will select for different buttons "View by Continent" etc........
-  $('button').click(loadTrips);
   // let buttonClicked = this.innerHTML;
   // console.log(buttonClicked);
+  $('button').click(loadTrips);
+  // event for clicking on a trip in trips list gets us a trips id
+  $('#trips-table').on('click', 'li', displayTrip)
 });
