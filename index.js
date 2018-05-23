@@ -67,7 +67,61 @@ const loadDetails = function(event) {
 
 }
 
+// Reserve Trip
+const FORM_FIELDS = ['name', 'email'];
+const inputField = name => $(`#reserve-form input[name="${name}"]`);
+
+const readFormData = () => {
+  const getInput = name => {
+    const input = inputField(name).val();
+    return input ? input : undefined;
+  };
+
+  const formData = {};
+  FORM_FIELDS.forEach((field) => {
+    formData[field] = getInput(field);
+  });
+
+  return formData;
+}
+
+const clearForm = () => {
+  FORM_FIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+}
+
+const reserveTrip = (event) => {
+  event.preventDefault();
+
+  const tripID = $(`#trip-reservation-num`).find('span').html();
+
+  const tripData = readFormData();
+  console.log(tripData);
+
+  reportStatus('Making reservation...');
+
+  axios.post(`${URL}\\${tripID}\\reservations`, tripData)
+    .then((response) => {
+      console.log(response);
+      reportStatus(`Successfully made a reservation!`);
+      clearForm();
+    })
+    .catch((error) => {
+      console.log(error.response);
+      // if (error.response.data && error.response.data.errors) {
+      //   reportError(
+      //     `Encountered an error: ${error.message}`,
+      //     error.response.data.errors
+      //   );
+      // } else {
+        reportStatus(`Encountered an error: ${error.message}`);
+      // }
+    });
+};
+
 $(document).ready(() => {
   $('#trips-button').click(loadTrips);
   $('#trip-list').on('click', 'p', loadDetails);
+  $('#reserve-form').submit(reserveTrip);
 });
