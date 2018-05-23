@@ -2,14 +2,14 @@ const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
 
 const loadTrips = () => {
+
   const tripList = $('#trip-list');
-  tripList.empty();
 
   axios.get(URL)
     .then((response) => {
       response.data.forEach((trip) => {
         let tripID = trip.id;
-        tripList.append(`<li id="${tripID}">${trip.name}</li>`);
+          tripList.append(`<li id="${tripID}">${trip.name}</li>`);
       });
     })
     .catch((error) => {
