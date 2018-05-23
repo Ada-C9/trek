@@ -1,18 +1,19 @@
 .trips {
-  background-color: #3e181b;
-  color: #db1d2d;
+  background-color: #FFEFF3;
+  color: #D64933;
+  border: dotted #D64933 1px;
   cursor: pointer;
-  font-size: 3rem;
-  width: 8rem;
-  height: 8rem;
-  margin: 0;
-  padding: 0;
-  border: 3px solid currentColor;
+  font-size: 2rem;
+  margin-bottom: 1em;
 }
 
 .trips:hover { background-color: #661920; }
 
 .trips:active, .trips.active { background-color: #db1d2d; }
+
+.navigation {
+  text-align: center;
+}
 
 .bulk {
   display: flex;
@@ -23,6 +24,47 @@
   display: none;
 }
 
-* {
-  border: black solid 1px;
+
+body {
+  background-color: #FFF7F9;
 }
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.img {
+    /* The image used */
+    background-image: url('etienne-desclides-119070-unsplash.jpg');
+
+    /* Full height */
+    height: 30%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 4em;
+    margin-bottom: 1em;
+    border: #EBEFF2 solid 1px;
+}
+
+.title {
+  color: #215B33;
+  text-align: center;
+  font-size: 6em;
+}
+
+ul {
+  max-height: 75vh;
+  overflow: scroll;
+}
+li {
+  padding: .5em;
+  margin-left: 1em;
+}
+
+/* * {
+  border: white solid 1px;
+} */

@@ -4,18 +4,18 @@ const reportStatus = (message) => {
   $('#status-message').html(message);
 }
 
-// GET TRIPS LIST
-const loadTrips = () => {
+// GET LIST HELPER
+const apiGET = (url) => {
   const tripList = $('#trips-list');
   tripList.empty()
 
   reportStatus('Loading Trips! Please Wait...');
 
-  axios.get(URL)
+  axios.get(url)
   .then((response) => {
     response.data.forEach((adventure) => {
       tripList.append(`<li id="${adventure.id}">${adventure.name}</li>`);
-      reportStatus('Trips Loaded!')
+      reportStatus('Asia Trips Loaded!')
     })
   })
   .catch((error) => {
@@ -23,6 +23,51 @@ const loadTrips = () => {
     reportStatus(`Error: ${error.message}`)
   })
 }
+
+// ALL TRIPS
+const loadTrips = () => {
+  apiGET(URL)
+}
+
+// GET ASIA
+const asiaTrips = () => {
+  let url = (URL + '/continent?query=Asia')
+  apiGET(url)
+}
+
+// GET AFRICA
+const africaTrips = () => {
+  let url = (URL + '/continent?query=Africa')
+  apiGET(url)
+}
+
+// GET Antartica
+const antarticaTrips = () => {
+  let url = (URL + '/continent?query=Antartica')
+  apiGET(url)
+}
+// GET Australasia
+const australasiaTrips = () => {
+  let url = (URL + '/continent?query=Australasia')
+  apiGET(url)
+}
+// GET EUROPE
+const europeTrips = () => {
+  let url = (URL + '/continent?query=Europe')
+  apiGET(url)
+}
+// GET North America
+const nAmericaTrips = () => {
+  let url = (URL + '/continent?query=North%20America')
+  apiGET(url)
+}
+
+// GET South America
+const sAmericaTrips = () => {
+  let url = (URL + '/continent?query=South%20America')
+  apiGET(url)
+}
+
 
 // SELECT/SEE TRIP INFO
 const getTrip = (id) => {
@@ -103,8 +148,16 @@ const reserveTrip = (event) => {
 // ACTION PLAN
 $(document).ready(() => {
   $('#load').click(loadTrips);
+  $('#asia').click(asiaTrips);
+  $('#africa').click(africaTrips);
+  $('#antartica').click(antarticaTrips);
+  $('#australasia').click(australasiaTrips);
+  $('#europe').click(europeTrips);
+  $('#n-amer').click(nAmericaTrips);
+  $('#s-amer').click(sAmericaTrips);
+
   $('body').delegate( 'li', 'click', function() {
-    console.log(this.id)
+    console.log(this)
     getTrip(this.id)
   });
   $('#trip-form').submit(reserveTrip)
