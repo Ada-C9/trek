@@ -37,20 +37,21 @@ const showDetails = (event) => {
 
 
   $('#trip-details').html('<h2>Trip Details</h2>');
-  $('#trip-details > h2').addClass('bordered-bottom')
+  $('#trip-details > h2').addClass('bordered-bottom');
 
   axios.get(detailsLink)
     .then((response) => {
+      let trip = response.data;
       $('#trip-details').append(
         `<ul>
-          <li><strong>Name: ${response.data.name}</strong></li>
-          <li><strong>Continent: </strong>${response.data.continent}</li>
-          <li><strong>Category: </strong>${response.data.category}</li>
-          <li><strong>Weeks: </strong>${response.data.weeks}</li>
-          <li><strong>Cost: </strong>$${response.data.cost}</li>
+          <li><strong>Name: ${trip.name}</strong></li>
+          <li><strong>Continent: </strong>${trip.continent}</li>
+          <li><strong>Category: </strong>${trip.category}</li>
+          <li><strong>Weeks: </strong>${trip.weeks}</li>
+          <li><strong>Cost: </strong>$${trip.cost}</li>
           <li>
           <strong>About: </strong>
-            <p>${response.data.about}</p>
+            <p>${trip.about}</p>
           </li>
         </ul>`
       );
@@ -59,9 +60,6 @@ const showDetails = (event) => {
 
     });
 
-
-
-
 };
 
 
@@ -69,7 +67,6 @@ const showDetails = (event) => {
 
 
 $(document).ready(()=>{
-  console.log("This is Working!");
   $('#all').click(showTrips);
-  $('#trip-list').on('click', 'a', showDetails)
+  $('#trip-list').on('click', 'a', showDetails);
 });
