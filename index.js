@@ -13,8 +13,8 @@ const loadTrips = () => {
     const tripCollection = response.data
     // console.log(response);
     tripCollection.forEach((trip) => {
-      // console.log(trip);
-      tripList.append(`<li>${trip.name}</li>`)
+      console.log(trip);
+      tripList.append(`<li class="trip ${trip.id}">${trip.name}</li>`)
     });
     userMessage(`Showing ${tripCollection.length} amazing trips to choose from!`)
   })
@@ -24,11 +24,21 @@ const loadTrips = () => {
   });
 };
 
-
+function loadClickedTrip(trip) {
+  console.log(trip);
+  
+}
 
 
 
 $(document).ready (() => {
   $('#trips-button').click(loadTrips);
-  // loadTrips()
+  $('.trip').click(function(){
+    let trip = $(this)
+    loadClickedTrip(trip);
+  })
 });
+//   $(".note").click(function(){
+//       let note = $(this).html();
+//       playNote (note);
+//   })
