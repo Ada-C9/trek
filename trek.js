@@ -62,7 +62,7 @@ const individualTrip = (id) => {
     );
     reserve.addClass(id);
     reserve.html(
-      `
+      `<h1>Reservation</h1>
       <div>
       <label for="name">Name</label>
       <input type="text" name="name" />
@@ -128,7 +128,7 @@ const createReservation = (urlTrip) => {
 
   .then((response) => {
     console.log(response);
-    reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
+    reportStatus(`Successfully added a reservation with ID ${response.data.trip_id}!`);
     clearForm();
   })
   .catch((error) => {
