@@ -43,7 +43,6 @@ const loadTrips = () => {
 
 const individualTrip = (id) => {
   console.log(this.id);
-  // const tripId = this.id
   reportStatus("Loading trip details...");
 
   const trip = $('#trip');
@@ -66,22 +65,67 @@ const individualTrip = (id) => {
     );
   })
   .catch((error) => {
-    reportStatus(`Encountered an error while loading trips: ${error.message}`);
+    reportStatus(`Encountered an error while loading this trip: ${error.message}`);
     console.log(error);
   });
 };
 
+const FORM_FIELDS = ['name'];
+const inputField = name => $(`#reservation-form input[name="${name}"]`);
+
+const readFormData = () => {
+  const getInput = name => {
+    const input = inputField(name).val();
+    return input ? input : undefined;
+  };
+
+  const formData = {};
+  FORM_FIELDS.forEach((field) => {
+    formData[field] = getInput(field);
+  });
+
+  return formData;
+};
+
+const clearForm = () => {
+  FORM_FIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+}
+
+const createReservation = (event) => {
+
+  event.preventDefault();
+
+  const reservationData = readFormData();
+  console.log(reservationData);
+
+  reportStatus('Doing your reservation...');
 
 
-
-//
-// OK GO!!!!!
-//
+  axios.post(urlReservation)
+  .then((response) => {
+    reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
+    clearForm();
+  })
+  .catch((error) => {
+    console.log(error.response);
+    if (error.response.data && error.response.data.errors) {
+      reportError(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}`);
+    }
+  });
+};
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $(`#trips-list`).on(`click`, `li`, function(){
     individualTrip(this.id);
   });
+  $('#reservation-form').submit(createReservation);
 
 });
