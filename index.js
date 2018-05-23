@@ -32,12 +32,14 @@ const showTrip = (event) => {
   // console.log('Trip clicked');
   axios.get(URL + `/${tripId}`)
     .then((response) => {
-      console.log(response);
+      console.log(response.data.name);
+      $('#show-trip').text(response.data.name); //CALL NEW FUNCTION TO BUILD HTML
+      reportStatus(`Trip #${tripId} Loaded!`);
     })
     .catch((error) => {
       console.log(error.message);
+      reportStatus(`Error: ${error.message}`);
     });
-
 };
 
 $(document).ready(() => {

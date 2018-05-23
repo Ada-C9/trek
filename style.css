@@ -37,10 +37,26 @@ h1, button[name] {
   margin: 1em 0em;
 }
 
+#trip-list li:first-child {
+  margin-top: 0;
+}
+
+.right, .left {
+  width: 40vw;
+  margin-top: 1em;
+}
+
 div.left {
   margin-left: 4em;
+  /* margin-top:  */
   overflow: auto;
   max-height: 100vh;
+  /* width: 40vw; */
+}
+
+div.right {
+  margin-right: 4em;
+  /* width: 40vw; */
 }
 
 button.trip {
