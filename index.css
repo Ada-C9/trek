@@ -1,0 +1,10 @@
+
+#body{
+  background-color: blue;
+  display: flex;
+  flex-direction: row;
+}
+
+aside{
+  align-self: center;
+}
