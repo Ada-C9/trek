@@ -2,6 +2,7 @@
 body {
   margin-left: 4em;
   margin-right: 4em;
+  /* overflow: hidden; */
 }
 
 .header-flex {
@@ -10,8 +11,12 @@ body {
 }
 
 /* HEADER */
-header, main, section {
-  border: black 1px dashed;
+header, main, section, footer {
+  /* border: black 1px dashed; */
+}
+
+header {
+  background-color: gray;
 }
 
 h1, button[name] {
@@ -21,6 +26,7 @@ h1, button[name] {
 /* SECTION */
 #status-message {
   text-align: center;
+  background-color: lightgreen;
 }
 
 /* MAIN */
@@ -65,4 +71,18 @@ button.trip {
 section#show-trip {
   height: 40vh;
   overflow: auto;
+}
+
+/* FOOTER */
+footer {
+  position: fixed;
+  height: 30px;
+  text-align: center;
+  background-color: gray;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-left: 4em;
+  margin-right: 4em;
+  margin-bottom: 0px;
 }
