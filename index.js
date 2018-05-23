@@ -118,12 +118,15 @@ const reserveTrip = (event) => {
 
   axios.post(`${URL}\\${tripID}\\reservations`, tripData)
     .then((response) => {
-      console.log(response);
+      $('input[type="text"]').removeClass('highlight')
       reportStatus(`Successfully made a reservation!`);
       clearForm();
     })
     .catch((error) => {
       console.log(error.response);
+
+      $('input[type="text"]').addClass('highlight')
+
       if (error.response.data && error.response.data.errors) {
         reportError(
           `Encountered an error: ${error.message}`,
