@@ -35,6 +35,10 @@ button {
   color: white;
 }
 
+.hidden {
+  display: none;
+}
+
 #status-message {
   text-align: center;
   background-color: rgba(231, 242, 147,.4);
@@ -65,4 +69,12 @@ button {
   padding-left: 40px;
   border-radius: 15px;
   margin: 20px;
+}
+
+#trip-list li {
+  padding: 5px;
+}
+
+#trip-list li:hover {
+  color: #C61184;
 }

@@ -1,7 +1,7 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips/';
 
 const reportStatus = (message) => {
-  $('#status-message').html(message);
+  $('#status-message').html(message).removeClass("hidden");
 };
 
 const reportError = (message, errors) => {
@@ -20,7 +20,7 @@ const reportError = (message, errors) => {
 const loadTrips = () => {
   reportStatus('Loading trips...');
 
-  const tripList = $('#trip-list');
+  const tripList = $('#trip-list').removeClass("hidden");
   tripList.empty();
 
   axios.get(URL)
@@ -43,7 +43,7 @@ const loadTrips = () => {
 }; // end of load Trips
 
 const getTripData = (trip_id) => {
-  const tripDetails = $(`#trip-details`);
+  const tripDetails = $(`#trip-details`).removeClass("hidden");
   tripDetails.empty();
   let tripURL = URL + trip_id;
 
@@ -56,9 +56,11 @@ const getTripData = (trip_id) => {
       <li>Travel Category: ${response.data.category}</li>
       <li>Continent: ${response.data.continent}</li>
       <li>Cost: $${response.data.cost}</li>
-      <li>Weeks of Travel: ${response.data.weeks}</li>
-      <li>About this Trip:</li>
-      <li>${response.data.about}</li>`);
+      <li>Weeks of Travel: ${response.data.weeks}</li>`);
+  })
+  .catch((error) => {
+    reportStatus(`Encountered an error while trying to load the trip: ${error.message}`);
+    console.log(error);
   });
 }
 
