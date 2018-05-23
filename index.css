@@ -42,9 +42,25 @@ table {
   margin-top: .5em;
   border-collapse: collapse;
   width: 100%;
+  height: 100%
   text-align: center;
 }
 table, th, td {
   padding: 15px 32px;
   border: 1px solid black;
+}
+
+#trip-details {
+  margin: 1em;
+  text-align: left;
+}
+
+.detail-header {
+  text-align: center;
+  border: 1px solid black;
+  padding: 1em;
+  font-weight: bold;
+}
+p {
+  font-weight: bold;
 }
