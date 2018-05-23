@@ -4,16 +4,25 @@
     <meta charset="utf-8">
     <title>Treker</title>
     <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
   </head>
 
   <body>
 
+
+    <header>
+      <img id="logo" src="images/travel.png" alt="Globe with plane logo">
+      <h1>Trekking's Travels</h1>
+    </header>
+
+    <section class="sub-header">
+      <button id="load">View All Trips</button>
+      <div id="status-message"></div>
+    </section>
+
     <main>
 
-      <section>
-        <button id="load">All Trips</button>
-        <ul id="trip-list"></ul>
-      </section>
+      <ul id="trip-list"></ul>
 
       <section id="trip-details">
         <div id="name"></div>
@@ -25,6 +34,31 @@
       </section>
 
     </main>
+
+    <section id="reserve-trip">
+      <form id="reserve-form">
+
+        <input type="hidden" name="tripID" id="tripToRes"/>
+
+        <div>
+          <label for="name">Name: </label>
+          <input type="string" name="name" />
+        </div>
+
+        <div>
+          <label for="age">Age: </label>
+          <input type="number" name="age" />
+        </div>
+
+        <div>
+          <label for="email">Email: </label>
+          <input type="string" name="email" />
+        </div>
+
+        <input type="submit" name="add-reservation" />
+
+      </form>
+    </section>
 
   </body>
 
