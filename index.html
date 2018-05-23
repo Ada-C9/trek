@@ -28,6 +28,7 @@
         </tbody>
       </table>
     </section>
+
     <section id="trip-info">
       <table id="trip-details">
         <thead>
@@ -41,15 +42,20 @@
         </tbody>
       </table>
 
-      <table>
-        <thead>
-          <tr>
-            <th>
-              Another Table
-            </th>
-          </tr>
-        </thead>
-      </table>
+      <section class="new-reservation">
+        <h1>Reserve Trip</h1>
+        <form id="reservation-form">
+          <div>
+            <label for="name">Your Name:</label>
+            <input type="text" name="name" />
+          </div>
+          <div>
+            <label for="name">Trip:</label>
+            <span id="trip-name"></span>
+          </div>
+          <input type="submit" name="add-reservation" value="Reserve" />
+        </form>
+      </section>
     </section>
   </main>
   <script

@@ -22,6 +22,7 @@ const loadTrip = function loadTrip(tripID) {
   .then((response) => {
     $("#trip-info").show();
     tripInfo.append(`<tr><td>Name: ${response.data.name}</td></tr>
+      <tr><td>Trip ID: ${response.data.id}</td></tr>
       <tr><td>Continent: ${response.data.continent}</td></tr>
       <tr><td>Category: ${response.data.category}</td></tr>
       <tr><td>Weeks: ${response.data.weeks}</td></tr>
