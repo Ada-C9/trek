@@ -11,11 +11,13 @@ main {
 .current-treks {
   border: dotted 3px green;
   width: 90%;
-  grid-column-start: 1;
+  /* grid-column-start: 1; */
 }
 
-.trip-details, #reserv-form {
+.trip-details {
   border: dotted 3px green;
   width: 90%;
-  grid-column-start: 2;
+  display: flex;
+  flex-direction: column;
+  /* grid-column-start: 2; */
 }

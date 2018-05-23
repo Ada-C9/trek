@@ -69,7 +69,6 @@ const displayTrip = (trip) => {
       }
     }
 
-    // reserveTrip(trip);
   })
 
   .catch((error) => {
@@ -87,70 +86,67 @@ const listForm = (id) => {
   formTag += `<div><label for="name">Email</label>
     <input type="text" name="email" /></div>`,
   formTag += `<div id="trek-name">
-    <h5>Trip:${id}</h5></div>`
+    <h5>Trip ID: ${id}</h5></div>`
   formTag += `<input type="submit" name="add-reserv" value="Reserve" />
     </form>`
 
   $('#reserv-form').html(formTag);
 }
 
-// const FORM_FIELDS = ['name', 'email'];
-// const inputField = (name) => $(`#trek-form input[name="${name}"]`);
-//
-// const readFormData = () => {
-//   const getInput = (name) => {
-//     const input = inputField(name).val();
-//     return input ? input : undefined;
-//   };
-//
-//   const formData = {};
-//   FORM_FIELDS.forEach((field) => {
-//     formData[field] = getInput(field);
-//   });
-//
-//   return formData;
-// };
-//
-// const clearForm = () => {
-//   FORM_FIELDS.forEach((field) => {
-//     inputField(field).val('');
-//   });
-// }
+const FORM_FIELDS = ['name', 'email'];
+const inputField = (name) => $(`#trek-form input[name="${name}"]`);
 
-// // A reservation form for trip
-// const reserveTrip = (event) => {
-//
-//   event.preventDefault();
-//
-//   const tripData = readFormData();
-//   console.log(tripData);
-//
-//   const makeReserv = $('#trek-form');
-//
-//   axios.post(URL, tripData)
-//
-//   .then((response) => {
-//     reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
-//     clearForm();
-//     makeReserv.html('<h4>Reserve Trip</h4>')
-//   })
-//
-//   .catch((error) => {
-//     console.log(error.response);
-//     if (error.response.data && error.response.data.errors) {
-//       reportError(
-//         `Encountered an error: ${error.message}`,
-//         error.response.data.errors
-//       );
-//     } else {
-//       reportStatus(`Encountered an error: ${error.message}`);
-//     }
-//   });
-//
-// };
+const readFormData = () => {
+  const getInput = (name) => {
+    const input = inputField(name).val();
+    return input ? input : undefined;
+  };
 
+  const formData = {};
+  FORM_FIELDS.forEach((field) => {
+    formData[field] = getInput(field);
+  });
+
+  return formData;
+};
+
+const clearForm = () => {
+  FORM_FIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+}
+
+// A reservation form for trip
+const reserveTrip = (event) => {
+
+  event.preventDefault();
+
+  const tripData = readFormData();
+  console.log(tripData);
+
+  axios.post(URL, tripData)
+
+  .then((response) => {
+    console.log(response.data.id);
+    reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
+    clearForm();
+  })
+
+  .catch((error) => {
+    console.log(error.response);
+    if (error.response.data && error.response.data.errors) {
+      reportError(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}`);
+    }
+  });
+
+};
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
-  // $('#trek-form').submit(reserveTrip);
+  $('#trip-form').submit(reserveTrip);
 });
