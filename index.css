@@ -26,18 +26,34 @@ body {
   min-width: 400px;
 }
 
+#trip, #reservation, #about-trip {
+  padding: 0 1em;
+}
+
 #trip {
   height: 25vh;
-  /* overflow: scroll; */
 }
 
 #reservation {
-  height: 10vh;
+  height: 5vh;
 }
 
 #about-trip {
-  height: 26vh;
+  height: 30vh;
   overflow: scroll;
+}
+
+/* form styles  */
+
+form div, input[type="submit"] {
+  display: inline-block;
+}
+
+form div input[type="text"] {
+  border: none;
+  font-size: 1em;
+  width: 8em;
+  padding: 5px 0 5px 5px;
 }
 
 /* dynamic display styles  */
@@ -68,7 +84,6 @@ h2 {
 }
 
 button#display-trips, input[type="submit"] {
-  display: block;
   border: none;
   margin: 0 auto 1em auto;
   font-size: 1em;
@@ -110,7 +125,7 @@ li {
 
 /* media queries  */
 @media only screen and (max-width: 820px) {
-    /* For mobile phones: */
+    /* For smaller screens: */
     #trips-info {
       grid-column-start: 1;
       grid-column-end: 3;
