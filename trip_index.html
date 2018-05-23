@@ -32,7 +32,7 @@
         <!-- Loading trip deets via jQuery -->
       </ul>
     </section>
-
+    <!-- FIXME: Need to render the form once the trip display has activated a trip display -->
     <!-- form to reserve a spot -->
     <section id="spot-save">
         <h2>Reserve A Spot!</h2>
@@ -42,11 +42,18 @@
             <label for="name">Name</label>
             <input type="text" name="name" />
           </div>
+          <div>
+            <label for="age">Age</label>
+            <input type="age" age="age" />
+          </div>
           <!-- field for email -->
           <div>
             <label for="email">Email</label>
             <input type="email" email="email" />
           </div>
+
+          <input id="tripID" name="tripID" type="hidden" value="">
+
           <!-- submit button with text -->
           <input type="submit" name="hold-spot" value="Hold Spot!" />
         </form>

@@ -1,7 +1,7 @@
 let numTrips = 0;
+const URL = "https://ada-backtrek-api.herokuapp.com/trips"
 
 const loadTrips = () => {
-  const URL = "https://ada-backtrek-api.herokuapp.com/trips"
   reportStatus('Loading trip...');
 
   // Setting up trip table that will correspond to the table with the given id in HTML and it empties out at the beginning
@@ -28,12 +28,13 @@ const loadTrips = () => {
   });
 };
 
+const tripURL = 'https://ada-backtrek-api.herokuapp.com/trips/';
+
 const displayTrip = (event) => {
   // console.log(event);
   // retrieving the id based on the id assigned in the all trips list, parsing data till I got the value I wanted after viewing in the above console.log()
-  let id = event.target.className;
+  const id = event.target.className;
 
-  const tripURL = 'https://ada-backtrek-api.herokuapp.com/trips/';
   // making sure we clear out all trip deets
 
   const tripDetails = $('#trip-deets');
@@ -53,19 +54,37 @@ const displayTrip = (event) => {
     for (let detail1 in response.data) {
       tripDetails.append(`<li> ${response.data[detail1]} </li>`);
     }
+    // need to set the hidden value on the form with the corresponding trip ID
+    $('#tripID').val(id)
   })
 };
 
 const holdSpot = (event) => {
-// TODO: Currently working on the functionality for a POST request to hold a spot
+  event.preventDefault();
+  let spotId = $(`#tripID`).val();
+  const holdURL = `${tripURL}` + `${spotId}` + `/reservations`
+  // just for now, making sure that a spot hold can be created
+  // will replace with form input
+  const spotData = {
+    name: 'Test Name',
+    age: 24,
+    email: 'boo@boo.com',
+  };
 
+  reportStatus('Making sure we hold your spot...');
+  console.log(holdURL);
+  console.log(spotData);
+  // POST request processing
+  axios.post(holdURL, spotData)
 
-
-
-
-
-
-}
+  .then((response) => {
+    reportStatus(`Successfully reserved spot, enjoy your trip!`);
+  })
+  .catch((error) => {
+    console.log(error.response);
+    reportStatus(`Encountered an error: ${error.message}`);
+  });
+};
 
 const reportStatus = (message) => {
   $('#status-messages').html(message);
@@ -79,6 +98,5 @@ $(document).ready(() => {
   $('button').click(loadTrips);
   // event for clicking on a trip in trips list gets us a trips id. Had to use event delegation cause <li>'s I wanted had not been made yet
   $('#trips-table').on('click', 'li', displayTrip)
-
-  //
+  $('#spot-form').submit(holdSpot);
 });
