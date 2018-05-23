@@ -26,16 +26,19 @@ const loadTripDetails = function loadTripDetails() {
   const tripDetails = $("#trip-details");
   tripDetails.empty();
 
-  axios.get(URL + "/" + this.id)
+  axios.get(URL + `/${this.id}`)
     .then((response) => {
+      const trip = response.data;
       let html = "";
-      html += "<h2>Trip Details</h2>";
-      html += `<h3>Name: ${this.innerHTML}<h3>`;
-      html += `<h4>Continent: ${response.data.continent}</h4>`;
-      html += `<h4>Category: ${response.data.category}</h4>`;
-      html += `<h4>Weeks: ${response.data.weeks}</h4>`;
-      html += `<h4>Cost: $${response.data.cost}</h4>`;
-      html += `<h4>About:<h4><p>${response.data.about}</p>`;
+
+      html += `<h2>Trip Details</h2>
+               <h3>Name: ${this.innerHTML}<h3>
+               <h4>Continent: ${trip.continent}</h4>
+               <h4>Category: ${trip.category}</h4>
+               <h4>Weeks: ${trip.weeks}</h4>
+               <h4>Cost: $${trip.cost}</h4>
+               <h4>About:<h4>
+               <p>${trip.about}</p>`;
 
       tripDetails.append(html);
     })
