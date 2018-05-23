@@ -1,0 +1,28 @@
+.trips {
+  background-color: #3e181b;
+  color: #db1d2d;
+  cursor: pointer;
+  font-size: 3rem;
+  width: 8rem;
+  height: 8rem;
+  margin: 0;
+  padding: 0;
+  border: 3px solid currentColor;
+}
+
+.trips:hover { background-color: #661920; }
+
+.trips:active, .trips.active { background-color: #db1d2d; }
+
+.bulk {
+  display: flex;
+  flex-direction: row;
+}
+
+.hidden {
+  display: none;
+}
+
+* {
+  border: black solid 1px;
+}
