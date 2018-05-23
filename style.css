@@ -1,0 +1,17 @@
+body {
+  margin-left: 4em;
+  margin-right: 4em;
+}
+
+.site-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+header, main {
+  border: black 1px dashed;
+}
+
+h1, button[name], main {
+  margin: 10px 40px;
+}
