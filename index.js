@@ -42,8 +42,6 @@ const loadDetails = (link) => {
   reportStatus('Loading Details...');
   console.log(link);
 
-
-
   axios.get(link)
 
   .then((response) => {
@@ -55,7 +53,7 @@ const loadDetails = (link) => {
     for (let detail in response.data) {
       console.log(detail);
 
-      tripDetails += `<li>${detail}: ${response.data[detail]} </li>`;
+      tripDetails += `<p>${detail}: ${response.data[detail]} </p>`;
     }
     $('#trip-details').html(tripDetails);
   })
