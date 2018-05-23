@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Trek</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="status-message"></section>
+  <main>
+    <section class="trips">
+      <button id="load">See All Trips</button>
+        <table id="table">
+          <thead>
+            <tr>
+              <th>
+                All Trips
+              </th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+
+          </tbody>
+        </table>
+    </section>
+  </main>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript"> $("#table").hide(); </script>
+</body>
+</html>
