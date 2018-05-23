@@ -30,6 +30,7 @@ const loadTrips = () => {
   axios.get(URL)
   .then((response) => {
     reportStatus(`Successfully loaded ${response.data.length} trips.`);
+    trips.append('<h2>All Trips</h2>');
     response.data.forEach((trip) => {
       trips.append(`<li>${trip.name}</li>`);
       trips.append(`<span>${trip.id}</span>`);
@@ -54,6 +55,7 @@ const loadTrip = (id) => {
       reportStatus(`Successfully loaded trip ${id}.`);
       let data = response.data;
       $('#trip').append(`
+        <h2>Trip Details</h2>
         <h3>Name: ${data.name}</h3>
         <div>
         <p><strong>Continent: </strong>${data.continent}</p>
@@ -129,6 +131,7 @@ const reserveTrip = (event) => {
 
 $(document).ready(() => {
   $('#display-trips').click(() => {
+    $('#trips-info').show();
     loadTrips();
   });
   $('ul').on('click', 'li', function() {

@@ -58,12 +58,33 @@ h1 {
   margin: 0;
 }
 
+h2 {
+  text-align: center;
+}
+
 button#display-trips, input[type="submit"] {
   display: block;
   border: none;
   margin: 0 auto 1em auto;
   font-size: 1em;
   padding: 5px 30px;
+}
+
+#trips-info, #trip-info {
+  border: solid 1px #ffffff;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0 1em;
+  text-align: center;
+}
+
+li {
+  display: block;
+  height: 5em;
+  line-height: 5em;
+  border-top: solid 1px #ffffff;
 }
 
 /* media queries  */
