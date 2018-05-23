@@ -1,0 +1,89 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #121F27;
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+h2 {
+  background-color: #416275;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 10px 0 10px 0;
+  margin: 20px 0 0 0;
+}
+
+ul, li {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul {
+  height: 100vh;
+  overflow-x: scroll;
+}
+
+li {
+  padding: 10px 0 10px 0;
+  text-align: center;
+}
+
+li:nth-child(even) {
+  background-color: rgba(228, 238, 240, 0.5);
+}
+
+li:nth-child(odd) {
+  background-color: rgba(187, 207, 218, 0.5);
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+section > div {
+  background-color: rgba(228, 238, 240, 0.5);
+}
+
+button, input[type="submit"] {
+  background-color: rgba(18, 31, 39, 1);
+  color: #FFFFFF;
+  font-size: 0.8rem;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+button:hover, input[type="submit"]:hover {
+  background-color: rgba(97, 145, 168, 1);
+}
+
+button:focus, input[type="submit"]:focus {
+  outline: none;
+}
+
+form, #trip-details > div {
+  padding: 20px;
+}
+
+form > div {
+  padding-bottom: 20px;
+}
+
+input[type="text"] {
+  width: 80%;
+  margin: 5px 10px;
+  padding: 5px 0;
+}
+
+#reserve-trip h3 {
+  text-align: center;
+}
+
+#status {
+  padding-top: 20px;
+}
