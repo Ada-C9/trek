@@ -48,22 +48,23 @@ const loadTripDetails = function loadTripDetails() {
 };
 
 const loadReserveTrip = function loadReserveTrip() {
+
   const reserveTrip = $("#reserve-trip");
   reserveTrip.empty();
 
   let html = "";
-  html += "<h2>Reserve Trip</h2>";
-  html += `<form id=${this.id}>`;
-  html += "<div>";
-  html += "<label for='name'>Your Name</label>";
-  html += "<input type='text' id='name' />";
-  html += "</div>";
-  html += "<div>";
-  html += "<label for='email'>Email</label>";
-  html += "<input type='text' id='email' />";
-  html += "</div>";
-  html += `<input type='submit' value='Reserve' />`;
-  html += "</form>";
+  html += `<h2>Reserve Trip</h2>
+           <form id=${this.id}>
+             <div>
+               <label for='name'>Your Name</label>
+               <input type='text' id='name' />
+             </div>
+             <div>
+               <label for='email'>Email</label>
+               <input type='text' id='email' />
+             </div>
+             <input type='submit' value='Reserve' />
+           </form>`;
 
   reserveTrip.append(html);
 };
