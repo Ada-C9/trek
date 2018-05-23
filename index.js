@@ -17,7 +17,7 @@ const loadTrips = () => {
   axios.get(TRIPSURL)
     .then((response) => {
       response.data.forEach((trip) => {
-        tripList.append(`<a href="#${trip.id}"><li>${trip.name}</li></a>`);
+        tripList.append(`<li><a href="" class="trip-link" id="${trip.id}">${trip.name}</a></li>`);
       });
 
       reportStatus('Trips loaded :)');
@@ -30,7 +30,12 @@ const loadTrips = () => {
 };
 
 
-
 $(document).ready(() => {
   $('#load').click(loadTrips);
+  $('#trip-list').on('click', '.trip-link', function(event) {
+    // event.preventDefault();
+    console.log('lkasjdfl');
+    let id = $(this).attr('id');
+    alert(id);
+  });
 });

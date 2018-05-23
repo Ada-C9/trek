@@ -6,6 +6,10 @@ main {
   "one two";
 }
 
+#status-message {
+  grid-area: one;
+}
+
 .all-trips {
   grid-area: one;
 }
