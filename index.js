@@ -63,10 +63,24 @@ const loadTrip = (id) => {
 
 // Reserve Trip
 
-const reserveTrip = () => {
+const reserveTrip = (event) => {
   event.preventDefault();
-  let tripId = $('#trip span').text();
+  const tripId = $('#trip span').text();
+  const reservationUrl = URL + '/' + tripId + '/reservations';
+  const reservationData = {
+    id: tripId,
+    name: 'Jane Doe',
+    email: 'example@example.com'
+  };
   reportStatus(`Reserving trip ${tripId}`);
+
+  axios.post(reservationUrl, reservationData)
+  .then((response) => {
+    reportStatus(`Successfully reserved trip ${tripId}`);
+    console.log(response);
+  })
+  .catch();
+
 };
 
 // Document Ready
