@@ -12,12 +12,30 @@ const loadTrips = () => {
 
   axios.get(URL)
   .then((response) => {
-    console.log(response);
-
     response.data.forEach((trip) => {
-      Trips.append(`<li>${trip.name}</li>`);
+      Trips.append(`<li id='${trip.id}'>${trip.name}</li>`);
     });
     reportStatus('')
+  })
+
+  .catch((error) => {
+    console.log(error);
+    reportStatus(`Error: ${error.message}`)
+  });
+};
+
+const loadOneTrip = (id) => {
+  const TripURL = 'https://ada-backtrek-api.herokuapp.com/trips/'
+  axios.get(`${TripURL}${id}`)
+  .then((response) => {
+    console.log(response)
+    $('#trip').append(`<h1>Trip Details</h1>`);
+    $('#trip').append(`<h3>Name: <span>${response.data.name}</span></h3>`);
+    $('#trip').append(`<p>Category: ${response.data.category}</p>`);
+    $('#trip').append(`<p>Weeks: ${response.data.name}</p>`);
+    $('#trip').append(`<p>Cost: $${response.data.cost}</p>`);
+    $('#trip').append(`<p>About: ${response.data.about}</p>`);
+    LoadReservationForm(id)
   })
   .catch((error) => {
     console.log(error);
@@ -25,7 +43,52 @@ const loadTrips = () => {
   });
 };
 
+const LoadReservationForm = (id) => {
+  $('#reservations').prepend(`<h1>Reserve This Trip</h1>`);
+  $('.name label').html('Name');
+  $('.name label').append('<input type="text" name="name" />');
+  $('.email label').html('Email');
+  $('.email label').append('<input type="text" name="email" />');
+  $('.trip-name label').html(`Trip: ${$('#trip span').html()}`);
+  $('#reserve').append('<input type="submit" name="reserve-trip" value="Reserve Trip" />')
+
+}
+
+
+
+const clearForm = () => {
+  FORM_FIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+
+const reserveTrip = (event, id) => {
+  event.preventDefault();
+
+  const ReserveURL = 'https://ada-backtrek-api.herokuapp.com/trips/'
+
+  let reservationData = {}
+  reservationData['name'] = $('input[name='name']').val();
+  reservationData['email'] = $('input[name='email']').val();
+
+
+  axios.post(`${ReserveURL}${id}/reservations`, reservationData)
+  .then((response) => {
+    reportStatus(`Created New Reservation`)
+  })
+  .catch((error) => {
+    reportStatus(`Error: ${error.message}`)
+  });
+
+  clearForm();
+}
+
+
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
+
+  $('ul').on('click', 'li', function(event) {
+    loadOneTrip($(this).attr('id'));
+
+  });
 });
