@@ -2,18 +2,21 @@ header {
   border-bottom: 1px solid;
 }
 
-h2 {
+h2, p {
   text-align: center;
   border-bottom: 1px solid;
 }
 
-p {
+h3 {
   text-align: center;
-  border-bottom: 1px solid;
 }
 
 p:last-of-type {
   border-bottom: none;
+}
+
+.display-none, span {
+  display: none;
 }
 
 .grid-container {
@@ -27,6 +30,8 @@ p:last-of-type {
   margin-bottom: 3rem;
 }
 
-.display-none {
-  display: none;
+.details p {
+  text-align: left;
+  font-weight: bold;
+  padding: 0 10px;
 }
