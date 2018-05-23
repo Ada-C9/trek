@@ -45,34 +45,32 @@ const loadTrips = () => {
 //
 // Loading Single Trip
 //
-const loadTrip = () => {
-  reportStatus('Finding that trip...');
-
-  const singleTrip = $('#single-trip');
-  singleTrip.empty();
-
-  // let tripId = $('#trip-table td').attr('data-id')
-  let tripId = $(this).attr('data-id');
-  let tripName = $(this).attr('data-name');
-
-  console.log(tripId)
-  axios.get(URL + '${tripID}')
-    .then((response) => {
-      reportStatus(`Successfully loaded trip data`);
-      let trip = response.data;
-      singleTrip.append(`<li>Name: ${trip.name}</li>`);
-      singleTrip.append(`<li>Continent: ${trip.continent}</li>`);
-      singleTrip.append(`<li>About: ${trip.about}</li>`);
-      singleTrip.append(`<li>Category: ${trip.category}</li>`);
-      singleTrip.append(`<li>Weeks: ${trip.weeks}</li>`);
-      singleTrip.append(`<li>Cost: ${trip.cost}</li>`);
-      console.log('Getting a single trip');
-    })
-    .catch((error) => {
-      reportStatus(`Encountered an error while loading trips: ${error.message}`);
-      console.log(error);
-    });
- };
+// const loadTrip = () => {
+//   reportStatus('Finding that trip...');
+//
+//   const singleTrip = $('#single-trip');
+//   singleTrip.empty();
+//
+//   let tripId = $(this).attr('data-id');
+//   let tripName = $(this).attr('data-name');
+//
+//   axios.get(URL + '${tripID}')
+//     .then((response) => {
+//       reportStatus(`Successfully loaded trip data`);
+//       let trip = response.data;
+//       singleTrip.append(`<li>Name: ${trip.name}</li>`);
+//       singleTrip.append(`<li>Continent: ${trip.continent}</li>`);
+//       singleTrip.append(`<li>About: ${trip.about}</li>`);
+//       singleTrip.append(`<li>Category: ${trip.category}</li>`);
+//       singleTrip.append(`<li>Weeks: ${trip.weeks}</li>`);
+//       singleTrip.append(`<li>Cost: ${trip.cost}</li>`);
+//       console.log('Getting a single trip');
+//     })
+//     .catch((error) => {
+//       reportStatus(`Encountered an error while loading trips: ${error.message}`);
+//       console.log(error);
+//     });
+//  };
 
 //
 // Reserving Trips
@@ -111,9 +109,7 @@ const clearForm = () => {
 
    reportStatus('Reserving trip...');
 
-   // axios.post(URL + '200' + '\/reservations', tripData)
    axios.post(URL + tripData.trip_id + '\/reservations', tripData)
-   // axios.post(URL + tripData[trip_id] + '\/reservations', tripData)
      .then((response) => {
        reportStatus(`Successfully reserved a trip with ID ${response.data.trip_id}!`);
 
@@ -140,12 +136,8 @@ $(document).ready(() => {
   $('.reserve-trip').hide();
   $('#reserve-trip').submit(reserveTrip);
 
-  $('#trip-table').on('click', 'td', function() {
-    alert($(this).text());
-  } )
-
-  // $('#trip-table').on('click', "td", loadTrip);
-
+  // $('#trip-table').on('click', "td", loadTrip); //no idea why this didn't work
+  //loadTrip function
   $('#trip-table').on('click', 'td', function() {
 
     reportStatus('Finding that trip...');
@@ -158,10 +150,10 @@ $(document).ready(() => {
 
     let tripId = $(this).attr('data-id');
     let tripName = $(this).attr('data-name');
-    alert(tripName)
-//set hidden form trip_id for reserve trip
+
+    //set hidden form trip_id for reserve trip
     $('#trip_id').val(tripId);
-//set Trip name field for reserve trip
+    //set Trip name field for reserve trip
     $('#trip_name').val(tripName);
 
     axios.get(URL + tripId)
