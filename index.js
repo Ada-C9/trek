@@ -53,42 +53,42 @@ const loadATrip = (tripID) => {
 
   axios.get(tripURL + tripID)
   .then((response) => {
-    reportStatus(`Successfully loaded ${response.data.length} trips`);
+    reportStatus(`Successfully loaded ${response.data.name} trip details`);
     // response.data.forEach((trip) => {
-      tripDetails.append(`<li>${response.data.name}</li>
-        <li>${response.data.continent}</li>
-        <li>${response.data.about}</li>
-        <li>${response.data.category}</li>
-        <li>${response.data.weeks}</li>
-        <li>${response.data.cost}</li>`);
-    // });
-  })
-  .catch((error) => {
-    reportStatus(`Encountered an error while loading trips: ${error.message}`);
-    console.log(error);
+    tripDetails.append(`<h3>${response.data.name}</h3>
+      <h5>Continent</h5><p>${response.data.continent}</p>
+      <h5>Category</h5><p>${response.data.category}</p>
+      <h5>Weeks</h5><p>${response.data.weeks}</p>
+      <h5>Cost</h5><p>${response.data.cost}</p>
+      <h5>About</h5><p>${response.data.about}</p>`);
+      // });
+    })
+    .catch((error) => {
+      reportStatus(`Encountered an error while loading trips: ${error.message}`);
+      console.log(error);
+    });
+  };
+
+
+
+  // __________________
+  // Actions:
+  $(document).ready(() => {
+    $('#load').click(loadTrips);
+    // $('#trip-list').click(loadATrip($('.trip')));
+
+    //
+    //
+    $('#trip-list').on('click', 'li', function(event) {
+      // console.log($(this));
+      // console.log($(this.id));
+      console.log($(this)[0].id);
+      loadATrip($(this)[0].id);
+      // console.log('clicked');
+      // loadATrip($(this.id));
+    });
+
+
+    // same as:
+    // $(`li[class="trip"]`).click(console.log('clicked'));
   });
-};
-
-
-
-// __________________
-// Actions:
-$(document).ready(() => {
-  $('#load').click(loadTrips);
-  // $('#trip-list').click(loadATrip($('.trip')));
-
-  //
-  //
-  $('#trip-list').on('click', 'li', function(event) {
-    // console.log($(this));
-    // console.log($(this.id));
-    console.log($(this)[0].id);
-    loadATrip($(this)[0].id);
-    // console.log('clicked');
-    // loadATrip($(this.id));
-  });
-
-
-  // same as:
-  // $(`li[class="trip"]`).click(console.log('clicked'));
-});
