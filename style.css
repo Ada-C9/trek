@@ -6,3 +6,18 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+/* table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+td, th {
+    height: 50px;
+}
+
+td {
+  text-align: center;
+} */

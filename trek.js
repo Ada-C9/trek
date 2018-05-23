@@ -5,17 +5,17 @@ const reportStatus = (message) => {
 };
 
 const loadTrips = () => {
-  const tripList = $(`#trip-list`);
+  const tripList = $('#tbody');
   tripList.empty();
 
   reportStatus('Loading trips! Please wait...');
 
   axios.get(URL)
   .then((response) => {
-    console.log('inside the .then');
+    $('#table').show();
     response.data.forEach((trip) => {
+      tripList.append(`<tr><td>${trip.name}</td></tr>`);
       console.log(trip);
-      tripList.append(`<li>${trip.name}</li>`);
     });
     reportStatus('Trips Loaded!');
   })
@@ -23,8 +23,6 @@ const loadTrips = () => {
     console.log(error);
     reportStatus('Error: ${error.message}');
   });
-
-  console.log('This is after .get');
 };
 
 $(document).ready(() => {

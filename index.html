@@ -4,17 +4,13 @@
   <meta charset="utf-8">
   <title>Trek</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script type="text/javascript" src="index.js"></script>
 </head>
 
 <body>
-  <section id="status-message">
-  </section>
+  <section id="status-message"></section>
   <main>
     <section class="trips">
-      <h1>List-o-Trips</h1>
+      <h1>List-of-Trips</h1>
       <button id="load">Get trips!</button>
       <table id="table">
         <thead>
@@ -24,18 +20,19 @@
             </th>
           </tr>
         </thead>
-        <tbody id="tbody">
-
-        </tbody>
+        <tbody id="tbody"></tbody>
       </table>
     </section>
 
     <section>
       <h1>Add a new trip</h1>
-      <form id="trip-form">
-      </section>
-
-    </main>
-
-  </body>
-  </html>
+      <form id="trip-form"></form>
+    </section>
+  </main>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="trek.js"></script>
+  <!-- <script type="text/javascript"> $("#table").hide(); </script> -->
+</body>
+</html>
