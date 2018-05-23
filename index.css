@@ -1,3 +1,12 @@
+/* Mobile Ready */
+@media screen and (max-width: 760px) {
+
+    [class*="col-"] {
+        width: 100%;
+    }
+
+}
+
 /* All */
 * {
   font-family: 'Playfair Display', serif;
@@ -65,6 +74,11 @@ main {
 
 #trip-table td {
   border-radius: 5px;
+}
+
+.trips {
+  overflow-y: scroll;
+  max-height: 500px;
 }
 
 .button {
