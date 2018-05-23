@@ -1,4 +1,4 @@
-const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
+const URL = 'https://ada-backtrek-api.herokuapp.com/trips/';
 
 //
 // Status Management
@@ -24,7 +24,6 @@ const reportError = (message, errors) => {
 const loadTrips = () => {
   reportStatus('One sec! Loading trips...');
 
-  // const tripList = $('#trip-list');
   const tripList = $('#trip-table');
   tripList.empty();
 
@@ -33,7 +32,7 @@ const loadTrips = () => {
       reportStatus(`Successfully loaded ${response.data.length} trips`);
       response.data.forEach((trip) => {
         let id = trip.id
-        tripList.append(`<tr><td data-id=${id}>${trip.name}</tr></td>`);
+        tripList.append(`<tr><td data-id=${id} data-name='${trip.name}'>${trip.name}</tr></td>`);
       });
     })
     .catch((error) => {
@@ -53,11 +52,10 @@ const loadTrip = () => {
 
   // let tripId = $('#trip-table td').attr('data-id')
   let tripId = $(this).attr('data-id');
+  let tripName = $(this).attr('data-name');
 
   console.log(tripId)
-  axios.get(URL + '\/${tripID}')
-  // axios.get(URL + '\/200') //need to change this to not be hardcoded to trip 200
-  // axios.get(URL + '\/${tripID}')
+  axios.get(URL + '${tripID}')
     .then((response) => {
       reportStatus(`Successfully loaded trip data`);
       let trip = response.data;
@@ -111,10 +109,8 @@ const clearForm = () => {
    reportStatus('Reserving trip...');
 
    //url will be different and need to interpolate the trip ID that was selected
-   let reserveURL = 'https://ada-backtrek-api.herokuapp.com/trips/250/reservations'
-
-   axios.post(URL + tripData[trip_id] + '\/reservations', tripData)
-   // axios.post(reserveURL, tripData)
+   axios.post(URL + '200' + '\/reservations', tripData)
+   // axios.post(URL + tripData[trip_id] + '\/reservations', tripData)
      .then((response) => {
        reportStatus(`Successfully reserved a trip with ID ${response.data.id}!`);
        console.log('Posting a trip');
@@ -136,10 +132,11 @@ const clearForm = () => {
 $(document).ready(() => {
   $('#load-all-trips').click(loadTrips);
   $('#reserve-trip').submit(reserveTrip);
-  //need event for loading single trip on click of ul link from trip-table
-  $('#trip-table').on('click', "td", function() {
+
+  $('#trip-table').on('click', 'td', function() {
     alert($(this).text());
   } )
+
   // $('#trip-table').on('click', "td", loadTrip);
 
   $('#trip-table').on('click', 'td', function() {
@@ -150,12 +147,14 @@ $(document).ready(() => {
     singleTrip.empty();
 
     let tripId = $(this).attr('data-id');
-    // alert(tripId);
-    // alert(URL + '\/' + tripId)
+    let tripName = $(this).attr('data-name');
+    alert(tripName)
+//set hidden form trip_id for reserve trip
+    $('#trip_id').val(tripId);
+//set Trip name field for reserve trip
+    $('#trip_name').val(tripName);
 
-    axios.get(URL + '\/' + tripId)
-    // axios.get(URL + '\/200') //need to change this to not be hardcoded to trip 200
-    // axios.get(URL + '\/${tripID}')
+    axios.get(URL + tripId)
       .then((response) => {
         reportStatus(`Successfully loaded trip data`);
         let trip = response.data;
