@@ -42,7 +42,7 @@ h1, button[name] {
 }
 
 .right, .left {
-  width: 40vw;
+  /* width: 40vw; */
   margin-top: 1em;
 }
 
@@ -50,10 +50,12 @@ div.left {
   margin-left: 4em;
   overflow: auto;
   max-height: 100vh;
+  width: 30vw;
 }
 
 div.right {
   margin-right: 4em;
+  width: 50vw;
 }
 
 button.trip {
