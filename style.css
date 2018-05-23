@@ -32,7 +32,7 @@ h2 {
   padding: 10px 0;
 }
 
-h3, li, p {
+h3, li, label, p {
   font-family: 'Playfair Display', serif;
   font-size: 1.4rem;
   color: #5B4C40;
@@ -59,7 +59,7 @@ main {
   min-height: 75%;
 }
 
-.all-trips, #trip-details, #reserve-trip {
+.all-trips, #trip-details, #reservation-form {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -77,6 +77,16 @@ ul {
 #trip-details p {
   text-align: left;
   padding-bottom: 20px;
+}
+
+.user-name {
+  display: inline-block;
+  max-width: 150px;
+  margin: 0;
+}
+
+.reserve.button {
+  margin-top: 15px;
 }
 
 footer {

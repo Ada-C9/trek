@@ -25,6 +25,8 @@ const loadTrips = () => {
 const loadTrip = (id) => {
   const tripDetails = $('#trip-details');
   tripDetails.empty();
+  const reservationForm = $('#reservation-form');
+  reservationForm.empty();
 
   reportStatus('Loading Trip Details! Please Wait...')
 
@@ -40,6 +42,17 @@ const loadTrip = (id) => {
       tripDetails.append(`<h3><strong>Weeks:</strong> ${data.weeks}</h3>`);
       tripDetails.append(`<h3><strong>Cost:</strong> $${data.cost}</h3>`);
       tripDetails.append(`<h3><strong>About:</strong></h3> <p>${data.about}</p>`);
+
+      reservationForm.append(`<h2>Reserve Trip</h2>`);
+      reservationForm.append(
+        `<label class="user-name">Your Name:</label>
+        <input type="text" name="name" class="user-name" />`
+      );
+      reservationForm.append(`<label>Trip: ${data.name}</label>`);
+      reservationForm.append(
+        `<input type="submit" name="reserve-trip" value="Reserve" class="button reserve" />`
+      );
+
       reportStatus('Trip Details Loaded!');
     })
     .catch((error) => {
