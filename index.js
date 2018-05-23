@@ -29,7 +29,9 @@ const loadTrips = (event) => {
 
 const loadDetails = function(event) {
   const tripDetails = $('#details');
+  const tripResNum = $('#trip-reservation-num')
   tripDetails.empty();
+  tripResNum.empty();
 
   let trip = $(this).find('span').html()
 
@@ -51,6 +53,10 @@ const loadDetails = function(event) {
         <p>Cost: ${tripData.cost}</p>
         <p>About: <br/> ${tripData.about}</p>`);
 
+      tripResNum.append(
+        `<p>${tripData.name}<span>${tripData.id}</span></p>`
+      );
+
       reportStatus('Trip details loaded!')
     })
 
@@ -60,9 +66,6 @@ const loadDetails = function(event) {
     });
 
 }
-
-
-
 
 $(document).ready(() => {
   $('#trips-button').click(loadTrips);

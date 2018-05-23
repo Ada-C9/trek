@@ -17,21 +17,22 @@
       <p id="status-message"></p>
 
       <section class="data grid-container">
-        <section class="all-trips display-none grid-item">
+        <section class="all-trips display-none">
           <h2>All Trips</h2>
           <div id="trip-list"></div>
         </section>
 
-        <aside class="trip-details display-none grid-item">
+        <aside class="trip-details display-none">
           <section class="details" id="details"></section>
 
           <section class="reserve-form" id="reserve">
             <h2>Reserve Trip</h2>
             <form id="reserve-form">
-              <div>
-                <label for="name">Name</label>
-                <input id="name" type="text" name="name" />
+              <div class="grid-container">
+                <label class="place" for="name">Your Name:</label>
+                <input class="place" id="name" type="text" name="name" />
               </div>
+              <div id="trip-reservation-num"></div>
               <input type="submit" name="reserve" value="Reserve" />
             </form>
           </section>
