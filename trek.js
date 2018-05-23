@@ -1,4 +1,5 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips/';
+const dataField = ['Name', 'Continent', 'Category', 'Weeks', 'Cost', 'About'];
 
 const reportStatus = (message) => {
   $('#status-message').html(message);
@@ -51,28 +52,19 @@ const loadTrips = () => {
 // Show one trip's detail
 const displayTrek = (trip) => {
 
-  const trekList = $('#trek-detail');
+  const trekDetail = $('#trek-detail');
 
   axios.get(URL + trip.id)
 
   .then((response) => {
 
-    console.log(response);
+    console.log(response.data);
 
-    if(response) {
-
-      trekList.html('<h4>Trip Details</h4>')
-      let html = '<li>';
-        html += `Name: <strong>${trip.name}</strong></li>`,
-        html += `<li>Continent: ${trip.continent}</li>`,
-        html += `<li>Category: ${trip.category}</li>`,
-        html += `<li>Weeks: ${trip.weeks}</li>`,
-        html += `<li>Cost: ${trip.cost}</li>`,
-        html += `<li>About: ${trip.about}</li>`,
-
-      trekList.append(html);
+    trekDetail.html('<h4>Trip Details</h4>')
+    for (let data of dataField) {
+      let html = `<li><strong>${data}:</strong> ${response.data[data.toLowerCase()]}</li>`;
+      trekDetail.append(html);
     }
-
   })
 
   .catch((error) => {
@@ -81,7 +73,6 @@ const displayTrek = (trip) => {
   })
 
 };
-
 
 
 $(document).ready(() => {
