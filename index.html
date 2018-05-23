@@ -13,33 +13,48 @@
   <section id="status-message"></section>
 
   <main>
-    <section class="current-trips">
+    <div class="current-trips">
       <h1>Trek</h1>
       <button id="load">See all Trips</button>
+      <h2 id="hidden">All Trips</h2>
       <ul id="trips-list"></ul>
-    </section>
+    </div>
 
-    <!-- <section class="new-pet">
-      <h1>Add a new pet</h1>
-      <form id="pet-form">
+
+    <div id="trip-details">
+      <h2 id="trip-name"></h2>
+      <p id="continent"></p>
+      <p id="about"></p>
+      <p id="category"></p>
+      <p id="weeks"></p>
+      <p id="cost"></p>
+    </div>
+
+    <div class="new-trip" id="new-trip">
+      <h2 id="trip-name"></h2>
+      <form id="trip-form">
         <div>
           <label for="name">Name</label>
           <input type="text" name="name" />
         </div>
 
-        <div>
+        <!-- <div>
           <label for="age">Age</label>
-          <input type="number" name="age" />
+          <input type="text" name="age" />
+        </div> -->
+
+        <div>
+          <label for="email">Email</label>
+          <input type="text" name="email" />
         </div>
 
         <div>
-          <label for="owner">Owner</label>
-          <input type="text" name="owner" />
+          <p>Trip: <span id="selected-name"></span></p>
         </div>
 
-        <input type="submit" name="add-pet" value="Add Pet" />
+        <input type="submit" name="Reserve" value="Reserve" />
       </form>
-    </section> -->
+    </div>
   </main>
 </body>
 </html>
