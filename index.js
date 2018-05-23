@@ -48,36 +48,58 @@ const loadDetails = function loadDetails(event) {
   event.preventDefault();
   const tripLink = event.currentTarget.getAttribute('href');
   const tripDetails = $('#trip-details');
+  const tripForm = $('#trip-form');
 
   axios.get(tripLink)
-    .then((response) => {
-      reportStatus('Trip Details successfully retrieved.');
-      const trip = response.data;
-      tripDetails.empty();
-      tripDetails.append(
-        `<ul>
-        <li>Name: ${trip.name}</li>
-        <li>Trip id: ${trip.id}</li>
-        <li>Continent: ${trip.continent}</li>
-        <li>Category: ${trip.category}</li>
-        <li>Trip Length: ${trip.weeks}</li>
-        <li>Price: $${trip.cost}</li>
-        <li>Description: ${trip.about}</li>
-        </ul>
-        <button id='show-form'>Let's Go!</button>
-        `
-      );
+  .then((response) => {
+    reportStatus('Trip Details successfully retrieved.');
+    const trip = response.data;
+    tripDetails.empty();
+    tripDetails.append(
+      `<ul>
+      <li>Name: ${trip.name}</li>
+      <li>Trip id: ${trip.id}</li>
+      <li>Continent: ${trip.continent}</li>
+      <li>Category: ${trip.category}</li>
+      <li>Trip Length: ${trip.weeks}</li>
+      <li>Price: $${trip.cost}</li>
+      <li>Description: ${trip.about}</li>
+      </ul>
+      `
+    );
+    tripForm.html(
+      `
+      <form method="post" id="trip-form">
+      <h3>Reserve Trip</h3>
+      <div>
+      <label for="name">Name</label>
+      <input type="text" name="name" />
+      </div>
 
-    })
-    .catch((error) => {
-      reportStatus ( `Error loading trip: ${error.message}`);
-      console.log(error);
-    });
+      <div>
+      <label for="email">Email</label>
+      <input type="email" name="email" />
+      </div>
+
+      <div>
+      <label for="trip">${trip.name}:</label>
+      <input type="text" name="trip" />
+      </div>
+
+      <input type="submit" name="new-trip" value="Reserve" />
+      </form>
+      `
+    );
+  })
+  .catch((error) => {
+    reportStatus ( `Error loading trip: ${error.message}`);
+    console.log(error);
+  });
 };
 
+
+
 $(document).ready(() => {
-  $('form').hide();
   $('#load').click(loadTrips);
   $('#trip-list').on('click', 'a', loadDetails);
-  // $('#show-form').on('click', 'button, ')
 });
