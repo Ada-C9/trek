@@ -72,13 +72,10 @@ button#display-trips, input[type="submit"] {
 
 #trips-info, #trip-info {
   border: solid 1px #ffffff;
-}
-
-#trips-info {
   position: relative;
 }
 
-#trips-info h2 {
+#trips-info h2, #trip-info h2 {
   margin: 0;
   line-height: 5em;
   background-color: #ffffff;

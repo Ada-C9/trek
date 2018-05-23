@@ -54,7 +54,6 @@ const loadTrip = (id) => {
       reportStatus(`Successfully loaded trip ${id}.`);
       let data = response.data;
       $('#trip').append(`
-        <h2>Trip Details</h2>
         <h3>Name: ${data.name}</h3>
         <div>
         <p><strong>Continent: </strong>${data.continent}</p>
