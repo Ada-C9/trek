@@ -59,10 +59,9 @@ const loadTrip = (id) => {
         <p><strong>Continent: </strong>${data.continent}</p>
         <p><strong>Category: </strong>${data.category}</p>
         <p><strong>Weeks: </strong>${data.weeks}</p>
-        <p><strong>Cost: </strong>$${data.cost}</p>
-        <p><strong>About: </strong><p>${data.about}</p>
-        </div>
+        <p><strong>Cost: </strong>$${data.cost}</p></div>
       `);
+      $('#about-trip').append(`        <strong>About: </strong><p>${data.about}</p>`);
       $('#trip').append(`<span>${id}</span>`);
       $('span').hide();
     } else {

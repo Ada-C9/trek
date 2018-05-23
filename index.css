@@ -27,12 +27,17 @@ body {
 }
 
 #trip {
-  height: 40vh;
-  overflow: scroll;
+  height: 25vh;
+  /* overflow: scroll; */
 }
 
 #reservation {
-  height: 20vh;
+  height: 10vh;
+}
+
+#about-trip {
+  height: 26vh;
+  overflow: scroll;
 }
 
 /* dynamic display styles  */
