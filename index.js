@@ -1,5 +1,6 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
-
+const tripURL = "https://ada-backtrek-api.herokuapp.com/trips/";
+const reserveURL = "https://ada-backtrek-api.herokuapp.com/trips/"
 //
 // Status Management
 //
@@ -19,7 +20,6 @@ const reportError = (message, errors) => {
 };
 
 //
-// Loading Pets
 //
 const loadTrips = () => {
   reportStatus('Loading trips...');
@@ -28,78 +28,106 @@ const loadTrips = () => {
   tripList.empty();
 
   axios.get(URL)
-    .then((response) => {
-      console.log(response);
-      reportStatus(`Successfully loaded ${response.data.length} trips`);
-      response.data.forEach((trip) => {
-        tripList.append(`<li>${trip.name}</li>`);
-      });
+  .then((response) => {
+    console.log(response);
+    reportStatus(`Successfully loaded ${response.data.length} trips`);
+    response.data.forEach((trip) => {
+      const tripItem = $(`<li>${trip.name}</li>`);
+      tripList.append(tripItem);
+      tripItem.click(() => {
+        loadTrip(trip);
+        // createTrip(trip);
+      })
+      $('#hidden').show();
+    });
+  })
+  .catch((error) => {
+    reportStatus(`Encountered an error while loading trips: ${error.message}`);
+    console.log(error);
+  });
+};
+
+const loadTrip = (trip) => {
+  reportStatus('Loading trip...');
+  const tripDetails = $('#trip-details');
+
+  axios.get(tripURL + trip.id)
+  .then((response) => {
+    console.log(response);
+    reportStatus(`Successfully loaded ${response.data.name} trip`);
+
+    const tripItem = $(
+      `<h2> Name: ${response.data.name}</h2>
+      <p><strong> Continent:</strong> ${response.data.continent}</p>
+      <p><strong> About:</strong> ${response.data.about}</p>
+      <p><strong> Category:</strong> ${response.data.category}</p>
+      <p><strong> Cost:</strong> ${response.data.weeks}</p>`);
+      tripDetails.html(tripItem);
+      // $('#trip-form').submit(createTrip);
+      $('#selected-name').text(response.data.name)
+      $('#new-trip').show();
+      $('#trip-details').show();
+      $('#trip-form').submit (function (event) {
+        event.preventDefault();
+        createTrip(trip);
+      })
     })
+
     .catch((error) => {
       reportStatus(`Encountered an error while loading trips: ${error.message}`);
       console.log(error);
     });
-};
+  }
 
-//
-// Creating Pets
-//
-// const FORM_FIELDS = ['name', 'age', 'owner'];
-// const inputField = name => $(`#pet-form input[name="${name}"]`);
-//
-// const readFormData = () => {
-//   const getInput = name => {
-//     const input = inputField(name).val();
-//     return input ? input : undefined;
-//   };
-//
-//   const formData = {};
-//   FORM_FIELDS.forEach((field) => {
-//     formData[field] = getInput(field);
-//   });
-//
-//   return formData;
-// };
-//
-// const clearForm = () => {
-//   FORM_FIELDS.forEach((field) => {
-//     inputField(field).val('');
-//   });
-// }
+  const FORM_FIELDS = ['name', 'email'];
+  const inputField = name => $(`#trip-form input[name="${name}"]`);
 
-// const createPet = (event) => {
-//   // Note that createPet is a handler for a `submit`
-//   // event, which means we need to call `preventDefault`
-//   // to avoid a page reload
-//   event.preventDefault();
-//
-//   const petData = readFormData();
-//   console.log(petData);
-//
-//   reportStatus('Sending pet data...');
-//
-//   axios.post(URL, petData)
-//     .then((response) => {
-//       reportStatus(`Successfully added a pet with ID ${response.data.id}!`);
-//       clearForm();
-//     })
-//     .catch((error) => {
-//       console.log(error.response);
-//       if (error.response.data && error.response.data.errors) {
-//         reportError(
-//           `Encountered an error: ${error.message}`,
-//           error.response.data.errors
-//         );
-//       } else {
-//         reportStatus(`Encountered an error: ${error.message}`);
-//       }
-//     });
-// };
+  const readFormData = () => {
+    const getInput = name => {
+      const input = inputField(name).val();
+      return input ? input : undefined;
+    };
 
-//
-// OK GO!!!!!
-//
-$(document).ready(() => {
-  $('#load').click(loadTrips);
-  // $('#pet-form').submit(createPet);
-});
+    const formData = {};
+    FORM_FIELDS.forEach((field) => {
+      formData[field] = getInput(field);
+    });
+
+    return formData;
+  };
+
+  const clearForm = () => {
+    FORM_FIELDS.forEach((field) => {
+      inputField(field).val('');
+    });
+  }
+
+  const createTrip = (trip) => {
+
+    const tripData = readFormData();
+    reportStatus('Sending trip data...');
+
+    axios.post(reserveURL + trip.id + "/reservations", tripData)
+    .then((response) => {
+      reportStatus(`Successfully reserved a trip with ID ${response.data.trip_id}!`);
+      clearForm();
+    })
+
+    .catch((error) => {
+      console.log(error.response);
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Encountered an error: ${error.message}`);
+      }
+    });
+  };
+
+
+  $(document).ready(() => {
+    $('#load').click(loadTrips);
+    $('#trip-details').click(loadTrip);
+  });
