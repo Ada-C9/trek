@@ -1,0 +1,8 @@
+ul {
+  list-style-type: none;
+}
+
+.trip-link:hover {
+  color: blue;
+  cursor: pointer;
+}
