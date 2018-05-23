@@ -1,6 +1,25 @@
 
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
+const loadForm = (data) => {
+  $('#trip-reservation').addClass('bordered');
+  $('#trip-reservation').empty();
+
+
+  $('#trip-reservation').html('<h2>Reserve Trip</h2>');
+  $('#trip-reservation > h2').addClass('bordered-bottom');
+
+  $('#trip-reservation').append(
+    `<form>
+    Your Name: <input type="text" name="name"><br>
+    Trip: ${data.name}<br>
+    <input type="hidden" name="id" value="${data.id}">
+    <input type="submit" value="Reserve"><br>
+    </form>`
+  );
+};
+
+
 const showTrips = () => {
 
   $('#all-trips').addClass('bordered');
@@ -25,19 +44,6 @@ const showTrips = () => {
   });
 
 };
-
-const loadForm = (data) => {
-  console.log("loading form!");
-  $('#trip-reservation').addClass('bordered');
-  $('#trip-reservation').empty();
-
-
-  $('#trip-reservation').html('<h2>Reserve Trip</h2>');
-  $('#trip-reservation > h2').addClass('bordered-bottom');
-};
-
-
-
 
 const showDetails = (event) => {
   event.preventDefault();
@@ -70,7 +76,7 @@ const showDetails = (event) => {
       );
 
       // load form using response data
-      loadForm(response);
+      loadForm(trip);
 
     })
     .catch((error) => {
