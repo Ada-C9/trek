@@ -8,7 +8,7 @@ const statusColors = {
 
 const reportStatus = (message, status) => {
   let color = statusColors[status];
-  return $('#status-message').fadeIn(1000).html(message).css('background-color', color);
+  return $('#status-message').show(1000).html(message).css('background-color', color);
   // $('#status-message').fadeOut(2000);
 };
 
@@ -33,7 +33,7 @@ const getTrips = () => {
       response.data.forEach((trip) =>{
         $('#trip-list').append(`<li><button id="${trip.id}" class="button trip">${trip.name}</button></li>`)
       });
-      reportStatus('Trips Loaded!', 'success').fadeOut(2000);
+      reportStatus('Trips Loaded!', 'success').delay(2000).hide(1000);
     })
     .catch((error) => {
       console.log(error.message);
@@ -54,7 +54,7 @@ const showTrip = (event) => {
       $('#reserve-trip').css('display', 'block');
       $('#reserve-trip-id').text(response.data.name);
 
-      reportStatus(`Trip #${tripId} Loaded!`, 'success').fadeOut(2000);
+      reportStatus(`Trip #${tripId} Loaded!`, 'success').delay(2000).hide(1000);
     })
     .catch((error) => {
       reportStatus(`Error: ${error.message}`, 'fail');
@@ -86,7 +86,7 @@ const reserveTrip = (event) => {
 
   axios.post(URL + `/${tripId}/reservations`, getFormData())
     .then((response) => {
-      reportStatus(`Trip #${tripId} Reserved!`, 'success').fadeOut(2000);
+      reportStatus(`Trip #${tripId} Reserved!`, 'success').delay(2000).hide(1000);
       console.log(response);
       clearForm();
     })

@@ -2,6 +2,9 @@
 body {
   margin-left: 4em;
   margin-right: 4em;
+  /* background: url(https://images.unsplash.com/photo-1499123785106-343e69e68db1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f946973b7550539f4be0f89693b5cb1c&auto=format&fit=crop&w=1953&q=80);
+  background-repeat: no-repeat;
+  background-size: cover; */
 }
 
 .header-flex {
@@ -15,6 +18,7 @@ header, main, section, footer {
 }
 
 header {
+  /* background-color: #ffffff85; */
   background-color: gray;
 }
 
@@ -40,7 +44,7 @@ h1, button[name] {
 }
 
 #trip-list li {
-  margin: 1em 0em;
+  /* margin: 1em 0em; */
   height: 40px;
 }
 
@@ -66,6 +70,7 @@ div.right {
 
 button.trip {
   width: 100%;
+  border-bottom: black 1px solid;
 }
 
 section#show-trip {
@@ -84,6 +89,7 @@ footer {
   position: fixed;
   height: 30px;
   text-align: center;
+  /* background-color: #ffffff85; */
   background-color: gray;
   bottom: 0px;
   left: 0px;
