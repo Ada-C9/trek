@@ -18,8 +18,20 @@ main {
   border: 3px solid black;
   position: fixed;
   top: 20px;
-  margin-left: 600px;
+  margin-left: 650px;
   background-color: #0f0 ! important;
-  height: auto;
+  height: 400px;
   width: 57%;
+  overflow-y: scroll;
+  }
+
+#reserve-trip {
+  border: 3px solid black;
+  position: fixed;
+  top: 450px;
+  margin-left: 650px;
+  background-color: blue;
+  height: 200px;
+  width: 57%;
+  overflow-y: none;
   }
