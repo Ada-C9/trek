@@ -32,9 +32,9 @@ h2 {
   padding: 10px 0;
 }
 
-h3, h4, li, p {
+h3, li, p {
   font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #5B4C40;
   padding: 5px;
 }
@@ -44,7 +44,7 @@ h3 {
 }
 
 .button {
-  background-color: #4EA8AC;
+  background-color: rgba(78, 168, 172, 0.5);
   font-size: 1.5rem;
   padding: 10px;
 }
@@ -60,7 +60,7 @@ main {
 }
 
 .all-trips, #trip-details, #reserve-trip {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 ul {
@@ -77,4 +77,9 @@ ul {
 #trip-details p {
   text-align: left;
   padding-bottom: 20px;
+}
+
+footer {
+  padding: 15px 0;
+  color: #5B4C40;
 }
