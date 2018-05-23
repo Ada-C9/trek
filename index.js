@@ -56,27 +56,12 @@ const LoadReservationForm = (id) => {
 }
 
 const FORM_FIELDS = ['name', 'email'];
-const inputField = name => $('#reserve.name input[for="${name}"]');
-
-const readFormData = () => {
-  const getInput = name => {
-    const input = inputField(name).val();
-    return input ? input : undefined;
-  };
-
-  const formData = {};
-  FORM_FIELDS.forEach((field) => {
-    formData[field] = getInput(field);
-  });
-  return formData;
-};
 
 const clearForm = () => {
   FORM_FIELDS.forEach((field) => {
-    inputField(field).val('');
+    $(`#reserve .${field} input`).val('')
   });
 }
-
 
 const reserveTrip = (event) => {
   console.log(event);
