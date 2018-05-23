@@ -16,19 +16,43 @@
       <button type='all-button'>View All Trips</button>
     </div>
   </header>
-  <div id="all-trips">
-    <h2>Available Trips</h2>
-    <section id="status-messages"></section>
-    <ul id="trips-table">
-      <!-- Loading info via jQuery -->
-    </ul>
-  </div>
-  <div id="single-trip">
-    <h2>Trip Details</h2>
-    <ul id="trip-deets">
-      <!-- Loading trip deets via jQuery -->
-    </ul>
-  </div>
+  <main>
+    <section id="all-trips">
+      <h2>Available Trips</h2>
+      <section id="status-messages"></section>
+      <ul id="trips-table">
+        <!-- Loading info via jQuery -->
+      </ul>
+    </section>
+
+    <section id="single-trip">
+      <!-- displays single trip info -->
+      <h2>Trip Details:</h2>
+      <ul id="trip-deets">
+        <!-- Loading trip deets via jQuery -->
+      </ul>
+    </section>
+
+    <!-- form to reserve a spot -->
+    <section id="spot-save">
+        <h2>Reserve A Spot!</h2>
+        <form id="spot-form">
+          <!-- field for name -->
+          <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" />
+          </div>
+          <!-- field for email -->
+          <div>
+            <label for="email">Email</label>
+            <input type="email" email="email" />
+          </div>
+          <!-- submit button with text -->
+          <input type="submit" name="hold-spot" value="Hold Spot!" />
+        </form>
+    </section>
+
+  </main>
 
 
 </body>

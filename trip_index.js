@@ -28,10 +28,9 @@ const loadTrips = () => {
   });
 };
 
-// TODO: Figure out how to pass the id of the thing we clicked on as a parameter
 const displayTrip = (event) => {
-  console.log(event);
-
+  // console.log(event);
+  // retrieving the id based on the id assigned in the all trips list, parsing data till I got the value I wanted after viewing in the above console.log()
   let id = event.target.className;
 
   const tripURL = 'https://ada-backtrek-api.herokuapp.com/trips/';
@@ -46,9 +45,8 @@ const displayTrip = (event) => {
   .then((response) => {
     reportStatus('Successfully loaded trip details');
 
-    // from the response I want the data. from the data I want all of the current values
     // FIXME: Want to display the detail name before it by accessing the name of the keys
-    
+
     // for (let key in response.data) {
     //   tripDetails.append(`<li> ${response.data('key')} </li>`);
     // }
@@ -58,6 +56,16 @@ const displayTrip = (event) => {
   })
 };
 
+const holdSpot = (event) => {
+// TODO: Currently working on the functionality for a POST request to hold a spot
+
+
+
+
+
+
+
+}
 
 const reportStatus = (message) => {
   $('#status-messages').html(message);
@@ -69,6 +77,8 @@ $(document).ready(() => {
   // let buttonClicked = this.innerHTML;
   // console.log(buttonClicked);
   $('button').click(loadTrips);
-  // event for clicking on a trip in trips list gets us a trips id
+  // event for clicking on a trip in trips list gets us a trips id. Had to use event delegation cause <li>'s I wanted had not been made yet
   $('#trips-table').on('click', 'li', displayTrip)
+
+  //
 });
