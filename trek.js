@@ -57,18 +57,18 @@ const displayTrek = (trip) => {
 
   .then((response) => {
 
-    // console.log('whaatttt');
-    // console.log(response.data);
-
-    // const result = response.data
+    console.log(response);
 
     if(response) {
 
       trekList.html('<h4>Trip Details</h4>')
       let html = '<li>';
-        html += `Name: <strong>${trip.name}</strong>`,
-        html += `Continent: ${trip.continent}`,
-        html += '</li>',
+        html += `Name: <strong>${trip.name}</strong></li>`,
+        html += `<li>Continent: ${trip.continent}</li>`,
+        html += `<li>Category: ${trip.category}</li>`,
+        html += `<li>Weeks: ${trip.weeks}</li>`,
+        html += `<li>Cost: ${trip.cost}</li>`,
+        html += `<li>About: ${trip.about}</li>`,
 
       trekList.append(html);
     }
@@ -86,5 +86,4 @@ const displayTrek = (trip) => {
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
-  // $('#trek-detail').append(displayTrek);
 });
