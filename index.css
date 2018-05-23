@@ -1,0 +1,21 @@
+main {
+  font-family: sans-serif;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+  "one two";
+}
+
+.all-trips {
+  grid-area: one;
+}
+
+.trip-details {
+  border: 3px solid black;
+  position: fixed;
+  top: 20px;
+  margin-left: 820px;
+  background-color: #0f0 ! important;
+  height: 200px;
+  width: 50%;
+  }

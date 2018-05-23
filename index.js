@@ -1,4 +1,4 @@
-const URL = "https://ada-backtrek-api.herokuapp.com/trips";
+const TRIPSURL = "https://ada-backtrek-api.herokuapp.com/trips";
 
 const reportStatus = (message) => {
   $('#status-message').html(message);
@@ -14,10 +14,10 @@ const loadTrips = () => {
 
   // Actually load the trips
   // axios is linked at the bottom of index.html
-  axios.get(URL)
+  axios.get(TRIPSURL)
     .then((response) => {
       response.data.forEach((trip) => {
-        tripList.append(`<li>${trip.name}</li>`);
+        tripList.append(`<a href="#${trip.id}"><li>${trip.name}</li></a>`);
       });
 
       reportStatus('Trips loaded :)');
@@ -28,6 +28,8 @@ const loadTrips = () => {
       reportStatus(`Error: ${error.message}`)
     });
 };
+
+
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
