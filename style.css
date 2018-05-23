@@ -1,3 +1,7 @@
-li:hover{
+#all-trips li:hover{
   font-weight: bold;
+}
+
+#trip-form{
+  display: none;
 }

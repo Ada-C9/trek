@@ -1,6 +1,6 @@
-//method for details
-//if a on click event occurs on a trip item
-//populate trip details list
+//click on reservation
+//form appears - input name (on click event - prepopulated)
+
 const URL = `https://ada-backtrek-api.herokuapp.com/trips`
 
 const reportStatus = (message) =>{
@@ -26,6 +26,7 @@ const loadTripdetails = (aTrip)=>{
         tripDetails.append(`<li>${response.data.weeks}</li>`)
         tripDetails.append(`<li>${response.data.cost}</li>`)
         tripDetails.append(`<li>${response.data.about}</li>`)
+        tripDetails.append(`<li><button id="reserve-trip">Reserve this trip</button></li>`)
       reportStatus('Trip details found!')
     })
   .catch((error) =>{
@@ -62,5 +63,9 @@ $(document).ready(() => {
    $(document).on("click","#all-trips",function(event){
      loadTripdetails(event);
    });
+   $(document).on("click","#reserve-trip",function(){
+     $("#trip-form").toggle("slow");
+   })
+
 
 });
