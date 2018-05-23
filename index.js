@@ -23,7 +23,7 @@ const listallTrips = () => {
 
   axios.get(allTripsURL)
   .then((response) => {
-    reportStatus(`Successfully loaded ${response.data.length} Wonders`);
+    reportStatus(`Successfully loaded ${response.data.length}`);
     console.log(response);
     const result = response.data
     result.forEach((place) => {
@@ -38,27 +38,50 @@ const listallTrips = () => {
 }; //end of listallTrips
 
 const tripDetails = (trip) => {
-  singleTripUrl = 'https://ada-backtrek-api.herokuapp.com/trips/'
+
+  const aboutTrip = $('#details')
+  const singleTripUrl = 'https://ada-backtrek-api.herokuapp.com/trips/'
   console.log(trip);
 
   axios.get(singleTripUrl + trip.id)
   .then((response) => {
-    reportStatus(`Successfully loaded ${response.data.length} Wonders`);
+    reportStatus(`Successfully loaded ${response.data.length}`);
     console.log(response);
     const result = response.data
     for (attr in result) {
+      aboutTrip.append(`<li>${result[attr]}</li>`);
     }
-    }((place) => {
-      tripsList.append(`<li id='${place.id}'>${place.name}</li>`);
+
   })
   .catch((error) => {
     reportStatus(`Encountered an error while loading trips: ${error.message}`);
     console.log(error);
   });
 
-});
-
 }; //end of Trip details
+
+const createReservation = (reservation, trip) => {
+  console.log(reservation);
+  console.log(trip);
+
+  const reservationURL = 'https://ada-backtrek-api.herokuapp.com/trips/1/reservations'
+  
+  axios.get(singleTripUrl + trip.id)
+  .then((response) => {
+    reportStatus(`Successfully loaded ${response.data.length}`);
+    console.log(response);
+    const result = response.data
+    for (attr in result) {
+      aboutTrip.append(`<li>${result[attr]}</li>`);
+    }
+
+  })
+  .catch((error) => {
+    reportStatus(`Encountered an error while loading trips: ${error.message}`);
+    console.log(error);
+  });
+
+}; //end of createReservation
 
 
 
@@ -71,8 +94,16 @@ $(document).ready(() => {
 
     tripDetails(trip);
 
+    $('form').submit( function(event) {
+      event.preventDefault();
+      const reservation = this
+      console.log(trip);
+
+      createReservation(reservation, trip);
 
 
+    });
   });
+
 
 });

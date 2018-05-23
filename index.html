@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Trekitup</title>
-    <script
+<head>
+  <meta charset="utf-8">
+  <title>Trekitup</title>
+</head>
+<body>
+  <header>
+    <h1>Get Trekkin!</h1>
+  </header>
+  <main>
+    <section>
+      <h2 id="load">See all trips</h2>
+      <ul id="tripList">
+
+      </ul>
+    </section>
+
+    <aside>
+      <h3>Trip Details</h3>
+      
+      <ul id="details">
+
+      </ul>
+
+        <form id="tripForm">
+          <div>
+            <label for="name">name</label>
+            <input type="text" name="name"/>
+          </div>
+          <div>
+            <label for="age">age</label>
+            <input type="number" name="age"/>
+          </div>
+          <div>
+            <label for="email">email</label>
+            <input type="text" name="email"/>
+          </div>
+
+          <input type="submit" name="reserve" value="reserve">
+        </form>
+    </aside>
+
+  </main>
+
+  <script
   src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript" src="index.js"></script>
-  </head>
-  <body>
-    <header>
-      <h1>Get Trekkin!</h1>
-    </header>
-    <main>
-      <section>
-        <h2 id="load">See all trips</h2>
-        <ul id="tripList">
 
-        </ul>
-      </section>
-
-    </main>
-
-  </body>
+</body>
 </html>
