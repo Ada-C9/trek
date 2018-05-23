@@ -46,7 +46,7 @@ $(document).ready(() => {
     axios.get(pageURL)
       .then((response) => {
         console.log(response.data)
-          tripDetails.append(response.data.name);
+          tripDetails.append(`<p><h1>${response.data.name}</h1></p> <p>${response.data.continent}</p><p><h3>About: </h3>${response.data.about}</p><p> <h3>Category:</h3>${response.data.category}</p>`);
 
         reportStatus('Trip details loaded :)');
       })
