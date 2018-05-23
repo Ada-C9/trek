@@ -1,4 +1,6 @@
-const allTripsUrl = " https://ada-backtrek-api.herokuapp.com/trips"
+const allTripsUrl = " https://ada-backtrek-api.herokuapp.com/trips";
+
+const singleTripUrl = "https://ada-backtrek-api.herokuapp.com/trips/";
 
 const reportStatus = (message) => {
   $('#status-message').html(message);
@@ -9,18 +11,15 @@ const reportError = (message, errors) => {
   content += '<ul>';
 }
 
-
-// axios.get(allTripsUrl)
 const loadTrips = function loadTrips() {
-  // console.log("Am i inside?");
-  let tripList = $('.trips')
+  let tripList = $('.trips');
 
   axios.get(allTripsUrl)
   .then((response) => {
     console.log('inside the .then');
     response.data.forEach((trip) => {
       console.log(trip);
-      tripList.append(`<li>${trip.name}</li>`);
+      tripList.append(`<li><a class="trip" href="#">${trip.name}</a></li>`);
     });
     reportStatus('Trips Loaded!');
   })
@@ -38,7 +37,19 @@ const loadTrips = function loadTrips() {
   });
 };
 
+const getTrip = function getTrip(event) {
+  // id, name, continent, about, category, weeks and cost
+  // params to get id ???
+  event.preventDefault();
+
+  axios.get(singleTripUrl + '3' )
+  .then((response) => {
+    $('#details').empty().append(`<h2>${response.data.name}</h2><h3>${response.data.continent}</h3><p>${response.data.about}</p><p>${response.data.category}</p><p>${response.data.weeks}</p><p>${response.data.cost}</p>`);
+    reportStatus('Trips Loaded!');
+  });
+}
+
 $(document).ready(() => {
   $('#load').click(loadTrips);
-  // loadTrips()
+  $('.trips').on('click', '.trip', getTrip);
 });
