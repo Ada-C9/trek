@@ -48,6 +48,7 @@ button:hover {
   grid-area: 2 / 1 / 4 / 2;
   text-align: center;
   margin: 1vw;
+  padding: 0;
 }
 
 h2 {
@@ -100,6 +101,11 @@ h2 {
 
 #trip-details li:first-child {
   font-size: 1.6em;
+}
+
+#trip-reservation {
+  grid-area: 3 / 2 / 4 / 3 ;
+  margin: 1vw;
 }
 
 .bordered {

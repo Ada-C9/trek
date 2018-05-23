@@ -26,6 +26,17 @@ const showTrips = () => {
 
 };
 
+const loadForm = (data) => {
+  console.log("loading form!");
+  $('#trip-reservation').addClass('bordered');
+  $('#trip-reservation').empty();
+
+
+  $('#trip-reservation').html('<h2>Reserve Trip</h2>');
+  $('#trip-reservation > h2').addClass('bordered-bottom');
+};
+
+
 
 
 const showDetails = (event) => {
@@ -41,6 +52,8 @@ const showDetails = (event) => {
 
   axios.get(detailsLink)
     .then((response) => {
+
+      // Add details to DOM using response data
       let trip = response.data;
       $('#trip-details').append(
         `<ul>
@@ -55,6 +68,10 @@ const showDetails = (event) => {
           </li>
         </ul>`
       );
+
+      // load form using response data
+      loadForm(response);
+
     })
     .catch((error) => {
 
