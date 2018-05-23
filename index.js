@@ -1,4 +1,4 @@
-const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
+const URL = 'https://ada-backtrek-api.herokuapp.com/trips/';
 
 //
 // Report Status and Errors to User
@@ -31,7 +31,7 @@ const loadTrips = () => {
   .then((response) => {
     reportStatus(`Successfully loaded ${response.data.length} trips`);
     response.data.forEach((trip) => {
-      tripList.append(`<li><a href='#'>${trip.name}</a></li>`);
+      tripList.append(`<li><a href='https://ada-backtrek-api.herokuapp.com/trips/${trip.id}'>${trip.name}</a></li>`);
     });
   })
   .catch((error) => {
@@ -43,12 +43,36 @@ const loadTrips = () => {
 //
 // View Trip Details
 //
-const loadDetails = function loadDetails(trip) {
+const loadDetails = function loadDetails(event) {
+  reportStatus('Loading trip data...');
+  event.preventDefault();
+  const tripLink = event.currentTarget.getAttribute('href');
+  const tripDetails = $('#trip-details');
 
-  $('#trip-details').html(`Trip Details`)
+  axios.get(tripLink)
+    .then((response) => {
+      const trip = response.data;
+      tripDetails.append(
+        `<ul>
+        <li>Name: ${trip.name}</li>
+        <li>Trip id: ${trip.id}</li>
+        <li>Continent: ${trip.continent}</li>
+        <li>Category: ${trip.category}</li>
+        <li>Trip Length: ${trip.weeks}</li>
+        <li>Price: $${trip.cost}</li>
+        <li>Description: ${trip.about}</li>
+        </ul>
+        <button>Click to Book </button>
+        `
+      );
+    })
+    .catch((error) => {
+      reportStatus ( `Error loading trip: ${error.message}`);
+      console.log(error);
+    });
 };
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
-  $('li').click(loadDetails);
+  $('#trip-list').on('click', 'a', loadDetails);
 });
