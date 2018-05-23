@@ -79,7 +79,10 @@ const reserveTrip = (event) => {
     reportStatus(`Successfully reserved trip ${tripId}`);
     console.log(response);
   })
-  .catch();
+  .catch((error) => {
+    console.log(error.response);
+    reportStatus(`There was a problem reserving the trip the trip: ${error.response.statusText}.`);
+  });
 
 };
 
