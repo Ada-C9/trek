@@ -1,3 +1,21 @@
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
 #page-header {
   color: orange;
+}
+
+.current-treks {
+  border: dotted 3px green;
+  width: 90%;
+  grid-column-start: 1;
+}
+
+.trip-details, #reserv-form {
+  border: dotted 3px green;
+  width: 90%;
+  grid-column-start: 2;
 }
