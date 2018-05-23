@@ -7,8 +7,7 @@ const loadTrips = () => {
   .then((response) => {
     $("#table").show();
     response.data.forEach((trip) => {
-      tripList.append(`<tr><td>${trip.name}</td></tr>`);
-      console.log(trip);
+      tripList.append(`<tr><td id='${trip.id}'>${trip.name}</td></tr>`);
     })
   })
   .catch((error) => {
@@ -16,9 +15,26 @@ const loadTrips = () => {
   });
 }
 
+const loadTrip = function sayItTwice(tripID) {
+  const tripInfo = $('#detailBody')
+  tripInfo.empty();
+  // console.log(tripID);
+  // console.log(`${URL}/${tripID}`);
+  axios.get(`${URL}/${tripID}`)
+  .then((response) => {
+    $("#trip-info").show();
+    tripInfo.append(`<tr><td>Name: ${response.data.name}</td></tr>
+      <tr><td>Continent: ${response.data.continent}</td></tr>
+      <tr><td>Category: ${response.data.category}</td></tr>
+      <tr><td>Weeks: ${response.data.weeks}</td></tr>
+      <tr><td>Cost: ${response.data.cost}</td></tr>
+      <tr><td>About:</br> ${response.data.about}</td></tr>`);
+  })
+}
+
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('#tbody').on('click', 'td', function(event) {
-    alert(`You clicked on a td containing ${$(this).data.id}!`);
+    loadTrip(event.target.id)
   });
 })

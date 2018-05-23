@@ -7,21 +7,39 @@
 </head>
 <body>
   <section id="status-message"></section>
-  <main>
+  <main class="container">
+    <header>
+      <h1>Trek</h1>
+    </header>
+    <section class="button-container">
+      <button class="button" id="load">See All Trips</button>
+    </section>
     <section class="trips">
-      <button id="load">See All Trips</button>
-        <table id="table">
-          <thead>
-            <tr>
-              <th>
-                All Trips
-              </th>
-            </tr>
-          </thead>
-          <tbody id="tbody">
+      <table id="table">
+        <thead>
+          <tr>
+            <th>
+              All Trips
+            </th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
 
-          </tbody>
-        </table>
+        </tbody>
+      </table>
+    </section>
+    <section id="trip-info">
+      <table id="trip-details">
+        <thead>
+          <tr>
+            <th>
+              Trip Details
+            </th>
+          </tr>
+        </thead>
+        <tbody id="detailBody">
+        </tbody>
+      </table>
     </section>
   </main>
   <script
@@ -29,5 +47,6 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript" src="index.js"></script>
   <script type="text/javascript"> $("#table").hide(); </script>
+  <script type="text/javascript"> $("#trip-info").hide(); </script>
 </body>
 </html>
