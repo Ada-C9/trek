@@ -28,11 +28,12 @@ const loadOneTrip = (id) => {
   const TripURL = 'https://ada-backtrek-api.herokuapp.com/trips/'
   axios.get(`${TripURL}${id}`)
   .then((response) => {
-    console.log(response)
+
+    $('#trip').addClass(id)
     $('#trip').append(`<h1>Trip Details</h1>`);
     $('#trip').append(`<h3>Name: <span>${response.data.name}</span></h3>`);
     $('#trip').append(`<p>Category: ${response.data.category}</p>`);
-    $('#trip').append(`<p>Weeks: ${response.data.name}</p>`);
+    $('#trip').append(`<p>Weeks: ${response.data.weeks}</p>`);
     $('#trip').append(`<p>Cost: $${response.data.cost}</p>`);
     $('#trip').append(`<p>About: ${response.data.about}</p>`);
     LoadReservationForm(id)
@@ -54,22 +55,37 @@ const LoadReservationForm = (id) => {
 
 }
 
+const FORM_FIELDS = ['name', 'email'];
+const inputField = name => $('#reserve.name input[for="${name}"]');
 
+const readFormData = () => {
+  const getInput = name => {
+    const input = inputField(name).val();
+    return input ? input : undefined;
+  };
+
+  const formData = {};
+  FORM_FIELDS.forEach((field) => {
+    formData[field] = getInput(field);
+  });
+  return formData;
+};
 
 const clearForm = () => {
   FORM_FIELDS.forEach((field) => {
     inputField(field).val('');
   });
+}
 
-const reserveTrip = (event, id) => {
+
+const reserveTrip = (event) => {
+  console.log(event);
   event.preventDefault();
 
   const ReserveURL = 'https://ada-backtrek-api.herokuapp.com/trips/'
 
-  let reservationData = {}
-  reservationData['name'] = $('input[name='name']').val();
-  reservationData['email'] = $('input[name='email']').val();
-
+  const reservationData = {'name': `${$('#reserve .name input').val()}`, 'email': `${$('#reserve .email input').val()}` }
+  let id = $('#trip').attr("class")
 
   axios.post(`${ReserveURL}${id}/reservations`, reservationData)
   .then((response) => {
@@ -83,12 +99,13 @@ const reserveTrip = (event, id) => {
 }
 
 
-
 $(document).ready(() => {
   $('#load').click(loadTrips);
 
   $('ul').on('click', 'li', function(event) {
+    $('#trip').removeClass()
     loadOneTrip($(this).attr('id'));
-
+    $('#reserve').submit(reserveTrip);
   });
+
 });
