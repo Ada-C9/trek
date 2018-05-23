@@ -38,9 +38,10 @@ const loadTrips = () => {
 const individualTrip = (id) => {
   console.log(id);
   reportStatus("Loading trip details...");
-
+  const reserve = $('#trip-form');
   const trip = $('#trip');
   trip.empty();
+  reserve.empty();
 
   let urlTrip = URL + id;
   axios.get(urlTrip)
@@ -59,23 +60,21 @@ const individualTrip = (id) => {
       <tr><th>About</th><td>${response.data.about}</td></tr>
       `
     );
-    trip.append(
-      `<section class="new-reservation">
-        <h1>Reservation</h1>
-        <form id="trip-form">
-          <div>
-            <label for="name">Name</label>
-            <input type="text" name="name" />
-          </div>
+    reserve.addClass(id);
+    reserve.html(
+      `
+      <div>
+      <label for="name">Name</label>
+      <input type="text" name="name" />
+      </div>
 
-          <div>
-            <label for="email">Email</label>
-            <input type="text" name="email" />
-          </div>
+      <div>
+      <label for="email">Email</label>
+      <input type="text" name="email" />
+      </div>
 
-          <input type="submit" name="add-reservation" value="Add Reservation" />
-        </form>
-      </section>`
+      <input type="submit" name="add-reservation" value="Add Reservation" />
+      `
     );
 
 
@@ -93,7 +92,7 @@ const individualTrip = (id) => {
 };
 
 const FORM_FIELDS = ['name', 'email'];
-const inputField = name => $(`#reservation-form input[name="${name}"]`);
+const inputField = name => $(`#trip-form input[name="${name}"]`);
 
 const readFormData = () => {
   const getInput = name => {
@@ -126,7 +125,9 @@ const createReservation = (urlTrip) => {
 
   let urlReservation = urlTrip + '/reservations'
   axios.post(urlReservation, reservationData)
+
   .then((response) => {
+    console.log(response);
     reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
     clearForm();
   })
