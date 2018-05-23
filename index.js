@@ -51,8 +51,8 @@ const loadTrip = () => {
   const singleTrip = $('#single-trip');
   singleTrip.empty();
 
-  let tripId = $('#trip-table td').attr('data-id')
-
+  // let tripId = $('#trip-table td').attr('data-id')
+  let tripId = $(this).attr('data-id');
 
   console.log(tripId)
   axios.get(URL + '\/${tripID}')
@@ -141,9 +141,36 @@ $(document).ready(() => {
     alert($(this).text());
   } )
   // $('#trip-table').on('click', "td", loadTrip);
-  $('#trip-table').on('click', 'td', function() {
-    let tripId = $(this).attr('data-id');
 
-    alert(tripId);
+  $('#trip-table').on('click', 'td', function() {
+
+    reportStatus('Finding that trip...');
+
+    const singleTrip = $('#single-trip');
+    singleTrip.empty();
+
+    let tripId = $(this).attr('data-id');
+    // alert(tripId);
+    // alert(URL + '\/' + tripId)
+
+    axios.get(URL + '\/' + tripId)
+    // axios.get(URL + '\/200') //need to change this to not be hardcoded to trip 200
+    // axios.get(URL + '\/${tripID}')
+      .then((response) => {
+        reportStatus(`Successfully loaded trip data`);
+        let trip = response.data;
+        singleTrip.append(`<li>Name: ${trip.name}</li>`);
+        singleTrip.append(`<li>Continent: ${trip.continent}</li>`);
+        singleTrip.append(`<li>About: ${trip.about}</li>`);
+        singleTrip.append(`<li>Category: ${trip.category}</li>`);
+        singleTrip.append(`<li>Weeks: ${trip.weeks}</li>`);
+        singleTrip.append(`<li>Cost: ${trip.cost}</li>`);
+        console.log('Getting a single trip');
+      })
+      .catch((error) => {
+        reportStatus(`Encountered an error while loading trips: ${error.message}`);
+        console.log(error);
+      });
   })
+
 });
