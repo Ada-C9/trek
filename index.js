@@ -64,5 +64,6 @@ $(document).ready(() => {
   $('ul').on('click', 'li', function() {
     let tripId = $(this).next().text();
     loadTrip(tripId);
+    $('#reservation').show();
   });
 });
