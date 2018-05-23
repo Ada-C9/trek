@@ -10,12 +10,17 @@ body {
 }
 
 /* HEADER */
-header, main {
+header, main, section {
   border: black 1px dashed;
 }
 
 h1, button[name] {
   margin: 10px 40px;
+}
+
+/* SECTION */
+#status-message {
+  text-align: center;
 }
 
 /* MAIN */
