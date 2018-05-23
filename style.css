@@ -1,17 +1,33 @@
+/* OVERALL PAGE */
 body {
   margin-left: 4em;
   margin-right: 4em;
 }
 
-.site-flex {
+.header-flex {
   display: flex;
   justify-content: space-between;
 }
 
+/* HEADER */
 header, main {
   border: black 1px dashed;
 }
 
-h1, button[name], main {
+h1, button[name] {
   margin: 10px 40px;
 }
+
+/* MAIN */
+.main-flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* .left {
+  background-color: lightblue;
+}
+
+.right {
+  background-color: pink;
+} */
