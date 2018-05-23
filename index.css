@@ -25,7 +25,7 @@ main {
   overflow-y: scroll;
   }
 
-#reserve-trip {
+.reserve-trip {
   border: 3px solid black;
   position: fixed;
   top: 450px;
@@ -35,3 +35,11 @@ main {
   width: 57%;
   overflow-y: none;
   }
+
+.hidden-display {
+  display: none;
+}
+
+.show {
+
+}
