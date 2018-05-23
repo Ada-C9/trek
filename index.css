@@ -7,13 +7,13 @@ body {
 }
 
 #top-nav {
-  min-height: 50px;
+  min-height: 20px;
   grid-column-start: 1;
   grid-column-end: 3;
 }
 
 #display-status {
-  min-height: 50px;
+  /* min-height: 50px; */
 }
 
 #trips-info {
@@ -32,7 +32,7 @@ body {
 }
 
 #reservation {
-  height: 18vh; 
+  height: 18vh;
 }
 
 /* dynamic display styles  */
@@ -47,6 +47,23 @@ body {
   background-color: #944743;
   font-family: 'Open Sans', sans-serif;
   color: #ffffff;
+}
+
+#top-nav {
+  text-align: center;
+}
+
+h1 {
+  font-size: 3em;
+  margin: 0;
+}
+
+button#display-trips, input[type="submit"] {
+  display: block;
+  border: none;
+  margin: 0 auto 1em auto;
+  font-size: 1em;
+  padding: 5px 30px;
 }
 
 /* media queries  */
