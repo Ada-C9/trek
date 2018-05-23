@@ -39,6 +39,7 @@ const showTrip = (event) => {
     .then((response) => {
       console.log(response.data);
       $('#show-trip').append( buildTrip(response.data) );
+      $('#reserve-trip').css('display', 'block');
       reportStatus(`Trip #${tripId} Loaded!`);
     })
     .catch((error) => {
