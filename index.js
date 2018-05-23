@@ -61,17 +61,32 @@ const loadTrip = (id) => {
   });
 };
 
+// Get form data
+const FORM_FIELDS = ['name', 'email'];
+const inputField = name => $(`#reservation-form input[name="${name}"]`);
+
+const getFormData = () => {
+  const getInput = name => {
+    const input = inputField(name).val();
+    return input ? input : undefined;
+  };
+
+  const formData = {};
+  FORM_FIELDS.forEach((field) => {
+    formData[field] = getInput(field);
+  });
+
+  return formData;
+};
+
 // Reserve Trip
 
 const reserveTrip = (event) => {
   event.preventDefault();
   const tripId = $('#trip span').text();
   const reservationUrl = URL + '/' + tripId + '/reservations';
-  const reservationData = {
-    id: tripId,
-    name: 'Jane Doe',
-    email: 'example@example.com'
-  };
+  const reservationData = getFormData();
+
   reportStatus(`Reserving trip ${tripId}`);
 
   axios.post(reservationUrl, reservationData)
