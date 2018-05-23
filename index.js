@@ -36,7 +36,7 @@ const loadTrips = () => {
     reportStatus(`Encountered an error while loading trips: ${error.message}`);
     console.log(error);
   });
-};
+}; //end loadTrips
 
 const loadDetails = (link) => {
   reportStatus('Loading Details...');
@@ -62,18 +62,74 @@ const loadDetails = (link) => {
     reportStatus(`Encountered an error while loading trips: ${error.message}`);
     console.log(error);
   });
+}; //end loadDetails
+
+// form helpers
+const FORM_FIELDS = ['name', 'age', 'email'];
+const inputField = name => $(`#reserve-form input[name="${name}"]`);
+
+const readFormData = () => {
+  const getInput = name => {
+    const input = inputField(name).val();
+    return input ? input : undefined;
+  };
+
+  const formData = {};
+  FORM_FIELDS.forEach((field) => {
+    formData[field] = getInput(field);
+  });
+
+  return formData;
 };
+
+const clearForm = () => {
+  FORM_FIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+}
+
+const reserveTrip = (event) => {
+  // Note that createPet is a handler for a `submit`
+  // event, which means we need to call `preventDefault`
+  // to avoid a page reload
+  event.preventDefault();
+
+  const petData = readFormData();
+  console.log(petData);
+
+  reportStatus('Sending pet data...');
+
+  axios.post(URL, petData)
+
+    .then((response) => {
+      reportStatus(`Successfully added a pet with ID ${response.data.id}!`);
+      clearForm();
+    })
+
+    .catch((error) => {
+      console.log(error.response);
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Encountered an error: ${error.message}`);
+      }
+    });
+};
+
+
 
 $(document).ready(() => {
   $('#search-all').click(loadTrips);
 
-  $( '#trip-list' ).on("click", "a",  function(event) {
+  $('#trip-list').on("click", "a",  function(event) {
     console.log($(event));
     event.preventDefault();
     loadDetails(this.href);
   });
 
-  // $('#trip-list').on('click', 'li', loadDetails);
-  // $('#pet-form').submit(createPet);
-// });
+  // $('#reserve-form').submit(reserveTrip);
+
 });
