@@ -17,7 +17,7 @@ const clearContent = (id) => {
 };
 
 const clearForm = () => {
-  $('input[name="name"]').val('');
+  $('input[name="reservation-name"]').val('');
   $('input[name="email"]').val('');
 };
 
@@ -78,7 +78,7 @@ const buildTrip = (tripData) => {
 
 const getFormData = () => {
   let data = {};
-  data['name'] = $('input[name="name"]').val();
+  data['name'] = $('input[name="reservation-name"]').val();
   data['email'] = $('input[name="email"]').val();
   return data;
 };
@@ -100,18 +100,54 @@ const reserveTrip = (event) => {
     });
 };
 
-const addTrip = () => {
-  // console.log('add trip clicked');
+const showTripForm = () => {
   getTrips();
   $('#reserve-trip').css('display', 'none');
   $('#show-trip').css('display', 'none');
   $('#new-trip').css('display', 'block');
+};
 
+const addTrip = () => {
+  event.preventDefault();
+  reportStatus('Adding Trip...', 'loading');
+
+  axios.post(URL, getTripFormData())
+    .then((response) => {
+      console.log(response.data);
+      reportStatus('Trip Added', 'success').delay(2000).hide(1000);
+      // clear trip form
+      clearTripForm();
+    })
+    .catch((error) => {
+      console.log(error.message);
+      reportStatus('Error: Trip not added', 'fail');
+    });
+};
+
+const clearTripForm = () => {
+  $('input[name="name"]').val('');
+  $('input[name="continent"]').val('');
+  $('input[name="category"]').val('');
+  $('input[name="weeks"]').val('');
+  $('input[name="cost"]').val('');
+  $('input[name="about"]').val('');
+};
+
+const getTripFormData = () => {
+  let data = {};
+  data['name'] = $('input[name="name"]').val();
+  data['continent'] = $('input[name="continent"]').val();
+  data['category'] = $('input[name="category"]').val();
+  data['weeks'] = $('input[name="weeks"]').val();
+  data['cost'] = $('input[name="cost"]').val();
+  data['about'] = $('input[name="about"]').val();
+  return data;
 };
 
 $(document).ready(() => {
   $('#all-trips').click(getTrips);
   $('#trip-list').on('click', 'li', showTrip);
   $('#reserve-form').submit(reserveTrip);
-  $('#add-trip').click(addTrip);
+  $('#add-trip').click(showTripForm);
+  $('#add-trip-form').submit(addTrip);
 });
