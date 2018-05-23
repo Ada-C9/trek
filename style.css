@@ -1,16 +1,47 @@
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
 body {
   margin-left: 50px;
+}
+
+img {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+
+header {
+  height: 200px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  font-size: 2em;
+  letter-spacing: 2px;
 }
 
 table {
   border-collapse: collapse;
 }
 
-table, th, td {
+#table, #table-th, .table-td {
   border: 1px solid black;
 }
 
-td, th {
+#trip-details {
+  border: 1px solid black;
+}
+
+#trip-details thead {
+  border-bottom: 1px solid black;
+}
+
+.detail-header {
+  height: 50px;
+}
+
+.table-td, #table-th {
   height: 50px;
 }
 
@@ -43,11 +74,43 @@ td {
   padding: 10px 10px;
 }
 
+#trip-info{
+  width: 800px;
+}
+
 #trip-details {
-  width: 700px
+  width: 700px;
 }
 
 #load {
   width: 100px;
   height: 30px;
+}
+
+.new-reservation {
+  border: 1px solid black;
+  margin-top: 20px;
+  width: 700px
+}
+
+.reserve {
+  text-align: center;
+  border-bottom: 1px solid black;
+  height: 50px;
+  line-height: 50px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+form {
+  padding: 20px 20px;
+}
+
+form div {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+strong {
+  font-size: 1.3em;
 }

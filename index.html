@@ -4,13 +4,17 @@
   <meta charset="utf-8">
   <title>Trek</title>
   <link rel="stylesheet" href="style.css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Nixie+One" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
 </head>
 <body>
+  <header>
+    <img src="world.png">
+    <h1>Trek</h1>
+  </header>
   <section id="status-message"></section>
   <main class="container">
-    <header>
-      <h1>Trek</h1>
-    </header>
     <section class="button-container">
       <button class="button" id="load">See All Trips</button>
     </section>
@@ -18,7 +22,7 @@
       <table id="table">
         <thead>
           <tr>
-            <th>
+            <th id="table-th">
               All Trips
             </th>
           </tr>
@@ -33,7 +37,7 @@
       <table id="trip-details">
         <thead>
           <tr>
-            <th>
+            <th class="detail-header">
               Trip Details
             </th>
           </tr>
@@ -43,7 +47,7 @@
       </table>
 
       <section class="new-reservation">
-        <h1>Reserve Trip</h1>
+        <div class="reserve">Reserve Trip</div>
         <form id="reservation-form">
           <div>
             <label for="name">Your Name: </label>
