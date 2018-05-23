@@ -5,6 +5,8 @@ const reportStatus = (message) => {
   $('#display-status').html(message);
 };
 
+// Load Trips
+
 const loadTrips = () => {
   reportStatus('Loading trips');
 
@@ -46,7 +48,9 @@ const loadTrip = (id) => {
         <p><strong>Cost: </strong>$${data.cost}</p>
         <p><strong>About: </strong><p>${data.about}</p>
         </div>
-        `);
+      `);
+      $('#trip').append(`<span>${id}</span>`);
+      $('span').hide();
     } else {
       reportStatus(`There was a problem loading the trip: ${response.statusText}.`);
     }
@@ -55,7 +59,17 @@ const loadTrip = (id) => {
     reportStatus(`There was a problem loading the trip: ${error.message}`);
     console.log(error);
   });
-}
+};
+
+// Reserve Trip
+
+const reserveTrip = () => {
+  event.preventDefault();
+  let tripId = $('#trip span').text();
+  reportStatus(`Reserving trip ${tripId}`);
+};
+
+// Document Ready
 
 $(document).ready(() => {
   $('#display-trips').click(() => {
@@ -66,4 +80,5 @@ $(document).ready(() => {
     loadTrip(tripId);
     $('#reservation').show();
   });
+  $('#reservation-form').submit(reserveTrip);
 });
