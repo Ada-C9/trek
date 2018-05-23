@@ -31,7 +31,8 @@ const loadTreks = () => {
     reportStatus(`Successfully loaded ${response.data.length} trips!`);
     trekList.html('<h4>All Trips</h4>')
     response.data.forEach((trip) => {
-      trekList.append(`<li><a href=${trip.name}></a></li>`);
+      let listTrip = $(`<li><a href=${URL}${trip.id}>${trip.name}</a></li>`);
+      trekList.append(listTrip);
     });
   })
 
@@ -84,5 +85,5 @@ const displayTrek = (event) => {
 
 $(document).ready(() => {
   $('#load').click(loadTreks);
-  $('#trek-list').click(displayTrek);
+  // $('#trek-list').click(displayTrek);
 });
