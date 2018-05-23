@@ -3,17 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>Ada Trek</title>
+    <link rel="stylesheet" href="foundation.css">
+    <!-- <link rel="stylesheet" href="index.css"> -->
   </head>
-  <body>
 
+<body>
     <section id="fail"></section>
-
     <button id="all-trips" class="button">View All Trips</button>
 
 <!-- All Trips -->
-    <section id="trips">
+    <section id="trips" class="all-trip-list">
   <ul><h4></h4></ul>
 </section>
+
+<!-- Single Trip view -->
+<article id="trip" class="trip-info-list">
+  <h1 id="trip-name"></h1>
+  <ul id="trip-summary"></ul>
+</article>
 
 <!-- Script tags -->
         <script
