@@ -1,9 +1,22 @@
+// Constant API url
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips'
 
+// Status Message Handling
 const reportStatus = (message) => {
-  $('#status-message').html(message)
+  $('.status-message').html(message)
 }
 
+const reportError = (message, errors) => {
+  let content = `<p>${message}</p>`;
+  for (const field in errors) {
+    for (const problem of errors[field]) {
+      content += `<p>${field}: ${problem}</p>`;
+    }
+  }
+  reportStatus(content);
+};
+
+// Load All Trips
 const loadTrips = (event) => {
   $('.all-trips').removeClass('display-none');
 
@@ -12,7 +25,6 @@ const loadTrips = (event) => {
 
   reportStatus('Loading trips! Please wait...')
 
-  // get info
   axios.get(URL) // returns a promise
     .then((response) => {
       response.data.forEach((trip) => {
@@ -22,11 +34,12 @@ const loadTrips = (event) => {
       reportStatus('Trips loaded!')
     })
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
       reportStatus(`${error.message}`)
     });
 }
 
+// Load Trip Details
 const loadDetails = function(event) {
   const tripDetails = $('#details');
   const tripResNum = $('#trip-reservation-num')
@@ -34,12 +47,11 @@ const loadDetails = function(event) {
   tripResNum.empty();
 
   let trip = $(this).find('span').html()
-
+console.log(trip);
   $('.trip-details').removeClass('display-none');
 
   reportStatus('Loading trip details! Please wait...')
 
-  // get details
   axios.get(`${URL}\\${trip}`) // returns a promise
     .then((response) => {
       console.log(response.data);
@@ -94,6 +106,9 @@ const clearForm = () => {
 const reserveTrip = (event) => {
   event.preventDefault();
 
+  $('p:first-of-type').removeClass('status-message');
+  $('#reservation-status').addClass('status-message');
+
   const tripID = $(`#trip-reservation-num`).find('span').html();
 
   const tripData = readFormData();
@@ -109,14 +124,14 @@ const reserveTrip = (event) => {
     })
     .catch((error) => {
       console.log(error.response);
-      // if (error.response.data && error.response.data.errors) {
-      //   reportError(
-      //     `Encountered an error: ${error.message}`,
-      //     error.response.data.errors
-      //   );
-      // } else {
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
         reportStatus(`Encountered an error: ${error.message}`);
-      // }
+      }
     });
 };
 
