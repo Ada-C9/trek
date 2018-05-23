@@ -52,7 +52,7 @@ form div, input[type="submit"] {
 form div input[type="text"] {
   border: none;
   font-size: 1em;
-  width: 8em;
+  width: 7em;
   padding: 5px 0 5px 5px;
 }
 
@@ -89,7 +89,7 @@ button#display-trips, input[type="submit"] {
   font-size: 1em;
   padding: 5px 30px;
   background-color: #EADEDB;
-  color: #333;
+  color: #333333;
 }
 
 #trips-info, #trip-info {
