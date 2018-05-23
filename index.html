@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Trek the World.</title>
+<head>
+  <meta charset="utf-8">
+  <title>Trek the World.</title>
   <script
   src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript" src="index.js"></script>
-  </head>
-  <body>
-    <main>
-      <section id="details">
+</head>
+<body>
+  <main>
+    <section id="new-trip">
+      <h1>Reserve a spot</h1>
+      <form id="trip-form" action="index.html" method="post">
 
-      </section>
+        <div>
+          <label for="name">Name</label>
+          <input type="text" name="name" />
+        </div>
 
-        <section class="trips">
-          <ul>
+        <input type="submit" name="reserve-trip" value="Ready!" />
 
-          </ul>
-        </section>
-    </main>
+      </form>
+    </section>
+
+    <section id="details">
+
+    </section>
+
+    <section class="trips">
+      <ul>
+
+      </ul>
+    </section>
+  </main>
   <button id="load">See all trips!</button>
-  </body>
+</body>
 </html>
