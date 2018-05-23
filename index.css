@@ -26,6 +26,14 @@ header h1 {
   margin-bottom: 1em;
 }
 
+#trip-list {
+  min-width: 23em;
+  height: 30em;
+  overflow-x: scroll;
+  margin-right: 1em;
+  font-weight: bold;
+}
+
 #status-message {
   font-size: 0.75em;
   color: gray;
@@ -35,6 +43,7 @@ header h1 {
   font-weight: bold;
   padding: 0.75em;
   border: 0.15em solid #1eb6a7;
+  margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
 
@@ -47,6 +56,11 @@ li {
   list-style-type: none;
 }
 
-#reserve-form {
+#trip-details {
+  margin-right: 2em;
+}
+
+#reserve-form, #reserve-form label {
   margin-bottom: 1em;
+  font-weight: bold;
 }
