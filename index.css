@@ -49,6 +49,7 @@ button:hover {
   text-align: center;
   margin: 1vw;
   padding: 0;
+  max-width: 45vw;
 }
 
 h2 {
@@ -71,7 +72,7 @@ h2 {
 
 #trip-list li a {
   color: black;
-  font-size: 1.25em;
+  font-size: 1.15em;
   font-weight: bold;
   text-decoration: none;
 }
@@ -96,16 +97,28 @@ h2 {
 
 #trip-details li {
   margin: .5vw;
-  font-size: 1.25em;
+  font-size: 1.15em;
 }
-
+-
 #trip-details li:first-child {
-  font-size: 1.6em;
+  font-size: 1.3em;
 }
 
 #trip-reservation {
   grid-area: 3 / 2 / 4 / 3 ;
   margin: 1vw;
+}
+
+#trip-reservation form {
+  padding: 2vw;
+  font-size: 1.15em;
+}
+
+#trip-reservation form submit {
+  font-size: 1em;
+  background: linear-gradient(lightpink, grey);
+  font-weight: bold;
+  padding: .5em;
 }
 
 .bordered {

@@ -11,9 +11,10 @@ const loadForm = (data) => {
 
   $('#trip-reservation').append(
     `<form>
-    Your Name: <input type="text" name="name"><br>
-    Trip: ${data.name}<br>
     <input type="hidden" name="id" value="${data.id}">
+    Your Name: <input type="text" name="name"><br>
+    Your Email: <input type="text" name="email"><br>
+    Trip: ${data.name}<br>
     <input type="submit" value="Reserve"><br>
     </form>`
   );
@@ -85,11 +86,25 @@ const showDetails = (event) => {
 
 };
 
+const reserveTrip = (event) => {
+  event.preventDefault();
+  const tripData = $('form').serialize()
+  const id = parseInt(tripData.replace('id=',""));
 
+  axios.post(`https://ada-backtrek-api.herokuapp.com/trips/${id}/reservations?${tripData}`)
+  .then((response) => {
+    console.log(`SUCCESS!!! CHECK IT ${response}`);
+  })
+  .catch((error) => {
+    console.log(`OH NOOOOOOO ${error}`);
+  });
+
+};
 
 
 
 $(document).ready(()=>{
   $('#all').click(showTrips);
   $('#trip-list').on('click', 'a', showDetails);
+  $('#trip-reservation').on('submit', 'form', reserveTrip);
 });
