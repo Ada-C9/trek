@@ -1,8 +1,22 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
 // Status Management
+
 const reportStatus = (message) => {
   $('#display-status').html(message);
+};
+
+// Error Handling
+
+const reportError = (message, errors) => {
+  let content = `<p>${message}</p><ul>`;
+  for (const error in errors) {
+    for (const problem of errors[error]) {
+      content += `<li>${error}: ${problem}</li>`;
+    }
+  }
+  content += '</ul>';
+  reportStatus(content);
 };
 
 // Load Trips
@@ -98,12 +112,15 @@ const reserveTrip = (event) => {
 
   axios.post(reservationUrl, reservationData)
   .then((response) => {
-    reportStatus(`Successfully reserved trip ${tripId}`);
+    reportStatus(`Successfully reserved trip ${tripId}. Your reservation ID is ${response.data.id}.`);
     clearForm();
   })
   .catch((error) => {
-    console.log(error.response);
-    reportStatus(`There was a problem reserving the trip the trip: ${error.response.statusText}.`);
+    if (error.response.data && error.response.data.errors) {
+      reportError(`There was an error reserving the trip: ${error}`, error.response.data.errors);
+    } else {
+      reportStatus(`There was a problem reserving the trip: ${error.response.statusText}.`);
+    }
   });
 
 };
