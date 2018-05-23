@@ -63,6 +63,24 @@ const individualTrip = (id) => {
       <tr><th>About</th><td>${response.data.about}</td></tr>
       `
     );
+    trip.append(
+      `<section class="new-reservation">
+        <h1>Reservation</h1>
+        <form id="trip-form">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" />
+          </div>
+
+          <div>
+            <label for="email">Email</label>
+            <input type="text" name="email" />
+          </div>
+
+          <input type="submit" name="add-reservation" value="Add Reservation" />
+        </form>
+      </section>`
+    );
   })
   .catch((error) => {
     reportStatus(`Encountered an error while loading this trip: ${error.message}`);
@@ -70,7 +88,7 @@ const individualTrip = (id) => {
   });
 };
 
-const FORM_FIELDS = ['name'];
+const FORM_FIELDS = ['name', 'email'];
 const inputField = name => $(`#reservation-form input[name="${name}"]`);
 
 const readFormData = () => {
@@ -102,7 +120,7 @@ const createReservation = (event) => {
 
   reportStatus('Doing your reservation...');
 
-
+  let urlReservation = 'urlTrip + /reservations'
   axios.post(urlReservation)
   .then((response) => {
     reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
