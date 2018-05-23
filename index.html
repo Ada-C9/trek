@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Trek</title>
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <title>Trek</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section id="status-message"></section>
 
-    <script
+  <main>
+    <section class="current-trips">
+      <h1>Trek: Trips of a Lifetime</h1>
+      <button id="load">See Trip List</button>
+      <ul id="trip-list"></ul>
+    </section>
+  </main>
+
+
+
+
+
+  <script
   src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript" src="index.js"></script>
-  </body>
+</body>
 </html>
