@@ -1,27 +1,26 @@
-
+// CONSTANTS
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
-
 const reportStatus = (message) => {
   $('#status-message').html(message);
 }
 
 // GET TRIPS LIST
 const loadTrips = () => {
-  // const tripList = ;
-  // tripList.empty()
+  const tripList = $('#trips-list');
+  tripList.empty()
 
   reportStatus('Loading Trips! Please Wait...');
 
   axios.get(URL)
   .then((response) => {
     response.data.forEach((adventure) => {
-      $('#trips-list').append(`<li id="${adventure.id}">${adventure.name}</li>`);
+      tripList.append(`<li id="${adventure.id}">${adventure.name}</li>`);
       reportStatus('Trips Loaded!')
     })
   })
   .catch((error) => {
     console.log(error);
-      reportStatus(`Error: ${error.message}`)
+    reportStatus(`Error: ${error.message}`)
   })
 }
 
@@ -45,11 +44,11 @@ const getTrip = (id) => {
   })
   .catch((error) => {
     console.log(error);
-      reportStatus(`Error: ${error.message}`)
+    reportStatus(`Error: ${error.message}`)
   })
 }
 
-// RESERVE TRIP
+// RESERVE TRIP HELPERS
 const FORM_FIELDS = ['name', 'email', 'trip_id'];
 const inputField = name => $(`#trip-form input[name="${name}"]`);
 
@@ -73,13 +72,14 @@ const clearForm = () => {
   });
 }
 
+
+// RESERVE TRIP
 const reserveTrip = (event) => {
   event.preventDefault();
   console.log(event);
   const tripData = readFormData()
   console.log(tripData);
   let url = URL + '/' + tripData.trip_id + '/reservations'
-
 
   axios.post(url, tripData)
   .then((response) => {
@@ -89,21 +89,18 @@ const reserveTrip = (event) => {
   })
   .catch((error) => {
     console.log(error.response);
-     if (error.response.data && error.response.data.errors) {
-       reportError(
-         `Encountered an error: ${error.message}`,
-         error.response.data.errors
-       );
-     } else {
-       reportStatus(`Encountered an error: ${error.message}`);
-     }
-   });
-
+    if (error.response.data && error.response.data.errors) {
+      reportStatus(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}`);
+    }
+  });
 }
 
-
-
-// ENACT
+// ACTION PLAN
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('body').delegate( 'li', 'click', function() {
