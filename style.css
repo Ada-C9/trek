@@ -1,7 +1,14 @@
-/* table {
-  border: solid thin black;
-} */
-
 body {
   font-family: sans-serif;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.table {
+  max-width: 20%;
+  text-align: center;
+}
+
+.btn.btn-outline-info {
+  margin-bottom: 2em;
 }
