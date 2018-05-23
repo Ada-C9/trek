@@ -32,10 +32,29 @@ const loadTrips = () => {
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
+
+  // clicking on individual trip to load details into trip-details section
   $('#trip-list').on('click', '.trip-link', function(event) {
-    // event.preventDefault();
-    console.log('lkasjdfl');
+    event.preventDefault();
     let id = $(this).attr('id');
-    alert(id);
+
+    const tripDetails = $('#trip-details');
+    tripDetails.empty();
+    console.log('asdfalksj')
+
+    let pageURL = TRIPSURL + `/${id}`
+    axios.get(pageURL)
+      .then((response) => {
+        console.log(response.data)
+          tripDetails.append(response.data.name);
+
+        reportStatus('Trip details loaded :)');
+      })
+        // axios is giving us this error object to use
+      .catch((error) => {
+        console.log(error);
+        reportStatus(`Error: ${error.message}`)
+      });
+
   });
 });
