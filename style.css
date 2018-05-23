@@ -3,8 +3,9 @@
   color: #D64933;
   border: dotted #D64933 1px;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1rem;
   margin-bottom: 1em;
+  font-family: 'Playfair Display SC', serif;
 }
 
 .trips:hover { background-color: #661920; }
@@ -28,11 +29,12 @@
 }
 
 .content-split {
-  width: 40%;
+  width: 45%;
 }
 
 body {
   background-color: #FFF7F9;
+  font-family: 'PT Sans Narrow', sans-serif;
 }
 
 body, html {
@@ -52,9 +54,12 @@ body, html {
 }
 
 .title {
-  color: #215B33;
+  color: #0F2A18;
   text-align: center;
-  font-size: 6em;
+  font-size: 5em;
+  font-family: 'Playfair Display SC', serif;
+  white-space: nowrap;
+  margin-top: 1em;
 }
 
 ul {
