@@ -1,6 +1,7 @@
 let numTrips = 0;
 const URL = "https://ada-backtrek-api.herokuapp.com/trips"
 
+// Show me all of the trips Available
 const loadTrips = () => {
   reportStatus('Loading trip...');
 
@@ -23,12 +24,21 @@ const loadTrips = () => {
   })
   // do this if the response is not successful
   .catch((error) => {
-    reportStatus(`Encountered an error while loading trips: ${error.message}`);
-    console.log(error);
+    console.log(error.response);
+    if (error.response && error.response.data.errors) {
+      reportError(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}. You know what you did....`);
+    }
   });
 };
 
 const tripURL = 'https://ada-backtrek-api.herokuapp.com/trips/';
+
+// Show me one trip's details
 const displayTrip = (event) => {
   // console.log(event);
   // retrieving the id based on the id assigned in the all trips list, parsing data till I got the value I wanted after viewing in the above console.log()
@@ -49,31 +59,63 @@ const displayTrip = (event) => {
     $('#tripID').val(id)
   })
   .catch((error) => {
-    reportStatus(`Encountered an error while loading trip: ${error.message}`);
-    console.log(error);
-  })
+    console.log(error.response);
+    if (error.response && error.response.data.errors) {
+      reportError(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}.You know what you did....`);
+    }
+  });
 };
 
+
+// read traveler's info from a form
+// $('#spot-form').serializeArray()
+const FORM_FIELDS = ['name', 'age', 'email'];
+const inputField = name => $(`#spot-form input[name="${name}"]`);
+
+const readFormData = () => {
+  const getInput = name => {
+    const input = inputField(name).val();
+    return input ? input : undefined;
+  };
+
+  const formData = {};
+  FORM_FIELDS.forEach((field) => {
+    formData[field] = getInput(field);
+  });
+  return formData;
+};
+
+// clear out a form to restock with new user info
+const clearForm = () => {
+  FORM_FIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+}
+
+
+//reserve a spot on a trip
 const holdSpot = (event) => {
   event.preventDefault();
   let spotId = $(`#tripID`).val();
   const holdURL = `${tripURL}` + `${spotId}` + `/reservations`
   // just for now, making sure that a spot hold can be created
   // will replace with form input
-  const spotData = {
-    name: '',
-    age: 24,
-    email: 'boo@boo.com',
-  };
+  const spotData = readFormData();
+  console.log(spotData);
 
   reportStatus('Making sure we hold your spot...');
-  console.log(holdURL);
-  console.log(spotData);
+
   // POST request processing
   axios.post(holdURL, spotData)
 
   .then((response) => {
     reportStatus(`Successfully reserved spot, enjoy your trip!`);
+    clearForm();
   })
   .catch((error) => {
     console.log(error.response);
