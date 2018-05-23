@@ -1,15 +1,15 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
-// add status in order to add colors??
 const statusColors = {
   'success': 'lightgreen',
   'fail': 'indianred',
   'loading': 'sandybrown'
 }
-// const reportStatus = (message, status) => {}..
+
 const reportStatus = (message, status) => {
   let color = statusColors[status];
-  $('#status-message').html(message).css('background-color', color);
+  return $('#status-message').fadeIn(1000).html(message).css('background-color', color);
+  // $('#status-message').fadeOut(2000);
 };
 
 const clearContent = (id) => {
@@ -33,7 +33,7 @@ const getTrips = () => {
       response.data.forEach((trip) =>{
         $('#trip-list').append(`<li><button id="${trip.id}" class="button trip">${trip.name}</button></li>`)
       });
-      reportStatus('Trips Loaded!', 'success');
+      reportStatus('Trips Loaded!', 'success').fadeOut(2000);
     })
     .catch((error) => {
       console.log(error.message);
@@ -42,8 +42,8 @@ const getTrips = () => {
 };
 
 const showTrip = (event) => {
-  reportStatus('Loading Trip...', 'loading');
   clearContent('show-trip').empty();
+  reportStatus('Loading Trip...', 'loading');
 
   const tripId = event.target.id;
 
@@ -54,7 +54,7 @@ const showTrip = (event) => {
       $('#reserve-trip').css('display', 'block');
       $('#reserve-trip-id').text(response.data.name);
 
-      reportStatus(`Trip #${tripId} Loaded!`, 'success');
+      reportStatus(`Trip #${tripId} Loaded!`, 'success').fadeOut(2000);
     })
     .catch((error) => {
       reportStatus(`Error: ${error.message}`, 'fail');
@@ -86,7 +86,7 @@ const reserveTrip = (event) => {
 
   axios.post(URL + `/${tripId}/reservations`, getFormData())
     .then((response) => {
-      reportStatus(`Trip #${tripId} Reserved!`, 'success');
+      reportStatus(`Trip #${tripId} Reserved!`, 'success').fadeOut(2000);
       console.log(response);
       clearForm();
     })
