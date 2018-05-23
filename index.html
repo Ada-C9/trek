@@ -14,9 +14,22 @@
       <button id="load">See Trip List</button>
       <ul id="trip-list" class="hidden"></ul>
     </section>
-    <section >
-      <div id="trip-details" class="hidden"></div>
-      <div id="reservation-form" class="hidden"></div>
+    <section class="hidden">
+      <div id="trip-details" ></div>
+      <div id="reservation">
+        <form id="reservation-form">
+          <p><strong>Reserve a Spot on this Trip!</strong></p>
+        <div class="form-text">
+          <label for="name">Name</label>
+          <input type="text" name="name" />
+        </div>
+        <div class="form-text">
+          <label for="email">Email</label>
+          <input type="text" name="email" />
+        </div>
+        <input type="submit" name="add-reservation" value="Add Reservation" class="form-text"/>
+      </form>
+      </div>
     </section>
   </main>
 

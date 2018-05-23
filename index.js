@@ -30,7 +30,9 @@ const loadTrips = () => {
     response.data.forEach((trip) => {
       let item = $(`<li>${trip.name}</li>`);
       item.click(function() {
+        $("section").removeClass("hidden")
         getTripData(trip.id);
+        showReservationForm(trip.id);
       });
       tripList.append(item);
     });
@@ -57,21 +59,46 @@ const getTripData = (trip_id) => {
       <li>Continent: ${response.data.continent}</li>
       <li>Cost: $${response.data.cost}</li>
       <li>Weeks of Travel: ${response.data.weeks}</li>`);
-  })
-  .catch((error) => {
-    reportStatus(`Encountered an error while trying to load the trip: ${error.message}`);
-    console.log(error);
+    })
+    .catch((error) => {
+      reportStatus(`Encountered an error while trying to load the trip: ${error.message}`);
+      console.log(error);
+    });
+  }
+
+  const showReservationForm = (trip_id) => {
+    const FORM_FIELDS = ['name', 'email'];
+    const inputField = name => $(`#reservation-form input[name="${name}"]`);
+
+    const readFormData = () => {
+      const getInput = name => {
+        const input = inputField(name).val();
+        return input ? input : undefined;
+      };
+
+      const formData = {};
+      FORM_FIELDS.forEach((field) => {
+        formData[field] = getInput(field);
+      });
+
+      return formData;
+    };
+
+    const clearForm = () => {
+      FORM_FIELDS.forEach((field) => {
+        inputField(field).val('');
+      });
+    }
+  }
+
+
+
+
+
+
+
+
+
+  $(document).ready(() => {
+    $('#load').click(loadTrips);
   });
-}
-
-
-
-
-
-
-
-
-
-$(document).ready(() => {
-  $('#load').click(loadTrips);
-});
