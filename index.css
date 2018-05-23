@@ -1,0 +1,34 @@
+body {
+	padding: 100px;
+}
+
+#load-trips{
+	font-size: 2rem;
+	background: linear-gradient(rgb(222, 240, 228), rgb(136, 242, 194));
+	margin: 30px auto;
+}
+
+header {
+	border-bottom: dashed 2px grey;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+main section {
+	border: solid 1px rgb(180, 238, 191);
+	margin: 20px;
+}
+
+#right-side {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+#right-side div {
+	border: solid 1px rgb(180, 238, 191);
+	margin: 20px;
+}
