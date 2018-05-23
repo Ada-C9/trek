@@ -27,12 +27,9 @@ const loadTrips = () => {
     reportStatus(`Successfully loaded ${response.data.length} trips`);
     response.data.forEach((trip) => {
       let link = `${URL}/${trip.id}`;
+
       tripList.append(`<li><a href=${link}>${trip.name}</li>`);
-      // tripList.click(() => {
-      //   loadDetails(trip);
-      // })
     });
-    // .click function and pass
   })
 
   .catch((error) => {
@@ -45,8 +42,7 @@ const loadDetails = (link) => {
   reportStatus('Loading Details...');
   console.log(link);
 
-  // const details = $('#trip-list li');
-  // details.empty();
+
 
   axios.get(link)
 
@@ -54,14 +50,14 @@ const loadDetails = (link) => {
     reportStatus(`Successfully loaded ${this.name} details!`);
     console.log('pressed');
 
-    $('#trip-detail').empty();
+    // tripDetails.empty();
     let tripDetails = "";
     for (let detail in response.data) {
       console.log(detail);
 
-      tripDetails += `<li>${detail}</li>`;
+      tripDetails += `<li>${detail}: ${response.data[detail]} </li>`;
     }
-    $('#trip-details').append(tripDetails);
+    $('#trip-details').html(tripDetails);
   })
 
   .catch((error) => {
@@ -72,6 +68,7 @@ const loadDetails = (link) => {
 
 $(document).ready(() => {
   $('#search-all').click(loadTrips);
+
   $( '#trip-list' ).on("click", "a",  function(event) {
     console.log($(event));
     event.preventDefault();
