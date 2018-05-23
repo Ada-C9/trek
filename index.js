@@ -37,33 +37,35 @@ const loadTrips = () => {
     reportStatus(`Encountered an error while loading trips: ${error.message}`);
     console.log(error);
   })
+};
 
-  $('#trip-list').on ('click', 'li', function() {
-    reportStatus('Loading trip..');
-    const tripDetail = $('#trip-detail');
-    tripDetail.empty();
+const singleTrip = (id) => {
+  reportStatus('Loading trip..');
+  const tripDetail = $('#trip-detail');
+  tripDetail.empty();
 
-    let tripId = this.id
-    axios.get(allTrips + tripId)
-    .then((response) => {
-      reportStatus(`Successfully loaded trip`);
-      tripDetail.append('<h3>Trip Detail:</h3>')
-      let detail = response.data;
-      let html = `<li><ID: ${detail.id}</li>`;
-      html += `<li>Trip: ${detail.name}</li>`;
-      html += `<li>Continent: ${detail.continent}</li>`;
-      html += `<li>About: ${detail.about}</li>`;
-      html += `<li>Weeks: ${detail.weeks}</li>`;
-      html += `<li>Price: ${detail.cost}</li>`;
-      tripDetail.append(html)
-    })
-    .catch((error) => {
-      reportStatus(`Encountered an error while loading trip: ${error.message}`);
-      console.log(error);
-    })
-  });
+  axios.get(allTrips + id)
+  .then((response) => {
+    reportStatus(`Successfully loaded trip`);
+    tripDetail.append('<h3>Trip Detail:</h3>')
+    let detail = response.data;
+    let html = `<li><ID: ${detail.id}</li>`;
+    html += `<li>Trip: ${detail.name}</li>`;
+    html += `<li>Continent: ${detail.continent}</li>`;
+    html += `<li>About: ${detail.about}</li>`;
+    html += `<li>Weeks: ${detail.weeks}</li>`;
+    html += `<li>Price: ${detail.cost}</li>`;
+    tripDetail.append(html)
+  })
+  .catch((error) => {
+    reportStatus(`Encountered an error while loading trip: ${error.message}`);
+    console.log(error);
+  })
 };
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
+  $('#trip-list').on('click', 'li', function() {
+    singleTrip(this.id);
+  });
 });
