@@ -30,7 +30,6 @@ const loadTrips = () => {
   axios.get(URL)
   .then((response) => {
     reportStatus(`Successfully loaded ${response.data.length} trips.`);
-    trips.append('<h2>All Trips</h2>');
     response.data.forEach((trip) => {
       trips.append(`<li>${trip.name}</li>`);
       trips.append(`<span>${trip.id}</span>`);

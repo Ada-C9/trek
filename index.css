@@ -74,10 +74,29 @@ button#display-trips, input[type="submit"] {
   border: solid 1px #ffffff;
 }
 
+#trips-info {
+  position: relative;
+}
+
+#trips-info h2 {
+  margin: 0;
+  line-height: 5em;
+  background-color: #ffffff;
+  color: #944743;
+  position: sticky;
+  top: 0;
+  border-bottom: solid 1px #ffffff;
+}
+
 ul {
+   margin: 0;
   list-style-type: none;
   padding: 0 1em;
   text-align: center;
+}
+
+li:first-child {
+  border: none;
 }
 
 li {
