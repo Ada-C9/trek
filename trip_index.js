@@ -29,33 +29,28 @@ const loadTrips = () => {
 };
 
 const tripURL = 'https://ada-backtrek-api.herokuapp.com/trips/';
-
 const displayTrip = (event) => {
   // console.log(event);
   // retrieving the id based on the id assigned in the all trips list, parsing data till I got the value I wanted after viewing in the above console.log()
   const id = event.target.className;
-
   // making sure we clear out all trip deets
-
   const tripDetails = $('#trip-deets');
   tripDetails.empty();
 
   // GET request, need to include the id of the
   axios.get(tripURL + id)
-
   .then((response) => {
     reportStatus('Successfully loaded trip details');
-
     // FIXME: Want to display the detail name before it by accessing the name of the keys
-
-    // for (let key in response.data) {
-    //   tripDetails.append(`<li> ${response.data('key')} </li>`);
-    // }
     for (let detail1 in response.data) {
       tripDetails.append(`<li> ${response.data[detail1]} </li>`);
     }
     // need to set the hidden value on the form with the corresponding trip ID
     $('#tripID').val(id)
+  })
+  .catch((error) => {
+    reportStatus(`Encountered an error while loading trip: ${error.message}`);
+    console.log(error);
   })
 };
 
@@ -66,7 +61,7 @@ const holdSpot = (event) => {
   // just for now, making sure that a spot hold can be created
   // will replace with form input
   const spotData = {
-    name: 'Test Name',
+    name: '',
     age: 24,
     email: 'boo@boo.com',
   };
@@ -82,12 +77,31 @@ const holdSpot = (event) => {
   })
   .catch((error) => {
     console.log(error.response);
-    reportStatus(`Encountered an error: ${error.message}`);
+    if (error.response && error.response.data.errors) {
+      reportError(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}. You know what you did....`);
+    }
   });
 };
 
 const reportStatus = (message) => {
   $('#status-messages').html(message);
+};
+
+const reportError = (message, errors) => {
+  let content = `<p>${message}</p>`
+  content += '<ul';
+  for (const field in errors) {
+    for (const problem in errors[field]) {
+      content += `<li>${field}: ${problem}</li>`
+    }
+  }
+  content += '</ul>';
+  reportStatus(content);
 };
 
 $(document).ready(() => {
