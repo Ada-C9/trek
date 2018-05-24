@@ -46,9 +46,10 @@ const loadDetails = function(event) {
 
   let trip = event.target.id
 
-  $('.trip-details').removeClass('display-none');
+  $('.details').removeClass('display-none');
+  $('.reserve-form').removeClass('display-none');
 
-  $('input[type="text"]').removeClass('highlight') // removes and previous error outlining from form
+  $('input').removeClass('highlight') // removes and previous error outlining from form
 
   $('#reservation-status').html('');
   $('#reservation-status').removeClass('status-message'); // removes previous reservation status if new trip selected
@@ -118,14 +119,14 @@ const reserveTrip = (event) => {
 
   axios.post(`${URL}\\${tripID}\\reservations`, tripData)
     .then((response) => {
-      $('input[type="text"]').removeClass('highlight')
+      $('input').removeClass('highlight')
       reportStatus(`Successfully made a reservation!`);
       clearForm();
     })
     .catch((error) => {
       console.log(error.response);
 
-      $('input[type="text"]').addClass('highlight')
+      $('#reserve-form input').addClass('highlight')
 
       if (error.response.data && error.response.data.errors) {
         reportError(

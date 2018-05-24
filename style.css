@@ -10,7 +10,7 @@ h2, .all-trips p, .details p {
   border-bottom: 1px solid;
 }
 
-h3, p {
+h3, p, .reserve, .create {
   text-align: center;
 }
 
@@ -46,10 +46,6 @@ p:last-of-type {
 .button {
   margin: 2.5%;
   border-radius: 5px;
-}
-
-.reserve {
-  text-align: center;
 }
 
 #trip-reservation-num p {
