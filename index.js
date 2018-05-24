@@ -57,7 +57,6 @@ const loadTrips = () => {
 // To call only one trip
 const loadTrip = function loadTrip(selectedTripID) {
   reportStatus('Loading one trip...');
-  console.log(selectedTripID);
   axios.get(TRIP_URL + `${selectedTripID}`)
   .then(response => {
     // reportStatus(`Successfully added trip with ID ${response.data.id}!`);
@@ -105,8 +104,7 @@ const inputField = name => $(`trip-form-input[name="${name}"]`);
 //   });
 // };
 
-const loadResForm = function loadResForm() {
-  console.log('HEEEEEEEYYYYYYYY');
+const loadResForm = function loadResForm(tripName) {
   const reserveTripForm = $(`.reserve-trip-form`);
   const tripForm =
     `<form>
@@ -118,18 +116,22 @@ const loadResForm = function loadResForm() {
           <label for="email">Email</label>
           <input type="text" name="email" />
       </div>
+      <p>${tripName}</p>
+    <input type="submit" name="reserve-trip" value="Reserve" />
     </form>`
+    // figure out how to hide and show???
   reserveTripForm.html(tripForm);
-
 };
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('#trips-list').on( "click", "li", function() {
     let selectedTripID = (this.id)
-    // console.log(selectedTripID);
     loadTrip(selectedTripID);
-    loadResForm();
+
+    let tripName = $(`#${this.id}`).text();
+    console.log(tripName);
+    loadResForm(tripName);
   });
 
 }); // ends (document).ready
