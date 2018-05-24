@@ -26,6 +26,8 @@ const loadTrips = () => {
   });
 };
 
+
+
 // const TripsbyBudget = () => {
 //   const budgeturl = 'https://ada-backtrek-api.herokuapp.com/trips/budget?query=';
 //
@@ -108,7 +110,7 @@ const reserveTrip = (event) => {
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
-  $('#budget').click(TripsbyBudget);
+  // $('#budget').click(TripsbyBudget);
 
   $('ul').on('click', 'li', function(event) {
     $('#trip').empty();
