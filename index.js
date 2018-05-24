@@ -28,7 +28,7 @@ const loadTrips = () => {
     response.data.forEach((trip) => {
       let link = `${URL}/${trip.id}`;
 
-      tripList.append(`<li><a href=${link}>${trip.name}</li>`);
+      tripList.append(`<li><a id=${trip.id} href=${link}>${trip.name}</li>`);
     });
   })
 
@@ -38,24 +38,25 @@ const loadTrips = () => {
   });
 }; //end loadTrips
 
-const loadDetails = (link) => {
+const loadDetails = (link, tripID) => {
   reportStatus('Loading Details...');
   console.log(link);
+
 
   axios.get(link)
 
   .then((response) => {
     reportStatus(`Successfully loaded ${this.name} details!`);
-    console.log('pressed');
 
     // tripDetails.empty();
     let tripDetails = "";
     for (let detail in response.data) {
-      console.log(detail);
 
       tripDetails += `<p>${detail}: ${response.data[detail]} </p>`;
     }
     $('#trip-details').html(tripDetails);
+    $('#reserve-form').removeClass();
+    $('#reserve-form').addClass(tripID);
   })
 
   .catch((error) => {
@@ -94,12 +95,14 @@ const reserveTrip = (event) => {
   // to avoid a page reload
   event.preventDefault();
 
-  const petData = readFormData();
-  console.log(petData);
+  const tripData = readFormData();
+  console.log(tripData);
 
-  reportStatus('Sending pet data...');
+  reportStatus('Sending trip data...');
 
-  axios.post(URL, petData)
+  let link = `${URL}/${$('#reserve-form').attr('class')}/reservations`;
+
+  axios.post(link, tripData)
 
     .then((response) => {
       reportStatus(`Successfully added a pet with ID ${response.data.id}!`);
@@ -125,11 +128,11 @@ $(document).ready(() => {
   $('#search-all').click(loadTrips);
 
   $('#trip-list').on("click", "a",  function(event) {
-    console.log($(event));
     event.preventDefault();
-    loadDetails(this.href);
+    let tripID = event.target.id;
+    loadDetails(this.href, tripID);
   });
 
-  // $('#reserve-form').submit(reserveTrip);
+    $('#reserve-form').submit(reserveTrip);
 
 });

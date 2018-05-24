@@ -8,37 +8,37 @@ header {
 }
 
 main {
+  position: fixed;
   margin-top: 80px;
+  height: 85vh;
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  /* grid-template-rows: 1fr 2fr; */
+  grid-template-columns: 30% 70%;
 }
 
 button {
   height: 30px;
   width: 80px;
 }
+
 section {
+  min-width: 30vw;
   display: grid;
-  grid-template-rows: 1fr .5fr 5fr;
+  grid-template-rows: 1fr 10fr;
   padding: 10px;
   border: dotted black 1px;
 }
 
 content {
-  max-height: 80vh;
-  overflow-y: scroll;
+  max-height: 75vh;
+  overflow-x: scroll;
 }
 
 h2 {
   font-size: 20px;
-    max-height: 2em;
+  max-height: 2em;
 }
 
-* {
-  /* border: black solid 1px; */
-}
 
-#pet-form {
+.hidden {
   display: none;
 }
