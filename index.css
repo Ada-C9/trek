@@ -2,35 +2,47 @@ body {
   font-family: sans-serif;
 }
 
-
 main {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  padding: 2rem;
 }
 
-header {
-
+h1 {
+  border-bottom: 1px solid #424242;
+  font-size: 3em;
+  text-align: center;
 }
 
-
-div {
-
+h3 {
+  border-bottom: .75px solid #424242;
+  text-align: center;
+  padding-bottom: .5em;
 }
-
-
 
 button {
-
+  background-color: #26A69A;
+  padding: 0.85em 1em;
+  color: white;
+  font-size: .75em;
+  font-weight: bold;
 }
 
 ul {
-
+  list-style-type: none;
 }
 
-li {
-
+.current-trips li {
+  border: 1px solid black;
+  text-align: center;
+  padding: 2em;
+  margin-right: .5em;
+  margin-left: .5em;
 }
 
-nav {
-
+section  {
+  margin-right: .5em;
+  margin-left: .5em;
+  padding-left: .5em;
+  padding-right: .5em;
 }

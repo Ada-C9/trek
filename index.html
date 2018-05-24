@@ -4,28 +4,40 @@
   <meta charset="utf-8">
   <title>Trek</title>
   <link href="index.css" media="screen" rel="stylesheet" type="text/css"/>
-
 </head>
 <body>
-  <section id="status-message"></section>
 
   <nav>
   </nav>
 
+  <header>
+    <section id="status-message"></section>
+    <h1>Trek</h1>
+    <button id="load">See All Trips</button>
+  </header>
+
   <main>
 
-    <section class="current-trips">
-      <h1>List of Trips</h1>
-      <button id="load">Get trips!</button>
+    <section class="current-trips" class="hidden">
       <ul id="trip-list"></ul>
     </section>
 
-    <article id="tripLocation">
-      <ul id="trip-details"> </ul>
-    </article>
+    <section id="trip-location">
+      <div id="trip-details"> </div>
+      <button id="reserve-trip"> Reserve Trip </button>
 
+      <section id="new-reservation"  class="hidden">
+        <h3>Make a reservation</h3>
+        <form id="reservation-form">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" />
+          </div>
+          <input type="submit" name="add-reservation" value="Add Reservation" />
+        </form>
+      </section>
+    </section>
   </main>
-
 
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
