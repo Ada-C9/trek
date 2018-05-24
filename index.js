@@ -81,7 +81,8 @@ const reserveTrip = (id) => {
     reportStatus(`Encountered an error: ${error.message}`);
     });
 
-  // TODO: implement clearForm();
+  $('input[name="name"]').val('');
+  $('input[name="email"]').val('');
 }
 
 $(document).ready(() => {
