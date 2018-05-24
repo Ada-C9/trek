@@ -54,6 +54,7 @@ const loadDetails = (link, tripID) => {
 
       tripDetails += `<p>${detail}: ${response.data[detail]} </p>`;
     }
+
     $('#trip-details').html(tripDetails);
     $('#reserve-form').removeClass();
     $('#reserve-form').addClass(tripID);
