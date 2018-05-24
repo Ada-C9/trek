@@ -143,9 +143,9 @@ footer {
 
 /* Exit Button */
 .exit {
-    color: #aaaaaa;
+    color: red;
     float: right;
-    font-size: 28px;
+    font-size: 56px;
     font-weight: bold;
 }
 

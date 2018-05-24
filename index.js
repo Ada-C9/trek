@@ -7,20 +7,7 @@ const reportTripStatus = (message) => {
   $('#status-message-two').html(message);
 }
 
-// ERROR HELPER
-const reportError = (message, errors) => {
-  let content = `<p>${message}</p>`
-  content += "<ul>";
-  for (const field in errors) {
-    for (const problem of errors[field]) {
-      content += `<li>${field}: ${problem}</li>`;
-    }
-  }
-  content += "</ul>";
-  reportTripStatus(content);
-};
-
-// GET LIST HELPER
+// GET LIST HELPERS
 const apiGET = (url) => {
   const chosenTrip = $('#chosen-trip');
   chosenTrip.empty()
@@ -51,7 +38,7 @@ const apiGET = (url) => {
   })
 }
 
-// ALL TRIPS
+// GET ALL TRIPS
 const loadTrips = () => {
   apiGET(URL)
 }
@@ -192,6 +179,19 @@ const clearTripForm = () => {
   });
 }
 
+// MAKE TRIP ERROR HELPER
+const reportError = (message, errors) => {
+  let content = `<p>${message}</p>`
+  content += "<ul>";
+  for (const field in errors) {
+    for (const problem of errors[field]) {
+      content += `<li>${field}: ${problem}</li>`;
+    }
+  }
+  content += "</ul>";
+  reportTripStatus(content);
+};
+
 
 // MAKE TRIP
 const createTrip = (event) => {
@@ -253,13 +253,5 @@ $(document).ready(() => {
     console.log(TRIP_FIELDS);
     $('#tripModal').css('display','none');
 
-  })
-
-  // doesn't currently close modal
-  $(document).click(function(event) {
-    if (!$(event.target).closest('#tripModal,#create-trip')) {
-          $("#tripModal").css('display','none');
-      }
-    // console.log(event);
   })
 });
