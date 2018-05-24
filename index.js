@@ -1,5 +1,6 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
+
 const reportStatus = (message) => {
   $('#status-message').html(message);
 }
@@ -45,7 +46,7 @@ const loadTrip = (id) => {
       reservationForm.append(`<h2>Reserve Trip</h2>`);
       reservationForm.append(
         `<div><label class="user">Your Name:</label>
-        <input type="text" name="name" class="user" /></div>`
+        <input type="text" name="user-name" class="user" /></div>`
       );
       reservationForm.append(
         `<div><label class="user">Your Email:</label>
@@ -64,14 +65,14 @@ const loadTrip = (id) => {
 }
 
 const reserveTrip = (id) => {
-  let tripData = {
-    'name': $('input[name="name"]').val(),
+  let userData = {
+    'name': $('input[name="user-name"]').val(),
     'email': $('input[name="email"]').val()
   }
 
   reportStatus('Reserving The Trip...');
 
-  axios.post(URL + `/${id}/reservations`, tripData)
+  axios.post(URL + `/${id}/reservations`, userData)
   .then((response) => {
     console.log(response);
     reportStatus(`Successfully reserved this trip with the name ${response.data.name}`);
@@ -81,7 +82,7 @@ const reserveTrip = (id) => {
     reportStatus(`Encountered an error: ${error.message}`);
     });
 
-  $('input[name="name"]').val('');
+  $('input[name="user-name"]').val('');
   $('input[name="email"]').val('');
 }
 
@@ -96,7 +97,14 @@ const showCreateTripForm = () => {
     </div>`);
   createTripForm.append(`<div>
     <label class="trip">Continent:</label>
-    <input type="text" name="continent" class="trip" />
+    <select id="continent" class="trip">
+      <option value="Africa">Africa</option>
+      <option value="Asia">Asia</option>
+      <option value="Australasia">Australasia</option>
+      <option value="Europe">Europe</option>
+      <option value="North America">North America</option>
+      <option value="South America">South America</option>
+    </select>
     </div>`);
   createTripForm.append(`<div>
     <label class="trip">Category:</label>
@@ -119,6 +127,37 @@ const showCreateTripForm = () => {
   );
 }
 
+const createTrip = () => {
+  let tripData = {
+    'name': $('input[name="name"]').val(),
+    'continent': $("#continent option:selected").text(),
+    'category': $('input[name="category"]').val(),
+    'weeks': $('input[name="weeks"]').val(),
+    'cost': $('input[name="cost"]').val(),
+    'about': $('input[name="about"]').val()
+  }
+  console.log(tripData);
+
+  reportStatus('Creating The Trip...');
+
+  axios.post(URL, tripData)
+    .then((response) => {
+      console.log(response);
+      reportStatus(`Successfully created a trip with the name ${response.data.name}`);
+      })
+    .catch((error) => {
+      console.log(error.response);
+      reportStatus(`Encountered an error: ${error.message}`);
+      });
+
+  $('input[name="name"]').val('');
+  $('input[name="continent"]').val('');
+  $('input[name="category"]').val('');
+  $('input[name="weeks"]').val('');
+  $('input[name="cost"]').val('');
+  $('input[name="about"]').val('');
+}
+
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('#create').click(showCreateTripForm);
@@ -129,5 +168,8 @@ $(document).ready(() => {
   $('#reservation-form').on('click', '.reserve', function(){
     let id = $(this).attr('id').substr(3);
     reserveTrip(id);
+  });
+  $('.create-trip-form').on('click', '#create', function(){
+    createTrip();
   });
 })
