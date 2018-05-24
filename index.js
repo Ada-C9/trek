@@ -61,8 +61,19 @@ const loadTrip = function(event) {
       $('#details').append(`<p><strong>About:</strong> ${data.about}</p>`);
 
       // reserve trip data
-      $('#reserve').append("<h2>Reserve a Trip</h2>")
-      $('#reserve').append(`<p><strong>Trip:</strong> ${data.name}</p>`);
+      $('#reserve h2').append("Reserve a Trip")
+      $('#reserve p').append(`<strong>Trip:</strong> ${data.name}`);
+
+      // $('#res-form').show();
+      console.log('about to do reservation');
+
+      $('#res-form').submit(function(event){
+        console.log(event);
+        event.preventDefault();
+        reserveSpot(data.id);
+        console.log('reservation completed');
+      });
+
 
     })
     .catch((error) => {
@@ -71,24 +82,49 @@ const loadTrip = function(event) {
 
   const details = $("#details");
   const reserve = $("#reserve");
-  details.empty();
-  reserve.empty();
+  // details.empty();
+  // $('#reserve p').empty();
+  // $('#reserve h2').empty();
+  // reserve.empty();
 
 };
 
-const reserveSpot = function() {
-  const target = $(this).children();
-  const URL = BASEURL +`/${target[0].id}/reservations`
-  // name(string)
-  // age(integer)
-  // email(string)
 
+const reserveSpot = function(id) {
+  // const target = $(this).children();
+  const URL = BASEURL +`/${id}/reservations`;
+  const resData = {
+    name: $('input[name="name"]').val(),
+    age: parseInt($('input[age="age"]').val()),
+    email: $('input[email="email"]').val()
+  }
+
+  axios.post(URL,resData)
+    .then((response) => {
+      $('input[name="name"]').val('');
+      $('input[age="age"]').val('');
+      $('input[email="email"]').val('');
+      console.log(response)
+      let data = response.data;
+      status(`Successfully reserved a spot on ${data.name}`)
+    })
+    .catch((error) => {
+      console.log('Something went wrong!')
+      if(error.response.data && error.response.data.errors){
+        console.log(error.response);
+        error(error.message, error.response.data.errors);
+      } else {
+        status(`Something went wrong: ${error.message}`)
+      }
+    });
+    // $('#res-form input').empty();
 };
 
 
 $(document).ready(() => {
   console.log('YOUR IN!');
+  // $('#res-form').hide()
   $('#all-trips').click(loadAllTrips);
   $('#trips-body').on('click','td',(loadTrip));
-  // $('#reserve')
+
 });
