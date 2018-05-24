@@ -7,14 +7,35 @@
 
 const URL = `https://ada-backtrek-api.herokuapp.com/trips`
 
-const reportStatus = (message) =>{
-  $(`#status-message`).html(message);
-}
-
 let singleTripURL = function(tripID){
   let singleURL = ``
   return singleURL+=`https://ada-backtrek-api.herokuapp.com/trips/${tripID}`
 }
+
+let reserveAtrip = function(tripID){
+  let singleURL =``
+  return singleURL+= `https://ada-backtrek-api.herokuapp.com/trips/${tripID}/reservations`
+}
+
+const postURL = `https://ada-backtrek-api.herokuapp.com/trips`
+
+const reportStatus = (message) =>{
+  $(`#status-message`).html(message);
+}
+
+const reportError = (message, errors) => {
+  let content = `<p>${message}</p>`
+  content += "<ul>";
+  for (const field in errors) {
+    for (const problem of errors[field]) {
+      content += `<li>${field}: ${problem}</li>`;
+    }
+  }
+  content += "</ul>";
+  reportStatus(content);
+};
+
+
 
 const loadTripdetails = (aTrip)=>{
   const tripDetails = $(`#trip-details`);
@@ -33,6 +54,7 @@ const loadTripdetails = (aTrip)=>{
         tripDetails.append(`<li>${response.data.cost}</li>`)
         tripDetails.append(`<li>${response.data.about}</li>`)
         tripDetails.append(`<button id="make-res">Book this trip!</button>`)
+        divTrips.append(`<input type="hidden" name="location-id" value="${response.data.id}"/>`)
         divTrips.append('<label for="trip">Trip</label>')
         divTrips.append(`<input type="trip" name="trip" id="trip-input" value=${response.data.name}/>`)
       reportStatus('Trip details found!')
@@ -63,6 +85,39 @@ axios.get(URL)
   })
 }
 
+
+const createTrip = (event) =>{
+  event.preventDefault();
+
+  const tripInfo ={
+    name: $(`input[name="name"]`).val(),
+    email:$(`input[name="email"]`).val(),
+    tripID:$(`input[name="location-id"]`).val()
+  }
+
+  console.log(tripInfo)
+
+  reportStatus(`Attempting to make your reservation`)
+  $(`input[name="name"]`).val('')
+  $(`input[name="email"]`).val('')
+  $(`input[name="location-id"]`).val('')
+
+axios.post(reserveAtrip(tripInfo.tripID),tripInfo)
+  .then((response) => {
+    reportStatus('You trip has been booked')
+  })
+  .catch((error) => {
+    reportStatus('fail')
+    if( error.message && error.response.data.errors){
+    reportError(error.message,error.response.data.errors)
+  }else
+    reportError(`encounted error: ${error.message}`)
+ })
+//end of method
+};
+
+
+/// DOCUMENT . READY ///
 // / Original Code //
 
 $(document).ready(() => {
@@ -74,9 +129,10 @@ $(document).ready(() => {
    });
 
    $(document).on("click","#make-res",function(){
-      $("#form").toggle();
+      $("#book-trip-form").toggle();
    });
 
+   $(`#book-trip-form`).submit(createTrip)
 
 //post a reservation
 
