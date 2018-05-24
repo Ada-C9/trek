@@ -4,6 +4,11 @@
   <meta charset="utf-8">
   <title>Trek</title>
 
+  <!-- Compressed CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
+
+  <!-- Compressed JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="stylesheet.css">
   <link href="https://fonts.googleapis.com/css?family=Antic|Space+Mono|Yatra+One" rel="stylesheet">
 </head>
@@ -19,8 +24,7 @@
       </div>
 
       <div>
-        <ul id="trip-details" class="hidden"></ul>
-  
+        <ul id="trip-details" class="bold-li hidden"></ul>
 
         <form id="reservation-form" class="reservations-form hidden">
           <h1>Add a new reservation</h1>
@@ -39,7 +43,7 @@
             <input type="text" name="email" />
           </div>
 
-          <input type="submit" name="make-reservation" value="Make Reservation" />
+          <input id="submit-button" type="submit" name="make-reservation" value="Make Reservation" class="button"/>
         </form>
       </div>
     </section>
@@ -48,5 +52,8 @@
   src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript" src="index.js"></script>
+  <script>
+  $(document).foundation();
+</script>
 </body>
 </html>
