@@ -61,20 +61,21 @@ const tripDetails = (trip) => {
 }; //end of Trip details
 
 const createReservation = (reservation, trip) => {
-  console.log(reservation);
-  console.log(trip);
+  // console.log(reservation);
+  // console.log(trip);
 
-  const reservationURL = 'https://ada-backtrek-api.herokuapp.com/trips/1/reservations'
-  
-  axios.get(singleTripUrl + trip.id)
+  const reservationData = {
+    name: $('input[name="name"]').val(),
+    age: $('input[name="age"]').val(),
+    email: $('input[name="email"]').val()
+  }
+
+  const reservationURL = `https://ada-backtrek-api.herokuapp.com/trips/${trip.id}/reservations`
+
+  axios.post(reservationURL, reservationData  )
   .then((response) => {
-    reportStatus(`Successfully loaded ${response.data.length}`);
+    reportStatus(`Successfully created something`);
     console.log(response);
-    const result = response.data
-    for (attr in result) {
-      aboutTrip.append(`<li>${result[attr]}</li>`);
-    }
-
   })
   .catch((error) => {
     reportStatus(`Encountered an error while loading trips: ${error.message}`);
