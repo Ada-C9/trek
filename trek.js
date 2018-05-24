@@ -4,49 +4,60 @@ const reportStatus = (message) => {
   $('#status-message').html(message);
 };
 
+// Load trips
 const loadTrips = () => {
-  const tripList = $('#tbody');
-  tripList.empty();
+  const tripsList = $('#tbody');
+  tripsList.empty();
 
   reportStatus('Loading trips! Please wait...');
 
   axios.get(URL)
   .then((response) => {
-    $('#table').show();
-    response.data.forEach((trip) => {
-      tripList.append(`<tr><td>${trip.name}</td></tr>`);
-      console.log(trip);
+      $('#table').show();
+      response.data.forEach((trip) => {
+        tripsList.append(`<tr><td>${trip.id}</td>
+        <td>${trip.name}</td></tr>`);
+      });
+      reportStatus('Trips Loaded!');
+    })
+    .catch((error) => {
+      reportStatus('Error: ${error.message}');
     });
-    reportStatus('Trips Loaded!');
-  })
-  .catch((error) => {
-    console.log(error);
-    reportStatus('Error: ${error.message}');
-  });
 };
 
-const openTrip = (id) => {
-  const tripList = $('#tbody/${id}');
-  tripList.empty();
+  // Load one trip
 
-  reportStatus('Loading trip! Please wait...');
+const loadTrip = (id) => {
+  const tripInfo = $('#trip-info');
+  tripInfo.empty();
 
-  axios.get(`${URL}/${id}`, (trip))
+  reportStatus('Loading trip info! Please wait...');
+
+    // get trip details from API
+
+  axios.get(URL + `/${id}`)
   .then((response) => {
-    $('#table').show();
-    response.data.forEach((trip) => {
-      tripList.append(`<tr><td>${trip.name}</td></tr>`);
-      console.log(trip);
+      $('#details').show();
+      tripInfo.append(`<tr><td><strong>Name: </strong> ${response.data.name}</td></tr>
+        <tr><td><strong>Trip ID: </strong>${response.data.id}</td></tr>
+        <tr><td><strong>Continent: </strong>${response.data.continent}</td></tr>
+        <tr><td><strong>Category: </strong>${response.data.category}</td></tr>
+        <tr><td><strong>Weeks: </strong>${response.data.weeks}</td></tr>
+        <tr><td><strong>Cost: </strong>${response.data.cost}</td></tr>
+        <tr><td><strong>About: </strong></br>${response.data.about}</td></tr>`);
+      reportStatus('Trip Info Loaded!');
+    })
+    .catch((error) => {
+      reportStatus('Error: ${error.message}');
     });
-    reportStatus('Trip Loaded!');
-  })
-  .catch((error) => {
-    console.log(error);
-    reportStatus('Error: ${error.message}');
-  });
 };
 
 $(document).ready(() => {
-  $('#load').click(loadTrips);
-  $('#trip-form').submit(createTrip)
-});
+      $('#load').click(loadTrips);
+      $('#tbody').on('click', 'td', function () {
+          let id = $(this).attr('id');
+          loadTrip(id);
+        });
+
+      // $('#trip-form').submit(createTrip)
+    });
