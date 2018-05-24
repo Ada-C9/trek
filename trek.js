@@ -1,4 +1,4 @@
-const URL = 'https://ada-backtrek-api.herokuapp.com/trips/';
+const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 const dataField = ['Name', 'Continent', 'Category', 'Weeks', 'Cost', 'About'];
 
 const reportStatus = (message) => {
@@ -54,15 +54,16 @@ const displayTrip = (trip) => {
 
   const trekDetail = $('#trek-detail');
 
-  axios.get(URL + trip.id)
+  axios.get(URL + '/' + trip.id)
 
   .then((response) => {
-
     console.log(response.data);
 
-    trekDetail.html('<h4>Trip Details</h4>')
     if (response.data) {
       listForm(response.data.id);
+
+      trekDetail.html('<h4>Trip Details</h4>')
+
       for (let data of dataField) {
         let html = `<li><strong>${data}:</strong> ${response.data[data.toLowerCase()]}</li>`;
         trekDetail.append(html);
@@ -76,16 +77,21 @@ const displayTrip = (trip) => {
     console.log(error);
   })
 
+  $('#reserv-form').submit((event) => {
+    event.preventDefault();
+    reserveTrip(trip.id)
+  });
+
 };
 
 const listForm = (id) => {
   let formTag = "<h4>Reserve Trip</h4>";
-  formTag += `<form id="trek-form">`,
+  formTag += `<form>`,
   formTag += `<div><label for="name">Name</label>
     <input type="text" name="name" /></div>`,
-  formTag += `<div><label for="name">Email</label>
+  formTag += `<div><label for="email">Email</label>
     <input type="text" name="email" /></div>`,
-  formTag += `<div id="trek-name">
+  formTag += `<div>
     <h5>Trip ID: ${id}</h5></div>`
   formTag += `<input type="submit" name="add-reserv" value="Reserve" />
     </form>`
@@ -94,9 +100,11 @@ const listForm = (id) => {
 }
 
 const FORM_FIELDS = ['name', 'email'];
-const inputField = (name) => $(`#trek-form input[name="${name}"]`);
+const inputField = (name) => $(`#reserv-form input[name="${name}"]`);
 
 const readFormData = () => {
+  console.log(name)
+
   const getInput = (name) => {
     const input = inputField(name).val();
     return input ? input : undefined;
@@ -117,17 +125,19 @@ const clearForm = () => {
 }
 
 // A reservation form for trip
-const reserveTrip = (event) => {
+const reserveTrip = (id) => {
 
-  event.preventDefault();
+  // event.preventDefault();
 
   const tripData = readFormData();
   console.log(tripData);
 
-  axios.post(URL, tripData)
+  let reservURL = URL + `/${id}/reservations`
+
+  axios.post(reservURL, tripData)
 
   .then((response) => {
-    console.log(response.data.id);
+    console.log(response);
     reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
     clearForm();
   })
@@ -148,5 +158,4 @@ const reserveTrip = (event) => {
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
-  $('#trip-form').submit(reserveTrip);
 });
