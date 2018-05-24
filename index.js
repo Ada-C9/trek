@@ -55,36 +55,81 @@ const loadTrips = () => {
 }; // ends const loadTrips
 
 // To call only one trip
-const loadTrip = function loadTrip(selectedTrip) {
+const loadTrip = function loadTrip(selectedTripID) {
   reportStatus('Loading one trip...');
-  console.log(selectedTrip);
-  axios.get(TRIP_URL + `${selectedTrip}`) // <- TODO should this include the trip ID inside the params??
+  console.log(selectedTripID);
+  axios.get(TRIP_URL + `${selectedTripID}`)
   .then(response => {
     // reportStatus(`Successfully added trip with ID ${response.data.id}!`);
     // clearForm(); // TODO <-- do we need this???
     console.log(response);
     const tripDetails = $('#trip-details');
-    // tripDetails.append(`<li id="${selectedTrip.name}">Name</li>`);
-    tripDetails.append(`<li><strong>Trip Name: </strong>${response.data.name}</li>`);
-    tripDetails.append(`<li><strong>Continent: </strong>${response.data.continent}</li>`);
-    tripDetails.append(`<li><strong>About: </strong>${response.data.about}</li>`);
-    tripDetails.append(`<li><strong>Category: </strong>${response.data.category}</li>`);
-    tripDetails.append(`<li><strong>Weeks: </strong>${response.data.weeks}</li>`);
-    tripDetails.append(`<li><strong>Cost: </strong>${response.data.cost}</li>`);
+
+    tripDetails.empty();
+
+    tripDetails.append(`<li><strong>ID: </strong>${response.data.id}</li><br>`);
+    tripDetails.append(`<li><strong>Trip Name: </strong>${response.data.name}</li><br>`);
+    tripDetails.append(`<li><strong>Continent: </strong>${response.data.continent}</li><br>`);
+    tripDetails.append(`<li><strong>About: </strong>${response.data.about}</li><br>`);
+    tripDetails.append(`<li><strong>Category: </strong>${response.data.category}</li><br>`);
+    tripDetails.append(`<li><strong>Weeks: </strong>${response.data.weeks}</li><br>`);
+    tripDetails.append(`<li><strong>Cost: </strong>${response.data.cost}</li><br>`);
   })
 
   .catch(error => {
     reportStatus(`Encountered an error while loading trips: ${error.message}`);
     console.log(error);
   });
-} // ends const loadTrip
+}; // ends const loadTrip
+
+const FORM_FIELDS = ["name", "email", "trip name"];
+const inputField = name => $(`trip-form-input[name="${name}"]`);
+
+// const readFormData = () => {
+//   const getInput = name => {
+//     const input = inputField(name).val();
+//     return input ? input : undefined;
+//   };
+//
+//   const formData = {};
+//   FORM_FIELDS.forEach(field => {
+//     formData[field] = getInput(field);
+//   });
+//
+//   return formData;
+// };
+//
+// const clearForm = () => {
+//   FORM_FIELDS.forEach(field => {
+//     inputField(field).val("");
+//   });
+// };
+
+const loadResForm = function loadResForm() {
+  console.log('HEEEEEEEYYYYYYYY');
+  const reserveTripForm = $(`.reserve-trip-form`);
+  const tripForm =
+    `<form>
+      <div>
+          <label for="name">Name</label>
+          <input type="text" name="name" />
+      </div>
+      <div>
+          <label for="email">Email</label>
+          <input type="text" name="email" />
+      </div>
+    </form>`
+  reserveTripForm.html(tripForm);
+
+};
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('#trips-list').on( "click", "li", function() {
-    let selectedTrip = (this.id)
-    console.log(selectedTrip);
-    loadTrip(selectedTrip);
+    let selectedTripID = (this.id)
+    // console.log(selectedTripID);
+    loadTrip(selectedTripID);
+    loadResForm();
   });
 
 }); // ends (document).ready
