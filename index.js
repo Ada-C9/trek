@@ -55,7 +55,7 @@ const buildForm = (selectedTrip) => {
   $('#trip-booking').empty();
   $("#trip-booking").append('<h4>Book A Trip!</h4>')
   $("#trip-booking").append(
-    `<form><p>Trip: ${selectedTrip.name}</p><p>Name:<input type= "text" name="name"></p><p>Email:<input type="text" name="email"></p><input type="hidden" name="id" value="${selectedTrip.id}"><input type="submit" value="Submit"></form>`
+    `<form><p>Trip: ${selectedTrip.name}</p><p>Name:<input type= "text" name="name"></p><p>Email:<input type="text" name="email"></p><input type="hidden" name="id" value="${selectedTrip.id}"><input class="button" type="submit" value="Submit"></form>`
   )
 }
 
