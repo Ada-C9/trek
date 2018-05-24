@@ -13,10 +13,12 @@
       <section id="details-container" class="hidden"></section>
       <section id="reserve-container" class="hidden">
         <h3>Reserve Trip</h3>
-        <form>
+        <form id='reserve-form'>
           <label for="name" type="text">Your Name:</label>
           <input id="name" placeholder="Some One"></input>
-          <p><label for="trip">Trip:</label></p>
+          <label for="email" type="text">Your Email:</label>
+          <input id="email" placeholder="SomeOne@SomeWhere.com"></input>
+          <p><label for="specific-trip">Trip:</label><span id="specific-trip"></span></p>
           <input type="submit" value="Reserve"></input>
         </form>
       </section>
