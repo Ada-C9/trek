@@ -44,12 +44,12 @@ const loadTrip = (id) => {
 
       reservationForm.append(`<h2>Reserve Trip</h2>`);
       reservationForm.append(
-        `<label class="user">Your Name:</label>
-        <input type="text" name="name" class="user" />`
+        `<div><label class="user">Your Name:</label>
+        <input type="text" name="name" class="user" /></div>`
       );
       reservationForm.append(
-        `<label class="user">Your Email:</label>
-        <input type="text" name="email" class="user" />`
+        `<div><label class="user">Your Email:</label>
+        <input type="text" name="email" class="user" /></div>`
       );
       reservationForm.append(`<label>Trip: ${data.name}</label>`);
       reservationForm.append(
@@ -80,6 +80,8 @@ const reserveTrip = (id) => {
     console.log(error.response);
     reportStatus(`Encountered an error: ${error.message}`);
     });
+
+  // TODO: implement clearForm();
 }
 
 $(document).ready(() => {
