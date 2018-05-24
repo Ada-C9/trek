@@ -40,20 +40,19 @@ const loadTrips = function loadTrips() {
 };
 
 const getTrip = function getTrip(event) {
-  // id, name, continent, about, category, weeks and cost
-  // params to get id ???
-  console.log(event);
   event.preventDefault();
 
   axios.get(singleTripUrl + $(this).data("id"))
   .then((response) => {
-    $('#details').empty().append(`<h2>${response.data.name}</h2><h3>${response.data.continent}</h3><p>${response.data.about}</p><p>Category of trip: ${response.data.category}</p><p>Duration of trip: ${response.data.weeks}</p><p>$${response.data.cost}</p>`);
+    $('#details').empty().append(`<h2>${response.data.name}</h2><h3>${response.data.continent}</h3><p>${response.data.about}</p><p>Category of trip: ${response.data.category}</p><p>Duration of trip (in weeks): ${response.data.weeks}</p><p>$${response.data.cost}</p>`);
     reportStatus('Trips Loaded!');
+
+    // call style.display on new-trip section tag
+    // when person clicks on trip title(below in doc ready), they alsoset of the submit
   });
 }
 
 const FORM_FIELDS = ['name'];
-// below has the name attribute given to the input tag in the html form
 const inputField = name => $(`#trip-form input[name="${name}"]`);
 
 const readFormData = () => {
@@ -77,8 +76,20 @@ const clearForm = () => {
 }
 
 const reserveTrip = (event) => {
-
   event.preventDefault();
+
+  console.log(`THIS IS AN EVENT `);
+  // <div class="toshow" style="display:none;">...
+  //  $("div.toshow").show();
+
+  // let display = $('#new-reserve.style.display');
+  // display.show();
+
+  // if (display === 'none') {
+  //   display = 'block';
+  // } else {
+  //   display = 'none';
+  // }
 
   const reserveData = readFormData()
   console.log(reserveData);
@@ -95,7 +106,11 @@ const reserveTrip = (event) => {
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
+  // figure out how to put multiple click actions on line below
   $('.trips').on('click', '.trip', getTrip);
-  $('#trip-form').submit(reserveTrip);
+  // $('.trips').on('click', '.trip', reserveTrip);
+
+  // $('#new-reserve').on('click', '.trip', reserveTrip);
+  // $('#trip-form').submit(reserveTrip);
 
 });

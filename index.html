@@ -2,15 +2,16 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>Trek the World.</title>
+  <title>Trek the World</title>
   <script
   src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
+  <h1>Trek the World</h1>
   <main>
-    <section id="new-trip">
+    <section id="new-reserve" style= "display:none">
       <h1>Reserve a spot</h1>
       <form id="trip-form" action="index.html" method="post">
 
@@ -19,18 +20,16 @@
           <input type="text" name="name" />
         </div>
 
-        <input type="submit" name="reserve-trip" value="Ready!" />
+        <input type="submit" name="reserve-trip" value="Ready to travel!" />
 
       </form>
     </section>
 
     <section id="details">
-
     </section>
 
     <section class="trips">
       <ul>
-
       </ul>
     </section>
   </main>
