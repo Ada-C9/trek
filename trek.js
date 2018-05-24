@@ -53,11 +53,11 @@ const individualTrip = (id) => {
       `
       <tr><th>Trip Details:</th></tr>
       <tr><th>${response.data.name}</th></tr>
-      <tr><th>Continent</th><td>${response.data.continent}</td></tr>
-      <tr><th>Category</th><td>${response.data.category}</td></tr>
-      <tr><th>Cost</th><td>${response.data.cost}</td></tr>
-      <tr><th>Cost</th><td>${response.data.weeks}</td></tr>
-      <tr><th>About</th><td>${response.data.about}</td></tr>
+      <tr><th>Continent:</th><td>${response.data.continent}</td></tr>
+      <tr><th>Category:</th><td>${response.data.category}</td></tr>
+      <tr><th>Cost:</th><td>${response.data.cost}</td></tr>
+      <tr><th>Weeks:</th><td>${response.data.weeks}</td></tr>
+      <tr><th>About:</th><td>${response.data.about}</td></tr>
       `
     );
     reserve.addClass(id);
@@ -128,7 +128,7 @@ const createReservation = (urlTrip) => {
 
   .then((response) => {
     console.log(response);
-    reportStatus(`Successfully added a reservation with ID ${response.data.trip_id}!`);
+    reportStatus(`Successfully added a reservation for ${response.data.name}!`);
     clearForm();
   })
   .catch((error) => {
