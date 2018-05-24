@@ -1,39 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Trek</title>
-    <link rel="stylesheet" href="style.css">
+<head>
+  <meta charset="utf-8">
+  <title>Trek</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Compressed CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
 
-  </head>
-  <body>
+</head>
+<body>
 
-    <h1>Trek</h1>
+  <h1>Trek</h1>
 
-    <button type="button" id="seetrips">See All Trips</button>
+  <button type="button" id="seetrips">See All Trips</button>
 
-    <div class="grid-x">
-
-      <div class="cell large-2">
-        <div class="Trips">
-          <table id="showtrips">
-          </table>
-        </div>
+  <div class="grid-x">
+    <div class="small-12 medium-6 cell">
+      <div class="Trips">
+        <table id="showtrips">
+        </table>
       </div>
-
-      <div class="cell large-2">
-        <div class="Trip">
-          <table id="tripDetails">
-          </table>
-        </div>
+    </div>
+    <div class="small-12 medium-6 cell">
+      <div class="Trip">
+        <table id="tripDetails">
+        </table>
       </div>
-
     </div>
 
+    <!-- <div class="small-12 medium-6 cell">
+      <div class="ReserveTrip">
 
-    <script
-    src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-  </body>
+        <form>
+          <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+              <div class="small -12 medium-6 cell">
+                <label>Your Name
+                  <input type="text" placeholder=".medium-12.cell">
+                </label>
+              </div>
+              <div class="small-12 medium-12 cell">
+                <label>Trip Name:
+                  <div id="newTripName">
+                  </div>
+                </label>
+              </div>
+              <button type="button" name="button">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div> -->
+  </div>
+
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+</body>
 </html>

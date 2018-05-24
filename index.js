@@ -88,5 +88,6 @@ $(document).ready(() => {
     let id = $(this).attr('id');
     event.preventDefault();
     loadTripDetails(id);
+    $('')
   });
 });
