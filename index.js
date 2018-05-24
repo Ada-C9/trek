@@ -1,3 +1,4 @@
+// API base url
 const allTrips = 'https://ada-backtrek-api.herokuapp.com/trips/'
 
 // Error Handling
@@ -29,7 +30,7 @@ const loadTrips = () => {
 
     tripList.append('<h3>All Trips</h3>')
     results.forEach((result) => {
-      tripList.append(`<li id="${result.id}"><strong>Trip: ${result.name}</strong></li><br></br>`)
+      tripList.append(`<li id="${result.id}"><strong>${result.name}</strong></li>`)
     });
   })
   .catch((error) => {
@@ -44,8 +45,7 @@ const singleTrip = (id) => {
   reportStatus('Loading trip..');
   const tripDetail = $('#trip-detail');
   tripDetail.empty();
-  const reservation = $('#form-page');
-  reservation.empty();
+  $('#form-page').show();
 
   axios.get(allTrips + id)
   .then((response) => {
@@ -60,53 +60,45 @@ const singleTrip = (id) => {
       <li>Weeks: ${detail.weeks}</li>
       <li>Price:$ ${detail.cost}</li>
       <li>About: ${detail.about}</li><br></br>`);
+    })
+    .catch((error) => {
+      reportStatus(`Encountered an error while loading trip: ${error.message}`);
+      console.log(error);
+    })
 
-    reservation.append(`<strong>Reserve Trip</strong>
-      <div>
-        <label for="name">Name</label>
-        <input type="text" name="name" />
-        <label for="email">Email<label>
-        <input type="text" email="email" />
-      </div>
-        <input type="submit" name="add-reservation" value="Add Reservation" />`);
-  })
-  .catch((error) => {
-    reportStatus(`Encountered an error while loading trip: ${error.message}`);
-    console.log(error);
-  })
-
-  $('#form-page').submit(function(event) {
-    event.preventDefault();
-    reserveTrip(id);
-  });
-};
-
-// Reserve a Trip
-const reserveTrip = (id) => {
-  const reserveData = {
-    name: $('input[name="name"]').val(),
-    email: $('input[email="email"]').val(),
+    $('#form-page').submit(function(event) {
+      event.preventDefault();
+      reserveTrip(id);
+    });
   };
 
-  reportStatus(`Attempting to Add Reservation for ${reserveData.name}`);
-  let reserveUrl = allTrips + id + '/reservations'
+  // Reserve a Trip
+  const reserveTrip = (id) => {
+    const reserveData = {
+      name: $('input[name="name"]').val(),
+      email: $('input[email="email"]').val(),
+    };
 
-  axios.post(reserveUrl, reserveData)
-  .then((response) => {
-    reportStatus(`Successfully added reservation for ${reserveData.name}, Trip Number: ${response.data.trip_id}`);
-    console.log(response)
-  })
-  .catch((error) => {
-    console.log(error.response);
-    reportError(error.message, error.response.data.errors);
-  });
-  $('#form-page')[0].reset();
-};
+    reportStatus(`Attempting to Add Reservation for ${reserveData.name}`);
+    let reserveUrl = allTrips + id + '/reservations'
 
-// Display
-$(document).ready(() => {
-  $('#load').click(loadTrips);
-  $('#trip-list').on('click', 'li', function() {
-    singleTrip(this.id);
+    axios.post(reserveUrl, reserveData)
+    .then((response) => {
+      reportStatus(`Successfully added reservation for ${reserveData.name}, Trip Number: ${response.data.trip_id}`);
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error.response);
+      reportError(error.message, error.response.data.errors);
+    });
+    $('#form-page')[0].reset();
+  };
+
+  // Display
+  $(document).ready(() => {
+    $('#load').click(loadTrips);
+    $('#form-page').hide()
+    $('#trip-list').on('click', 'li', function() {
+      singleTrip(this.id);
+    });
   });
-});
