@@ -4,6 +4,9 @@ const URL = 'https://ada-backtrek-api.herokuapp.com';
 const loadTrips = () => {
   const tripList = $('#showtrips');
   tripList.empty();
+  $('.ReserveTrip').hide();
+
+  $('#tripDetails').empty();
 
   const tripParam = '/trips';
 
@@ -26,9 +29,6 @@ const loadTrips = () => {
     });
     reportStatus('Trips Loaded');
 
-    // //call
-    // $('#1').click(loadTripDetails);
-    // console.log('both events are going');
   })
 
   .catch((error) => {
@@ -43,6 +43,7 @@ const loadTrips = () => {
 const loadTripDetails = (id) => {
   const tripDetails = $('#tripDetails');
   tripDetails.empty();
+
 
   const tripId = `/trips/${id}`;
 
@@ -63,11 +64,12 @@ const loadTripDetails = (id) => {
     let detail = response.data;
     tripDetails.append(`<tr><td>Name: ${detail.name}</td></tr>`);
     tripDetails.append(`<tr><td>Trip Id:${detail.id}</td></tr>`);
-    tripDetails.append(`<tr><td>Continent:${detail.continent}</td></tr>`);
-    tripDetails.append(`<tr><td>Category:${detail.category}</td></tr>`);
-    tripDetails.append(`<tr><td>Weeks:${detail.weeks}</td></tr>`);
+    tripDetails.append(`<tr><td>Continent: ${detail.continent}</td></tr>`);
+    tripDetails.append(`<tr><td>Category: ${detail.category}</td></tr>`);
+    tripDetails.append(`<tr><td>Weeks: ${detail.weeks}</td></tr>`);
     tripDetails.append(`<tr><td>Cost: $${detail.cost}</td></tr>`);
     tripDetails.append(`<tr><td>${detail.about}</td></tr>`);
+    $('.ReserveTrip').show();
 
     reportStatus('Trip Details Loaded');
   })
@@ -82,6 +84,47 @@ const loadTripDetails = (id) => {
 }
 
 
+// const reserveTrip = (id) => {
+//   const reservation = $('#');
+//   reservation.empty();
+//
+//   const tripId = `/trips/${id}`;
+//
+//   let reservationDetails = {
+//     name: #form,
+//     age: #form,
+//     email: #form
+//   }
+//
+//   let reportStatus = (message) => {
+//     $('#status-message').html(message);
+//   }
+//
+//   reportStatus('Loading Trip Details!  Please Wait...!');
+//
+//   axios.post(URL + tripId)
+//
+//   .then((response) => {
+//     console.log('Responding');
+//     console.log(response);
+//
+//     tripDetails.append(`<tr><th>Trip Details</th></tr>`);
+//
+//     reportStatus('Trip Details Loaded');
+//
+//     <button type="button" class="button secondary" id="seetrips">Reserve</button>
+//   })
+//
+//   .catch((error) => {
+//     console.log(error);
+//     reportStatus(`Error: ${error.message }`);
+//
+//   });
+//
+//   console.log('this is said after the get request and will run before the api responds');
+// }
+
+
 $(document).ready(() => {
   $('#seetrips').click(loadTrips);
   $('#showtrips').on( 'click', 'td', function(event) {
@@ -90,4 +133,5 @@ $(document).ready(() => {
     loadTripDetails(id);
     $('')
   });
+  // #when do I put the event listener?
 });

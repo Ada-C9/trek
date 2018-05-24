@@ -9,12 +9,13 @@
 
 </head>
 <body>
+<div class="grid-x grid-padding-x">
+  <h1 class="small-12 medium-12 cell">Trek</h1>
 
-  <h1>Trek</h1>
+  <button type="button" class="button secondary" id="seetrips">See All Trips</button>
+</div>
 
-  <button type="button" id="seetrips">See All Trips</button>
-
-  <div class="grid-x">
+  <div class="grid-x grid-padding-x">
     <div class="small-12 medium-6 cell">
       <div class="Trips">
         <table id="showtrips">
@@ -25,32 +26,22 @@
       <div class="Trip">
         <table id="tripDetails">
         </table>
+
+        <div class="ReserveTrip">
+          <h1>Reserve Trip</h1>
+          <form id="pet-form">
+            <div>
+              <label for="name">Your Name: </label>
+              <input type="text" name="name" />
+            </div>
+            <div id="tripName">
+            </div>
+            <input type="submit" name="reserve-trip" value="Reserve Trip" />
+          </form>
+
+        </div>
       </div>
     </div>
-
-    <!-- <div class="small-12 medium-6 cell">
-      <div class="ReserveTrip">
-
-        <form>
-          <div class="grid-container">
-            <div class="grid-x grid-padding-x">
-              <div class="small -12 medium-6 cell">
-                <label>Your Name
-                  <input type="text" placeholder=".medium-12.cell">
-                </label>
-              </div>
-              <div class="small-12 medium-12 cell">
-                <label>Trip Name:
-                  <div id="newTripName">
-                  </div>
-                </label>
-              </div>
-              <button type="button" name="button">Submit</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div> -->
   </div>
 
 
