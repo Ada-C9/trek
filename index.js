@@ -61,36 +61,58 @@ const reserveTrip = (tripId) => {
 	// add a form for reserve a trip
 	newTrip += '<form>';
 	newTrip += '<div><label for="name">Name</label><input type="text" name="name"/></div>';
-	newTrip += '<div><label for="age">Age</label><input type="number" name="age"/></div>';
 	newTrip += '<div><label for="email">Email</label><input type="text" name="email"/></div>';
-	newTrip += `<div id="trip-id"><label>Trip_ID</label>: ${tripId}</div>`;	newTrip += '<input type="submit" name="reserve-trip" value="Reserve Trip" />';
+	newTrip += `<div id="trip-id"><label>Trip_ID: </label>${tripId}</div>`;	newTrip += '<input type="submit" name="reserve-trip" class="submit" value="Reserve trip" />';
 	$('#reserve-trip').html(newTrip);
-  $('#reserve-trip').addClass('add-bottom');
+	$('#reserve-trip').addClass('add-bottom');
 };
 
 const addNewTrip = () => {
-	let form = '<h1>Add a New Trip</h1><form id="trip-form"><div><label for="name">Name</label><input type="text" name="name" /></div><div><label for="continent">Continent</label><input type="text" name="continent" /></div><div><label for="about">About</label><input type="text" name="about" /></div><div><label for="categoty">Category</label><input type="text" name="category" /></div><div><label for="weeks">Weeks</label><input type="number" name="weeks" /></div><div><label for="cost">Cost</label><input type="number" name="cost" /></div><input type="submit" name="add-trip" value="Add trip" /></form>';
+	let form = '<h1>Add a New Trip</h1><form id="trip-form"><div><label for="name">Name</label><input type="text" name="name" /></div><div><label for="continent">Continent</label><input type="text" name="continent" /></div><div><label for="about">About</label><input type="text" name="about" /></div><div><label for="categoty">Category</label><input type="text" name="category" /></div><div><label for="weeks">Weeks</label><input type="number" name="weeks" /></div><div><label for="cost">Cost</label><input type="number" name="cost" /></div><input type="submit" name="add-trip" class="submit" value="Add trip" /></form>';
 
 	$('#new-trip').html(form);
 	$('#new-trip').addClass('add-bottom');
 
 }
 
-const FORM_FIELDS = ['name', 'age', 'email'];
-const inputField = (name) => $(`#reserve-trip input[name="${name}"]`);
+const FORM_FIELDS = ['name', 'email'];
+
+const NEW_TRIP = ['name', 'continent', 'about', 'category', 'weeks', 'cost'];
 
 const readFormData = () => {
-  const getInput = (name) => {
-    const input = inputField(name).val();
+	const formData = {};
+
+	const inputField = (name) => $(`#reserve-trip input[name="${name}"]`);
+
+	const getInput = (name) => {
+		const input = inputField(name).val();
+		console.log(input);
 		return input ? input : undefined;
 	};
 
-	const formData = {};
 	FORM_FIELDS.forEach( (field) => {
 		formData[field] = getInput(field);
 	});
+
 	let stringData = $('#trip-id').text();
 	formData['trip_id'] = stringData[stringData.length - 1];
+	return formData;
+};
+
+const inputField = (name) => $(`#new-trip input[name="${name}"]`);
+
+const readTripData = () => {
+	const formData = {};
+
+	const getInput = (name) => {
+		const input = inputField(name).val();
+		return input ? input : undefined;
+	};
+
+	NEW_TRIP.forEach( (field) => {
+		formData[field] = getInput(field);
+	});
+	// console.log(formData);
 	return formData;
 };
 
@@ -100,8 +122,7 @@ const clearForm = () => {
 	});
 };
 
-const createReservation = (event) => {
-	event.preventDefault();
+const createReservation = () => {
 	const reservationData = readFormData();
 
 	reportStatus('Sending reservation data...');
@@ -109,27 +130,62 @@ const createReservation = (event) => {
 
 	axios.post(URL, reservationData)
 	.then( (response) => {
-    reportStatus(`Successfully reserved your trip with Reservation ${response.data['id']}!`);
+		console.log(response);
+		reportStatus(`Successfully reserved your trip with Reservation #${response.data['id']}!`);
 		clearForm();
 	})
 	.catch( (error) => {
-    if (error.response.data && error.response.data.errors) {
-			reportError( `Encountered an error: ${error.message}`, error.response.data.errors);
-		} else {
+		console.log(error);
+		// if (error.response.data && error.response.data.errors) {
+		// 	reportError( `Encountered an error: ${error.message}`, error.response.data.errors);
+		// } else {
 			reportStatus(	`Encountered an error: ${error.message}`);
-		}
+		// }
 	});
 
 };
 
+const createTrip = () => {
+	const tripData = readTripData();
+	reportStatus('Sending new trip data...');
+	console.log(tripData);
+	axios.post(URL, tripData)
+	.then( (response) => {
+		reportStatus(`Successfully created a new trip #${response.data['id']}!`);
+		clearForm();
+	})
+	.catch( (error) => {
+		console.log(error);
+		// if (error.response.data && error.response.data.errors) {
+		// 	// console.log(error.message);
+		// 	reportError(
+		// 		`Encountered an error: ${error.message}`,
+		//
+		// 		error.response.data.errors
+		// 	);
+		// } else {
+			reportStatus(`Encountered an error: ${error.message}`);
+		// }
+	});
+};
+
 $(document).ready( () => {
 	$('#load-trips').click(loadTrips);
+	$('#add-trip').click(addNewTrip);
 
 	$('#trip-list').on( 'click', 'a', function(event) {
 		event.preventDefault();
 		listTripById(this.href);
 	});
 
-	$('#add-trip').click(addNewTrip);
-	$('#reserve-trip').submit(createReservation);
+	$('#reserve-trip').submit( (event) => {
+		event.preventDefault();
+		// console.log(this);
+		createReservation();
+	});
+
+	$('#new-trip').submit( (event) => {
+		event.preventDefault();
+		createTrip();
+	});
 })
