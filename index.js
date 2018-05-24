@@ -64,7 +64,7 @@ const loadTrip = function(event) {
       $('#reserve h2').append("Reserve a Trip")
       $('#reserve p').append(`<strong>Trip:</strong> ${data.name}`);
 
-      // $('#res-form').show();
+      $('#res-form').show();
       console.log('about to do reservation');
 
       $('#res-form').submit(function(event){
@@ -82,9 +82,9 @@ const loadTrip = function(event) {
 
   const details = $("#details");
   const reserve = $("#reserve");
-  // details.empty();
-  // $('#reserve p').empty();
-  // $('#reserve h2').empty();
+  details.empty();
+  $('#reserve p').empty();
+  $('#reserve h2').empty();
   // reserve.empty();
 
 };
@@ -106,7 +106,7 @@ const reserveSpot = function(id) {
       $('input[email="email"]').val('');
       console.log(response)
       let data = response.data;
-      status(`Successfully reserved a spot on ${data.name}`)
+      status(`Successfully reserved a spot for ${data.name}`)
     })
     .catch((error) => {
       console.log('Something went wrong!')
@@ -123,7 +123,7 @@ const reserveSpot = function(id) {
 
 $(document).ready(() => {
   console.log('YOUR IN!');
-  // $('#res-form').hide()
+  $('#res-form').hide()
   $('#all-trips').click(loadAllTrips);
   $('#trips-body').on('click','td',(loadTrip));
 
