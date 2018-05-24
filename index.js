@@ -1,4 +1,5 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
+let queryString = "/";
 
 const reportStatus = (message) => {
   $('#status-message').html(message);
@@ -6,6 +7,8 @@ const reportStatus = (message) => {
 
 const loadTrips = () => {
   $('.create-trip-form').hide();
+  $('.search-results').hide();
+  $('.trip-container').hide();
   $('.all-trips').show();
   const allTrips = $('.all-trips');
   allTrips.empty();
@@ -107,6 +110,7 @@ const showCreateTripForm = () => {
   createTripForm.append(`<div>
     <label class="trip">Continent:</label>
     <select id="continent" class="trip">
+      <option value="" selected disabled>Please select an option...</option>
       <option value="Africa">Africa</option>
       <option value="Asia">Asia</option>
       <option value="Australasia">Australasia</option>
@@ -132,7 +136,7 @@ const showCreateTripForm = () => {
     <textarea id="about" name="about" rows="10" cols="20" class="trip"></textarea>
     </div>`);
   createTripForm.append(
-    `<input type="submit" name="create-trip" value="Create" class="button" />`
+    `<input type="submit" name="create-trip" value="Create" class="button" id="create-trip"/>`
   );
 }
 
@@ -179,6 +183,7 @@ const showSearchTripsForm = () => {
   searchTripsForm.append(`<div>
     <label class="search">Continent:</label>
     <select id="search-continent" class="search">
+      <option value=""></option>
       <option value="Africa">Africa</option>
       <option value="Asia">Asia</option>
       <option value="Australasia">Australasia</option>
@@ -187,23 +192,58 @@ const showSearchTripsForm = () => {
       <option value="South America">South America</option>
     </select>
     </div>`);
+  searchTripsForm.append(
+    `<input type="submit" name="search" value="Search by Continent" class="button" id="search-by-continent"/>`
+  );
   searchTripsForm.append(`<div>
     <label class="search">Max Amount of Weeks:</label>
-    <input type="number" name="max-weeks" class="search" />
-    </div>`);
-  searchTripsForm.append(`<div>
-    <label class="search">Max Budget: $</label>
-    <input type="number" name="budget" class="search" />
+    <input id="max-weeks" type="number" name="max-weeks" class="search" />
     </div>`);
   searchTripsForm.append(
-    `<input type="submit" name="search-trips" value="Search" class="button" />`
+    `<input type="submit" name="search" value="Search by Weeks" class="button" id="search-by-weeks"/>`
   );
+  searchTripsForm.append(`<div>
+    <label class="search">Max Budget: $</label>
+    <input id="budget" type="number" name="budget" class="search" />
+    </div>`);
+  searchTripsForm.append(
+    `<input type="submit" name="search" value="Search by Budget" class="button" id="search-by-budget"/>`
+  );
+}
+
+const searchByContinent = () => {
+  if ($('#search-continent').val()) {
+    $('.search-trips-form').hide();
+    $('.search-results').show();
+    const searchResults = $('.search-results');
+    searchResults.empty();
+    searchResults.append(`<h2>Trips in ${$('#search-continent').val()}</h2>`);
+    searchResults.append('<ul id="trip-by-continent"></ul>');
+    const tripByContinent = $('#trip-by-continent');
+
+    reportStatus('Searching Trips by Continent...');
+
+    queryString += 'continent?query=' + $('#search-continent').val();
+    axios.get(URL + queryString)
+      .then((response) => {
+        response.data.forEach((trip) => {
+          tripByContinent.append(`<li id="${trip.id}">${trip.name}</li>`);
+        });
+        reportStatus('Trips Loaded!');
+      })
+      .catch((error) => {
+        reportStatus(`Error: ${error.message}`);
+      })
+  } else {
+    reportStatus('Invalid Query');
+  }
 }
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('#create').click(showCreateTripForm);
   $('#search').click(showSearchTripsForm);
+
   $('.all-trips').on('click', 'li', function() {
     let id = $(this).attr('id');
     loadTrip(id);
@@ -212,7 +252,14 @@ $(document).ready(() => {
     let id = $(this).attr('id').substr(3);
     reserveTrip(id);
   });
-  $('.create-trip-form').on('click', '#create', function(){
+  $('.create-trip-form').on('click', '#create-trip', function(){
     createTrip();
+  });
+  $('.search-trips-form').on('click', '#search-by-continent', function(){
+    searchByContinent();
+  });
+  $('.search-results').on('click', 'li', function() {
+    let id = $(this).attr('id');
+    loadTrip(id);
   });
 })

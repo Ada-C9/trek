@@ -60,7 +60,7 @@ main {
   min-height: 75%;
 }
 
-.create-trip-form, .search-trips-form, .all-trips, #trip-details, #reservation-form {
+.create-trip-form, .search-trips-form, .search-results, .all-trips, #trip-details, #reservation-form {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
