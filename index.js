@@ -32,7 +32,11 @@ const loadTrips = () => {
       item.click(function() {
         $("section").removeClass("hidden")
         getTripData(trip.id);
-        showReservationForm(trip.id);
+        // showReservationForm(trip.id);
+        $('#submit-button').off('click');
+        $('#submit-button').click(function(event) {
+          createRes(event, trip.id);
+        });
       });
       tripList.append(item);
     });
@@ -43,6 +47,8 @@ const loadTrips = () => {
   });
 
 }; // end of load Trips
+
+
 
 const getTripData = (trip_id) => {
   const tripDetails = $(`#trip-details`).removeClass("hidden");
@@ -66,7 +72,7 @@ const getTripData = (trip_id) => {
     });
   }
 
-  const showReservationForm = (trip_id) => {
+  // const showReservationForm = (trip_id) => {
     const FORM_FIELDS = ['name', 'email'];
     const inputField = name => $(`#reservation-form input[name="${name}"]`);
 
@@ -87,35 +93,35 @@ const getTripData = (trip_id) => {
         inputField(field).val('');
       });
     }
+  // }
 
-  //   const createRes = (event) => {
-  //
-  //   event.preventDefault();
-  //
-  //   const resData = readFormData();
-  //   console.log(resData);
-  //
-  //   reportStatus('Sending reservation form...');
-  //   let resURL = URL + trip_id + '/reservations'
-  //
-  //   axios.post(resURL, resData)
-  //     .then((response) => {
-  //       reportStatus(`Successfully added a new reservation ith ID ${response.data.id}!`);
-  //       clearForm();
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response);
-  //       if (error.response.data && error.response.data.errors) {
-  //         reportError(
-  //           `Encountered an error: ${error.message}`,
-  //           error.response.data.errors
-  //         );
-  //       } else {
-  //         reportStatus(`Encountered an error: ${error.message}`);
-  //       }
-  //     });
-  // };
-  }
+  const createRes = (event, trip_id) => {
+    event.preventDefault();
+
+    const resData = readFormData();
+    console.log(resData);
+    reportStatus('Sending reservation data...');
+
+    let resURL = URL + trip_id + '/reservations';
+    console.log(resURL)
+    axios.post(resURL, resData)
+    .then((response) => {
+      reportStatus(`Successfully added a new reservation ith ID ${response.data.name}!`);
+      clearForm();
+    })
+    .catch((error) => {
+      console.log(error.response);
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Encountered an error: ${error.message}`);
+      }
+    });
+  };
+
 
 
 
