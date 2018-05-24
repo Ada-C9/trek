@@ -87,9 +87,16 @@ const reserveTrip = (event) => {
        reportStatus(`Encountered an Error: ${error.message}`)
      }
     });
+    clearForm();
 };
 
 
+const clearForm = () => {
+    document.getElementsByName("name")[0].value="";
+    document.getElementsByName("age")[0].value="";
+    document.getElementsByName("email")[0].value="";
+    return true;
+}
 
 
 
