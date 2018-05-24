@@ -1,13 +1,17 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
-
 const reportStatus = (message) => {
   $('#status-message').html(message);
 }
 
 const loadTrips = () => {
+  $('.create-trip-form').hide();
+  $('.all-trips').show();
+  const allTrips = $('.all-trips');
+  allTrips.empty();
+  allTrips.append('<h2>All Trips</h2>');
+  allTrips.append('<ul id="trip-list"></ul>');
   const tripList = $('#trip-list');
-  tripList.empty();
 
   reportStatus('Loading Trips! Please Wait...');
 
@@ -21,9 +25,11 @@ const loadTrips = () => {
     .catch((error) => {
       reportStatus(`Error: ${error.message}`);
     })
+
 }
 
 const loadTrip = (id) => {
+  $('.trip-container').show();
   const tripDetails = $('#trip-details');
   tripDetails.empty();
   const reservationForm = $('#reservation-form');
@@ -87,6 +93,9 @@ const reserveTrip = (id) => {
 }
 
 const showCreateTripForm = () => {
+  $('.all-trips').hide();
+  $('.trip-container').hide();
+  $('.create-trip-form').show();
   const createTripForm = $('.create-trip-form');
   createTripForm.empty();
 
@@ -120,7 +129,7 @@ const showCreateTripForm = () => {
     </div>`);
   createTripForm.append(`<div>
     <label class="trip">About:</label>
-    <input type="text" name="about" class="trip" style="height: 150px; width: 300px;" />
+    <textarea id="about" name="about" rows="10" cols="20" class="trip"></textarea>
     </div>`);
   createTripForm.append(
     `<input type="submit" name="create-trip" value="Create" class="button" id="create" />`
@@ -130,11 +139,11 @@ const showCreateTripForm = () => {
 const createTrip = () => {
   let tripData = {
     'name': $('input[name="name"]').val(),
-    'continent': $("#continent option:selected").text(),
+    'continent': $('#continent option:selected').text(),
     'category': $('input[name="category"]').val(),
     'weeks': $('input[name="weeks"]').val(),
     'cost': $('input[name="cost"]').val(),
-    'about': $('input[name="about"]').val()
+    'about': $('#about').val()
   }
   console.log(tripData);
 
@@ -151,17 +160,17 @@ const createTrip = () => {
       });
 
   $('input[name="name"]').val('');
-  $('input[name="continent"]').val('');
+  $('#continent option:selected').val('');
   $('input[name="category"]').val('');
   $('input[name="weeks"]').val('');
   $('input[name="cost"]').val('');
-  $('input[name="about"]').val('');
+  $('#about').val('');
 }
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('#create').click(showCreateTripForm);
-  $('#trip-list').on('click', 'li', function() {
+  $('.all-trips').on('click', 'li', function() {
     let id = $(this).attr('id');
     loadTrip(id);
   });

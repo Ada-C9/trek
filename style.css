@@ -47,6 +47,7 @@ h3 {
   background-color: rgba(78, 168, 172, 0.5);
   font-size: 1.5rem;
   padding: 10px;
+  margin: 15px;
 }
 
 #status-message {
@@ -81,8 +82,18 @@ ul {
 
 .user, .trip {
   display: inline-block;
-  max-width: 200px;
+  width: 200px;
   margin: 0;
+}
+
+input.trip, select.trip, textarea.trip, input.user {
+  width: 300px;
+  margin: 5px;
+}
+
+label.trip, label.user {
+  text-align: left;
+  width: 130px;
 }
 
 .button.reserve {
@@ -96,4 +107,11 @@ footer {
 
 .create-trip-form {
   margin-bottom: 10px;
+}
+
+.create-trip-form div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: top;
 }
