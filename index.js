@@ -27,21 +27,21 @@ const loadTrips = () => {
   tripList.empty();
 
   axios.get(URL)
-    .then((response) => {
-      reportStatus(`Successfully loaded ${response.data.length} trips`);
-      tripList.append(`<tr><th>All Trips</th></tr>`);
-      response.data.forEach((trip) => {
-        tripList.append(`<tr><td id="${trip.id}" class="trip-item">${trip.name}</td></tr>`);
-      });
-      $('.trip-item').click( function(event) {
-        loadTripDetails(`${event.target.id}`);
-      });
-    })
-
-    .catch((error) => {
-      reportStatus(`Encountered an error while loading trips: ${error.message}`);
-      console.log(error);
+  .then((response) => {
+    reportStatus(`Successfully loaded ${response.data.length} trips`);
+    tripList.append(`<tr><th>All Trips</th></tr>`);
+    response.data.forEach((trip) => {
+      tripList.append(`<tr><td id="${trip.id}" class="trip-item">${trip.name}</td></tr>`);
     });
+    $('.trip-item').click( function(event) {
+      loadTripDetails(`${event.target.id}`);
+    });
+  })
+
+  .catch((error) => {
+    reportStatus(`Encountered an error while loading trips: ${error.message}`);
+    console.log(error);
+  });
 };
 
 const loadTripDetails = (tripId) => {
@@ -64,6 +64,10 @@ const loadTripDetails = (tripId) => {
     tripDetails.append(`<p>Cost: ${trip.cost}</p>`);
     tripDetails.append(`<p>About:</br> ${trip.about}</p>`);
     tripDetails.append('</div>');
+
+    $('input[name="tripName"]').val(`${trip.name}`);
+    $('input[name="tripId"]').val(`${tripId}`);
+
   })
   .catch((error) => {
     reportStatus(`Encountered an error while loading trip details for ${tripId}`);
@@ -71,6 +75,61 @@ const loadTripDetails = (tripId) => {
   });
 };
 
+const FORM_FIELDS = ['name', 'email'];
+const inputField = name => $(`#reserve-form input[name="${name}"]`);
+
+const readFormData = () => {
+  const getInput = name => {
+    const input = inputField(name).val();
+    return input ? input : undefined;
+  };
+
+  const formData = {};
+  FORM_FIELDS.forEach((field) => {
+    formData[field] = getInput(field);
+  });
+
+  return formData;
+};
+
+const clearForm = () => {
+  FORM_FIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+}
+
+const reserveTrip = (event) => {
+  event.preventDefault();
+
+  const tripId = inputField('tripId').val();
+  if (tripId == "") {
+    reportError("Please select a trip first.");
+    return;
+  }
+  const reserveData = readFormData();
+  // console.log(reserveData);
+
+  reportStatus(`Reserving ${tripId}`);
+
+  axios.post(URL + '/' + tripId + '/reservations', reserveData)
+    .then((response) => {
+      reportStatus(`Successfully reserved ${tripId}`);
+      clearForm();
+    })
+    .catch((error) => {
+      console.log(error.response)
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Encountered an error: ${error.message}`);
+      }
+    })
+  }
+
 $(document).ready(() => {
   $('#load').click(loadTrips);
+  $('#reserve-form').submit(reserveTrip);
 });

@@ -19,9 +19,35 @@
       <table id="trip-list"></table>
     </section>
 
-    </section>
-     <table id="trip-details"></table>
-    </section>
+  </section>
+  <table id="trip-details"></table>
+</section>
+
+<section>
+  <h3>Reserve Trip</h3>
+  <form id="reserve-form">
+    <div>
+      <label for="name">Your name</label>
+      <input type="text" name="name" placeholder="your name here" />
+    </div>
+
+    <div>
+      <label for="Trip">Trip</label>
+      <input type="text" readonly="readonly" name="tripName" />
+    </div>
+
+    <div>
+      <input type="hidden" readonly="readonly" name="tripId" />
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input type="text" name="email" />
+    </div>
+
+    <input type="submit" name="reservation" value="Reserve" />
+  </form>
+</section>
 </main>
 </body>
 </html>
