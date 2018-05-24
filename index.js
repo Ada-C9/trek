@@ -1,5 +1,4 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
-let queryString = "/";
 
 const reportStatus = (message) => {
   $('#status-message').html(message);
@@ -182,8 +181,8 @@ const showSearchTripsForm = () => {
   searchTripsForm.append(`<h2>Search Trips</h2>`);
   searchTripsForm.append(`<div>
     <label class="search">Continent:</label>
-    <select id="search-continent" class="search">
-      <option value=""></option>
+    <select id="continent" class="search">
+      <option></option>
       <option value="Africa">Africa</option>
       <option value="Asia">Asia</option>
       <option value="Australasia">Australasia</option>
@@ -192,42 +191,56 @@ const showSearchTripsForm = () => {
       <option value="South America">South America</option>
     </select>
     </div>`);
-  searchTripsForm.append(
-    `<input type="submit" name="search" value="Search by Continent" class="button" id="search-by-continent"/>`
-  );
   searchTripsForm.append(`<div>
     <label class="search">Max Amount of Weeks:</label>
     <input id="max-weeks" type="number" name="max-weeks" class="search" />
     </div>`);
-  searchTripsForm.append(
-    `<input type="submit" name="search" value="Search by Weeks" class="button" id="search-by-weeks"/>`
-  );
   searchTripsForm.append(`<div>
     <label class="search">Max Budget: $</label>
     <input id="budget" type="number" name="budget" class="search" />
     </div>`);
   searchTripsForm.append(
-    `<input type="submit" name="search" value="Search by Budget" class="button" id="search-by-budget"/>`
+    `<input type="submit" name="search" value="Search" class="button" id="search-by-budget"/>`
   );
 }
 
-const searchByContinent = () => {
-  if ($('#search-continent').val()) {
-    $('.search-trips-form').hide();
-    $('.search-results').show();
-    const searchResults = $('.search-results');
-    searchResults.empty();
-    searchResults.append(`<h2>Trips in ${$('#search-continent').val()}</h2>`);
-    searchResults.append('<ul id="trip-by-continent"></ul>');
-    const tripByContinent = $('#trip-by-continent');
+const searchByBudget = () => {
+  const searchResults = $('.search-results');
+  $('.search-trips-form').hide();
+  $('.search-results').show();
+  searchResults.empty();
+  searchResults.append(`<h2>Search Results</h2>`);
+  searchResults.append('<ul id="search-results"></ul>');
+  const tripByBudget = $('#search-results');
 
-    reportStatus('Searching Trips by Continent...');
+  let data = [];
+  let continent = '';
+  let weeks = Infinity;
 
-    queryString += 'continent?query=' + $('#search-continent').val();
+  reportStatus('Searching Trips...');
+
+  if ($('#budget').val()) {
+    console.log($('#budget').val());
+    let queryString = '/budget?query=' + $('#budget').val();
     axios.get(URL + queryString)
       .then((response) => {
-        response.data.forEach((trip) => {
-          tripByContinent.append(`<li id="${trip.id}">${trip.name}</li>`);
+        data = response.data;
+        if ($('#continent').val()) {
+          continent = $('#continent').val();
+          data = data.filter(trip => trip.continent === continent);
+          console.log('Data filtered by continent:');
+          console.log($('#continent').val());
+          console.log(data);
+        }
+        if ($('#max-weeks').val()) {
+          weeks = $('#max-weeks').val();
+          data = data.filter(trip => trip.weeks <= weeks);
+          console.log("Data filtered by weeks:");
+          console.log($('#max-weeks').val());
+          console.log(data);
+        }
+        data.forEach((trip) => {
+          tripByBudget.append(`<li id="${trip.id}">${trip.name}</li>`);
         });
         reportStatus('Trips Loaded!');
       })
@@ -235,8 +248,33 @@ const searchByContinent = () => {
         reportStatus(`Error: ${error.message}`);
       })
   } else {
-    reportStatus('Invalid Query');
+    axios.get(URL)
+      .then((response) => {
+        data = response.data;
+        if ($('#continent').val()) {
+          continent = $('#continent').val();
+          data = data.filter(trip => trip.continent === continent);
+          console.log('Data filtered by continent:');
+          console.log($('#continent').val());
+          console.log(data);
+        }
+        if ($('#max-weeks').val()) {
+          weeks = $('#max-weeks').val();
+          data = data.filter(trip => trip.weeks <= weeks);
+          console.log("Data filtered by weeks:");
+          console.log($('#max-weeks').val());
+          console.log(data);
+        }
+        data.forEach((trip) => {
+          tripByBudget.append(`<li id="${trip.id}">${trip.name}</li>`);
+        });
+        reportStatus('Trips Loaded!');
+      })
+      .catch((error) => {
+        reportStatus(`Error: ${error.message}`);
+      })
   }
+
 }
 
 $(document).ready(() => {
@@ -255,8 +293,8 @@ $(document).ready(() => {
   $('.create-trip-form').on('click', '#create-trip', function(){
     createTrip();
   });
-  $('.search-trips-form').on('click', '#search-by-continent', function(){
-    searchByContinent();
+  $('.search-trips-form').on('click', '#search-by-budget', function(){
+    searchByBudget();
   });
   $('.search-results').on('click', 'li', function() {
     let id = $(this).attr('id');
