@@ -77,38 +77,36 @@ const clearForm = () => {
 
 const reserveTrip = (event) => {
   event.preventDefault();
-
-  console.log(`THIS IS AN EVENT `);
-  // <div class="toshow" style="display:none;">...
-  //  $("div.toshow").show();
-
-  // let display = $('#new-reserve.style.display');
-  // display.show();
-
-  // if (display === 'none') {
-  //   display = 'block';
-  // } else {
-  //   display = 'none';
-  // }
-
-  const reserveData = readFormData()
-  console.log(reserveData);
-
-  axios.post(reserveUrl, reserveData)
-    .then((response) => {
-      reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
-      clearForm();
-    })
-//     .catch(() => {
 //
-    // })
+  console.log(`THIS IS AN EVENT `);
+
+  let display = $('#new-reserve');
+  display.show();
+//
+//   // if (display === 'none') {
+//   //   display = 'block';
+//   // } else {
+//   //   display = 'none';
+//   // }
+//
+//   const reserveData = readFormData()
+//   console.log(reserveData);
+//
+//   axios.post(reserveUrl, reserveData)
+//     .then((response) => {
+//       reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
+//       clearForm();
+//     })
+// //     .catch(() => {
+// //
+//     // })
 };
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
   // figure out how to put multiple click actions on line below
   $('.trips').on('click', '.trip', getTrip);
-  // $('.trips').on('click', '.trip', reserveTrip);
+  $('.trips').on('click', '.trip', reserveTrip);
 
   // $('#new-reserve').on('click', '.trip', reserveTrip);
   // $('#trip-form').submit(reserveTrip);
