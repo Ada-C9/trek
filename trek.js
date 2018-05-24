@@ -15,7 +15,7 @@ const loadTrips = () => {
   .then((response) => {
       $('#table').show();
       response.data.forEach((trip) => {
-        tripsList.append(`<tr><td>${trip.id}</td>
+        tripsList.append(`<tr id="${trip.id}"><td>${trip.id}</td>
         <td>${trip.name}</td></tr>`);
       });
       reportStatus('Trips Loaded!');
@@ -37,6 +37,7 @@ const loadTrip = (id) => {
 
   axios.get(URL + `/${id}`)
   .then((response) => {
+      console.log(response);
       $('#details').show();
       tripInfo.append(`<tr><td><strong>Name: </strong> ${response.data.name}</td></tr>
         <tr><td><strong>Trip ID: </strong>${response.data.id}</td></tr>
@@ -54,7 +55,7 @@ const loadTrip = (id) => {
 
 $(document).ready(() => {
       $('#load').click(loadTrips);
-      $('#tbody').on('click', 'td', function () {
+      $('#tbody').on('click', 'tr', function () {
           let id = $(this).attr('id');
           loadTrip(id);
         });
