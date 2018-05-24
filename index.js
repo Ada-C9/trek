@@ -1,8 +1,6 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips/';
 
-//
-// Status Management
-//
+
 const reportStatus = (message) => {
   $('#status-message').html(message);
 };
@@ -19,7 +17,9 @@ const reportError = (message, errors) => {
 };
 
 
-//
+// LOAD ALL TRIPS
+
+
 const loadTrips = () => {
   reportStatus('Loading trips...');
 
@@ -40,16 +40,21 @@ const loadTrips = () => {
   });
 };
 
-$(`#trips-list`).on(`click`, `li`, function(){
-  console.log(this.id);
-  const tripid = this.id
-  reportStatus("Loading trip...");
 
+//LOAD ONE TRIP
+
+
+
+const loadOneTrip = (event) => {
+  console.log(event.target.id);
+  const tripid = event.target.id;
+  reportStatus("Loading trip...");
   const trip = $('#trip');
   trip.empty();
   const reservation = $(`#reserve-form`);
   reservation.empty();
-
+  const tripTitle = $(`#triptitle`);
+  tripTitle.empty();
 
   axios.get(URL+tripid)
   .then((response) => {
@@ -57,13 +62,15 @@ $(`#trips-list`).on(`click`, `li`, function(){
     reportStatus(`Successfully loaded trip to: ${response.data.name}`);
 
     trip.append(
-      `<tr><th>${response.data.name}</th></tr>
-      <tr><th>${response.data.weeks} weeks</th></tr>
+      `<tr><th colspan ="2">${response.data.weeks} weeks</th></tr>
+      <tr><th>ID</th><td>${response.data.id}</td></tr>
       <tr><th>Category</th><td>${response.data.category}</td></tr>
       <tr><th>Continent</th><td>${response.data.continent}</td></tr>
-      <tr><th>Cost</th><td>${response.data.cost}</td></tr>
+      <tr><th>About</th><td><div id="about">${response.data.about}</div></td></tr>
+      <tr><th>Cost</th><td id="cost">$${response.data.cost}</td></tr>
       `);
-      reservation.addClass(tripid)
+      tripTitle.text(`${response.data.name}`);
+      reservation.addClass(tripid);
       reservation.html(
         `<div>
         <label for="name">Name</label>
@@ -74,50 +81,42 @@ $(`#trips-list`).on(`click`, `li`, function(){
         <input type="email" name="email" />
         </div>
         <input type="submit" name="add-pet" value="Reserve!" />`);
-      });
-    });
-
-
-    const FORM_FIELDS = ['name', 'email'];
-    const inputField = name => $(`#reserve-form input[name="${name}"]`);
-  //  const inputemailField = email => $(`#reserve-form input[email="${email}"]`);
-    console.log();
-    const readFormData = () => {
-      const getInput = name => {
-        const input = inputField(name).val();
-        return input ? input : undefined;
-      };
-
-      const formData = {};
-      FORM_FIELDS.forEach((field) => {
-        formData[field] = getInput(field);
-      });
-
-      return formData;
+      })
+      .catch((error) => {
+        console.log(error.response);
+        if (error.response.data && error.response.data.errors) {
+          reportError(
+            `Encountered an error: ${error.message}`,
+            error.response.data.errors
+          );
+        } else {
+          reportStatus(`Encountered an error: ${error.message}`);
+        }
+      })
     };
 
-    const clearForm = () => {
-      FORM_FIELDS.forEach((field) => {
-        console.log(field);
-        inputField(field).val('');
-      });
-    }
+
+    // MAKE ONE RESERVATION POST
 
     const createReservation = (event) => {
       console.log(event.target.className);
       const tripid = event.target.className;
 
       event.preventDefault();
-      
-       const reservationData = readFormData();
+
+
+      const reservationData = $(`#reserve-form`).serialize()
+      console.log(reservationData)
 
       reportStatus('Making reservation...');
 
-      axios.post(URL+tripid+`/reservations`, reservationData)
+      axios.post(URL+tripid+`/reservations?`+reservationData)
       .then((response) => {
         console.log(response);
         reportStatus(`Your reservation has been made!`);
-        clearForm();
+
+        $(`#reserve-form`)[0].reset();
+
       })
       .catch((error) => {
         console.log(error.response);
@@ -132,7 +131,11 @@ $(`#trips-list`).on(`click`, `li`, function(){
       });
     };
 
+
+
+
     $(document).ready(() => {
       $('#load').click(loadTrips);
       $('#reserve-form').submit(createReservation);
+      $(`#trips-list`).on(`click`, `li`,(loadOneTrip));
     });

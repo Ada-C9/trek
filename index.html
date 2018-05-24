@@ -9,24 +9,23 @@
   <section id="status-message"></section>
 
   <main>
-    <section class="current-trip">
+    <section id="trips">
       <h1>TRIPS</h1>
       <button id="load">Find Trips!</button>
       <ul id="trips-list"></ul>
     </section>
-  </main>
 
-  <main>
-    <section >
-      <h1>Your Trip</h1>
+    <section id="current-trip">
+      <h1 id="triptitle">Please select a trip!</h1>
       <table id = "trip"></table>
     </section>
+
+    <section id="new-reservation">
+      <form id="reserve-form"></form>
+    </section>
+
   </main>
-  <section class="new-reservation">
-    <form id="reserve-form">
-      
-    </form>
-  </section>
+  <footer>@winirarrazaval</footer>
   <script
   src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
