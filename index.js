@@ -30,35 +30,16 @@ const clearForm = (form) => {
   }
 };
 
-// const clearForm = () => {
-//   $('input[name="reservation-name"]').val('');
-//   $('input[name="email"]').val('');
-// };
-
-// const clearTripForm = () => {
-//   $('input[name="name"]').val('');
-//   $('input[name="continent"]').val('');
-//   $('input[name="category"]').val('');
-//   $('input[name="weeks"]').val('');
-//   $('input[name="cost"]').val('');
-//   $('input[name="about"]').val('');
-// };
-
-const getFormData = () => {
+const getFormData = (form) => {
   let data = {};
-  data['name'] = $('input[name="reservation-name"]').val();
-  data['email'] = $('input[name="email"]').val();
-  return data;
-};
-
-const getTripFormData = () => {
-  let data = {};
-  data['name'] = $('input[name="name"]').val();
-  data['continent'] = $('input[name="continent"]').val();
-  data['category'] = $('input[name="category"]').val();
-  data['weeks'] = $('input[name="weeks"]').val();
-  data['cost'] = $('input[name="cost"]').val();
-  data['about'] = $('input[name="about"]').val();
+  if (form === 'reservation') {
+    data['name'] = $('input[name="reservation-name"]').val();
+    data['email'] = $('input[name="email"]').val();
+  } else if (form === 'trip'){
+    tripForm.forEach((formField) => {
+      data[formField] = $(`input[name="${formField}"]`).val();
+    });
+  }
   return data;
 };
 
@@ -124,7 +105,7 @@ const reserveTrip = (event) => {
   let tripId = parseInt( $('#show-trip div')[0].id );
   reportStatus('Reserving trip...', 'loading');
 
-  axios.post(URL + `/${tripId}/reservations`, getFormData())
+  axios.post(URL + `/${tripId}/reservations`, getFormData('reservation'))
     .then((response) => {
       reportStatus(`Trip #${tripId} Reserved!`, 'success').delay(2000).hide(1000);
       console.log(response);
@@ -147,7 +128,7 @@ const addTrip = () => {
   event.preventDefault();
   reportStatus('Adding Trip...', 'loading');
 
-  axios.post(URL, getTripFormData())
+  axios.post(URL, getFormData('trip'))
     .then((response) => {
       console.log(response.data);
       reportStatus('Trip Added', 'success').delay(2000).hide(1000);
