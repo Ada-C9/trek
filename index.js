@@ -58,7 +58,7 @@ const getTripData = (trip_id) => {
       <li>Travel Category: ${response.data.category}</li>
       <li>Continent: ${response.data.continent}</li>
       <li>Cost: $${response.data.cost}</li>
-      <li>Weeks of Travel: ${response.data.weeks}</li>`);
+      <li>Week(s) of Travel: ${response.data.weeks}</li>`);
     })
     .catch((error) => {
       reportStatus(`Encountered an error while trying to load the trip: ${error.message}`);
@@ -75,7 +75,6 @@ const getTripData = (trip_id) => {
         const input = inputField(name).val();
         return input ? input : undefined;
       };
-
       const formData = {};
       FORM_FIELDS.forEach((field) => {
         formData[field] = getInput(field);
@@ -83,18 +82,40 @@ const getTripData = (trip_id) => {
 
       return formData;
     };
-
     const clearForm = () => {
       FORM_FIELDS.forEach((field) => {
         inputField(field).val('');
       });
     }
+
+  //   const createRes = (event) => {
+  //
+  //   event.preventDefault();
+  //
+  //   const resData = readFormData();
+  //   console.log(resData);
+  //
+  //   reportStatus('Sending reservation form...');
+  //   let resURL = URL + trip_id + '/reservations'
+  //
+  //   axios.post(resURL, resData)
+  //     .then((response) => {
+  //       reportStatus(`Successfully added a new reservation ith ID ${response.data.id}!`);
+  //       clearForm();
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response);
+  //       if (error.response.data && error.response.data.errors) {
+  //         reportError(
+  //           `Encountered an error: ${error.message}`,
+  //           error.response.data.errors
+  //         );
+  //       } else {
+  //         reportStatus(`Encountered an error: ${error.message}`);
+  //       }
+  //     });
+  // };
   }
-
-
-
-
-
 
 
 
