@@ -17,8 +17,10 @@ const loadTrips = () => {
     response.data.forEach((trip) => {
       $('#trips-table').append(`<tr><td>${trip.name}</td></tr>`);
 
-      $(`tr:nth-child(${trip.id + 1})`).click(function() {
-        showTrip(trip.id);
+      $('td').click(function() {
+        if (event.target.innerHTML === trip.name){
+          showTrip(trip.id)
+        }
       })
     })
     reportStatus('Trips loaded :)');
@@ -29,7 +31,7 @@ const loadTrips = () => {
 };
 
 const showTrip = (id) => {
-  const tripInfo = $('#details-container');
+  const tripInfo = $('#details');
   tripInfo.empty();
   tripInfo.append(`<h2>Trip Details</h2>`)
 
