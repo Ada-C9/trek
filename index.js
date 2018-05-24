@@ -5,13 +5,12 @@ const reportStatus = (message) => {
 };
 
 const reportError = (message, errors) => {
-  let content = `<p>${message}</p><ul>`;
+  let content = `<span>${message}</span>`;
   for (const field in errors) {
     for (const problem of errors[field]) {
-      content += `<li>${field}: ${problem}</li>`;
+      content += `${field}: ${problem}, `;
     }
   }
-  content += "</ul>";
   reportStatus(content);
 };
 
