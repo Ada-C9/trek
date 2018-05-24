@@ -31,6 +31,7 @@ const loadTrips = () => {
 const showTrip = (id) => {
   const tripInfo = $('#details-container');
   tripInfo.empty();
+  tripInfo.append(`<h2>Trip Details</h2>`)
 
   axios.get(URL + id)
   .then((response) => {
