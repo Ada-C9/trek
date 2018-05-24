@@ -65,8 +65,6 @@ const buildTrip = (tripData) => {
 // EVENT LISTENER FUNCTIONS
 
 const getTrips = () => {
-  // clearContent('trip-list').empty();
-  // clearContent('show-trip').empty();
   clearContent(['trip-list', 'show-trip']);
   $('#reserve-trip').css('display', 'none');
 
@@ -86,11 +84,12 @@ const getTrips = () => {
 };
 
 const showTrip = (event) => {
-  // clearContent('show-trip').empty();
   clearContent(['show-trip']);
+
   $('#show-trip').css('display', 'block');
   $('#reserve-trip').css('display', 'block');
   $('#new-trip').css('display', 'none');
+
   reportStatus('Loading Trip...', 'loading');
 
   const tripId = event.target.id;
@@ -98,13 +97,12 @@ const showTrip = (event) => {
   axios.get(URL + `/${tripId}`)
     .then((response) => {
       $('#show-trip').append( buildTrip(response.data) );
-
-      $('#reserve-trip').css('display', 'block');
       $('#reserve-trip-id').text(response.data.name);
 
       reportStatus(`Trip #${tripId} Loaded!`, 'success').delay(2000).hide(1000);
     })
     .catch((error) => {
+      console.log(error.message);
       reportStatus(`Error: ${error.message}`, 'fail');
     });
 };
@@ -116,13 +114,13 @@ const reserveTrip = (event) => {
 
   axios.post(URL + `/${tripId}/reservations`, getFormData('reservation'))
     .then((response) => {
+      console.log(response.data);
       reportStatus(`Trip #${tripId} Reserved!`, 'success').delay(2000).hide(1000);
-      console.log(response);
       clearForm('reservation');
     })
     .catch((error) => {
-      reportStatus('Error: trip reservation failed', 'fail');
       console.log(error.message);
+      reportStatus('Error: trip reservation failed', 'fail');
     });
 };
 
