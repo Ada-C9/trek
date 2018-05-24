@@ -4,10 +4,18 @@ const reportStatus = (message) => {
   $('#status-message').html(message);
 }
 
-const loadTrips = () => {
+const hideForms = () => {
   $('.create-trip-form').hide();
-  $('.search-results').hide();
+  $('.search-trips-form').hide();
+}
+
+const hideTrips = () => {
+  $('.all-trips').hide();
   $('.trip-container').hide();
+}
+
+const loadTrips = () => {
+  hideForms();
   $('.all-trips').show();
   const allTrips = $('.all-trips');
   allTrips.empty();
@@ -27,10 +35,10 @@ const loadTrips = () => {
     .catch((error) => {
       reportStatus(`Error: ${error.message}`);
     })
-
 }
 
 const loadTrip = (id) => {
+  hideForms();
   $('.trip-container').show();
   const tripDetails = $('#trip-details');
   tripDetails.empty();
@@ -73,6 +81,8 @@ const loadTrip = (id) => {
 }
 
 const reserveTrip = (id) => {
+  hideForms();
+
   let userData = {
     'name': $('input[name="user-name"]').val(),
     'email': $('input[name="email"]').val()
@@ -95,8 +105,8 @@ const reserveTrip = (id) => {
 }
 
 const showCreateTripForm = () => {
-  $('.all-trips').hide();
-  $('.trip-container').hide();
+  hideTrips();
+  $('.search-trips-form').hide();
   $('.create-trip-form').show();
   const createTripForm = $('.create-trip-form');
   createTripForm.empty();
@@ -140,6 +150,8 @@ const showCreateTripForm = () => {
 }
 
 const createTrip = () => {
+  $('.search-trips-form').hide();
+  $('.create-trip-form').show();
   let tripData = {
     'name': $('input[name="name"]').val(),
     'continent': $('#continent option:selected').text(),
@@ -171,8 +183,7 @@ const createTrip = () => {
 }
 
 const showSearchTripsForm = () => {
-  $('.all-trips').hide();
-  $('.trip-container').hide();
+  hideTrips();
   $('.create-trip-form').hide();
   $('.search-trips-form').show();
   const searchTripsForm = $('.search-trips-form');
@@ -205,9 +216,9 @@ const showSearchTripsForm = () => {
 }
 
 const searchByBudget = () => {
-  const searchResults = $('.search-results');
-  $('.search-trips-form').hide();
-  $('.search-results').show();
+  hideForms();
+  $('.all-trips').show();
+  const searchResults = $('.all-trips');
   searchResults.empty();
   searchResults.append(`<h2>Search Results</h2>`);
   searchResults.append('<ul id="search-results"></ul>');
