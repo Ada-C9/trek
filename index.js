@@ -5,6 +5,7 @@ const reportStatus = (message) => {
 
 const loadTrips = () => {
   const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
+
   const Trips = $('#trip-list');
   Trips.empty();
 
@@ -24,6 +25,27 @@ const loadTrips = () => {
     reportStatus(`Error: ${error.message}`)
   });
 };
+
+// const TripsbyBudget = () => {
+//   const budgeturl = 'https://ada-backtrek-api.herokuapp.com/trips/budget?query=';
+//
+//   let budget = $('.budget input').val()
+//
+//   reportStatus('Trips Loading...')
+//
+//   axios.get(`${budgeturl}${budget}`)
+//   .then((response) => {
+//     $('#trip-list').append(`<h1>Trips</h1>`);
+//     response.data.forEach((trip) => {
+//       $('#trip-list').append(`<li id='${trip.id}'>${trip.name}</li>`);
+//     });
+//     reportStatus('')
+//   })
+//   .catch((error) => {
+//
+//     reportStatus(`Error: ${error.message}`)
+//   });
+// }
 
 const loadOneTrip = (id) => {
   const TripURL = 'https://ada-backtrek-api.herokuapp.com/trips/'
@@ -86,6 +108,7 @@ const reserveTrip = (event) => {
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
+  $('#budget').click(TripsbyBudget);
 
   $('ul').on('click', 'li', function(event) {
     $('#trip').empty();
