@@ -1,5 +1,6 @@
 const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
+// helper methods
 const reportStatus = (message) => {
   $('#status-message').html(message);
 }
@@ -10,20 +11,43 @@ const hideForms = () => {
 }
 
 const hideTrips = () => {
-  $('.all-trips').hide();
+  $('.trips').hide();
   $('.trip-container').hide();
 }
 
-const loadTrips = () => {
+const setupTripsView = (title, action) => {
   hideForms();
-  $('.all-trips').show();
-  const allTrips = $('.all-trips');
-  allTrips.empty();
-  allTrips.append('<h2>All Trips</h2>');
-  allTrips.append('<ul id="trip-list"></ul>');
-  const tripList = $('#trip-list');
+  $('.trips').show();
+  const trips = $('.trips');
+  trips.empty();
+  trips.append(`<h2>${title}</h2>`);
+  trips.append('<ul id="trip-list"></ul>');
+  reportStatus(`${action} Trips! Please Wait...`);
+}
 
-  reportStatus('Loading Trips! Please Wait...');
+const filterAndShowData = (data, tripList) => {
+  let continent = '';
+  let weeks = Infinity;
+
+  if ($('#continent').val()) {
+    continent = $('#continent').val();
+    data = data.filter(trip => trip.continent === continent);
+  }
+  if ($('#max-weeks').val()) {
+    weeks = $('#max-weeks').val();
+    data = data.filter(trip => trip.weeks <= weeks);
+  }
+
+  data.forEach((trip) => {
+    tripList.append(`<li id="${trip.id}">${trip.name}</li>`);
+  });
+  reportStatus('Trips Loaded!');
+}
+
+// main methods
+const loadTrips = () => {
+  setupTripsView('All Trips', 'Loading');
+  const tripList = $('#trip-list');
 
   axios.get(URL)
     .then((response) => {
@@ -34,7 +58,7 @@ const loadTrips = () => {
     })
     .catch((error) => {
       reportStatus(`Error: ${error.message}`);
-    })
+    });
 }
 
 const loadTrip = (id) => {
@@ -92,11 +116,9 @@ const reserveTrip = (id) => {
 
   axios.post(URL + `/${id}/reservations`, userData)
   .then((response) => {
-    console.log(response);
     reportStatus(`Successfully reserved this trip with the name ${response.data.name}`);
     })
   .catch((error) => {
-    console.log(error.response);
     reportStatus(`Encountered an error: ${error.message}`);
     });
 
@@ -160,17 +182,14 @@ const createTrip = () => {
     'cost': $('input[name="cost"]').val(),
     'about': $('#about').val()
   }
-  console.log(tripData);
 
   reportStatus('Creating The Trip...');
 
   axios.post(URL, tripData)
     .then((response) => {
-      console.log(response);
       reportStatus(`Successfully created a trip with the name ${response.data.name}`);
       })
     .catch((error) => {
-      console.log(error.response);
       reportStatus(`Encountered an error: ${error.message}`);
       });
 
@@ -216,84 +235,40 @@ const showSearchTripsForm = () => {
 }
 
 const searchByBudget = () => {
-  hideForms();
-  $('.all-trips').show();
-  const searchResults = $('.all-trips');
-  searchResults.empty();
-  searchResults.append(`<h2>Search Results</h2>`);
-  searchResults.append('<ul id="search-results"></ul>');
-  const tripByBudget = $('#search-results');
-
-  let data = [];
-  let continent = '';
-  let weeks = Infinity;
-
-  reportStatus('Searching Trips...');
+  setupTripsView('Search Results', 'Searching');
+  const tripList = $('#trip-list');
 
   if ($('#budget').val()) {
-    console.log($('#budget').val());
     let queryString = '/budget?query=' + $('#budget').val();
     axios.get(URL + queryString)
       .then((response) => {
-        data = response.data;
-        if ($('#continent').val()) {
-          continent = $('#continent').val();
-          data = data.filter(trip => trip.continent === continent);
-          console.log('Data filtered by continent:');
-          console.log($('#continent').val());
-          console.log(data);
+        if (response.data) {
+          filterAndShowData(response.data, tripList);
+        } else {
+          reportStatus('No Record Found!');
         }
-        if ($('#max-weeks').val()) {
-          weeks = $('#max-weeks').val();
-          data = data.filter(trip => trip.weeks <= weeks);
-          console.log("Data filtered by weeks:");
-          console.log($('#max-weeks').val());
-          console.log(data);
-        }
-        data.forEach((trip) => {
-          tripByBudget.append(`<li id="${trip.id}">${trip.name}</li>`);
-        });
-        reportStatus('Trips Loaded!');
       })
       .catch((error) => {
         reportStatus(`Error: ${error.message}`);
-      })
+      });
   } else {
     axios.get(URL)
       .then((response) => {
-        data = response.data;
-        if ($('#continent').val()) {
-          continent = $('#continent').val();
-          data = data.filter(trip => trip.continent === continent);
-          console.log('Data filtered by continent:');
-          console.log($('#continent').val());
-          console.log(data);
+        if (response.data) {
+          filterAndShowData(response.data, tripList);
+        } else {
+          reportStatus('No Record Found!');
         }
-        if ($('#max-weeks').val()) {
-          weeks = $('#max-weeks').val();
-          data = data.filter(trip => trip.weeks <= weeks);
-          console.log("Data filtered by weeks:");
-          console.log($('#max-weeks').val());
-          console.log(data);
-        }
-        data.forEach((trip) => {
-          tripByBudget.append(`<li id="${trip.id}">${trip.name}</li>`);
-        });
-        reportStatus('Trips Loaded!');
       })
       .catch((error) => {
         reportStatus(`Error: ${error.message}`);
-      })
+      });
   }
-
 }
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
-  $('#create').click(showCreateTripForm);
-  $('#search').click(showSearchTripsForm);
-
-  $('.all-trips').on('click', 'li', function() {
+  $('.trips').on('click', 'li', function() {
     let id = $(this).attr('id');
     loadTrip(id);
   });
@@ -301,14 +276,14 @@ $(document).ready(() => {
     let id = $(this).attr('id').substr(3);
     reserveTrip(id);
   });
+
+  $('#create').click(showCreateTripForm);
   $('.create-trip-form').on('click', '#create-trip', function(){
     createTrip();
   });
+
+  $('#search').click(showSearchTripsForm);
   $('.search-trips-form').on('click', '#search-by-budget', function(){
     searchByBudget();
-  });
-  $('.search-results').on('click', 'li', function() {
-    let id = $(this).attr('id');
-    loadTrip(id);
   });
 })
