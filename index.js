@@ -15,25 +15,40 @@ const clearContent = (id) => {
   return $(`#${id}`);
 };
 
-const clearForm = () => {
-  $('input[name="reservation-name"]').val('');
-  $('input[name="email"]').val('');
+const reservationForm = ['reservation-name', 'email'];
+const tripForm = ['name', 'continent', 'category', 'weeks', 'cost', 'about'];
+
+const clearForm = (form) => {
+  if (form === 'reservation'){
+    reservationForm.forEach((formField) => {
+      $(`input[name="${formField}"]`).val('');
+    });
+  } else if (form === 'trip') {
+    tripForm.forEach((formField) => {
+      $(`input[name="${formField}"]`).val('');
+    });
+  }
 };
+
+// const clearForm = () => {
+//   $('input[name="reservation-name"]').val('');
+//   $('input[name="email"]').val('');
+// };
+
+// const clearTripForm = () => {
+//   $('input[name="name"]').val('');
+//   $('input[name="continent"]').val('');
+//   $('input[name="category"]').val('');
+//   $('input[name="weeks"]').val('');
+//   $('input[name="cost"]').val('');
+//   $('input[name="about"]').val('');
+// };
 
 const getFormData = () => {
   let data = {};
   data['name'] = $('input[name="reservation-name"]').val();
   data['email'] = $('input[name="email"]').val();
   return data;
-};
-
-const clearTripForm = () => {
-  $('input[name="name"]').val('');
-  $('input[name="continent"]').val('');
-  $('input[name="category"]').val('');
-  $('input[name="weeks"]').val('');
-  $('input[name="cost"]').val('');
-  $('input[name="about"]').val('');
 };
 
 const getTripFormData = () => {
@@ -113,7 +128,7 @@ const reserveTrip = (event) => {
     .then((response) => {
       reportStatus(`Trip #${tripId} Reserved!`, 'success').delay(2000).hide(1000);
       console.log(response);
-      clearForm();
+      clearForm('reservation');
     })
     .catch((error) => {
       reportStatus('Error: trip reservation failed', 'fail');
@@ -136,7 +151,7 @@ const addTrip = () => {
     .then((response) => {
       console.log(response.data);
       reportStatus('Trip Added', 'success').delay(2000).hide(1000);
-      clearTripForm();
+      clearForm('trip');
     })
     .catch((error) => {
       console.log(error.message);
