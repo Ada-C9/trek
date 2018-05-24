@@ -17,7 +17,6 @@ const errors = (message, errors) => {
 
 const loadAllTrips = () => {
   status('Loading trips...');
-  // const trips = $("#trip-table");
   axios.get(BASEURL)
   .then((response) => {
     status('Successfully loaded trips');
@@ -31,7 +30,7 @@ const loadAllTrips = () => {
 
       $('#trip-table tbody').append(row);
     });
-    // trips.empty();
+
   })
   .catch((error) => {
     status(`Something went wrong while loading trips: ${error.message}`);
@@ -81,11 +80,11 @@ const loadTrip = function(event) {
     });
 
   const details = $("#details");
-  const reserve = $("#reserve");
   details.empty();
   $('#reserve p').empty();
   $('#reserve h2').empty();
   // reserve.empty();
+
 
 };
 
