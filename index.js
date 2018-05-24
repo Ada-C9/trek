@@ -16,17 +16,17 @@ const reportError = (message, errors) => {
 
 };
 
-const tableHeaders = (trip) => {
-  let headers = '';
-  headers += '<thead> <tr>';
-  console.log(Object.keys(trip));
-  Object.keys(trip).forEach( (header) => {
-    headers += `<th>${header.toUpperCase()}</th>`;
-  });
-  headers += '</tr> </th>';
-
-  return headers;
-};
+// const tableHeaders = (trip) => {
+//   let headers = '';
+//   headers += '<thead> <tr>';
+//   console.log(Object.keys(trip));
+//   Object.keys(trip).forEach( (header) => {
+//     headers += `<th>${header.toUpperCase()}</th>`;
+//   });
+//   headers += '</tr> </th>';
+//
+//   return headers;
+// };
 
 const baseURL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
@@ -38,17 +38,17 @@ const getTrips = () => {
 
   axios.get(baseURL)
     .then((response) => {
-      $('#trip-list').append(tableHeaders(response.data[0]));
+      $('#trip-list').append('<thead> <tr> <th>ID</th> <th>NAME</th> </tr> </thead>');
       $('#trip-list').append('<tbody>');
 
       response.data.forEach( (trip) => {
         let content = '<tr>';
         content += `<td>${trip.id}`;
         content += `<td>${trip.name}</td>`;
-        content += `<td>${trip.continent}</td>`;
-        content += `<td>${trip.category}</td>`;
-        content += `<td>${trip.weeks}</td>`;
-        content += `<td>${trip.cost}</td>`;
+        // content += `<td>${trip.continent}</td>`;
+        // content += `<td>${trip.category}</td>`;
+        // content += `<td>${trip.weeks}</td>`;
+        // content += `<td>${trip.cost}</td>`;
         content += `</tr>`;
         $('#trip-list').append(content);
 
