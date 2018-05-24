@@ -11,14 +11,22 @@ const reportStatus = (message, status) => {
   return $('#status-message').show(1000).html(message).css('background-color', color);
 };
 
-const clearContent = (id) => {
-  return $(`#${id}`);
+const clearContent = (idArr) => {
+  idArr.forEach((id) => {
+    $(`#${id}`).empty();
+  });
 };
 
 const reservationForm = ['reservation-name', 'email'];
 const tripForm = ['name', 'continent', 'category', 'weeks', 'cost', 'about'];
 
 const clearForm = (form) => {
+  // let array = `${form}Form`;
+  // console.log(`array in clearForm fn: ${typeof array}`);
+  // array.forEach((formField) => {
+  //   $(`input[name="${formField}"]`).val('');
+  // });
+
   if (form === 'reservation'){
     reservationForm.forEach((formField) => {
       $(`input[name="${formField}"]`).val('');
@@ -45,22 +53,22 @@ const getFormData = (form) => {
 
 const buildTrip = (tripData) => {
   return (`<div id='${tripData.id}'>
-    <h3>${tripData.name} </h3>
-    <p>Continent: ${tripData.continent} </p>
-    <p>Category: ${tripData.category} </p>
-    <p>Weeks: ${tripData.weeks} </p>
-    <p>Cost: $${tripData.cost} </p>
-    <p>About: ${tripData.about} </p>
-    </div>`);
+            <h3>${tripData.name} </h3>
+            <p>Continent: ${tripData.continent} </p>
+            <p>Category: ${tripData.category} </p>
+            <p>Weeks: ${tripData.weeks} </p>
+            <p>Cost: $${tripData.cost} </p>
+            <p>About: ${tripData.about} </p>
+          </div>`);
 };
 
 // EVENT LISTENER FUNCTIONS
 
 const getTrips = () => {
-  clearContent('trip-list').empty();
-  clearContent('show-trip').empty();
+  // clearContent('trip-list').empty();
+  // clearContent('show-trip').empty();
+  clearContent(['trip-list', 'show-trip']);
   $('#reserve-trip').css('display', 'none');
-  // $('#new-trip').hide();
 
   reportStatus('Loading Trips...', 'loading');
 
@@ -78,7 +86,8 @@ const getTrips = () => {
 };
 
 const showTrip = (event) => {
-  clearContent('show-trip').empty();
+  // clearContent('show-trip').empty();
+  clearContent(['show-trip']);
   $('#show-trip').css('display', 'block');
   $('#reserve-trip').css('display', 'block');
   $('#new-trip').css('display', 'none');
