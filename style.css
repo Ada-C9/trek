@@ -60,7 +60,7 @@ main {
   min-height: 75%;
 }
 
-.create-trip-form, .all-trips, #trip-details, #reservation-form {
+.create-trip-form, .search-trips-form, .all-trips, #trip-details, #reservation-form {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -68,6 +68,10 @@ ul {
   text-align: center;
   list-style-type: none;
   padding: 0;
+}
+
+li {
+  text-decoration: underline;
 }
 
 #trip-details strong, #trip-details p {
@@ -80,7 +84,7 @@ ul {
   padding-bottom: 20px;
 }
 
-.user, .trip {
+.user, .trip, .search {
   display: inline-block;
   width: 200px;
   margin: 0;
@@ -94,6 +98,10 @@ input.trip, select.trip, textarea.trip, input.user {
 label.trip, label.user {
   text-align: left;
   width: 130px;
+}
+
+label.search {
+  width: 300px;
 }
 
 .button.reserve {

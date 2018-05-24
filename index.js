@@ -132,7 +132,7 @@ const showCreateTripForm = () => {
     <textarea id="about" name="about" rows="10" cols="20" class="trip"></textarea>
     </div>`);
   createTripForm.append(
-    `<input type="submit" name="create-trip" value="Create" class="button" id="create" />`
+    `<input type="submit" name="create-trip" value="Create" class="button" />`
   );
 }
 
@@ -167,9 +167,43 @@ const createTrip = () => {
   $('#about').val('');
 }
 
+const showSearchTripsForm = () => {
+  $('.all-trips').hide();
+  $('.trip-container').hide();
+  $('.create-trip-form').hide();
+  $('.search-trips-form').show();
+  const searchTripsForm = $('.search-trips-form');
+  searchTripsForm.empty();
+
+  searchTripsForm.append(`<h2>Search Trips</h2>`);
+  searchTripsForm.append(`<div>
+    <label class="search">Continent:</label>
+    <select id="search-continent" class="search">
+      <option value="Africa">Africa</option>
+      <option value="Asia">Asia</option>
+      <option value="Australasia">Australasia</option>
+      <option value="Europe">Europe</option>
+      <option value="North America">North America</option>
+      <option value="South America">South America</option>
+    </select>
+    </div>`);
+  searchTripsForm.append(`<div>
+    <label class="search">Max Amount of Weeks:</label>
+    <input type="number" name="max-weeks" class="search" />
+    </div>`);
+  searchTripsForm.append(`<div>
+    <label class="search">Max Budget: $</label>
+    <input type="number" name="budget" class="search" />
+    </div>`);
+  searchTripsForm.append(
+    `<input type="submit" name="search-trips" value="Search" class="button" />`
+  );
+}
+
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('#create').click(showCreateTripForm);
+  $('#search').click(showSearchTripsForm);
   $('.all-trips').on('click', 'li', function() {
     let id = $(this).attr('id');
     loadTrip(id);
