@@ -117,15 +117,6 @@ footer {
 
 
 /* ADD TRIP */
-
-
-
-
-/* * {
-border: white solid 1px;
-} */
-
-
 /* The Modal (background) */
 .modal {
     display: none;
@@ -150,7 +141,7 @@ border: white solid 1px;
     width: 80%;
 }
 
-/* The Close Button */
+/* Exit Button */
 .exit {
     color: #aaaaaa;
     float: right;
@@ -164,3 +155,18 @@ border: white solid 1px;
     text-decoration: none;
     cursor: pointer;
 }
+
+
+/* FORMS */
+
+form div {
+  padding: .5em;
+}
+
+form {
+  margin-bottom: 5em;
+}
+
+/* * {
+border: white solid 1px;
+} */

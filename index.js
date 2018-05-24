@@ -135,8 +135,8 @@ const readFormData = () => {
   return formData;
 };
 
-const clearResForm = () => {
-  FORM_FIELDS.forEach((field) => {
+const clearForm = (array) => {
+  array.forEach((field) => {
     inputField(field).val('');
   });
 }
@@ -154,7 +154,7 @@ const reserveTrip = (event) => {
   .then((response) => {
     console.log(response);
     reportStatus(`Successfully reserved trip for ${response.data.name}!`);
-    clearResForm();
+    clearForm(FORM_FIELDS);
   })
   .catch((error) => {
     console.log(error.response);
@@ -169,7 +169,7 @@ const reserveTrip = (event) => {
 
 
 // MAKE TRIP HELPERS
-const tripFIELDS = ['name', 'continent', 'about', 'category', 'weeks', 'cost'];
+const TRIP_FIELDS = ['name', 'continent', 'about', 'category', 'weeks', 'cost'];
 const givenField = name => $(`#new-form input[name="${name}"]`);
 
 const readTripData = () => {
@@ -179,7 +179,7 @@ const readTripData = () => {
   };
 
   const newTripData = {};
-  tripFIELDS.forEach((field) => {
+  TRIP_FIELDS.forEach((field) => {
     newTripData[field] = myInput(field);
   });
 
@@ -187,8 +187,8 @@ const readTripData = () => {
 };
 
 const clearTripForm = () => {
-  tripFIELDS.forEach((field) => {
-    inputField(field).val('');
+  TRIP_FIELDS.forEach((field) => {
+    givenField(field).val('');
   });
 }
 
@@ -204,8 +204,8 @@ const createTrip = (event) => {
   .then((response) => {
     console.log(response);
     reportStatus(`Successfully created new trip: ${response.data.name}!`);
-    clearTripForm();
     $('#tripModal').css('display','none');
+    clearForm(FORM_FIELDS);
   })
   .catch((error) => {
     console.log(error.response);
@@ -248,7 +248,11 @@ $(document).ready(() => {
 
   // close the modal
   $('#close').click(function() {
-      $('#tripModal').css('display','none');
+    clearTripForm();
+    reportTripStatus('')
+    console.log(TRIP_FIELDS);
+    $('#tripModal').css('display','none');
+
   })
 
   // doesn't currently close modal
