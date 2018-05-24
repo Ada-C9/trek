@@ -12,24 +12,43 @@ const loadForm = (data) => {
   $('#trip-reservation').append(
     `<form>
     <input type="hidden" name="id" value="${data.id}">
-    Your Name: <input type="text" name="name"><br>
-    Your Email: <input type="text" name="email"><br>
-    Trip: ${data.name}<br>
-    <input type="submit" value="Reserve"><br>
+    <p>Your Name: <input type="text" name="name"></p>
+    <p>Your Email: <input type="text" name="email"></p>
+    <p>Trip: ${data.name}<br>
+    <input class="button" type="submit" value="Reserve"></p>
     </form>`
   );
 };
 
+const reportStatus = (message, applyClass = 'success') => {
+  $('#status-message').html(message);
+  $('#status-message').addClass(applyClass);
+};
+
+const reportError = (message, errors) => {
+  let mess = `<p>${message}</p><ul>`
+  for (const field in errors) {
+    for (const problem of errors[field]) {
+      mess +=  `<li>${field}: ${problem}<li>`;
+    }
+  }
+  mess += '</ul>'
+  reportStatus(mess, err)
+};
+
 
 const showTrips = () => {
-
+  // style all trips section
   $('#all-trips').addClass('bordered');
 
+  // style and fill #all-trips header
   $('#all-trips > h2').html('All Trips');
   $('#all-trips > h2').addClass('bordered-bottom')
 
+  // style and fill #all-trips ul (#trip-list)
   $('#trip-list').empty();
   axios.get(URL)
+
   .then((response) => {
     let collection = response.data
     for (const trip of collection) {
@@ -40,8 +59,10 @@ const showTrips = () => {
       );
     }
   })
-  .catch((error) => {
 
+  .catch((error) => {
+    reportStatus(`Sorry could not load trips: ${error.message}`);
+    console.log(error);
   });
 
 };
@@ -58,6 +79,7 @@ const showDetails = (event) => {
   $('#trip-details > h2').addClass('bordered-bottom');
 
   axios.get(detailsLink)
+
     .then((response) => {
 
       // Add details to DOM using response data
@@ -81,23 +103,43 @@ const showDetails = (event) => {
 
     })
     .catch((error) => {
-
+      console.log(error.response);
+      console.log(error.message);
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Sorry could not load trip: `, error.response.data.errors
+        );
+      } else {
+        reportStatus(`Encountered an error: ${error.message}`);
+      }
     });
 
 };
 
 const reserveTrip = (event) => {
   event.preventDefault();
-  const tripData = $('form').serialize()
-  const id = parseInt(tripData.replace('id=',""));
+  const tripData = $('form').serialize();
+  const id = parseInt(tripData.replace('id=',''));
 
   axios.post(`https://ada-backtrek-api.herokuapp.com/trips/${id}/reservations?${tripData}`)
+
   .then((response) => {
-    console.log(`SUCCESS!!! CHECK IT ${response}`);
+    reportStatus(`Successfully booked your trip with trip ID ${response.data.id}!  Have fun!`)
   })
+
   .catch((error) => {
-    console.log(`OH NOOOOOOO ${error}`);
+    console.log(error.response);
+    if (error.response.data && error.response.data.errors) {
+      reportError(
+        `Sorry could not load trip: ${error.message}`, error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}`);
+    }
   });
+
+  // reset the form
+  $('form')[0].reset();
 
 };
 

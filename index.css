@@ -32,13 +32,19 @@ main:first-child {
   grid-area: 1 / 1 / 2 / 3;
 }
 
+section:first-child {
+  grid-area: 1 / 1 / 2 / 3;
+  display: flex;
+}
 
-button {
+.button {
   font-size: 1em;
   background: linear-gradient(lightpink, grey);
   font-weight: bold;
   padding: .5em;
 }
+
+
 
 button:hover {
   background: linear-gradient(grey, lightpink);
@@ -127,4 +133,26 @@ h2 {
 
 .bordered-bottom {
   border-bottom: solid black .5px;
+}
+
+.success {
+  background-color: darkgrey;
+  color: green;
+  text-decoration: italic;
+  font-weight: bold;
+  padding: 1vw;
+  margin: 3vw;
+}
+
+.err {
+  background-color: darkgrey;
+  color: red;
+  text-decoration: italic;
+  font-weight: bold;
+  padding: 1vw;
+  margin: 3vw;
+}
+
+.err ul {
+  list-style-type: none;
 }
