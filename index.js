@@ -23,6 +23,7 @@ const loadTrips = () => {
 
   const tripList = $('#trip-list');
   tripList.empty();
+  $('#current-trips').removeClass('hidden')
 
   axios.get(URL)
   .then((response) => {
@@ -52,6 +53,8 @@ const loadTrips = () => {
 const clickTrip = (trip) => {
   console.log(trip)
 
+  $('#view-trip').removeClass('hidden')
+
   axios.get(URL+trip)
   .then((response) => {
     console.log(response);
@@ -60,8 +63,9 @@ const clickTrip = (trip) => {
     console.log('appending to table body');
 
     $('#tablebody').append(`<p>Name: ${response.data.name}</p>`);
-    $('#tablebody').append(`<p>Id: ${response.data.id}</p>`); $('#tablebody').append(`<p>Continent: ${response.data.continent}</p>`);  $('#tablebody').append(`<p>About: ${response.data.about}</p>`);
-    $('#tablebody').append(`<p>Category: ${response.data.category}</p>`);
+    $('#tablebody').append(`<p>Id: ${response.data.id}</p>`); $('#tablebody').append(`<p>Continent: ${response.data.continent}</p>`);
+     $('#tablebody').append(`<p>About: ${response.data.about}</p>`);
+    $('#tablebody').append(`<p>Category: </category>${response.data.category}</p>`);
     $('#tablebody').append(`<p>Week: ${response.data.weeks}</p>`);
     $('#tablebody').append(`<p>Cost: ${response.data.cost}</p>`);
 

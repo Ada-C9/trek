@@ -13,27 +13,28 @@
 
 <body>
 
-  <header>Trek</header>
+  <h1>Trek</h1>
   <section id='status-message'> </section>
+  <button type="button" name="button" id="load">Get Trips!</button>
+
   <main id="main">
 
+  <aside class="current-trips hidden" id ="current-trips">
+    <h2>All Trips</h2>
 
-  <aside class="current-tripss">
-    <h1>All Trips</h1>
-    <button type="button" name="button" id="load">Get Trips!</button>
     <ul id="trip-list"></ul>
   </aside>
 
-  <aside class="view-trip">
+  <aside class="view-trip hidden" id="view-trip">
     <article id="trip-details">
-      <h1>Trip Details</h1>
+      <h2>Trip Details</h2>
 
       <tablebody id="tablebody">
 
       </tablebody>
     </article>
     <article id="reserve-trip">
-      <h1>Reserve Trip</h1>
+      <h2>Reserve Trip</h2>
       <form id="reserve-form">
         <div>
           <label for="name">Name</label>
@@ -50,7 +51,7 @@
           <input type="text" name="email" />
         </div>
 
-        <input type="submit" name="add-reservation" value="Add Reservation" />
+        <input type="submit" name="add-reservation" class="button" value="Reserve" />
       </form>
     </article>
   </aside>
