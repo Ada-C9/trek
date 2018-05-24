@@ -1,15 +1,19 @@
+.cell.medium-auto.medium-cell-block-container {
+  display: none;
+}
+
 .reserve-trip{
   padding: 30%;
   padding-top: 5px;
 }
 
-h2, .callout{
+h2, .callout, h3, #reserve-block div{
   text-align: center;
 }
 
 header{
   padding: 2px;
-margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 main {
@@ -19,6 +23,23 @@ main {
 li.trip, #reservation-message li{
   list-style: none;
   padding-bottom: 10px;
+}
+
+ul#single-trip div, ul#single-trip, ul#single-trip h5{
+  display: inline-block;
+  padding: 15px;
+  position: center;
+  text-align: center;
+
+}
+
+ul#single-trip div p:first-letter, li.trip {
+  text-transform:capitalize;
+}
+
+ul#single-trip div:last-of-type{
+  display: inline;
+  text-align: left;
 }
 
 li.trip:hover{
@@ -36,7 +57,7 @@ div.header.medium-cell-block-container{
   margin-top: 12px;
 }
 /* div.all-trips, div.trip-details {
-  border: 10px solid #1779ba;
+border: 10px solid #1779ba;
 } */
 
 .make-reser-btn{

@@ -31,8 +31,8 @@
     </div>
 
 
-    <div class="cell medium-auto medium-cell-block-container">
-      <div class="grid-x grid-padding-x">
+    <div class="cell medium-auto medium-cell-block-container ">
+      <div class="grid-x grid-padding-x ">
 
         <!-- ____________________________________
         ALL TRIPS: -->
@@ -76,9 +76,9 @@
             </div>
 
             <div>
-              <label for="trip">Trip name:</label>
-              <label id="trip-name"></label>
-              <input class="button" type="submit" name="add-reservation" value="Reserve!" data-open="makeReservation" data-close aria-label="Close modal"/>
+              <!-- <label for="trip">Trip name:</label>
+              <label id="trip-name"></label> -->
+              <input id="makeReservation-button" class="button" type="submit" name="add-reservation" data-open="makeReservation" data-close aria-label="Close modal"/>
               <!-- Submit the form to create a new reservation and closes the modal as well. Also calls for another modal to open with the confirmation that the reservation was created or not. -->
             </div>
           </form>
@@ -114,9 +114,6 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
-<!-- <script src="pagination-with-styles.js"></script> -->
 
 <!-- ____________________________________
 FOUNDATION: -->
