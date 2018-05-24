@@ -6,3 +6,40 @@ body {
   background-position: top center;
   /* width: 100%; */
 }
+
+
+/* font options loaded: */
+/* font-family: 'Yatra One', cursive;
+font-family: 'Antic', sans-serif;
+font-family: 'Space Mono', monospace; */
+h1, h2, h3, h4 {
+  font-family: 'Yatra One', cursive;
+  text-align: center;
+}
+
+ul {
+  font-family: 'Yatra One', cursive;
+  /* text-align: center; */
+}
+li {
+  /* font-family: 'Space Mono', monospace; */
+  font-family: 'Antic', sans-serif;
+  list-style: none;
+}
+
+.main-display {
+  background-color: rgba(256,226,136,.4);
+  padding: 1rem;
+  border-radius: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+}
+button {
+  background-color: rgba(255,234,162,.8);
+  font-family: 'Yatra One', cursive;
+  padding: 1rem;
+  border-radius: 3rem;
+  border: none;
+}
+
+.hidden { display: none; }

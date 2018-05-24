@@ -1,24 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Trek</title>
+<head>
+  <meta charset="utf-8">
+  <title>Trek</title>
 
   <link rel="stylesheet" href="stylesheet.css">
-  </head>
-  <body>
-    <section id="status-message"></section>
+  <link href="https://fonts.googleapis.com/css?family=Antic|Space+Mono|Yatra+One" rel="stylesheet">
+</head>
+<body>
+  <section id="status-message" ></section>
+  <main>
+    <h1>Trek</h1>
+    <button id="load">See All Trips</button>
 
-      <main>
-        <section class="Base-page">
-          <h1>Trek</h1>
-          <button id="load">See All Trips</button>
-          <ul id="trip-list"></ul>
-        </section>
-      </main>
-      <script
-    src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-  </body>
+    <section class="main-display hidden">
+      <div>
+        <ul id="trip-list"></ul>
+      </div>
+
+      <div>
+        <ul id="trip-details" class="hidden"></ul>
+  
+
+        <form id="reservation-form" class="reservations-form hidden">
+          <h1>Add a new reservation</h1>
+          <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" />
+          </div>
+
+          <div>
+            <label for="age">Age</label>
+            <input type="number" name="age" />
+          </div>
+
+          <div>
+            <label for="email">email</label>
+            <input type="text" name="email" />
+          </div>
+
+          <input type="submit" name="make-reservation" value="Make Reservation" />
+        </form>
+      </div>
+    </section>
+  </main>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+</body>
 </html>
