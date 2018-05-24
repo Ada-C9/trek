@@ -1,16 +1,38 @@
 * {
     list-style-type: none;
     font-family: sans-serif;
+    box-sizing: border-box;
 }
 
-body {
-  display: flex;
-  flex-direction: row;
-  flex-flow: wrap;
+#container {
+  display: grid;
+  width: 100%;
+  height: 200px;
+  grid-template-columns: 1fr 1fr;
 }
+
 
 h1, h3 {
   font-style: italic;
+}
+
+ul {
+  list-style-type: none;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+li {
+  flex: 0 0 50%;
+  border: 1px solid grey;
+  padding: 1em;
+  display: flex;
+  align-items: flex-end;
+}
+
+.single-trip ul {
+  display: grid;
 }
 
 button {
@@ -22,15 +44,4 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-}
-
-
-.current-trips ul {
-  display: grid;
-}
-
-.current-trips ul > li {
-  grid-template-rows: 150px auto 100px;
-  grid-template-columns: minmax(200px, 1fr) 1fr;
-  border: 1px solid lightgrey;
 }

@@ -1,5 +1,6 @@
 const allTrips = 'https://ada-backtrek-api.herokuapp.com/trips/'
 
+// Error Handling
 const reportStatus = (message) => {
   $('#status-message').html(message);
 };
@@ -15,6 +16,7 @@ const reportError = (message, errors) => {
   reportStatus(content);
 };
 
+// List All Trips
 const loadTrips = () => {
   reportStatus('Loading trips...');
   const tripList = $('#trip-list');
@@ -27,10 +29,7 @@ const loadTrips = () => {
 
     tripList.append('<h3>All Trips</h3>')
     results.forEach((result) => {
-      let html = `<li id="${result.id}">`;
-      html += `<strong>Distination: ${result.name}</strong></li>`;
-      html += `<br></br>`;
-      tripList.append(html)
+      tripList.append(`<li id="${result.id}"><strong>Trip: ${result.name}</strong></li><br></br>`)
     });
   })
   .catch((error) => {
@@ -39,30 +38,72 @@ const loadTrips = () => {
   })
 };
 
+// List a single Trip
 const singleTrip = (id) => {
+
   reportStatus('Loading trip..');
   const tripDetail = $('#trip-detail');
   tripDetail.empty();
+  const reservation = $('#form-page');
+  reservation.empty();
 
   axios.get(allTrips + id)
   .then((response) => {
+
     reportStatus(`Successfully loaded trip`);
     tripDetail.append('<h3>Trip Detail:</h3>')
     let detail = response.data;
-    let html = `<li><ID: ${detail.id}</li>`;
-    html += `<li>Trip: ${detail.name}</li>`;
-    html += `<li>Continent: ${detail.continent}</li>`;
-    html += `<li>About: ${detail.about}</li>`;
-    html += `<li>Weeks: ${detail.weeks}</li>`;
-    html += `<li>Price: ${detail.cost}</li>`;
-    tripDetail.append(html)
+    tripDetail.append(`<li><ID: ${detail.id}</li>
+      <li>Trip: ${detail.name}</li>
+      <li>Continent: ${detail.continent}</li>
+      <li>Category: ${detail.category}</li>
+      <li>Weeks: ${detail.weeks}</li>
+      <li>Price:$ ${detail.cost}</li>
+      <li>About: ${detail.about}</li><br></br>`);
+
+    reservation.append(`<strong>Reserve Trip</strong>
+      <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" />
+        <label for="email">Email<label>
+        <input type="text" email="email" />
+      </div>
+        <input type="submit" name="add-reservation" value="Add Reservation" />`);
   })
   .catch((error) => {
     reportStatus(`Encountered an error while loading trip: ${error.message}`);
     console.log(error);
   })
+
+  $('#form-page').submit(function(event) {
+    event.preventDefault();
+    reserveTrip(id);
+  });
 };
 
+// Reserve a Trip
+const reserveTrip = (id) => {
+  const reserveData = {
+    name: $('input[name="name"]').val(),
+    email: $('input[email="email"]').val(),
+  };
+
+  reportStatus(`Attempting to Add Reservation for ${reserveData.name}`);
+  let reserveUrl = allTrips + id + '/reservations'
+
+  axios.post(reserveUrl, reserveData)
+  .then((response) => {
+    reportStatus(`Successfully added reservation for ${reserveData.name}, Trip Number: ${response.data.trip_id}`);
+    console.log(response)
+  })
+  .catch((error) => {
+    console.log(error.response);
+    reportError(error.message, error.response.data.errors);
+  });
+  $('#form-page')[0].reset();
+};
+
+// Display
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('#trip-list').on('click', 'li', function() {
