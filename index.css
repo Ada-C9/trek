@@ -30,12 +30,12 @@ section {
 
 content {
   max-height: 75vh;
-  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
-h2 {
-  font-size: 20px;
-  max-height: 2em;
+p {
+  font-size: .7em;
+  color: blue;
 }
 
 
