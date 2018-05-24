@@ -59,7 +59,7 @@ main {
   min-height: 75%;
 }
 
-.all-trips, #trip-details, #reservation-form {
+.create-trip-form, .all-trips, #trip-details, #reservation-form {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -79,9 +79,9 @@ ul {
   padding-bottom: 20px;
 }
 
-.user {
+.user, .trip {
   display: inline-block;
-  max-width: 150px;
+  max-width: 200px;
   margin: 0;
 }
 
@@ -92,4 +92,8 @@ ul {
 footer {
   padding: 15px 0;
   color: #5B4C40;
+}
+
+.create-trip-form {
+  margin-bottom: 10px;
 }

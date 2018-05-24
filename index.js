@@ -85,8 +85,43 @@ const reserveTrip = (id) => {
   $('input[name="email"]').val('');
 }
 
+const showCreateTripForm = () => {
+  const createTripForm = $('.create-trip-form');
+  createTripForm.empty();
+
+  createTripForm.append(`<h2>Create Trip</h2>`);
+  createTripForm.append(`<div>
+    <label class="trip">Name:</label>
+    <input type="text" name="name" class="trip" />
+    </div>`);
+  createTripForm.append(`<div>
+    <label class="trip">Continent:</label>
+    <input type="text" name="continent" class="trip" />
+    </div>`);
+  createTripForm.append(`<div>
+    <label class="trip">Category:</label>
+    <input type="text" name="category" class="trip" />
+    </div>`);
+  createTripForm.append(`<div>
+    <label class="trip">Weeks:</label>
+    <input type="number" name="weeks" class="trip" />
+    </div>`);
+  createTripForm.append(`<div>
+    <label class="trip">Cost: $</label>
+    <input type="number" name="cost" class="trip" />
+    </div>`);
+  createTripForm.append(`<div>
+    <label class="trip">About:</label>
+    <input type="text" name="about" class="trip" style="height: 150px; width: 300px;" />
+    </div>`);
+  createTripForm.append(
+    `<input type="submit" name="create-trip" value="Create" class="button" id="create" />`
+  );
+}
+
 $(document).ready(() => {
   $('#load').click(loadTrips);
+  $('#create').click(showCreateTripForm);
   $('#trip-list').on('click', 'li', function() {
     let id = $(this).attr('id');
     loadTrip(id);
