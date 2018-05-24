@@ -88,6 +88,11 @@ $(document).ready(() => {
   $('#load').click(loadTrips);
 
   $('ul').on('click', 'li', function(event) {
+    $('#trip').empty();
+    $('#reservations h1').remove();
+    $('.name input').remove();
+    $('.email input').remove();
+    $('#reserve input').remove();
     loadOneTrip($(this).attr('id'));
     $('#reserve').submit(reserveTrip);
   });
