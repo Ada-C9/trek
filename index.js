@@ -135,11 +135,8 @@ const readFormData = () => {
   return formData;
 };
 
-const clearForm = () => {
+const clearResForm = () => {
   FORM_FIELDS.forEach((field) => {
-    inputField(field).val('');
-  });
-  tripFIELDS.forEach((field) => {
     inputField(field).val('');
   });
 }
@@ -157,7 +154,7 @@ const reserveTrip = (event) => {
   .then((response) => {
     console.log(response);
     reportStatus(`Successfully reserved trip for ${response.data.name}!`);
-    clearForm();
+    clearResForm();
   })
   .catch((error) => {
     console.log(error.response);
@@ -173,46 +170,53 @@ const reserveTrip = (event) => {
 
 // MAKE TRIP HELPERS
 const tripFIELDS = ['name', 'continent', 'about', 'category', 'weeks', 'cost'];
-// const givenField = name => $(`#new-form input[name="${name}"]`);
-//
-// const readTripData = () => {
-//   const myInput = name => {
-//     const tInput = givenField(name).val();
-//     return tInput ? tInput : undefined;
-//   };
-//
-//   const newTripData = {};
-//   tripFIELDS.forEach((field) => {
-//     newTripData[field] = myInput(field);
-//   });
-//
-//   return newTripData;
-// };
-//
-//
-// // MAKE TRIP
-// const createTrip = (event) => {
-//   event.preventDefault();
-//   console.log(event);
-//   const nTripData = readTripData()
-//   console.log(nTripData);
-//
-//   axios.post(URL, nTripData)
-//   .then((response) => {
-//     console.log(response);
-//     reportStatus(`Successfully created new trip: ${response.data.name}!`);
-//     $('#tripModal').css('display','none');
-//   })
-//   .catch((error) => {
-//     console.log(error.response);
-//     if (error.response.data && error.response.data.errors) {
-//       reportError(
-//         `Encountered an error: ${error.message}`,
-//         error.response.data.errors
-//       );
-//     }
-//   });
-// }
+const givenField = name => $(`#new-form input[name="${name}"]`);
+
+const readTripData = () => {
+  const myInput = name => {
+    const tInput = givenField(name).val();
+    return tInput ? tInput : undefined;
+  };
+
+  const newTripData = {};
+  tripFIELDS.forEach((field) => {
+    newTripData[field] = myInput(field);
+  });
+
+  return newTripData;
+};
+
+const clearTripForm = () => {
+  tripFIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+}
+
+
+// MAKE TRIP
+const createTrip = (event) => {
+  event.preventDefault();
+  console.log(event);
+  const nTripData = readTripData()
+  console.log(nTripData);
+
+  axios.post(URL, nTripData)
+  .then((response) => {
+    console.log(response);
+    reportStatus(`Successfully created new trip: ${response.data.name}!`);
+    clearTripForm();
+    $('#tripModal').css('display','none');
+  })
+  .catch((error) => {
+    console.log(error.response);
+    if (error.response.data && error.response.data.errors) {
+      reportError(
+        `Encountered an error: ${error.message}`,
+        error.response.data.errors
+      );
+    }
+  });
+}
 
 
 // ACTION PLAN
@@ -235,23 +239,23 @@ $(document).ready(() => {
 
   // submit forms
   $('#trip-form').submit(reserveTrip)
-  // $('#new-trip-form').submit(createTrip)
-  //
-  // // open the modal
-  // $('#create-trip').click(function() {
-  //     $('#tripModal').css('display','block');
-  // })
-  //
-  // // close the modal
-  // $('#close').click(function() {
-  //     $('#tripModal').css('display','none');
-  // })
-  //
-  // // doesn't currently close modal
-  // $(document).click(function(event) {
-  //   if (!$(event.target).closest('#tripModal,#create-trip')) {
-  //         $("#tripModal").css('display','none');
-  //     }
-  //   // console.log(event);
-  // })
+  $('#new-form').submit(createTrip)
+
+  // open the modal
+  $('#create-trip').click(function() {
+      $('#tripModal').css('display','block');
+  })
+
+  // close the modal
+  $('#close').click(function() {
+      $('#tripModal').css('display','none');
+  })
+
+  // doesn't currently close modal
+  $(document).click(function(event) {
+    if (!$(event.target).closest('#tripModal,#create-trip')) {
+          $("#tripModal").css('display','none');
+      }
+    // console.log(event);
+  })
 });
