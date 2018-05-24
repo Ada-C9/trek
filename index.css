@@ -1,17 +1,18 @@
 body {
   font-family: 'Roboto', sans-serif;
-  color: #121F27;
+  color: rgba(18, 31, 39, 1);
 }
 
 main {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: auto;
   grid-gap: 20px;
 }
 
 h2 {
-  background-color: #416275;
-  color: #FFFFFF;
+  background-color: rgba(65,98,117, 1);
+  color: rgba(255, 255, 255, 1);
   text-align: center;
   padding: 10px 0 10px 0;
   margin: 20px 0 0 0;
@@ -23,7 +24,7 @@ ul, li {
 }
 
 ul {
-  height: 100vh;
+  height: 120vh;
   overflow-x: scroll;
 }
 
@@ -40,10 +41,8 @@ li:nth-child(odd) {
   background-color: rgba(187, 207, 218, 0.5);
 }
 
-p {
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
+li:hover {
+  background-color: rgba(187, 207, 218, 1);
 }
 
 section > div {
@@ -68,6 +67,15 @@ button:focus, input[type="submit"]:focus {
 
 form, #trip-details > div {
   padding: 20px;
+}
+
+#trip-details h4:last-of-type {
+  margin-bottom: 0;
+}
+
+#trip-details p {
+  margin-top: 5px;
+  line-height: 1.3;
 }
 
 form > div {

@@ -4,6 +4,19 @@ const reportStatus = function reportStatus(message) {
   $('#status').html(message);
 };
 
+const reportError = (message, errors) => {
+  let content = `<p>${message}</p><ul>`;
+  // first loop through the keys of the errors object
+  for (const field in errors) {
+    // then loop through the values of the errors object
+    for (const problem of errors[field]) {
+      content += `<li>${field}: ${problem}</li>`;
+    }
+  }
+  content += "</ul>";
+  reportStatus(content);
+};
+
 const loadTrips = function loadTrips() {
   reportStatus("Loading trips... be patient");
 
@@ -12,7 +25,6 @@ const loadTrips = function loadTrips() {
 
   allTrips.remove();
   tripList.empty();
-
 
   axios.get(URL)
     .then((response) => {
@@ -23,8 +35,15 @@ const loadTrips = function loadTrips() {
       reportStatus(`Successfully loaded ${response.data.length} trips`);
     })
     .catch((error) => {
-      reportStatus(`Encountered an error while loading pets: ${error.message}`);
-      console.log(error);
+      console.log(error.response);
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Encountered an error while loading trips: ${error.message}`);
+      }
     });
 };
 
@@ -53,7 +72,15 @@ const loadTripDetails = function loadTripDetails() {
       reportStatus(`Successfully loaded trip data for ${trip.name}`);
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error.response);
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Encountered an error while loading trip: ${error.message}`);
+      }
     });
 };
 
@@ -94,13 +121,21 @@ const makeReservation = function makeReservation(event) {
     .then((response) => {
       console.log(response);
 
+      reportStatus(`Successfully reserved trip ${tripID} for ${$("#name").val()}`);
+
       $("#name").val(''),
       $("#email").val('')
-      reportStatus("Successfully reserved a trip for ");
     })
     .catch((error) => {
       console.log(error.response);
-      //reportStatus(`Encountered an error: ${error.message}`);
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Encountered an error reserving trip: ${error.message}`);
+      }
     });
 };
 
