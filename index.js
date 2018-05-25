@@ -81,6 +81,7 @@ const appendReservationForm = (data, reservationForm) => {
 
 // handler methods
 const loadTrips = () => {
+  reportStatus('');
   setupTripsView('All Trips', 'Loading');
   const tripList = $('#trip-list');
 
@@ -97,6 +98,7 @@ const loadTrips = () => {
 }
 
 const loadTrip = (id) => {
+  reportStatus('');
   hideForms();
   $('.trip-container').show();
   const tripDetails = $('#trip-details');
@@ -118,6 +120,7 @@ const loadTrip = (id) => {
 }
 
 const reserveTrip = (id) => {
+  reportStatus('');
   hideForms();
   reportStatus('Reserving The Trip...');
 
@@ -138,6 +141,7 @@ const reserveTrip = (id) => {
 }
 
 const showCreateTripForm = () => {
+  reportStatus('');
   hideTrips();
   $('.search-trips-form').hide();
   $('.create-trip-form').show();
@@ -197,6 +201,7 @@ const showCreateTripForm = () => {
 }
 
 const createTrip = () => {
+  reportStatus('');
   $('.search-trips-form').hide();
   $('.create-trip-form').show();
   reportStatus('Creating The Trip...');
@@ -228,6 +233,7 @@ const createTrip = () => {
 }
 
 const showSearchTripsForm = () => {
+  reportStatus('');
   hideTrips();
   $('.create-trip-form').hide();
   $('.search-trips-form').show();
@@ -269,6 +275,7 @@ const showSearchTripsForm = () => {
 }
 
 const searchByBudget = () => {
+  reportStatus('');
   setupTripsView('Search Results', 'Searching');
   const tripList = $('#trip-list');
 
