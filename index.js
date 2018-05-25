@@ -21,12 +21,6 @@ const reservationForm = ['reservation-name', 'email'];
 const tripForm = ['name', 'continent', 'category', 'weeks', 'cost', 'about'];
 
 const clearForm = (form) => {
-  // let array = `${form}Form`;
-  // console.log(`array in clearForm fn: ${typeof array}`);
-  // array.forEach((formField) => {
-  //   $(`input[name="${formField}"]`).val('');
-  // });
-
   if (form === 'reservation'){
     reservationForm.forEach((formField) => {
       $(`input[name="${formField}"]`).val('');
