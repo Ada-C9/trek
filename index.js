@@ -2,7 +2,7 @@ const reportStatus = (message, type) => {
   if (type) {
     $('#status-message').html(message).attr('class', type);
   } else {
-    $('#status-message').html(message);
+    $('#status-message').html(message).attr('class', '');
   }
 };
 
