@@ -37,7 +37,31 @@ const loadTrips = () => {
 
   });
 
-  console.log('this is said after the get request and will run before the api responds');
+}
+
+const reserveTrip = function reserveTrip(tripId, reservationDetails){
+
+  let reportStatus = (message) => {
+    $('#status-message').html(message);
+  }
+
+  reportStatus('Loading Trip Details!  Please Wait...!');
+
+'https://ada-backtrek-api.herokuapp.com/trips/3/reservations'
+  let linkReservationId = `${tripId}/reservations`;
+
+  axios.post(`https://ada-backtrek-api.herokuapp.com/trips/${linkReservationId}`, reservationDetails)
+
+  .then((response) => {
+    console.log('Responding');
+    reportStatus('Successfully Reserved Trip');
+  })
+
+  .catch((error) => {
+    console.log(error);
+    reportStatus(`Unable to Reserve: ${error.message }`);
+  });
+
 }
 
 const loadTripDetails = (id) => {
@@ -69,63 +93,33 @@ const loadTripDetails = (id) => {
     tripDetails.append(`<tr><td>Cost: $${detail.cost}</td></tr>`);
     tripDetails.append(`<tr><td>${detail.about}</td></tr>`);
 
+    reportStatus('Trip Details Loaded');
+
     $('#tripName').empty();
     $('#tripName').append(`<h5>Trip Name: ${detail.name}</h5>`);
     $('.ReserveTrip').show();
 
-    reportStatus('Trip Details Loaded');
+//listening for a reservation form submit
+    $('#reservationForm').submit(function(event) {
+
+      let name = $(this).attr('name');
+      let id =  $(this).attr('id');
+
+      //how do I pull the form details from params?
+      let reservationDetails = {
+        travellerName: 'Abinnet'
+      };
+
+      event.preventDefault();
+
+      reserveTrip(id, reservationDetails);
+    })
+
+    .catch((error) => {
+      reportStatus(`Error: ${error.message }`);
+    });
   })
-
-  .catch((error) => {
-    console.log(error);
-    reportStatus(`Error: ${error.message }`);
-
-  });
-
-  console.log('this is said after the get request and will run before the api responds');
 }
-
-
-// const reserveTrip = (id) => {
-//   const reservation = $('#');
-//   reservation.empty();
-//
-//   const tripId = `/trips/${id}`;
-//
-//   let reservationDetails = {
-//     name: #form,
-//     age: #form,
-//     email: #form
-//   }
-//
-//   let reportStatus = (message) => {
-//     $('#status-message').html(message);
-//   }
-//
-//   reportStatus('Loading Trip Details!  Please Wait...!');
-//
-//   axios.post(URL + tripId)
-//
-//   .then((response) => {
-//     console.log('Responding');
-//     console.log(response);
-//
-//     tripDetails.append(`<tr><th>Trip Details</th></tr>`);
-//
-//     reportStatus('Trip Details Loaded');
-//
-//     <button type="button" class="button secondary" id="seetrips">Reserve</button>
-//   })
-//
-//   .catch((error) => {
-//     console.log(error);
-//     reportStatus(`Error: ${error.message }`);
-//
-//   });
-//
-//   console.log('this is said after the get request and will run before the api responds');
-// }
-
 
 $(document).ready(() => {
   $('#seetrips').click(loadTrips);
@@ -133,7 +127,6 @@ $(document).ready(() => {
     let id = $(this).attr('id');
     event.preventDefault();
     loadTripDetails(id);
-    $('')
   });
   // #when do I put the event listener?
 });
