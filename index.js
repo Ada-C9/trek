@@ -44,7 +44,6 @@ const loadTripDetails = (id) => {
   const tripDetails = $('#tripDetails');
   tripDetails.empty();
 
-
   const tripId = `/trips/${id}`;
 
   let reportStatus = (message) => {
@@ -69,6 +68,9 @@ const loadTripDetails = (id) => {
     tripDetails.append(`<tr><td>Weeks: ${detail.weeks}</td></tr>`);
     tripDetails.append(`<tr><td>Cost: $${detail.cost}</td></tr>`);
     tripDetails.append(`<tr><td>${detail.about}</td></tr>`);
+
+    $('#tripName').empty();
+    $('#tripName').append(`<h5>Trip Name: ${detail.name}</h5>`);
     $('.ReserveTrip').show();
 
     reportStatus('Trip Details Loaded');
