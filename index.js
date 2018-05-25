@@ -1,6 +1,13 @@
 
 const URL = 'https://ada-backtrek-api.herokuapp.com';
 
+const banner = $('#userMessages');
+
+const showBanner = (message) => {
+  banner.empty();
+  banner.append(message);
+}
+
 const loadTrips = () => {
   const tripList = $('#showtrips');
   tripList.empty();
@@ -10,11 +17,7 @@ const loadTrips = () => {
 
   const tripParam = '/trips';
 
-  let reportStatus = (message) => {
-    $('#status-message').html(message);
-  }
-
-  reportStatus('Loading Trips!  Please Wait...!');
+  showBanner('Loading Trips!  Please Wait...!');
 
   axios.get(URL + tripParam)
 
@@ -27,13 +30,13 @@ const loadTrips = () => {
     response.data.forEach((trip) => {
       tripList.append(`<tr><td id=${trip.id}>${trip.name}</td></tr>`);
     });
-    reportStatus('Trips Loaded');
+    showBanner('Trips Loaded');
 
   })
 
   .catch((error) => {
     console.log(error);
-    reportStatus(`Error: ${error.message }`);
+    showBanner(`Error: ${error.message }`);
 
   });
 
@@ -41,23 +44,18 @@ const loadTrips = () => {
 
 const reserveTrip = function reserveTrip(tripId, reservationDetails){
 
-  let reportStatus = (message) => {
-    $('#status-message').html(message);
-  }
-
-  reportStatus('Loading Trip Details!  Please Wait...!');
-
+  showBanner('Loading Trip Details!  Please Wait...!');
 
   axios.post(`https://ada-backtrek-api.herokuapp.com/trips/${tripId}/reservations`, reservationDetails)
 
   .then((response) => {
     console.log('Responding');
-    reportStatus('Successfully Reserved Trip');
+    showBanner('Successfully Reserved Trip');
   })
 
   .catch((error) => {
     console.log(error);
-    reportStatus(`Unable to Reserve: ${error.message }`);
+    showBanner(`Unable to Reserve: ${error.message }`);
   });
 
 }
@@ -68,11 +66,7 @@ const loadTripDetails = (id) => {
 
   const tripId = `/trips/${id}`;
 
-  let reportStatus = (message) => {
-    $('#status-message').html(message);
-  }
-
-  reportStatus('Loading Trip Details!  Please Wait...!');
+  showBanner('Loading Trip Details!  Please Wait...!');
 
   axios.get(URL + tripId)
 
@@ -91,7 +85,7 @@ const loadTripDetails = (id) => {
     tripDetails.append(`<tr><td>Cost: $${detail.cost}</td></tr>`);
     tripDetails.append(`<tr><td>${detail.about}</td></tr>`);
 
-    reportStatus('Trip Details Loaded');
+    showBanner('Trip Details Loaded');
 
     $('#tripName').empty();
     $('#tripName').append(`<h5>Trip Name: ${detail.name}</h5>`);
@@ -99,9 +93,6 @@ const loadTripDetails = (id) => {
     $('#reservationForm').off();
 
     $('#reservationForm').submit(function(event) {
-
-      // let name = $(this).attr('name');
-      // let email = $(this).attr('email')
 
       let reservationDetails = {
         name: $('#travellerName').val(),
@@ -115,7 +106,7 @@ const loadTripDetails = (id) => {
   })
 
   .catch((error) => {
-    reportStatus(`Error: ${error.message }`);
+    showBanner(`Error: ${error.message }`);
   });
 }
 
@@ -126,5 +117,4 @@ $(document).ready(() => {
     event.preventDefault();
     loadTripDetails(id);
   });
-  // #when do I put the event listener?
 });
