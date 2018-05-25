@@ -15,7 +15,7 @@ h1 {
   margin-bottom: 4px;
 }
 
-nav > h1, h3 {
+header > h1, h3 {
   font-family: 'Permanent Marker', cursive;
 }
 
@@ -24,15 +24,19 @@ nav > h1, h3 {
   height: 2rem;
   font-size: 1rem;
   background-color: white;
-  border-color: rgb(113, 134, 97);
+  border-color: rgb(64, 96, 119);
+}
+
+.button:focus {
+  outline: none;
 }
 
 .button:hover {
-  background-color: rgba(155, 195, 124, 0.58);
+  background-color: rgb(240, 216, 232);
 }
 
 .header-background {
-  min-height: 1vh;
+  min-height: 0.9vh;
   background-image: url('space-background.jpeg');
 }
 
@@ -50,7 +54,7 @@ nav > h1, h3 {
 }
 
 .success {
-  color: rgba(30, 172, 2, 0.64);
+  color: rgb(38, 175, 11);
 }
 
 .failure {
@@ -69,11 +73,19 @@ nav > h1, h3 {
   width: 100%;
 }
 
-#trip-list tr:nth-child(even) {
+#trip-list td {
+  cursor: pointer;
+}
+
+#trip-list tr:nth-child(odd) {
   background-color: rgba(147, 147, 147, 0.16);
 }
 
 #trip-form {
   grid-column-start: 2;
   grid-row-start: 3;
+}
+
+#trip-form .button {
+  margin-top: 2vh;
 }

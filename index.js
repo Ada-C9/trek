@@ -55,9 +55,9 @@ const getTrips = () => {
     });
 };
 
-const buildForm = function buildForm(id) {
+const buildForm = function buildForm(id, name) {
   let formContent = '';
-  formContent += '<h3>Reserve Trip</h3>';
+  formContent += `<h3>Reserve Trip: ${name}</h3>`;
   formContent += `<form action=${baseURL}>`;
   formContent += '<div><label for="name">Name</label><input type="text" name="name" /></div>';
   formContent += '<div><label for="email">Email</label><input type="text" name="email" /></div>';
@@ -88,7 +88,7 @@ const getTripInfo = function getTripInfo(event) {
         content += '</table>';
         $('#trip-info').append('<h3>Trip Info</h3>');
         $('#trip-info').append(content);
-        buildForm(trip.id);
+        buildForm(trip.id, trip.name);
     })
     .catch( (error) => {
 
