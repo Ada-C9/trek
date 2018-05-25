@@ -33,7 +33,15 @@ const loadTrips = () => {
     reportStatus(`Successfully loaded ${response.data.length} trips`);
     detailsTitle.html('Select a trip to view details');
     response.data.forEach((trip) => {
-      tripList.append(`<li><a href='https://ada-backtrek-api.herokuapp.com/trips/${trip.id}'>${trip.name}</a></li>`);
+      tripList.append(
+        `
+        <tr>
+        <td id="trip">
+        <a href='https://ada-backtrek-api.herokuapp.com/trips/${trip.id}'>${trip.name}</a>
+        </td>
+        </tr>
+        `
+      );
     });
   })
   .catch((error) => {
@@ -59,20 +67,21 @@ const loadDetails = function loadDetails(event) {
     detailsTitle.css('display', 'block');
     const trip = response.data;
     tripDetails.empty();
-    tripDetails.append(
+    tripDetails.html(
       `
-      <h3>Trip Details</h3>
+      <h3 id='details-title'>Trip Details</h3>
       <ul>
-      <li>Name: ${trip.name}</li>
-      <li>Trip id: ${trip.id}</li>
-      <li>Continent: ${trip.continent}</li>
-      <li>Category: ${trip.category}</li>
-      <li>Trip Length: ${trip.weeks}</li>
-      <li>Price: $${trip.cost}</li>
-      <li>Description: ${trip.about}</li>
+      <li><span class='bold'>Name:</span>   ${trip.name}</li>
+      <li><span class='bold'>Trip id:</span>   ${trip.id}</li>
+      <li><span class='bold'>Continent:</span>   ${trip.continent}</li>
+      <li><span class='bold'>Category:</span>   ${trip.category}</li>
+      <li><span class='bold'>Trip Length:</span>   ${trip.weeks}</li>
+      <li><span class='bold'>Price:</span>   $${trip.cost}</li>
+      <li><span class='bold'>Description:</span><br> ${trip.about}</li>
       </ul>
       `
     );
+    tripDetails.addClass('background');
     tripFormLocation.html(
       `
       <form method="post" id="trip-form">
@@ -95,6 +104,8 @@ const loadDetails = function loadDetails(event) {
       </form>
       `
     );
+
+    tripFormLocation.addClass('background');
   })
   .catch((error) => {
     reportStatus ( `Error loading trip: ${error.message}`);

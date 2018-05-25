@@ -62,6 +62,11 @@ form {
   line-height: 2em;
 }
 
+form h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 input {
   width: 30em;
   margin: 1em;
@@ -70,16 +75,9 @@ input {
 
 #trip-btn {
   margin-left: 3em;
-}
-
-footer {
-  padding: 2em;
-  background: linear-gradient( rgba(20, 20, 20, .5), rgba(20, 20, 20, .5)), url(footer.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: bottom;
-  bottom: 0;
-  font-size: 2em;
+  padding: .25em;
+  margin-bottom: 2em;
+  width: 17em;
 }
 
 main {
@@ -97,10 +95,36 @@ main {
   text-align: center;
 }
 
-#trip-list {
-  overflow-x: scroll;
-  list-style: none;
+td {
+  border: 2px solid rgb(25, 76, 53);
+  cursor: pointer;
+  background: radial-gradient(rgba(193, 205, 193, 0.7), rgba(245, 245, 245, 0.7));
+}
+
+td a {
+  color: rgb(25, 76, 53);
+}
+
+td a:hover {
+  font-size: 1.3em;
+}
+
+#table-wrapper {
+  position:relative;
+}
+
+#table-scroll {
   height: 30em;
+  overflow:auto;
+}
+
+#trip-list {
+  margin: 0 auto;
+  width: 5%;
+}
+
+td {
+  padding: .5em;
 }
 
 #trip-details {
@@ -109,10 +133,29 @@ main {
   grid-row-start: 1;
   grid-row-end: 1;
   float: right;
-  width: 100%;
+  width: 90%;
   height: 25em;
   overflow-x: scroll;
   margin: .25em;
+}
+
+.background {
+  border: 2px solid rgb(25, 76, 53);
+  background: radial-gradient(rgba(193, 205, 193, 0.7), rgba(245, 245, 245, 0.7));
+}
+
+#details-title {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-left: 1.9em;
+}
+
+#trip-details ul {
+  list-style: none;
+}
+
+.bold {
+  font-weight: bolder;
 }
 
 #trip-form {
@@ -120,4 +163,25 @@ main {
   grid-column-end: -1;
   grid-row-start: 2;
   grid-row-end: -1;
+  padding: 1em;
+}
+
+#trip-form-location {
+  width: 90%;
+  height: 80%;
+  margin: .25em;
+}
+
+footer {
+  padding: 4em;
+  background: linear-gradient( rgba(20, 20, 20, .5), rgba(20, 20, 20, .5)), url(footer.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  bottom: 0;
+  font-size: 1em;
+}
+
+footer p {
+  float: right;
 }
