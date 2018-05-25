@@ -1,3 +1,86 @@
+* {
+  margin: 0px;
+}
+
+/* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/* body {
+  background-color: #EEEEEE;
+  margin: 0px;
+}
 main {
   font-family: sans-serif;
   display: grid;
@@ -5,6 +88,12 @@ main {
   grid-template-areas:
   "one two"
   "three two";
+}
+
+#title-text {
+  text-align: right;
+  font-size: 3rem;
+  padding-right: 100px;
 }
 
 #status-message {
@@ -17,35 +106,72 @@ li:hover {
 
 .all-trips {
   grid-area: three;
+  background: yellow; }
 
+#load {
+  padding: 10px;
+  margin: 10px;
 }
 
 #trip-details {
-  border: 3px solid black;
   position: fixed;
-  top: 20px;
-  margin-left: 650px;
-  background-color: #0f0 ! important;
-  height: 400px;
-  width: 57%;
   overflow-y: scroll;
+  height: 400px;
+  width: 90%;
+  background-color: white;
   }
 
+#detail-container {
+  justify-content: center;
+  align-items: center;
+}
+
 .reserve-trip {
-  border: 3px solid black;
+  border-bottom: 2px solid black;
   position: fixed;
-  top: 450px;
-  margin-left: 650px;
-  background-color: blue;
+  top: 580px;
+  background-color: #FFFFFF;
   height: 200px;
-  width: 57%;
   overflow-y: none;
-  }
+}
 
 .hidden-display {
   display: none;
 }
 
-.show {
-
+.trip-form-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-left: 750px;
 }
+
+.trip-form {
+  text-align: center;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+.trip-form div {
+  text-align: center;
+  padding: 10px;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+}
+
+#trip-list {
+  margin-top: 0px;
+}
+
+h2 {
+  color: white;
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
+}  */

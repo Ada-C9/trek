@@ -16,7 +16,9 @@ const reportError = (message, errors) => {
 };
 
 
-const loadTrips = () => {
+const loadTrips = (event) => {
+  event.preventDefault();
+
   // Prep work
   const tripList = $('#trip-list');
   tripList.empty();
@@ -90,22 +92,22 @@ const showTripDetails = (id) => {
     let pageURL = TRIPSURL + `/${id}`
     axios.get(pageURL)
       .then((response) => {
-        tripDetails.append(`<p><h1>${response.data.name}</h1></p><p>${response.data.continent}</p><p><h3>About:</h3>${response.data.about}</p><p><h3>Category:</h3>${response.data.category}</p><p><h3>Weeks:</h3>${response.data.weeks}</p><p><h3>Cost:</h3>${response.data.cost}`);
+        tripDetails.append(`<h1>${response.data.name}</h1></p><p>${response.data.continent}</p><p><h3>About:</h3>${response.data.about}</p><p><h3>Category:</h3>${response.data.category}</p><p><h3>Weeks:</h3>${response.data.weeks}</p><p><h3>Cost:</h3>${response.data.cost}`);
 
         reportStatus('Trip details loaded :)');
       })
-        // axios is giving us this error object to use
-        .catch((error) => {
-          console.log(error.response);
-        if (error.response.data && error.response.data.errors) {
-          reportError(
-            `Encountered an error: ${error.message}`,
-            error.response.data.errors
-          );
-        } else {
-          reportStatus(`Encountered an error: ${error.message}`);
-        }
-        });
+      // axios is giving us this error object to use
+      .catch((error) => {
+        console.log(error.response);
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Encountered an error: ${error.message}`);
+      }
+      });
 }
 
 const buildReservationForm = (id) => {
