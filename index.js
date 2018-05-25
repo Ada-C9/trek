@@ -31,7 +31,7 @@ const loadTrips = () => {
     console.log(response);
     reportStatus(`Successfully loaded ${response.data.length} pets`);
     response.data.forEach((trip) => {
-      tripsList.append(`<li id="${trip.id}">${trip.name}</li>`);
+      tripsList.append(`<li id="${trip.id}">${trip.name.toUpperCase()}</li>`);
     });
   })
   .catch((error) => {
@@ -62,14 +62,14 @@ const loadOneTrip = (event) => {
     reportStatus(`Successfully loaded trip to: ${response.data.name}`);
 
     trip.append(
-      `<tr><th colspan ="2">${response.data.weeks} weeks</th></tr>
+      `<tr><th>Duration</th><td>${response.data.weeks}</td></tr>
       <tr><th>ID</th><td>${response.data.id}</td></tr>
       <tr><th>Category</th><td>${response.data.category}</td></tr>
       <tr><th>Continent</th><td>${response.data.continent}</td></tr>
       <tr><th>About</th><td><div id="about">${response.data.about}</div></td></tr>
       <tr><th>Cost</th><td id="cost">$${response.data.cost}</td></tr>
       `);
-      tripTitle.text(`${response.data.name}`);
+      tripTitle.text(`${response.data.name.toUpperCase()}`);
       reservation.addClass(tripid);
       reservation.html(
         `<div>
@@ -80,7 +80,9 @@ const loadOneTrip = (event) => {
         <label for="email">Email</label>
         <input type="email" name="email" />
         </div>
-        <input type="submit" name="add-pet" value="Reserve!" />`);
+        <div>
+        <input type="submit" name="add-pet" value="Reserve!" />
+        </div>`);
       })
       .catch((error) => {
         console.log(error.response);
