@@ -86,7 +86,6 @@ const readFormData = () => {
 
 	const getInput = (name) => {
 		const input = inputField(name).val();
-		console.log(input);
 		return input ? input : undefined;
 	};
 
@@ -95,7 +94,7 @@ const readFormData = () => {
 	});
 
 	let stringData = $('#trip-id').text();
-	formData['trip_id'] = stringData[stringData.length - 1];
+	formData['trip_id'] = stringData.split(' ')[1];
 	return formData;
 };
 
@@ -130,42 +129,34 @@ const createReservation = () => {
 
 	axios.post(URL, reservationData)
 	.then( (response) => {
-		console.log(response);
-		reportStatus(`Successfully reserved your trip with Reservation #${response.data['id']}!`);
+		reportStatus(`Successfully reserved your trip!`);
 		clearForm();
 	})
 	.catch( (error) => {
-		console.log(error);
-		// if (error.response.data && error.response.data.errors) {
-		// 	reportError( `Encountered an error: ${error.message}`, error.response.data.errors);
-		// } else {
+		if (error.response.data && error.response.data.errors) {
+			reportError( `Encountered an error: ${error.message}`, error.response.data.errors);
+		} else {
 			reportStatus(	`Encountered an error: ${error.message}`);
-		// }
+		}
 	});
-
 };
 
 const createTrip = () => {
 	const tripData = readTripData();
 	reportStatus('Sending new trip data...');
-	console.log(tripData);
-	axios.post(URL, tripData)
+	axios.post(ROOT, tripData)
 	.then( (response) => {
-		reportStatus(`Successfully created a new trip #${response.data['id']}!`);
+		reportStatus(`Successfully created a new trip ${response.data['name']}!`);
 		clearForm();
 	})
 	.catch( (error) => {
-		console.log(error);
-		// if (error.response.data && error.response.data.errors) {
-		// 	// console.log(error.message);
-		// 	reportError(
-		// 		`Encountered an error: ${error.message}`,
-		//
-		// 		error.response.data.errors
-		// 	);
-		// } else {
+		if (error.response.data && error.response.data.errors) {
+			reportError(
+				`Encountered an error: ${error.message}`, error.response.data.errors
+			);
+		} else {
 			reportStatus(`Encountered an error: ${error.message}`);
-		// }
+		}
 	});
 };
 
@@ -180,7 +171,6 @@ $(document).ready( () => {
 
 	$('#reserve-trip').submit( (event) => {
 		event.preventDefault();
-		// console.log(this);
 		createReservation();
 	});
 
