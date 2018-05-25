@@ -28,7 +28,35 @@
             </div>
             <div id="div-for-trips">
             </div>
-            <input type="submit" name="add-reservation" value="Make a Reservation"/>
+            <input type="submit" name="add-reservation" value="Make a Reservation" id="submit-button"/>
+        </form>
+
+        <form id="create-trip">
+          <div>
+            <label for="name-create">Trip Name</label>
+            <input type="text" name="name-create"/>
+          </div>
+          <div>
+            <label for="continent">Continent</label>
+            <input type="text" name="continent"/>
+          </div>
+          <div>
+            <label for="about">About</label>
+            <input type="text" name="about" />
+          </div>
+          <div>
+            <label for="category">Category</label>
+            <input type="text" name="category"/>
+          </div>
+          <div>
+            <label for="weeks">Weeks</label>
+            <input type="number" name="weeks"/>
+          </div>
+          <div>
+            <label for="cost">Cost</label>
+            <input type="text" name="cost"/>
+          </div>
+            <input type="submit" name="create-trip" value="Submit" id="submit-trip"/>
         </form>
 
       </main>

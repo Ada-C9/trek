@@ -85,8 +85,40 @@ axios.get(URL)
   })
 }
 
-
 const createTrip = (event) =>{
+  event.preventDefault();
+
+  const newTripinfo = {
+      name: $(`input[name="name-create"]`).val(),
+      continent: $(`input[name="continent"]`).val(),
+      about: $(`input[name="about"]`).val(),
+      category: $(`input[name="category"]`).val(),
+      weeks: $(`input[name="weeks"]`).val(),
+      cost: $(`input[name="cost"]`).val()
+
+  }
+console.log(newTripinfo)
+  reportStatus(`Attempting to create your new trip!`)
+  $(`input[name="name-create"]`).val('')
+  $(`input[name="continent"]`).val('')
+  $(`input[name="about"]`).val('')
+  $(`input[name="category"]`).val('')
+  $(`input[name="weeks"]`).val('')
+  $(`input[name="cost"]`).val('')
+
+  axios.post(URL,newTripinfo)
+  .then((response) => {
+    reportStatus('Your trip has been created')
+  })
+  .catch((error) =>{
+    console.log(error)
+    reportStatus(`Error: ${error.message}`)
+  })
+//end of method
+};
+
+
+const bookTrip = (event) =>{
   event.preventDefault();
 
   const tripInfo ={
@@ -95,7 +127,7 @@ const createTrip = (event) =>{
     tripID:$(`input[name="location-id"]`).val()
   }
 
-  console.log(tripInfo)
+  // console.log(tripInfo)
 
   reportStatus(`Attempting to make your reservation`)
   $(`input[name="name"]`).val('')
@@ -117,6 +149,8 @@ axios.post(reserveAtrip(tripInfo.tripID),tripInfo)
 };
 
 
+
+
 /// DOCUMENT . READY ///
 // / Original Code //
 
@@ -132,8 +166,13 @@ $(document).ready(() => {
       $("#book-trip-form").toggle();
    });
 
-   $(`#book-trip-form`).submit(createTrip)
+   $(`#book-trip-form`).submit(bookTrip);
 
+   $(document).on("click","#submit-button",function(){
+     $('#book-trip-form').toggle()
+   })
+
+   $(`#create-trip`).submit(createTrip);
 //post a reservation
 
 
