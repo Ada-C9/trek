@@ -2,20 +2,20 @@
 /* font-family: 'Playfair Display', serif;
 font-family: 'Faster One', cursive; */
 
-/* color: #BBECE8; light-green;
-color: #4EA8AC; green;
-color: #024B5A; blue;
-color: #5B4C40; brown; */
+/* color: #4EA8AC; green
+color: #024B5A; blue
+color: #5B4C40; brown */
 
+/*---------- global ----------*/
 body {
-  padding: 2rem;
   text-align: center;
+  height: 100%;
+  padding: 2rem;
   background-image: url("background.jpeg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100%;
 }
 
 h1 {
@@ -25,8 +25,8 @@ h1 {
 }
 
 h2 {
-  font-size: 1.7rem;
   font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
   font-weight: bold;
   color: #5B4C40;
   padding: 10px 0;
@@ -44,26 +44,36 @@ h3 {
 }
 
 .button {
-  background-color: rgba(78, 168, 172, 0.5);
   font-size: 1.5rem;
-  padding: 10px;
+  background-color: rgba(78, 168, 172, 0.5);
   margin: 15px;
+  padding: 10px;
 }
 
+/*---------- status-message ----------*/
 #status-message {
-  padding-bottom: 20px;
   font-size: 1.5rem;
   color: #5B4C40;
+  padding-bottom: 20px;
 }
 
+/*---------- main ----------*/
 main {
   min-height: 75%;
 }
 
-.create-trip-form, .search-trips-form, .search-results, .trips, #trip-details, #reservation-form {
+.trips, #trip-details, #reservation-form, .create-trip-form, .search-trips-form {
   background-color: rgba(255, 255, 255, 0.5);
+  min-width: 250px;
 }
 
+.user-form, .trip-form, .search-form {
+  display: inline-block;
+  width: 200px;
+  margin: 0;
+}
+
+/*---------- trips ----------*/
 ul {
   text-align: center;
   list-style-type: none;
@@ -74,7 +84,8 @@ li {
   text-decoration: underline;
 }
 
-#trip-details strong, #trip-details p {
+/*---------- trip-details ----------*/
+#trip-details h3, #trip-details p {
   margin-left: 15px;
   margin-right: 15px;
 }
@@ -84,37 +95,19 @@ li {
   padding-bottom: 20px;
 }
 
-.user, .trip, .search {
-  display: inline-block;
-  width: 200px;
-  margin: 0;
+/*---------- reservation-form ----------*/
+label.user-form {
+  width: 150px;
 }
 
-input.trip, select.trip, textarea.trip, input.user {
-  width: 300px;
-  margin: 5px;
-}
-
-label.trip, label.user {
-  text-align: left;
+/*---------- create-trip-form ----------*/
+label.trip-form {
+  text-align: right;
   width: 130px;
 }
 
-label.search {
+input.trip-form, select.trip-form, textarea.trip-form {
   width: 300px;
-}
-
-.button.reserve {
-  margin-top: 15px;
-}
-
-footer {
-  padding: 15px 0;
-  color: #5B4C40;
-}
-
-.create-trip-form {
-  margin-bottom: 10px;
 }
 
 .create-trip-form div {
@@ -122,4 +115,15 @@ footer {
   flex-direction: row;
   justify-content: center;
   align-items: top;
+}
+
+/*---------- search-trips-form ----------*/
+label.search-form {
+  width: 250px;
+}
+
+/*---------- footer ----------*/
+footer {
+  padding: 20px 0 10px 0;
+  color: #5B4C40;
 }

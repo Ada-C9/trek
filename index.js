@@ -61,14 +61,14 @@ const appendReservationForm = (data, reservationForm) => {
   );
   reservationForm.append(
     `<div>
-      <label class="user">Your Name:</label>
-      <input type="text" name="user-name" class="user" />
+      <label class="user-form">Your Name:</label>
+      <input type="text" name="user-name" class="user-form" />
     </div>`
   );
   reservationForm.append(
     `<div>
-      <label class="user">Your Email:</label>
-      <input type="text" name="email" class="user" />
+      <label class="user-form">Your Email:</label>
+      <input type="text" name="email" class="user-form" />
     </div>`
   );
   reservationForm.append(
@@ -149,14 +149,14 @@ const showCreateTripForm = () => {
   );
   createTripForm.append(
     `<div>
-      <label class="trip">Name:</label>
-      <input type="text" name="name" class="trip" />
+      <label class="trip-form">Name:</label>
+      <input type="text" name="name" class="trip-form" />
     </div>`
   );
   createTripForm.append(
     `<div>
-      <label class="trip">Continent:</label>
-      <select id="continent" class="trip">
+      <label class="trip-form">Continent:</label>
+      <select id="continent" class="trip-form">
         <option value="" selected disabled>Please select an option...</option>
         <option value="Africa">Africa</option>
         <option value="Asia">Asia</option>
@@ -169,26 +169,26 @@ const showCreateTripForm = () => {
   );
   createTripForm.append(
     `<div>
-      <label class="trip">Category:</label>
-      <input type="text" name="category" class="trip" />
+      <label class="trip-form">Category:</label>
+      <input type="text" name="category" class="trip-form" />
     </div>`
   );
   createTripForm.append(
     `<div>
-      <label class="trip">Weeks:</label>
-      <input type="number" name="weeks" class="trip" />
+      <label class="trip-form">Weeks:</label>
+      <input type="number" name="weeks" class="trip-form" />
     </div>`
   );
   createTripForm.append(
     `<div>
-      <label class="trip">Cost: $</label>
-      <input type="number" name="cost" class="trip" />
+      <label class="trip-form">Cost($):</label>
+      <input type="number" name="cost" class="trip-form" />
     </div>`
   );
   createTripForm.append(
     `<div>
-      <label class="trip">About:</label>
-      <textarea id="about" name="about" rows="10" cols="20" class="trip"></textarea>
+      <label class="trip-form">About:</label>
+      <textarea id="about" name="about" rows="10" cols="20" class="trip-form"></textarea>
     </div>`
   );
   createTripForm.append(
@@ -239,8 +239,8 @@ const showSearchTripsForm = () => {
   );
   searchTripsForm.append(
     `<div>
-      <label class="search">Continent:</label>
-      <select id="continent" class="search">
+      <label class="search-form">Continent:</label>
+      <select id="continent" class="search-form">
         <option></option>
         <option value="Africa">Africa</option>
         <option value="Asia">Asia</option>
@@ -253,14 +253,14 @@ const showSearchTripsForm = () => {
   );
   searchTripsForm.append(
     `<div>
-      <label class="search">Max Amount of Weeks:</label>
-      <input id="max-weeks" type="number" name="max-weeks" class="search" />
+      <label class="search-form">Max Amount of Weeks:</label>
+      <input id="max-weeks" type="number" name="max-weeks" class="search-form" />
     </div>`
   );
   searchTripsForm.append(
     `<div>
-      <label class="search">Max Budget: $</label>
-      <input id="budget" type="number" name="budget" class="search" />
+      <label class="search-form">Max Budget($):</label>
+      <input id="budget" type="number" name="budget" class="search-form" />
     </div>`
   );
   searchTripsForm.append(
