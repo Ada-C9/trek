@@ -71,8 +71,6 @@ const getTripInfo = function getTripInfo(event) {
   let tripInfo = $('#trip-info');
   tripInfo.empty();
 
-  reportStatus('Getting trip info...')
-
   let target = event.target;
   let tripLink = baseURL + '/' + target.id.toString();
 
@@ -91,10 +89,16 @@ const getTripInfo = function getTripInfo(event) {
         buildForm(trip.id, trip.name);
     })
     .catch( (error) => {
-
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Error: ${error.message}`, 'failure');
+      }
     });
 
-  reportStatus('');
 };
 
 const reserveTrip = function reserveTrip (event) {
@@ -118,7 +122,15 @@ const reserveTrip = function reserveTrip (event) {
       reportStatus('Successfully booked trip!', 'success');
     })
     .catch((error) => {
-
+      console.log(error);
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Error: ${error.message}`, 'failure');
+      }
     });
 
   $('#trip-info').empty();
