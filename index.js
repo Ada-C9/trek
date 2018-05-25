@@ -7,15 +7,15 @@ const reportStatus = (message, type) => {
 };
 
 const reportError = (message, errors) => {
-  let content = `<p>${message}</p>`;
-  content += '<ul>';
+  let content = `<span>${message}</span>`;
+  content += '<div>';
 
   for (const field in errors ){
     for (const problem of errors[field]) {
-      content += `<li>${field}: ${problem}</li>`;
+      content += `<span>${field}: ${problem}&emsp;</span>`;
     }
   }
-  content += '</ul>';
+  content += '</div>';
   reportStatus(content);
 };
 
@@ -125,7 +125,7 @@ const reserveTrip = function reserveTrip (event) {
       console.log(error);
       if (error.response.data && error.response.data.errors) {
         reportError(
-          `Encountered an error`,
+          `Encountered an error:`,
           error.response.data.errors
         );
       } else {
