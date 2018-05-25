@@ -25,11 +25,13 @@ const loadTrips = () => {
   reportStatus('Please wait, we\'re gathering our Trips...');
 
   const tripList = $('#trip-list');
+  const detailsTitle = $('#details-title');
   tripList.empty();
 
   axios.get(URL)
   .then((response) => {
     reportStatus(`Successfully loaded ${response.data.length} trips`);
+    detailsTitle.html('Select a trip to view details');
     response.data.forEach((trip) => {
       tripList.append(`<li><a href='https://ada-backtrek-api.herokuapp.com/trips/${trip.id}'>${trip.name}</a></li>`);
     });
@@ -47,16 +49,20 @@ const loadDetails = function loadDetails(event) {
   reportStatus('Loading trip data...');
   event.preventDefault();
   const tripLink = event.currentTarget.getAttribute('href');
+  const detailsTitle = $('#details-title');
   const tripDetails = $('#trip-details');
-  const tripForm = $('#trip-form');
+  const tripFormLocation = $('#trip-form-location');
 
   axios.get(tripLink)
   .then((response) => {
     reportStatus('Trip Details successfully retrieved.');
+    detailsTitle.css('display', 'block');
     const trip = response.data;
     tripDetails.empty();
     tripDetails.append(
-      `<ul>
+      `
+      <h3>Trip Details</h3>
+      <ul>
       <li>Name: ${trip.name}</li>
       <li>Trip id: ${trip.id}</li>
       <li>Continent: ${trip.continent}</li>
@@ -67,10 +73,10 @@ const loadDetails = function loadDetails(event) {
       </ul>
       `
     );
-    tripForm.html(
+    tripFormLocation.html(
       `
       <form method="post" id="trip-form">
-      <h3>Reserve Trip</h3>
+      <h3>Reserve Trip: ${trip.name}</h3>
       <div>
       <label for="name">Name</label>
       <input type="text" name="name" />
@@ -82,11 +88,10 @@ const loadDetails = function loadDetails(event) {
       </div>
 
       <div>
-      <label for="trip">${trip.name}:</label>
-      <input type="text" name="trip" />
+      <input type="hidden" name="id" value="${trip.id}">
       </div>
 
-      <input type="submit" name="new-trip" value="Reserve" />
+      <button id="trip-btn" type="submit" form="trip-form" name="new-trip" value="Reserve">Reserve</button>
       </form>
       `
     );
@@ -97,9 +102,65 @@ const loadDetails = function loadDetails(event) {
   });
 };
 
+//
+// Read Reservation Form
+//
+const getFormData = () => {
+  const getName = () => {
+    const nameInput = $('#trip-form input[name="name"]').val();
+    return nameInput ? nameInput : undefined;
+  };
+  const getEmail = email => {
+    const emailInput = $('#trip-form input[name="email"]').val();
+    return emailInput ? emailInput : undefined;
+  };
+  const getId = id => {
+    const idInput = $('#trip-form input[name="id"]').val();
+    return idInput ? idInput : undefined;
+  };
 
+  const formData = {};
+  formData['name'] = getName();
+  formData['email'] = getEmail();
+  formData['id'] = getId();
+
+  return formData;
+};
+
+const clearForm = () => {
+  formData[name] = '';
+  formData[email] = '';
+};
+
+const reserveTrip = (event) => {
+  event.preventDefault();
+
+  const tripData = getFormData();
+  const tripURL = `https://ada-backtrek-api.herokuapp.com/trips/${tripData.id}/reservations`;
+  console.log(tripData);
+
+  reportStatus('Reserving your trip...');
+
+  axios.post(tripURL, tripData)
+  .then((response) => {
+    reportStatus(`Trip successfully reserved`);
+    clearForm();
+  })
+  .catch((error) => {
+    console.log(error.response);
+    if (error.response.data && error.response.data.errors) {
+      reportError(
+        `Sorry, we could not fulfill your request: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error: ${error.message}`);
+    }
+  });
+};
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
   $('#trip-list').on('click', 'a', loadDetails);
+  $('#trip-form-location').on('submit', '#trip-form', reserveTrip);
 });
