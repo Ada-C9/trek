@@ -4,7 +4,7 @@ TREK is an application that displays information on travel packages and allows u
 
 This is a [stage 2](https://github.com/Ada-Developers-Academy/pedagogy/blob/master/rule-of-three.md) individual project.
 
-The project is due **Tuesday May 29th before 9am**. 
+The project is due **Tuesday May 29th before 9am**.
 
 ## Learning Goals
 
