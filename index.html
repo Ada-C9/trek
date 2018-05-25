@@ -10,17 +10,19 @@
     <header>
       <h1>Trek</h1>
       <button id="load" class="button">See All Trips</button>
-      <button id="create" class="button">Create A Trip</button>
       <button id="search" class="button">Search Trips</button>
+      <button id="create" class="button">Create A Trip</button>
     </header>
 
     <section id="status-message"></section>
 
     <main class="row">
-      <section class="small-8 small-offset-2 columns create-trip-form"></section>
-      <section class="small-8 small-offset-2 columns search-trips-form"></section>
-      <section class="small-6 columns trips"></section>
+      <section class="small-6 columns trips-container">
+        <section id="search-trips-form"></section>
+        <section id="trips"></section>
+      </section>
       <section class="small-6 columns trip-container">
+        <section id="create-trip-form"></section>
         <section id="trip-details"></section>
         <section id="reservation-form"></section>
       </section>

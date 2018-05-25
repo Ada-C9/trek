@@ -62,7 +62,7 @@ main {
   min-height: 75%;
 }
 
-.trips, #trip-details, #reservation-form, .create-trip-form, .search-trips-form {
+#trips, #trip-details, #reservation-form, #create-trip-form, #search-trips-form {
   background-color: rgba(255, 255, 255, 0.5);
   min-width: 250px;
 }
@@ -71,6 +71,10 @@ main {
   display: inline-block;
   width: 200px;
   margin: 0;
+}
+
+#trips, #trip-details {
+  margin-top: 15px;
 }
 
 /*---------- trips ----------*/
@@ -110,7 +114,7 @@ input.trip-form, select.trip-form, textarea.trip-form {
   width: 300px;
 }
 
-.create-trip-form div {
+#create-trip-form div {
   display: flex;
   flex-direction: row;
   justify-content: center;

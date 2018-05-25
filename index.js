@@ -5,20 +5,9 @@ const reportStatus = (message) => {
   $('#status-message').html(message);
 }
 
-const hideForms = () => {
-  $('.create-trip-form').hide();
-  $('.search-trips-form').hide();
-}
-
-const hideTrips = () => {
-  $('.trips').hide();
-  $('.trip-container').hide();
-}
-
 const setupTripsView = (title, action) => {
-  hideForms();
-  $('.trips').show();
-  const trips = $('.trips');
+  $('#trips').show();
+  const trips = $('#trips');
   trips.empty();
   trips.append(`<h2>${title}</h2>`);
   trips.append('<ul id="trip-list"></ul>');
@@ -29,8 +18,8 @@ const filterAndShowData = (data, tripList) => {
   let continent = '';
   let weeks = Infinity;
 
-  if ($('#continent').val()) {
-    continent = $('#continent').val();
+  if ($('#search-continent').val()) {
+    continent = $('#search-continent').val();
     data = data.filter(trip => trip.continent === continent);
   }
   if ($('#max-weeks').val()) {
@@ -41,7 +30,12 @@ const filterAndShowData = (data, tripList) => {
   data.forEach((trip) => {
     tripList.append(`<li id="${trip.id}">${trip.name}</li>`);
   });
-  reportStatus('Trips Loaded!');
+
+  if (data.length > 0) {
+    reportStatus('Trips Loaded!');
+  } else {
+    reportStatus('No Record Found!');
+  }
 }
 
 const appendTripDetails = (data, tripDetails) => {
@@ -57,7 +51,7 @@ const appendTripDetails = (data, tripDetails) => {
 
 const appendReservationForm = (data, reservationForm) => {
   reservationForm.append(
-    `<h2>Reserve Trip</h2>`
+    `<h2>Reserve This Trip</h2>`
   );
   reservationForm.append(
     `<div>
@@ -99,7 +93,6 @@ const loadTrips = () => {
 
 const loadTrip = (id) => {
   reportStatus('');
-  hideForms();
   $('.trip-container').show();
   const tripDetails = $('#trip-details');
   tripDetails.empty();
@@ -121,7 +114,6 @@ const loadTrip = (id) => {
 
 const reserveTrip = (id) => {
   reportStatus('');
-  hideForms();
   reportStatus('Reserving The Trip...');
 
   let userData = {
@@ -142,14 +134,12 @@ const reserveTrip = (id) => {
 
 const showCreateTripForm = () => {
   reportStatus('');
-  hideTrips();
-  $('.search-trips-form').hide();
-  $('.create-trip-form').show();
-  const createTripForm = $('.create-trip-form');
+  $('#create-trip-form').show();
+  const createTripForm = $('#create-trip-form');
   createTripForm.empty();
 
   createTripForm.append(
-    `<h2>Create Trip</h2>`
+    `<h2>Create A Trip</h2>`
   );
   createTripForm.append(
     `<div>
@@ -202,8 +192,7 @@ const showCreateTripForm = () => {
 
 const createTrip = () => {
   reportStatus('');
-  $('.search-trips-form').hide();
-  $('.create-trip-form').show();
+  $('#create-trip-form').show();
   reportStatus('Creating The Trip...');
 
   let tripData = {
@@ -234,10 +223,8 @@ const createTrip = () => {
 
 const showSearchTripsForm = () => {
   reportStatus('');
-  hideTrips();
-  $('.create-trip-form').hide();
-  $('.search-trips-form').show();
-  const searchTripsForm = $('.search-trips-form');
+  $('#search-trips-form').show();
+  const searchTripsForm = $('#search-trips-form');
   searchTripsForm.empty();
 
   searchTripsForm.append(
@@ -246,7 +233,7 @@ const showSearchTripsForm = () => {
   searchTripsForm.append(
     `<div>
       <label class="search-form">Continent:</label>
-      <select id="continent" class="search-form">
+      <select id="search-continent" class="search-form">
         <option></option>
         <option value="Africa">Africa</option>
         <option value="Asia">Asia</option>
@@ -307,10 +294,10 @@ const searchByBudget = () => {
   }
 }
 
-// listerners
+// listeners
 $(document).ready(() => {
   $('#load').click(loadTrips);
-  $('.trips').on('click', 'li', function() {
+  $('#trips').on('click', 'li', function() {
     let id = $(this).attr('id');
     loadTrip(id);
   });
@@ -320,12 +307,12 @@ $(document).ready(() => {
   });
 
   $('#create').click(showCreateTripForm);
-  $('.create-trip-form').on('click', '#create-trip', function(){
+  $('#create-trip-form').on('click', '#create-trip', function(){
     createTrip();
   });
 
   $('#search').click(showSearchTripsForm);
-  $('.search-trips-form').on('click', '#search-by-budget', function(){
+  $('#search-trips-form').on('click', '#search-by-budget', function(){
     searchByBudget();
   });
 })
