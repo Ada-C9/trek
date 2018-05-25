@@ -128,8 +128,8 @@ const getFormData = () => {
 };
 
 const clearForm = () => {
-  formData[name] = '';
-  formData[email] = '';
+  $('#trip-form input[name="name"]').val('');
+  $('#trip-form input[name="email"]').val('');
 };
 
 const reserveTrip = (event) => {
@@ -147,15 +147,8 @@ const reserveTrip = (event) => {
     clearForm();
   })
   .catch((error) => {
-    console.log(error.response);
-    if (error.response.data && error.response.data.errors) {
-      reportError(
-        `Sorry, we could not fulfill your request: ${error.message}`,
-        error.response.data.errors
-      );
-    } else {
-      reportStatus(`Encountered an error: ${error.message}`);
-    }
+    reportStatus ( `Error reserving trip: ${error.message}`);
+    console.log(error);
   });
 };
 
