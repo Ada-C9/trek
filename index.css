@@ -1,0 +1,42 @@
+body {
+  color: white;
+  background-color: black;
+  font-family: 'Karla', sans-serif;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 50% 1fr;
+  grid-template-rows: 5vh 50vh 1fr;
+}
+
+nav > h1 {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.trip-table {
+  max-height: 75vh;
+  overflow-x: scroll;
+}
+
+#status-message {
+  grid-column: 1 / span 2;
+}
+
+#current-trips {
+  grid-row: 2 / span 2;
+}
+
+#trip-info {
+  grid-column-start: 2;
+}
+
+#trip-list {
+  width: 100%;
+  background-color: rgb(178, 222, 228);
+}
+
+#trip-form {
+  grid-column-start: 2;
+  grid-row-start: 3;
+}
