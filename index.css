@@ -132,7 +132,6 @@ td {
   grid-column-end: -1;
   grid-row-start: 1;
   grid-row-end: 1;
-  float: right;
   width: 90%;
   height: 25em;
   overflow-x: scroll;
