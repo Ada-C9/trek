@@ -120,7 +120,7 @@ const buildReservationForm = (id) => {
 
 
 $(document).ready(() => {
-  $('#load').click(loadTrips);
+  $('.load-all').click(loadTrips);
 
   // clicking on individual trip to load details into trip-details section
   $('#trip-list').on('click', '.trip-link', function(event) {

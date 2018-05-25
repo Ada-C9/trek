@@ -2,6 +2,24 @@
   margin: 0px;
 }
 
+main {
+  display: grid;
+  border: 3px solid black;
+  grid-template-rows: 400px 400px;
+  grid-template-areas:
+    "top"
+    "bottom";
+}
+
+header {
+  grid-area: top;
+}
+
+header img {
+  height: 100%;
+  width: 100%;
+}
+
 /* Navbar container */
 .navbar {
   overflow: hidden;

@@ -6,38 +6,36 @@
     <link rel="stylesheet" href="index.css">
   </head>
 
-
-  <div class="navbar" id="navbar">
-    <!-- <button id="load">See Trips</button> -->
-    <a href="#index">Home</a>
-    <div class="dropdown">
-      <button class="dropbtn" id="load">Trips
-        <i class="fa fa-caret-down"></i>
-      </button>
-      <div class="dropdown-content">
-        <a href="#">All Trips</a>
-        <a href="#">Continent 1</a>
-        <a href="#">Continent 2</a>
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-
-
-  <section>
-    <span id="status-message"></span>
-    </section>
-
   <body>
-    <main>
-    <ul id="trip-list"></ul>
-    <section id="trip-details"><h2>Trip Details</h2><p>
-      <div id="detail-container"><img src= "https://images.pexels.com/photos/59519/pexels-photo-59519.jpeg?cs=srgb&dl=aerial-aerial-view-aeroplane-59519.jpg&fm=jpg"></div></section>
+    <nav class="navbar" id="navbar">
+      <!-- <button id="load">See Trips</button> -->
+      <a href="#index">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn load-all">Trips
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="#" class="load-all">All Trips</a>
+          <a href="#">Continent 1</a>
+          <a href="#">Continent 2</a>
+        </div>
+      </div>
+    </nav>
 
+  <!-- <section>
+    <span id="status-message"></span>
+    </section> -->
+
+    <main>
+      <header>
+        <img src= "https://images.pexels.com/photos/59519/pexels-photo-59519.jpeg?cs=srgb&dl=aerial-aerial-view-aeroplane-59519.jpg&fm=jpg">
+      </header>
+
+
+    <section id="trip-details"><h2>Trip Details</h2><p>
+    <div id="detail-container"></div></section>
+
+    <ul id="trip-list"></ul>
     <section class="reserve-trip hidden-display">
       <form class="trip-form">
         <div>
