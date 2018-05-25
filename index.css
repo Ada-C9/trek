@@ -6,23 +6,59 @@
 #container {
   display: grid;
   width: 100%;
-  height: 200px;
+  height: 300px;
   grid-template-columns: 1fr 1fr;
 }
 
-
-h1, h3 {
-  font-style: italic;
+#status-message {
+  padding: 10px;
+  color: goldenrod;
 }
 
+header {
+  width: 100vw;
+  height: 30vh;
+  content: "";
+  background: url(palms.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: .7;
+  padding: 1em;
+  clear: left;
+  text-align: center;
+}
+
+footer {
+  color: rgb(244, 216, 134);
+  padding: 1em;
+  text-align: justify;
+  left: 0;
+}
 
 button {
-    background-color: #e79654;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+ font-size: 1em;
+ padding: 10px;
+ color: #fff;
+ background-color: rgb(161, 222, 189);
+ border: 2px solid #06D85F;
+ border-radius: 20px/50px;
+ text-decoration: none;
+ cursor: pointer;
+ transition: all 0.3s ease-out;
+ }
+
+button:hover {
+  background-color: #1eaa62;
+}
+
+button:active, button.active { background-color: #20d071; }
+}
+
+header h1 {
+  text-align: center;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 6em;
+  /* width: auto;
+  margin: 50px 0;
+  position: static; */
 }
