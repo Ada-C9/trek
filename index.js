@@ -92,7 +92,7 @@ const reserveTrip = (event) => {
 
   axios.post(reserveUrl, reserveData)
     .then((response) => {
-      console.log(`SUCCESS: ${$(response.data.id)}`);
+      console.log(`SUCCESS: ${$response.data.id}`);
       reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
       clearForm();
     })
