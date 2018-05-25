@@ -2,11 +2,11 @@ $(document).ready( () => {
   const URL = "https://ada-backtrek-api.herokuapp.com/trips"
   $('#trips-button').click(() => {
     $('main').html($('#trips-button'))
-    $('main').append('<table id="trips-container"><tr><th>All Trips</th></tr></table>');
+    $('main').append('<h3>All Trips</h3><ul id="trips-container"></ul>');
     axios.get(URL)
     .then((response) => {
       response.data.forEach((trip) => {
-        $('#trips-container').append(`<tr><td class="trip" id="${trip.id}">Trip ${trip.id}: ${trip.name}</td></tr>`);
+        $('#trips-container').append(`<li class="trip" id="${trip.id}">${trip.name}</li>`);
       });
     })
     .catch((error) => {
@@ -18,7 +18,9 @@ $(document).ready( () => {
     axios.get(`${URL}/${id}`)
     .then((response) => {
         const trip = response.data;
-        $('#details-container').html('<h3>Trip Details</h3>')
+        $('#details-container').removeClass('hidden');
+        $('#reserve-container').removeClass('hidden');
+        $('#details-container').html('<h3>Trip Details</h3>');
         $('#details-container').append(
           `<p><strong>Name:</strong> ${trip.name}</p>
           <p><strong>Continent:</strong> ${trip.continent}</p>
@@ -27,8 +29,8 @@ $(document).ready( () => {
           <p><strong>Cost:</strong> ${trip.cost}</p>
           <p><strong>About:</strong></p><p>${trip.about}</p>`
         );
-        $('span#specific-trip').html(` ${trip.name}`)
-        $('span#specific-trip').attr('class', `${trip.id}`)
+        $('span#specific-trip').html(` ${trip.name}`);
+        $('span#specific-trip').attr('class', `${trip.id}`);
     })
     .catch((error) => {
       console.log(error);

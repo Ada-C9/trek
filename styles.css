@@ -1,0 +1,143 @@
+body {
+  background-color: #ffddcc;
+  color: #331100;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 50px;
+  font-family: 'IBM Plex Serif', serif;
+}
+
+header {
+  grid-column: 1 / span 4;
+  border-bottom: 2px solid #331100;
+  background-color: #ffddcc;
+  box-shadow: 2px 5px #331100;
+  margin: 0;
+  margin-bottom: 25px;
+}
+
+h1, h2, h3, table tr th {
+  font-family: 'Molle', cursive;
+  font-size: 3em;
+}
+
+h1 {
+  font-size: 5em;
+  padding: 20px 0 5px 100px;
+  margin: 0;
+}
+
+main {
+  grid-column: 2 / span 1;
+  width: 85%;
+}
+
+aside {
+  grid-column: 3 / span 1;
+}
+
+main, aside {
+  text-align: center;
+}
+
+main h3 {
+  margin: 15px 0 0;
+  padding: 15px 0 5px;
+}
+
+main h3, ul, ul li, aside > section {
+  border: 2px solid #331100;
+  box-shadow: 2px 5px #331100;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: 615px;
+  overflow: scroll;
+}
+
+ul li {
+  font-size: 1.5em;
+  padding: 10px 0;
+}
+
+ul li:hover {
+  background-color: #331100;
+  color: #ffddcc;
+  border: 2px solid #ffddcc;
+}
+
+.hidden {
+  display: none;
+}
+
+.button {
+  background-color: #331100;
+  color: #ffddcc;
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: bold;
+  font-size: 1.25em;
+  padding: 10px;
+  margin-top: 5px 0 0;
+  border-radius: 10px;
+  width: 65%;
+}
+
+.button:hover {
+  background-color: white;
+  color: #331100;
+}
+
+aside h3 {
+  margin: 10px 0;
+}
+
+aside p {
+  font-size: 1.25em;
+  margin: 0;
+  text-align: left;
+  padding-bottom: 5px;
+}
+
+aside p:first-of-type {
+  font-size: 1.5em;
+}
+
+aside p:last-of-type {
+  height: 150px;
+  overflow: scroll;
+}
+
+aside section:first-child {
+  margin-bottom: 25px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+label {
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+div > input {
+  width: 65%;
+  height: 2em;
+}
+
+div {
+  padding-bottom: 15px;
+}
+span#specific-trip {
+  padding-left: 5px;
+  font-size: 1.4em;
+}
+
+aside > section {
+  padding: 15px;
+}
