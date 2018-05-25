@@ -1,5 +1,9 @@
-const reportStatus = (message) => {
-  $('#status-message').html(message);
+const reportStatus = (message, type) => {
+  if (type) {
+    $('#status-message').html(message).attr('class', type);
+  } else {
+    $('#status-message').html(message);
+  }
 };
 
 const reportError = (message, errors) => {
@@ -36,7 +40,7 @@ const getTrips = () => {
       });
 
       $('#trip-list').append('</tbody>');
-      reportStatus(`${response.data.length} trips loaded`);
+      reportStatus(`${response.data.length} trips loaded`, 'success');
     })
     .catch((error) => {
       // this might not be right
@@ -46,7 +50,7 @@ const getTrips = () => {
           error.response.data.errors
         );
       } else {
-        reportStatus(`Error: ${error.message}`);
+        reportStatus(`Error: ${error.message}`, 'failure');
       }
     });
 };
@@ -66,6 +70,8 @@ const buildForm = function buildForm(id) {
 const getTripInfo = function getTripInfo(event) {
   let tripInfo = $('#trip-info');
   tripInfo.empty();
+
+  reportStatus('Getting trip info...')
 
   let target = event.target;
   let tripLink = baseURL + '/' + target.id.toString();
@@ -87,6 +93,8 @@ const getTripInfo = function getTripInfo(event) {
     .catch( (error) => {
 
     });
+
+  reportStatus('');
 };
 
 const reserveTrip = function reserveTrip (event) {
@@ -107,7 +115,7 @@ const reserveTrip = function reserveTrip (event) {
       $('input[name="name"]').val(''); // clearing text field
       $('input[name="email"]').val('');
 
-      reportStatus('Successfully booked trip!');
+      reportStatus('Successfully booked trip!', 'success');
     })
     .catch((error) => {
 
