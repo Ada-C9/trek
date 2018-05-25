@@ -47,10 +47,8 @@ const reserveTrip = function reserveTrip(tripId, reservationDetails){
 
   reportStatus('Loading Trip Details!  Please Wait...!');
 
-'https://ada-backtrek-api.herokuapp.com/trips/3/reservations'
-  let linkReservationId = `${tripId}/reservations`;
 
-  axios.post(`https://ada-backtrek-api.herokuapp.com/trips/${linkReservationId}`, reservationDetails)
+  axios.post(`https://ada-backtrek-api.herokuapp.com/trips/${tripId}/reservations`, reservationDetails)
 
   .then((response) => {
     console.log('Responding');
@@ -98,27 +96,27 @@ const loadTripDetails = (id) => {
     $('#tripName').empty();
     $('#tripName').append(`<h5>Trip Name: ${detail.name}</h5>`);
     $('.ReserveTrip').show();
+    $('#reservationForm').off();
 
-//listening for a reservation form submit
     $('#reservationForm').submit(function(event) {
 
-      let name = $(this).attr('name');
-      let id =  $(this).attr('id');
+      // let name = $(this).attr('name');
+      // let email = $(this).attr('email')
 
-      //how do I pull the form details from params?
       let reservationDetails = {
-        travellerName: 'Abinnet'
+        name: $('#travellerName').val(),
+        email: $('#travellerEmail').val(),
       };
 
       event.preventDefault();
 
-      reserveTrip(id, reservationDetails);
-    })
-
-    .catch((error) => {
-      reportStatus(`Error: ${error.message }`);
+      reserveTrip(detail.id, reservationDetails);
     });
   })
+
+  .catch((error) => {
+    reportStatus(`Error: ${error.message }`);
+  });
 }
 
 $(document).ready(() => {
