@@ -1,6 +1,4 @@
-body {
-  color: white;
-  background-color: black;
+body, .button {
   font-family: 'Karla', sans-serif;
 }
 
@@ -8,15 +6,30 @@ main {
   display: grid;
   grid-template-columns: 50% 1fr;
   grid-template-rows: 5vh 50vh 1fr;
+  grid-column-gap: 1em;
 }
 
-nav > h1 {
+h1 {
+  font-size: 2.25rem;
+}
+
+nav > h1, h3 {
   font-family: 'Permanent Marker', cursive;
+}
+
+.button {
+  width: 8rem;
+  height: 2rem;
+  font-size: 1rem;
+}
+
+.trip-table, #trip-info {
+  overflow-x: scroll;
 }
 
 .trip-table {
   max-height: 75vh;
-  overflow-x: scroll;
+  margin-top: 2vh;
 }
 
 #status-message {
@@ -33,7 +46,10 @@ nav > h1 {
 
 #trip-list {
   width: 100%;
-  background-color: rgb(178, 222, 228);
+}
+
+#trip-list tr:nth-child(even) {
+  background-color: rgba(147, 147, 147, 0.16);
 }
 
 #trip-form {

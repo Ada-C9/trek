@@ -25,7 +25,7 @@ const getTrips = () => {
 
   axios.get(baseURL)
     .then((response) => {
-      $('#trip-list').append('<thead> <tr> <th> All Trips </th> </tr> </thead>');
+      $('#trip-list').append('<h3>All Trips<h3>');
       $('#trip-list').append('<tbody>')
 
       response.data.forEach( (trip) => {
@@ -58,7 +58,7 @@ const buildForm = function buildForm(id) {
   formContent += '<div><label for="name">Name</label><input type="text" name="name" /></div>';
   formContent += '<div><label for="email">Email</label><input type="text" name="email" /></div>';
   formContent += `<input type='hidden' name='id' value=${id}>`;
-  formContent += '<input type="submit" value="Submit">';
+  formContent += '<button type="submit" class="button">Reseve Trip!</button>';
 
   $('#trip-form').html(formContent);
 };
@@ -73,13 +73,13 @@ const getTripInfo = function getTripInfo(event) {
   axios.get(tripLink)
     .then( (response) => {
         let trip = response.data;
-        let content = '<table>'
+        let content = '<table>';
         content += `<tr> <td>ID</td> <td> ${trip.id} </td></tr>`;
         content += `<tr> <td>NAME</td> <td> ${trip.name} </td></tr>`;
         content += `<tr> <td>CONTINENT</td> <td> ${trip.continent} </td></tr>`;
         content += `<tr> <td>CATEGORY</td> <td> ${trip.category} </td></tr>`;
-        content += `<tr> <td>ABOUT</td> <td> ${trip.about} </td></tr>`;
-        content += '</table>'
+        content += `<tr> <td id='about-trip'>ABOUT</td> <td> ${trip.about} </td></tr>`;
+        content += '</table>';
         $('#trip-info').append('<h3>Trip Info</h3>');
         $('#trip-info').append(content);
         buildForm(trip.id);
@@ -112,6 +112,9 @@ const reserveTrip = function reserveTrip (event) {
     .catch((error) => {
 
     });
+
+  $('#trip-info').empty();
+  $('#trip-form').empty();
 };
 
 
