@@ -46,6 +46,7 @@ const loadDetails = function(event) {
 
   let trip = event.target.id
 
+  $('.trip-creation').removeClass('display-none');
   $('.details').removeClass('display-none');
   $('.reserve-form').removeClass('display-none');
 
@@ -139,8 +140,66 @@ const reserveTrip = (event) => {
     });
 };
 
+// Create Trip
+const CREATE_FORM_FIELDS = ['name', 'continent', 'category', 'weeks', 'cost' ];
+const createInputField = name => $(`#new-trip-form input[name="${name}"]`);
+
+const readCreateFormData = () => {
+  const getCreateInput = name => {
+    const inputCreateForm = createInputField(name).val();
+    return inputCreateForm ? inputCreateForm : undefined;
+  };
+
+  const createFormData = {};
+  CREATE_FORM_FIELDS.forEach((field) => {
+    createFormData[field] = getCreateInput(field);
+  });
+
+  return createFormData;
+}
+
+const createClearForm = () => {
+  $(`#new-trip-form textarea"]`).val(''); // clears textarea value
+  CREATE_FORM_FIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+}
+
+const createTrip = (event) => {
+  event.preventDefault();
+
+  $('p:first-of-type').removeClass('status-message');
+  $('#reservation-status').removeClass('status-message');
+  $('#creation-status').addClass('status-message');
+
+  const createTripData = readCreateFormData();
+  reportStatus('Creating a trip...');
+
+  axios.post(URL, createTripData)
+    .then((response) => {
+      $('input').removeClass('highlight')
+      reportStatus(`Successfully made a new trip!`);
+      clearForm();
+    })
+    .catch((error) => {
+      console.log(error.response);
+
+      $('#new-trip-form input').addClass('highlight')
+
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Encountered an error: ${error.message}`);
+      }
+    });
+};
+
 $(document).ready(() => {
   $('#trips-button').click(loadTrips);
   $('#trip-list').on('click', 'p', loadDetails);
   $('#reserve-form').submit(reserveTrip);
+  $('#new-trip-form').submit(createTrip);
 });
