@@ -44,7 +44,42 @@ const filterAndShowData = (data, tripList) => {
   reportStatus('Trips Loaded!');
 }
 
-// main methods
+const appendTripDetails = (data, tripDetails) => {
+  tripDetails.append(`<h2>Trip Details</h2>`);
+  tripDetails.append(`<h3><strong>ID:</strong> ${data.id}</h3>`);
+  tripDetails.append(`<h3><strong>Name:</strong> ${data.name}</h3>`);
+  tripDetails.append(`<h3><strong>Continent:</strong> ${data.continent}</h3>`);
+  tripDetails.append(`<h3><strong>Category:</strong> ${data.category}</h3>`);
+  tripDetails.append(`<h3><strong>Weeks:</strong> ${data.weeks}</h3>`);
+  tripDetails.append(`<h3><strong>Cost:</strong> $${data.cost}</h3>`);
+  tripDetails.append(`<h3><strong>About:</strong></h3> <p>${data.about}</p>`);
+}
+
+const appendReservationForm = (data, reservationForm) => {
+  reservationForm.append(
+    `<h2>Reserve Trip</h2>`
+  );
+  reservationForm.append(
+    `<div>
+      <label class="user">Your Name:</label>
+      <input type="text" name="user-name" class="user" />
+    </div>`
+  );
+  reservationForm.append(
+    `<div>
+      <label class="user">Your Email:</label>
+      <input type="text" name="email" class="user" />
+    </div>`
+  );
+  reservationForm.append(
+    `<label>Trip: ${data.name}</label>`
+  );
+  reservationForm.append(
+    `<input type="submit" name="reserve-trip" value="Reserve" class="button reserve" id="res${data.id}" />`
+  );
+}
+
+// handler methods
 const loadTrips = () => {
   setupTripsView('All Trips', 'Loading');
   const tripList = $('#trip-list');
@@ -68,64 +103,41 @@ const loadTrip = (id) => {
   tripDetails.empty();
   const reservationForm = $('#reservation-form');
   reservationForm.empty();
-
   reportStatus('Loading Trip Details! Please Wait...')
 
   axios.get(URL + `/${id}`)
     .then((response) => {
       let data = response.data;
-      tripDetails.append(`<h2>Trip Details</h2>`);
-      tripDetails.append(`<h3><strong>ID:</strong> ${data.id}</h3>`);
-      tripDetails.append(`<h3><strong>Name:</strong> ${data.name}</h3>`);
-      tripDetails.append(`<h3><strong>Continent:</strong> ${data.continent}</h3>`);
-      tripDetails.append(`<h3><strong>Category:</strong> ${data.category}</h3>`);
-      tripDetails.append(`<h3><strong>Weeks:</strong> ${data.weeks}</h3>`);
-      tripDetails.append(`<h3><strong>Cost:</strong> $${data.cost}</h3>`);
-      tripDetails.append(`<h3><strong>About:</strong></h3> <p>${data.about}</p>`);
-
-      reservationForm.append(`<h2>Reserve Trip</h2>`);
-      reservationForm.append(
-        `<div><label class="user">Your Name:</label>
-        <input type="text" name="user-name" class="user" /></div>`
-      );
-      reservationForm.append(
-        `<div><label class="user">Your Email:</label>
-        <input type="text" name="email" class="user" /></div>`
-      );
-      reservationForm.append(`<label>Trip: ${data.name}</label>`);
-      reservationForm.append(
-        `<input type="submit" name="reserve-trip" value="Reserve" class="button reserve" id="res${data.id}" />`
-      );
-
+      appendTripDetails(data, tripDetails);
+      appendReservationForm(data, reservationForm);
       reportStatus('Trip Details Loaded!');
     })
     .catch((error) => {
       reportStatus(`Error: ${error.message}`);
-    })
+    });
 }
 
 const reserveTrip = (id) => {
   hideForms();
+  reportStatus('Reserving The Trip...');
 
   let userData = {
     'name': $('input[name="user-name"]').val(),
     'email': $('input[name="email"]').val()
   }
-
-  reportStatus('Reserving The Trip...');
-
   axios.post(URL + `/${id}/reservations`, userData)
-  .then((response) => {
-    reportStatus(`Successfully reserved this trip with the name ${response.data.name}`);
-    })
-  .catch((error) => {
-    reportStatus(`Encountered an error: ${error.message}`);
-    });
+    .then((response) => {
+      reportStatus(`Successfully reserved this trip with the name ${response.data.name}`);
+      })
+    .catch((error) => {
+      reportStatus(`Encountered an error: ${error.message}`);
+      });
 
   $('input[name="user-name"]').val('');
   $('input[name="email"]').val('');
 }
 
+// TODO
 const showCreateTripForm = () => {
   hideTrips();
   $('.search-trips-form').hide();
@@ -171,6 +183,7 @@ const showCreateTripForm = () => {
   );
 }
 
+// TODO
 const createTrip = () => {
   $('.search-trips-form').hide();
   $('.create-trip-form').show();
@@ -201,6 +214,7 @@ const createTrip = () => {
   $('#about').val('');
 }
 
+// TODO
 const showSearchTripsForm = () => {
   hideTrips();
   $('.create-trip-form').hide();
