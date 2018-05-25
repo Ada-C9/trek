@@ -10,10 +10,10 @@ const loadTrips = () => {
   tripsList.empty();
 
   reportStatus('Loading trips! Please wait...');
+  $('#table').show();
 
   axios.get(URL)
   .then((response) => {
-    $('#table').show();
     response.data.forEach((trip) => {
       tripsList.append(`<tr id="${trip.id}"><td>${trip.id}</td>
       <td>${trip.name}</td></tr>`);
@@ -34,13 +34,13 @@ const loadTrip = (id) => {
   reservationForm.empty();
 
   reportStatus('Loading trip info! Please wait...');
+  $('#details').show();
 
   // GET TRIP DETAILS FROM API
 
   axios.get(URL + `/${id}`)
   .then((response) => {
     // console.log(response);
-    $('#details').show();
     tripInfo.append(`<tr><td><strong>Name: </strong>     ${response.data.name}</td></tr>
       <tr><td><strong>Trip ID: </strong>${response.data.id}</td></tr>
       <tr><td><strong>Continent: </strong>${response.data.continent}</td></tr>
@@ -54,14 +54,14 @@ const loadTrip = (id) => {
       </div>`);
       reservationForm.append(`<div>
           <label for="name">Name: </label>
-          <input type="text" name="name" />
+          <input type="text" name="user-name" />
         </div>
         <div>
           <label for="email">Email: </label>
           <input type="text" name="email" />
         </div>
         <div class="submit-container">
-          <input type="submit" name="add-reservation" value="Reserve" class="submit" id="reserve${response.data.id}"/>
+          <input type="submit" name="add-reservation" value="Reserve" class="reserve" id="reserve${response.data.id}"/>
         </div>`);
 
     })
@@ -70,58 +70,29 @@ const loadTrip = (id) => {
     });
 };
 
-// RESERVE TRIP HELPERS
-
-const FORM_FIELDS = ['name', 'email'];
-const inputField = name => $(`#reservation-form input[name="${name}"]`);
-
-const readFormData = () => {
-  const getInput = name => {
-    const input = inputField(name).val();
-    return input ? input : undefined;
-  };
-
-  const formData = {};
-  FORM_FIELDS.forEach((field) => {
-    formData[field] = getInput(field);
-  });
-
-  return formData;
-};
-
-const clearForm = () => {
-    FORM_FIELDS.forEach((field) => {
-      inputField(field).val('');
-    });
-};
-
 
   //RESERVE TRIP
 
-const reserveTrip = (event, id) => {
-  console.log(id);
-    event.preventDefault();
-    console.log(event);
-    const tripData = readFormData();
-    console.log(tripData);
+  const reserveTrip = (id) => {
+  reportStatus('');
+  reportStatus('Reserving The Trip...');
 
-
-    axios.get(URL + `/${id}/reservations`)
-    .then((response) => {
-      console.log(response);
-      reportStatus(`Successfully reserved trip for ${response.data.name}!`);
-      clearForm(FORM_FIELDS);
-    })
-    .catch((error) => {
-      console.log(error.response);
-      if (error.response.data && error.response.data.errors) {
-        reportStatus(
-          `Encountered an error: ${error.message}`,
-          error.response.data.errors
-        );
-      }
-    });
+  let userData = {
+    'name': $('input[name="user-name"]').val(),
+    'email': $('input[name="email"]').val()
   }
+
+  axios.post(URL + `/${id}/reservations`, userData)
+    .then((response) => {
+      reportStatus(`Successfully reserved this trip with the name ${response.data.name}`);
+      })
+    .catch((error) => {
+      reportStatus(`Encountered an error: ${error.message}`);
+      });
+
+  $('input[name="user-name"]').val('');
+  $('input[name="email"]').val('');
+}
 
 // ACTION
 $(document).ready(() => {
@@ -131,9 +102,8 @@ $(document).ready(() => {
       loadTrip(id);
     });
 
-    $('#reservation-form').on('click', '.submit', function () {
+    $('#reservation-form').on('click', '.reserve', function () {
       let id = $(this).attr('id').substr(7);
-      console.log(id);
       reserveTrip(id);
     });
   });
