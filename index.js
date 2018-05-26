@@ -19,6 +19,7 @@ const reportError = (message, errors) => {
 const loadTrips = (event) => {
   event.preventDefault();
 
+  $("#welcome").addClass("hidden")
   // Prep work
   const tripList = $('#trip-list');
   tripList.empty();
@@ -92,7 +93,7 @@ const showTripDetails = (id) => {
     let pageURL = TRIPSURL + `/${id}`
     axios.get(pageURL)
       .then((response) => {
-        tripDetails.append(`<h1>${response.data.name}</h1></p><p>${response.data.continent}</p><p><h3>About:</h3>${response.data.about}</p><p><h3>Category:</h3>${response.data.category}</p><p><h3>Weeks:</h3>${response.data.weeks}</p><p><h3>Cost:</h3>${response.data.cost}`);
+        tripDetails.append(`<h2>Trip Details</h2><p><h1>${response.data.name}</h1></p><p>${response.data.continent}</p><p><h3>About:</h3>${response.data.about}</p><p><h3>Category:</h3>${response.data.category}</p><p><h3>Weeks:</h3>${response.data.weeks}</p><p><h3>Cost:</h3>${response.data.cost}`);
 
         reportStatus('Trip details loaded :)');
       })
@@ -114,7 +115,7 @@ const buildReservationForm = (id) => {
   const reserveTrip = $('#reserve-trip');
   reserveTrip.empty();
 
-  $(".reserve-trip").removeClass("hidden-display").addClass("trip-form-container")
+  $(".reserve-trip").removeClass("hidden").addClass("trip-form-container")
   $(".trip-form").removeAttr( "id" ).attr("id", id);
 }
 
@@ -126,7 +127,6 @@ $(document).ready(() => {
   $('#trip-list').on('click', '.trip-link', function(event) {
     event.preventDefault();
     let id = $(this).attr('id');
-
 
     showTripDetails(id);
     buildReservationForm(id);

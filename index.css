@@ -11,6 +11,10 @@ main {
     "bottom";
 }
 
+.hidden {
+  display: none;
+}
+
 #title {
   grid-area: top;
   align-self: end;
@@ -35,6 +39,13 @@ header img {
   grid-template-columns: 33% 45% 22%;
   grid-template-areas:
     "left center right";
+}
+
+#welcome {
+  grid-area: bottom;
+  border: 3px solid orange;
+  text-align: center;
+  font-size: 5rem;
 }
 
 #trip-list-container {
