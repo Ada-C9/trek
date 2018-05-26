@@ -55,42 +55,20 @@ const makeReservation = (trip) => {
   $('.reservation-container').empty();
 
 
+
+
   $('.reservation-container').append(`<form></form>`);
   $(`form`).append(`<h2>Reserve Trip</h2>`);
   $(`form`).append(`<label for="name">Your Name: </label>`);
-  $(`form`).append(`<input type="text" name="name"></input>`)
+  $(`form`).append(`<input type="text" name="name"></input>`);
+  $(`form`).append(`<p>Trip: ${trip.name}</p>`);
+  $(`form`).append(`<input type="submit" name="reserve" value="Reserve"></input>`);
 
-  // .text("Reserve Trip").append(`<input`, {
-  //   type: 'text',
-  //   id: 'name',
-  //   name: 'name', })
 };
 
-  //     action: '#',
-  //     method: '#'
-
-  // .append(
-  //     $("<input/>", {
-  //       type: 'text',
-  //       id: 'vname',
-  //       name: 'name',
-  //       placeholder: 'Your Name'
-  //     })
-  //
-  // })
-  //
-  // form.append(`<p>Trip: ${trip.name}</p>`);
-
-  // form.append(`<label for="name">Your name:</label>`)
-  //
-  // <input type="text" name="name"/>
 
 
 
-  // $('#trip-name').append(`<p>Trip: ${trip.name}</p>`)
-  // $('#reservation-form').submit();
-
-
-  $(document).ready(() => {
-    $('#get-trips').click(loadTrips);
-  })
+$(document).ready(() => {
+  $('#get-trips').click(loadTrips);
+})
