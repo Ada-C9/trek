@@ -88,13 +88,13 @@ const listForm = (id) => {
   let formTag = "<h4>Reserve Trip</h4>";
   formTag += `<form>`,
   formTag += `<div><label for="name">Name</label>
-    <input type="text" name="name" /></div>`,
+  <input type="text" name="name" /></div>`,
   formTag += `<div><label for="email">Email</label>
-    <input type="text" name="email" /></div>`,
+  <input type="text" name="email" /></div>`,
   formTag += `<div>
-    <h5>Trip ID: ${id}</h5></div>`
+  <h5>Trip ID: ${id}</h5></div>`
   formTag += `<input type="submit" name="add-reserv" value="Reserve" />
-    </form>`
+  </form>`
 
   $('#reserv-form').html(formTag);
 }
@@ -103,7 +103,6 @@ const FORM_FIELDS = ['name', 'email'];
 const inputField = (name) => $(`#reserv-form input[name="${name}"]`);
 
 const readFormData = () => {
-  console.log(name)
 
   const getInput = (name) => {
     const input = inputField(name).val();
@@ -127,10 +126,7 @@ const clearForm = () => {
 // A reservation form for trip
 const reserveTrip = (id) => {
 
-  // event.preventDefault();
-
   const tripData = readFormData();
-  console.log(tripData);
 
   let reservURL = URL + `/${id}/reservations`
 
@@ -138,7 +134,7 @@ const reserveTrip = (id) => {
 
   .then((response) => {
     console.log(response);
-    reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
+    reportStatus(`Successfully added a reservation with ID ${response.data}!`);
     clearForm();
   })
 
