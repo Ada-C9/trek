@@ -1,9 +1,5 @@
-const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
-const tripURL = "https://ada-backtrek-api.herokuapp.com/trips/";
-const reserveURL = "https://ada-backtrek-api.herokuapp.com/trips/"
-//
-// Status Management
-//
+const URL = 'https://ada-backtrek-api.herokuapp.com/trips/';
+
 const reportStatus = (message) => {
   $('#status-message').html(message);
 };
@@ -19,8 +15,7 @@ const reportError = (message, errors) => {
   reportStatus(content);
 };
 
-//
-//
+
 const loadTrips = () => {
   reportStatus('Loading trips...');
 
@@ -36,7 +31,6 @@ const loadTrips = () => {
       tripList.append(tripItem);
       tripItem.click(() => {
         loadTrip(trip);
-        // createTrip(trip);
       })
       $('#hidden').show();
     });
@@ -51,7 +45,7 @@ const loadTrip = (trip) => {
   reportStatus('Loading trip...');
   const tripDetails = $('#trip-details');
 
-  axios.get(tripURL + trip.id)
+  axios.get(URL + trip.id)
   .then((response) => {
     console.log(response);
     reportStatus(`Successfully loaded ${response.data.name} trip`);
@@ -63,13 +57,13 @@ const loadTrip = (trip) => {
       <p><strong> Category:</strong> ${response.data.category}</p>
       <p><strong> Cost:</strong> ${response.data.weeks}</p>`);
       tripDetails.html(tripItem);
-      // $('#trip-form').submit(createTrip);
+
       $('#selected-name').text(response.data.name)
       $('#new-trip').show();
       $('#trip-details').show();
       $('#trip-form').submit (function (event) {
         event.preventDefault();
-        createTrip(trip);
+        reserveTrip(trip);
       })
     })
 
@@ -102,12 +96,12 @@ const loadTrip = (trip) => {
     });
   }
 
-  const createTrip = (trip) => {
+  const reserveTrip = (trip) => {
 
     const tripData = readFormData();
     reportStatus('Sending trip data...');
 
-    axios.post(reserveURL + trip.id + "/reservations", tripData)
+    axios.post(URL + trip.id + "/reservations", tripData)
     .then((response) => {
       reportStatus(`Successfully reserved a trip with ID ${response.data.trip_id}!`);
       clearForm();
