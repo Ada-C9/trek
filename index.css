@@ -5,10 +5,17 @@
 main {
   display: grid;
   border: 3px solid black;
-  grid-template-rows: 400px 400px;
+  grid-template-rows: 375px 375px;
   grid-template-areas:
     "top"
     "bottom";
+}
+
+#title {
+  grid-area: top;
+  align-self: end;
+  font-size: 5rem;
+  padding-left: 5px;
 }
 
 header {
@@ -18,6 +25,42 @@ header {
 header img {
   height: 100%;
   width: 100%;
+}
+
+#information-container {
+  grid-area: bottom;
+  border: 3px solid red;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 33% 45% 22%;
+  grid-template-areas:
+    "left center right";
+}
+
+#trip-list-container {
+  grid-area: left;
+  border: 3px solid blue;
+  height: 368px;
+  width: 100%
+  margin-bottom: 20px;
+  overflow: scroll;
+}
+
+#trip-details {
+  grid-area: center;
+  border-right: 3px dashed green;
+  height: 368px;
+  width: 100%;
+  overflow: scroll;
+  margin-bottom: 20px;
+}
+
+#reservation-container {
+  grid-area: right;
+  height: 368px;
+  width: 100%;
+  overflow: scroll;
+  margin-bottom: 20px;
 }
 
 /* Navbar container */

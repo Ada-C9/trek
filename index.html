@@ -28,34 +28,41 @@
 
     <main>
       <header>
-        <img src= "https://images.pexels.com/photos/59519/pexels-photo-59519.jpeg?cs=srgb&dl=aerial-aerial-view-aeroplane-59519.jpg&fm=jpg">
+        <img src= "https://images.pexels.com/photos/185933/pexels-photo-185933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
       </header>
 
+      <h2 id="title">Trippy Finder</h2>
 
-    <section id="trip-details"><h2>Trip Details</h2><p>
-    <div id="detail-container"></div></section>
-
-    <ul id="trip-list"></ul>
-    <section class="reserve-trip hidden-display">
-      <form class="trip-form">
-        <div>
-          <label for="name">Name</label>
-          <input type="text" name="name" />
+      <section id="information-container">
+        <div id="trip-list-container">
+          <ul id="trip-list"></ul>
         </div>
 
-        <div>
-          <label for="age">Age</label>
-          <input type="number" name="age" />
-        </div>
+        <section id="trip-details"><h2>Trip Details</h2><p>
+          <div id="detail-container"></div>
+        </section>
 
-        <div>
-          <label for="email">Email</label>
-          <input type="text" name="email" />
-        </div>
+        <section class="reserve-trip hidden-display" id="reservation-container">
+          <form class="trip-form">
+            <div>
+              <label for="name">Name</label>
+              <input type="text" name="name" />
+            </div>
+          <div>
+            <label for="age">Age</label>
+            <input type="number" name="age" />
+          </div>
 
-        <input type="submit" name="reserve-trip" value="Reserve Trip" />
-      </form>
-    </section>
+            <div>
+              <label for="email">Email</label>
+              <input type="text" name="email" />
+            </div>
+
+            <input type="submit" name="reserve-trip" value="Reserve Trip" />
+          </form>
+        </section>
+
+      </section>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
