@@ -1,12 +1,7 @@
 body {
   font-family: sans-serif;
   background-color: #f5f7f2;
-  background-image: url("http://freeuse.io/img_highres/5513-flight-sky-clouds-airplane.jpg");
-}
-
-.list-container {
-  padding-left: 1em;
-  padding-right: 1em;
+  /* background-image: url("http://freeuse.io/img_highres/5513-flight-sky-clouds-airplane.jpg"); */
 }
 
 h1, h2 {
@@ -21,7 +16,7 @@ h1, h2 {
   text-align: center;
 }
 
-.btn.btn-light {
+.btn.btn-info {
   margin-bottom: 2em;
   margin-top: 1em;
   margin-left: 1em;
@@ -41,7 +36,18 @@ main {
   grid-template-columns: 1fr 2fr;
 }
 
+.list-container {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
 .details-container {
+  border: 1px solid #dee2e6;
+  margin-right: 1em;
+  height: max-content;
+}
+
+.reservation-container {
   border: 1px solid #dee2e6;
   margin-right: 1em;
   height: max-content;
