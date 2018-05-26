@@ -5,7 +5,7 @@ const reportStatus = (message) => {
 };
 
 const reportError = (message, errors) => {
-  let content = `<p>${message}</p><ul>`;
+  let content = `<ul>`;
   for (const field in errors) {
     for (const problem of errors[field]) {
       content += `<li>${field}: ${problem}</li>`;
@@ -30,8 +30,9 @@ const loadTrips = (event) => {
   // axios is linked at the bottom of index.html
   axios.get(TRIPSURL)
     .then((response) => {
+      tripList.append(`<h2>Trips</h2>`)
       response.data.forEach((trip) => {
-        tripList.append(`<li class="trip-link" id="${trip.id}">${trip.name}</li>`);
+        tripList.append(`<li class="trip-link" id="${trip.id}"><img src="https://de.orlandoairports.net/site/uploads/2015/07/baggage_icon.svg" height=20px width=20px> ${trip.name}</li>`);
       });
 
       reportStatus('Trips loaded :)');
@@ -81,19 +82,36 @@ const createReservation = (event) => {
       reportStatus(`Encountered an error: ${error.message}`);
     }
     });
+
+  $('.trip-form')[0].reset();
 };
 
 const showTripDetails = (id) => {
   // empty sections so you can add new content with click
-    const tripDetails = $('#trip-details');
-    tripDetails.empty();
+    const tripName = $('#name');
+    tripName.empty();
+    const tripPlace = $('#place');
+    tripPlace.empty();
+    const tripDescription = $('#description');
+    tripDescription.empty();
+    const tripCategory = $('#category');
+    tripName.empty();
+    const tripWeeks = $('#weeks');
+    tripWeeks.empty();
+    const tripPrice = $('#price');
+    tripName.empty();
     const reserveTrip = $('#reserve-trip');
     reserveTrip.empty();
 
     let pageURL = TRIPSURL + `/${id}`
     axios.get(pageURL)
       .then((response) => {
-        tripDetails.append(`<h2>Trip Details</h2><p><h1>${response.data.name}</h1></p><p>${response.data.continent}</p><p><h3>About:</h3>${response.data.about}</p><p><h3>Category:</h3>${response.data.category}</p><p><h3>Weeks:</h3>${response.data.weeks}</p><p><h3>Cost:</h3>${response.data.cost}`);
+        tripName.text(response.data.name)
+        tripPlace.text(response.data.continent)
+        tripDescription.text(response.data.about)
+        tripCategory.text('Category: ' + response.data.category)
+        tripWeeks.text('Weeks: ' + response.data.weeks)
+        tripPrice.text('Cost: $' + response.data.cost)
 
         reportStatus('Trip details loaded :)');
       })

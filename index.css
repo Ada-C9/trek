@@ -1,10 +1,54 @@
+/* Fields */
+input[type=text], input[type=number] {
+  background-color: transparent; /* Remove background fill */
+  text-transform: uppercase; /* Make text all uppercase */
+  border-radius: 0; /* Remove corner curve */
+  border: 2px solid #000; /* 2px white border */
+  color: #000; /* White text */
+  height: 35px; /* Increase input height */
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color:    #000;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+ color:    #000;
+ opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+ color:    #000;
+ opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color:    #000;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+ color:    #000;
+}
+
+/* Button */
+input[type=submit] {
+  text-transform: uppercase;
+  padding: 10px 60px;
+  color: white;
+  background: #444;
+  font-weight: normal;
+  margin-top: 10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+}
+
 * {
   margin: 0px;
+  font-family: 'Gudea';
 }
 
 main {
   display: grid;
-  border: 3px solid black;
+  border-bottom: 1px solid grey;
   grid-template-rows: 375px 375px;
   grid-template-areas:
     "top"
@@ -20,6 +64,15 @@ main {
   align-self: end;
   font-size: 5rem;
   padding-left: 5px;
+  padding-bottom: 5px;
+}
+
+#navbar div button {
+  font-size: 1.5rem;
+}
+
+#navbar div button:hover {
+  cursor: pointer;
 }
 
 header {
@@ -31,9 +84,17 @@ header img {
   width: 100%;
 }
 
+#status-message {
+  grid-area: top;
+  align-self: start;
+  font-size: 1.1rem;
+  padding-top:3px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+}
+
 #information-container {
   grid-area: bottom;
-  border: 3px solid red;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 33% 45% 22%;
@@ -43,27 +104,50 @@ header img {
 
 #welcome {
   grid-area: bottom;
-  border: 3px solid orange;
   text-align: center;
   font-size: 5rem;
+  padding-top: 100px
 }
 
 #trip-list-container {
   grid-area: left;
-  border: 3px solid blue;
-  height: 368px;
+  height: 375px;
   width: 100%
   margin-bottom: 20px;
   overflow: scroll;
 }
 
+#trip-list h2 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#trip-list li {
+  list-style-type: none;
+  font-size:1.25rem;
+  padding-top: 5px;
+  padding-bototm: 5px;
+}
+
+#trip-list li:hover {
+  cursor: pointer;
+}
+
 #trip-details {
   grid-area: center;
-  border-right: 3px dashed green;
-  height: 368px;
+  height: 365px;
   width: 100%;
   overflow: scroll;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+#description {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 #reservation-container {
@@ -72,6 +156,21 @@ header img {
   width: 100%;
   overflow: scroll;
   margin-bottom: 20px;
+  text-align: center;
+}
+
+#reservation-container h2 {
+  margin-top: 10px;
+}
+
+.trip-form {
+  text-align: center;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.trip-form div {
+  margin-top: 10px;
 }
 
 /* Navbar container */
@@ -111,7 +210,7 @@ header img {
 
 /* Add a red background color to navbar links on hover */
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
+  background-color: grey;
 }
 
 /* Dropdown content (hidden by default) */
