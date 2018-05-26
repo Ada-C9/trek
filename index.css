@@ -1,6 +1,10 @@
 * {
     list-style-type: none;
-    font-family: sans-serif;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+body {
+  background-color: whitesmoke;
 }
 
 #container {
@@ -8,11 +12,33 @@
   width: 100%;
   height: 300px;
   grid-template-columns: 1fr 1fr;
+  background-size: cover;
+  color: white;
+}
+
+#trip-list {
+  background-color:hsla(175, 74%, 19%, 0.95);
+  border: 1px solid lightgrey;
+}
+
+#single-trip {
+  color: grey;
+  display: flex;
+  text-align: justify;
+}
+
+#form-page {
+  padding-left: 20px;
 }
 
 #status-message {
   padding: 10px;
   color: goldenrod;
+}
+
+header h1 {
+  text-align: center;
+  font-size: 4em;
 }
 
 header {
@@ -31,7 +57,6 @@ header {
 footer {
   color: rgb(244, 216, 134);
   padding: 1em;
-  text-align: justify;
   left: 0;
 }
 
@@ -39,9 +64,9 @@ button {
  font-size: 1em;
  padding: 10px;
  color: #fff;
- background-color: rgb(161, 222, 189);
- border: 2px solid #06D85F;
- border-radius: 20px/50px;
+ background-color: hsla(174, 79%, 32%, 0.95);
+ border: 2px solid #06d7be;
+ border-radius: 10px/50px;
  text-decoration: none;
  cursor: pointer;
  transition: all 0.3s ease-out;
@@ -52,13 +77,4 @@ button:hover {
 }
 
 button:active, button.active { background-color: #20d071; }
-}
-
-header h1 {
-  text-align: center;
-  font-family: Tahoma, Arial, sans-serif;
-  font-size: 6em;
-  /* width: auto;
-  margin: 50px 0;
-  position: static; */
 }
