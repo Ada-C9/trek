@@ -9,8 +9,6 @@
 
 #status-message{
   height: 20px;
-  background-color: blue;
-
 }
 
 
@@ -24,6 +22,7 @@ header{
 h1{
   font-weight: bold;
   font-size: 2em;
+  border-bottom: solid 1px;
 }
 
 
@@ -34,7 +33,6 @@ margin: 1em;
 }
 
 .current-trips{
-  height: 100px;
   padding: 0;
   border:solid;
 }
@@ -45,13 +43,15 @@ div{
 
 #load{
   align-self: left;
+  margin:1em;
+  padding:1em;
 }
 
 
 
 #trip-list li{
   padding: 2em;
-  border: solid;
+  border: solid 1px;
   list-style: none;
 }
 
