@@ -38,8 +38,8 @@ const filterAndShowData = (data, tripList) => {
   }
 }
 
-const appendTripDetails = (data, tripDetails) => {
-  tripDetails.append(`<h2>Trip Details</h2>`);
+const appendTripDetails = (data, tripDetails, title) => {
+  tripDetails.append(`<h2>${title} Trip Details</h2>`);
   tripDetails.append(`<h3><strong>ID:</strong> ${data.id}</h3>`);
   tripDetails.append(`<h3><strong>Name:</strong> ${data.name}</h3>`);
   tripDetails.append(`<h3><strong>Continent:</strong> ${data.continent}</h3>`);
@@ -103,7 +103,7 @@ const loadTrip = (id) => {
   axios.get(URL + `/${id}`)
     .then((response) => {
       let data = response.data;
-      appendTripDetails(data, tripDetails);
+      appendTripDetails(data, tripDetails, 'Existing');
       appendReservationForm(data, reservationForm);
       reportStatus('Trip Details Loaded!');
     })
@@ -182,7 +182,7 @@ const showCreateTripForm = () => {
   createTripForm.append(
     `<div>
       <label class="trip-form">About:</label>
-      <textarea id="about" name="about" rows="10" cols="20" class="trip-form"></textarea>
+      <textarea id="about" name="about" rows="5" cols="20" class="trip-form"></textarea>
     </div>`
   );
   createTripForm.append(
@@ -193,6 +193,10 @@ const showCreateTripForm = () => {
 const createTrip = () => {
   reportStatus('');
   $('#create-trip-form').show();
+  const tripDetails = $('#trip-details');
+  tripDetails.empty();
+  const reservationForm = $('#reservation-form');
+  reservationForm.empty();
   reportStatus('Creating The Trip...');
 
   let tripData = {
@@ -205,6 +209,9 @@ const createTrip = () => {
   }
   axios.post(URL, tripData)
     .then((response) => {
+      let data = response.data;
+      appendTripDetails(data, tripDetails, 'New');
+      appendReservationForm(data, reservationForm);
       reportStatus(
         `Successfully created a trip with the name ${response.data.name}`
       );
@@ -306,13 +313,13 @@ $(document).ready(() => {
     reserveTrip(id);
   });
 
-  $('#create').click(showCreateTripForm);
-  $('#create-trip-form').on('click', '#create-trip', function(){
-    createTrip();
-  });
-
   $('#search').click(showSearchTripsForm);
   $('#search-trips-form').on('click', '#search-by-budget', function(){
     searchByBudget();
+  });
+
+  $('#create').click(showCreateTripForm);
+  $('#create-trip-form').on('click', '#create-trip', function(){
+    createTrip();
   });
 })
