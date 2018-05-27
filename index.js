@@ -46,23 +46,36 @@ const viewTrip = (id) => {
 
   axios.get(URL + '/' + id)
   .then((response) => {
-    reportStatus(`Successfully loaded trip #${id}`);
-    let trip = response.data;
-    let tripDetails = `
-    <h3> ${trip.name} - Trip Details </h3>
-    <p> Continent: ${trip.continent} </p>
-    <p> Category: ${trip.category} </p>
-    <p> Duration: ${trip.weeks} weeks</p>
-    <p> Cost: $${trip.cost} </p>
-    <p> ${trip.about} </p>
-    `;
-    $('#trip-details').append(tripDetails);
+    if (response.status == 200) {
+      console.log();
+      reportStatus(`Successfully loaded trip #${id}`);
+      let trip = response.data;
+      let tripID_res = trip.id
+      // console.log(`res id`);
+      // console.log(tripID_res);
+      let tripDetails = `
+      <h3> ${trip.name} - Trip Details (ID <span>${trip.id}</span>) </h3>
+      <p> Continent: ${trip.continent} </p>
+      <p> Category: ${trip.category} </p>
+      <p> Duration: ${trip.weeks} weeks</p>
+      <p> Cost: $${trip.cost.toFixed(2)} </p>
+      <p> ${trip.about} </p>
 
-
+      `;
+      // $('span').hide()
+      $('#trip-details').append(tripDetails);
+    } else {
+      reportStatus(`Encountered an error while loading trip: ${error.message}`);
+    }
   })
+
+  .catch((error) => {
+    reportStatus(`Encountered an error while loading trip: ${error.message}`);
+    console.log(error);
+  });
 };
 
-const FORM_FIELDS = ['name', 'age', 'email'];
+const FORM_FIELDS = ['name', 'email'];
 const inputField = name => $(`#reservation-form input[name="${name}"]`);
 
 const readFormData = () => {
@@ -87,16 +100,18 @@ const clearForm = () => {
 
 const reserveTrip = (event) => {
   event.preventDefault();
-  const reservationURL = URL + '/' + tripId + '/reservations';
 
+  const tripId = $('#trip-details span').text();
+  // const tripId = $('#trip-id');
+  const reservationURL = URL + '/' + tripId + '/reservations';
   const reservationData = readFormData();
-  console.log(reservationData);
+  console.log();
 
   reportStatus('Reserving trip...');
 
   axios.post(reservationURL, reservationData)
   .then((response) => {
-    reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
+    reportStatus(`Successfully added a reservation with ID ${tripId}!`);
     clearForm();
   })
   .catch((error) => {
@@ -114,15 +129,20 @@ const reserveTrip = (event) => {
 
 $(document).ready(() => {
   $("#trip-location").hide();
-  $("#new-reservation").hide();
+
   $('#load').click(loadtrips)
+
   $('ul').on('click', 'li', function() {
     let tripID = $(this).attr('trip-id');
     viewTrip(tripID);
     $('#trip-location').show();
-    // $('reservation-form').show();
-    // $('reservation-form').attr('tripid', trip.id);
-    // $('#reservation-form').submit(reserveTrip);
+    $("#reserve-trip").show();
+    $("#new-reservation").hide();
+  });
+  $('#reserve-trip').click(function(){
+    $("#reserve-trip").hide();
+    $("#new-reservation").show();
+    let tripID = $(this).attr('trip-id');
   });
   $('#reservation-form').submit(reserveTrip);
 });

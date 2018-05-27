@@ -26,17 +26,19 @@
       <div id="trip-details"> </div>
       <button id="reserve-trip"> Reserve Trip </button>
 
-      <section id="new-reservation"  class="hidden">
+      <div id="new-reservation"  class="hidden">
         <h3>Make a reservation</h3>
         <form id="reservation-form">
-          <div>
-            <label for="name">Name</label>
-            <input type="text" name="name" />
-          </div>
+          <label for="name">Name</label>
+          <input type="text" name="name" />
+          <label for="email">Email</label>
+          <input type="text" name="email" />
           <input type="submit" name="add-reservation" value="Add Reservation" />
         </form>
-      </section>
+      </div>
+
     </section>
+
   </main>
 
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
