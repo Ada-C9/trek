@@ -1,0 +1,7 @@
+.grid-container {
+  grid-template-columns:15% 20% 15% 50%;
+}
+
+#right-aside {
+  grid-column-start: 4;
+}
