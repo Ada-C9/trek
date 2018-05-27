@@ -7,13 +7,54 @@ ul {
   cursor: pointer;
 }
 
-main {
-  display: grid;
-  grid-template-columns: 2;
-  grid-template-rows: 2;
+body {
+  margin: 0;
 }
 
-#trips {
+main {
+  display: grid;
+}
+
+header button {
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 5%;
+  color: white;
+  font-size: 1em;
+}
+
+header h1 {
+  font-size: 5em;
+}
+
+header {
+  margin: 0;
+  padding: 0;
+  height: 50vh;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/croatia.jpg');
+  background-attachment: fixed;
+}
+
+.alltrips {
+  grid-column: 1;
+  grid-row: 1 / span 2;
   max-height: 70vh;
-  overflow-x: scroll;
+}
+
+.details {
+  padding: 0;
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.details ul {
+  padding: 0;
+}
+
+.reservations {
+  grid-row: 2;
+  grid-column: 2;
 }
