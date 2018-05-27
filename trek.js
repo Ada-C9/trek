@@ -101,7 +101,7 @@ const listForm = (id) => {
   <input type="text" name="email" /></div>`,
   formTag += `<div>
   <h5>Trip ID: ${id}</h5></div>`
-  formTag += `<input type="submit" name="add-reserv" value="Reserve" />
+  formTag += `<input type="submit" name="add-reserv" value="Reserve" id="submit-button"/>
   </form>`
 
   $('#reserv-form').html(formTag);
