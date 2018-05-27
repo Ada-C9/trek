@@ -16,14 +16,14 @@ const reportError = (message, errors) => {
   reportStatus(content);
 };
 
-
 const listallTrips = () => {
+  reportStatus('Loading something...');
   const tripsList = $('#tripList')
   tripsList.empty();
 
   axios.get(allTripsURL)
   .then((response) => {
-    reportStatus(`Successfully loaded ${response.data.length}`);
+    reportStatus(`Successfully loaded ${response.data.length} trips`);
     console.log(response);
     const result = response.data
     result.forEach((place) => {
@@ -41,16 +41,18 @@ const tripDetails = (trip) => {
 
   const aboutTrip = $('#details')
   const singleTripUrl = 'https://ada-backtrek-api.herokuapp.com/trips/'
+  reportStatus('Loading a single something...');
   console.log(trip);
 
   axios.get(singleTripUrl + trip.id)
   .then((response) => {
-    reportStatus(`Successfully loaded ${response.data.length}`);
+    reportStatus(`Successfully loaded ${response.data.name} trip`);
     console.log(response);
     const result = response.data
     for (attr in result) {
       aboutTrip.append(`<li>${result[attr]}</li>`);
     }
+    $('#hide').show();
 
   })
   .catch((error) => {
@@ -58,7 +60,7 @@ const tripDetails = (trip) => {
     console.log(error);
   });
 
-}; //end of Trip details
+} //end of Trip details
 
 const createReservation = (reservation, trip) => {
   // console.log(reservation);
