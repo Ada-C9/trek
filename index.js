@@ -87,7 +87,7 @@ const loadTrips = () => {
       reportStatus('Trips Loaded!');
     })
     .catch((error) => {
-      reportStatus(`Error: ${error.message}`);
+      reportStatus(`Error: ${error.message}.`);
     });
 }
 
@@ -122,10 +122,10 @@ const reserveTrip = (id) => {
   }
   axios.post(URL + `/${id}/reservations`, userData)
     .then((response) => {
-      reportStatus(`Successfully reserved this trip with the name ${response.data.name}`);
+      reportStatus(`Successfully reserved this trip with the name ${response.data.name}.`);
       })
     .catch((error) => {
-      reportStatus(`Encountered an error: ${error.message}`);
+      reportStatus(`Encountered an error: ${error.message}.`);
       });
 
   $('input[name="user-name"]').val('');
@@ -213,11 +213,11 @@ const createTrip = () => {
       appendTripDetails(data, tripDetails, 'New');
       appendReservationForm(data, reservationForm);
       reportStatus(
-        `Successfully created a trip with the name ${response.data.name}`
+        `Successfully created a trip with the name ${response.data.name}.`
       );
     })
     .catch((error) => {
-      reportStatus(`Encountered an error: ${error.message}`);
+      reportStatus(`Encountered an error: ${error.message}.`);
     });
 
   $('input[name="name"]').val('');
@@ -307,10 +307,12 @@ $(document).ready(() => {
   $('#trips').on('click', 'li', function() {
     let id = $(this).attr('id');
     loadTrip(id);
+    window.scrollTo(0, 0);
   });
   $('#reservation-form').on('click', '.reserve', function(){
     let id = $(this).attr('id').substr(3);
     reserveTrip(id);
+    window.scrollTo(0, 0);
   });
 
   $('#search').click(showSearchTripsForm);

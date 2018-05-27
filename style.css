@@ -88,6 +88,10 @@ li {
   text-decoration: underline;
 }
 
+li:hover {
+  color: #4EA8AC;
+}
+
 /*---------- trip-details ----------*/
 #trip-details h3, #trip-details p {
   margin-left: 15px;
