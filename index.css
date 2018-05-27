@@ -2,11 +2,6 @@ ul {
   list-style-type: none;
 }
 
-.trip-link:hover {
-  color: blue;
-  cursor: pointer;
-}
-
 body {
   margin: 0;
 }
@@ -29,19 +24,6 @@ header button:hover {
   cursor: pointer;
 }
 
-.reservation input[type="submit"]:hover {
-  cursor: pointer;
-}
-
-.reservation input[type="submit"] {
-  background-color: transparent;
-  border: 1px solid black;
-  border-radius: 5%;
-  color: black;
-  font-size: 0.75em;
-  align-content: center;
-}
-
 header h1 {
   font-size: 5em;
 }
@@ -59,6 +41,15 @@ header {
   color: white;
   background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/croatia.jpg');
   background-attachment: fixed;
+}
+
+.trip-link:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.reservation input[type="submit"]:hover {
+  cursor: pointer;
 }
 
 .alltrips {
@@ -85,5 +76,14 @@ header {
 .reservation {
   grid-row: 2;
   grid-column: 2;
+  align-content: center;
+}
+
+.reservation input[type="submit"] {
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5%;
+  color: black;
+  font-size: 0.75em;
   align-content: center;
 }

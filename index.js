@@ -1,11 +1,11 @@
 const reportStatus = (message) => {
   $('#status-message').html(message);
 };
-const reportErrors = (message, errors) => {
+const reportError = (message, errors) => {
   let content = `<p>${message}</p><ul>`;
-  for (const name in errors) {
-    for (const description of errors[name]) {
-      content += `<li>${name}: ${description}</li>`
+  for (const field in errors) {
+    for (const problem of errors[field]) {
+      content += `<li>${field}: ${problem}</li>`;
     }
   }
   content += "</ul>";
@@ -27,7 +27,7 @@ const loadTrips = () => {
     response.data.forEach((response) => {
       let id = response.id;
       let tripName = response.name;
-      tripList.append(`<li class="trip-link" id="${id}">${tripName}</li>` + '</h3>');
+      tripList.append(`<li class="trip-link" id="${id}">#${id} ${tripName}</li>`);
     });
 
     reportStatus(`You have ${response.data.length} trips to choose from!`)
@@ -76,9 +76,13 @@ const reserveTrip = (event) => {
     reportStatus(`Successfully reserved trip #${response.data.trip_id}! `);
   })
   .catch((error) => {
-    reportStatus(`Had trouble loading trips: ${error.message}`);
-    console.log(error);
-  });
+      if (error.response.data && error.response.data.errors) {
+        console.log(error.response);
+        reportError(`Encountered an error: ${error.message}`, error.response.data.errors);
+      } else {
+        reportStatus(`There was an error: ${error.message}`);
+      }
+    });
 };
 
 const buildReservationBox = (tripData) => {
@@ -100,7 +104,7 @@ const buildReservationBox = (tripData) => {
 const buildDetails = (tripData) => {
   let tripDetails = $('#trip-details');
 
-  let details = '<h3>' + 'Trip: ' + tripData.name + '</h3>';
+  let details = '<h3>' + `Trip #${tripData.id} ` + tripData.name + '</h3>';
   details += '<p>' + tripData.about + '<p>';
   details += '<p>' + '<strong>Continent: </strong>' + tripData.continent + '</p>';
   details += '<p>' + '<strong>Category: </strong>' + tripData.category + '</p>';
