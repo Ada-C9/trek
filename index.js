@@ -54,15 +54,14 @@ const showTrip = (id) => {
 const makeReservation = (trip) => {
   $('.reservation-container').empty();
 
-
-
-
   $('.reservation-container').append(`<form></form>`);
   $(`form`).append(`<h2>Reserve Trip</h2>`);
-  $(`form`).append(`<label for="name">Your Name: </label>`);
+  $(`form`).append(`<label for="name">Your Name:</label>`);
   $(`form`).append(`<input type="text" name="name"></input>`);
   $(`form`).append(`<p>Trip: ${trip.name}</p>`);
   $(`form`).append(`<input type="submit" name="reserve" value="Reserve"></input>`);
+
+
 
 };
 
