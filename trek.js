@@ -73,7 +73,15 @@ const displayTrip = (trip) => {
   })
 
   .catch((error) => {
-    reportStatus(`Encountered an error while loading trip's details: ${error.message}`);
+    console.log(error.response);
+    if (error.response.data && error.response.data.errors) {
+      reportError(
+        `Encountered an error while loading trip's details: ${error.message}`,
+        error.response.data.errors
+      );
+    } else {
+      reportStatus(`Encountered an error while loading trip's details: ${error.message}`);
+    }
     console.log(error);
   })
 
@@ -134,7 +142,7 @@ const reserveTrip = (id) => {
 
   .then((response) => {
     console.log(response);
-    reportStatus(`Successfully added a reservation with ID ${response.data}!`);
+    reportStatus(`Successfully added a reservation!`);
     clearForm();
   })
 
