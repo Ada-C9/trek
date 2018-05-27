@@ -18,16 +18,19 @@ const loadTrips = () => {
   const URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
   let tripList = $('#all-trips');
+  let tripTable = $('#table-body')
   tripList.empty();
 
   axios.get(URL)
   .then((response) => {
+    tripList.append('<h3>Available Trips - Click for Details</h3>');
     response.data.forEach((response) => {
       let id = response.id;
       let tripName = response.name;
-      tripList.append(`<li class="trip-link" id="${id}">${tripName}</li>`);
+      tripList.append(`<li class="trip-link" id="${id}">${tripName}</li>` + '</h3>');
     });
-    reportStatus(`Loaded ${response.data.length} trips!`)
+
+    reportStatus(`You have ${response.data.length} trips to choose from!`)
   })
   .catch((error) => {
     reportStatus(`Had trouble loading trips: ${error.message}`);
@@ -97,27 +100,15 @@ const buildReservationBox = (tripData) => {
 const buildDetails = (tripData) => {
   let tripDetails = $('#trip-details');
 
-  let details = '<h3>Trip Details</h3><ul>';
-  details += '<li #tdName>' + tripData.name + '<li>';
-  details += '<li #tdContinent>' + tripData.continent + '<li>';
-  details += '<li>' + tripData.category + '<li>';
-  details += '<li>' + tripData.weeks + '<li>';
-  details += '<li>' + tripData.cost + '<li>';
-  details += '<li>About: <li>';
+  let details = '<h3>' + 'Trip: ' + tripData.name + '</h3>';
   details += '<p>' + tripData.about + '<p>';
-  details += '<ul>';
+  details += '<p>' + '<strong>Continent: </strong>' + tripData.continent + '</p>';
+  details += '<p>' + '<strong>Category: </strong>' + tripData.category + '</p>';
+  details += '<p>' + '<strong>Weeks: </strong>' + tripData.weeks + '</p>';
+  details += '<p>' + '<strong>Price: $</strong>' + tripData.cost + '</p>';
 
   tripDetails.html(details);
 };
-
-// function populateListItems(trip) {
-//   for (key : trip.getKeys()) {
-//     $("li #td"+key.toUpper()).text( trip[key]);
-//   }
-// }
-//
-// populateListItems({'name': "To Zanzibar!", 'continent': "Atlantis"})
-
 
 $(document).ready(() => {
   // Use Foundation CDN!!
@@ -125,6 +116,9 @@ $(document).ready(() => {
   $('#all-trips').on('click', '.trip-link', function(event){
     let trip = event.target.id;
     (displayTripInfo(trip));
+  });
+  $('#load-trips').on('click', function(event){
+    $('header').css("height", "50vh");
   });
   $('#reserve-trip-form').submit(reserveTrip);
 });
