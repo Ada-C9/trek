@@ -15,7 +15,7 @@ const loadForm = (data) => {
     <p>Your Name: <input type="text" name="name"></p>
     <p>Your Email: <input type="text" name="email"></p>
     <p>Trip: ${data.name}<br>
-    <input class="button" type="submit" value="Reserve"></p>
+    <input type="submit" value="Reserve"></p>
     </form>`
   );
 };
@@ -32,8 +32,8 @@ const reportError = (message, errors) => {
       mess +=  `<li>${field}: ${problem}<li>`;
     }
   }
-  mess += '</ul>'
-  reportStatus(mess, err)
+  mess += '</ul>';
+  reportStatus(mess, 'err');
 };
 
 
@@ -131,7 +131,7 @@ const reserveTrip = (event) => {
     console.log(error.response);
     if (error.response.data && error.response.data.errors) {
       reportError(
-        `Sorry could not load trip: ${error.message}`, error.response.data.errors
+        `Sorry could not load trip: `, error.response.data.errors
       );
     } else {
       reportStatus(`Encountered an error: ${error.message}`);
@@ -140,9 +140,24 @@ const reserveTrip = (event) => {
 
   // reset the form
   $('form')[0].reset();
+};
+
+const buildTrip = () => {
 
 };
 
+const createTrip = () => {
+  const createURL = 'https://ada-backtrek-api.herokuapp.com/trips';
+  const tripData = ''
+  axios.post(`${createURL}${tripData}`)
+
+  .then((response) => {
+
+  })
+  .catch((error) => {
+
+  });
+};
 
 
 $(document).ready(()=>{

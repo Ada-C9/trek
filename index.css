@@ -1,6 +1,10 @@
-body{
+/* ***************ALL BODY ****************/
+
+body {
   background-color: lightgrey;
 }
+
+/* *********** HEADER AND FOOTER *************/
 
 header, footer {
   background-color: lightpink;
@@ -12,6 +16,12 @@ header, footer {
 header {
   top: 0;
   max-height: 8vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+header h1 {
+  margin: 1vh 2vw;
 }
 
 footer {
@@ -19,6 +29,8 @@ footer {
   text-align: center;
   margin: 0;
 }
+
+/* *************** MAIN ****************/
 
 main {
   padding: 8vh 0;
@@ -28,27 +40,44 @@ main {
   grid-template-rows: .75fr 6fr 6fr;
 }
 
-main:first-child {
-  grid-area: 1 / 1 / 2 / 3;
+
+/* ************* ALL SECTIONS ************ */
+
+h2 {
+  margin: 0;
+  padding: 2vh;
+  text-align: center;
 }
+
+/* *************** TOP SECTION ************** */
 
 section:first-child {
   grid-area: 1 / 1 / 2 / 3;
   display: flex;
+  justify-content: space-around;
 }
 
-.button {
+button {
   font-size: 1em;
   background: linear-gradient(lightpink, grey);
   font-weight: bold;
   padding: .5em;
 }
 
-
-
 button:hover {
   background: linear-gradient(grey, lightpink);
 }
+
+#status-message {
+  background-color: darkgrey;
+  font-style: italic;
+  font-weight: bold;
+  margin: 0 5vw;
+}
+
+
+
+/* ********** ALL TRIPS SECTION *********** */
 
 #all-trips {
   grid-area: 2 / 1 / 4 / 2;
@@ -58,11 +87,6 @@ button:hover {
   max-width: 45vw;
 }
 
-h2 {
-  margin: 0;
-  padding: 2vh;
-  text-align: center;
-}
 
 #trip-list {
   list-style-type: none;
@@ -88,6 +112,9 @@ h2 {
   font-size: 1.4em;
 }
 
+
+/* *********** TRIP DETAIL SECTION ************* */
+
 #trip-details {
   margin: 1vw;
   grid-area: 2 / 2 / 3 / 3;
@@ -110,6 +137,8 @@ h2 {
   font-size: 1.3em;
 }
 
+/* ********* TRIP RESERVATION SECTION ********* */
+
 #trip-reservation {
   grid-area: 3 / 2 / 4 / 3 ;
   margin: 1vw;
@@ -127,6 +156,8 @@ h2 {
   padding: .5em;
 }
 
+/* ********* STYLES USED BY JQUERY ********** */
+
 .bordered {
   border: solid black .25px;
 }
@@ -136,23 +167,21 @@ h2 {
 }
 
 .success {
-  background-color: darkgrey;
   color: green;
-  text-decoration: italic;
-  font-weight: bold;
   padding: 1vw;
-  margin: 3vw;
 }
 
 .err {
-  background-color: darkgrey;
   color: red;
-  text-decoration: italic;
-  font-weight: bold;
-  padding: 1vw;
-  margin: 3vw;
+  padding: auto 1vw;
+}
+
+.err p {
+  margin: 0;
 }
 
 .err ul {
   list-style-type: none;
+  padding: 0;
+  margin: 0
 }
