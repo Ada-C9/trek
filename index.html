@@ -8,18 +8,19 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
 
   <!-- Compressed JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script> -->
   <link rel="stylesheet" href="stylesheet.css">
   <link href="https://fonts.googleapis.com/css?family=Antic|Space+Mono|Yatra+One" rel="stylesheet">
 </head>
 <body>
-  <section id="status-message" ></section>
+  <section id="status-message" class="hidden" ></section>
   <main>
     <h1>Trek</h1>
     <button id="load">See All Trips</button>
 
     <section class="main-display hidden">
       <div>
+        <h3>Trips:</h3>
         <ul id="trip-list"></ul>
       </div>
 
@@ -27,23 +28,23 @@
         <ul id="trip-details" class="bold-li hidden"></ul>
 
         <form id="reservation-form" class="reservations-form hidden">
-          <h1>Add a new reservation</h1>
+          <h3>Add a new reservation</h3>
           <div>
-            <label for="name">Name</label>
+            <label for="name">Name:</label>
             <input type="text" name="name" />
           </div>
 
           <div>
-            <label for="age">Age</label>
+            <label for="age">Age:</label>
             <input type="number" name="age" />
           </div>
 
           <div>
-            <label for="email">email</label>
+            <label for="email">email:</label>
             <input type="text" name="email" />
           </div>
 
-          <input id="submit-button" type="submit" name="make-reservation" value="Make Reservation" class="button"/>
+          <button><input id="submit-button" type="submit" name="make-reservation" value="Make Reservation" /></button>
         </form>
       </div>
     </section>

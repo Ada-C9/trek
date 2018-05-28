@@ -5,6 +5,7 @@ body {
   background-repeat: no-repeat;
   background-position: top center;
   /* width: 100%; */
+  margin: 5%; 
 }
 
 
@@ -12,9 +13,9 @@ body {
 /* font-family: 'Yatra One', cursive;
 font-family: 'Antic', sans-serif;
 font-family: 'Space Mono', monospace; */
-h1, h2, h3, h4 {
+h1, h2, h3, h4, label{
   font-family: 'Yatra One', cursive;
-  text-align: center;
+  /* text-align: center; */
 }
 
 ul {
@@ -42,4 +43,22 @@ button {
   border: none;
 }
 
+#submit-button {
+  background: none;
+  border: none;
+}
+
 .hidden { display: none; }
+
+input {
+  background-color: rgba(256,226,136,.8);
+}
+
+#status-message{
+  background-color: rgba(255,234,162,.8);
+  font-family: 'Yatra One', cursive;
+  padding: 1rem;
+  border-radius: 3rem;
+  border: none;
+  width: auto;
+}
