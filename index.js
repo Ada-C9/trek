@@ -1,6 +1,7 @@
 
 
-let targetTrip = null
+let targetTripId = null
+let targetTripName = null
 
 const BASE_URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
@@ -49,7 +50,7 @@ const getTripDetail = function getTripDetail(tripID) {
 
   reportStatus('Getting trip details.');
 
-  targetTrip = tripID
+  targetTripId = tripID
 
   const singleTripDetail = $('#trip-deets');
   singleTripDetail.empty();
@@ -63,16 +64,17 @@ const getTripDetail = function getTripDetail(tripID) {
   axios.get(tripDetailUrl)
     .then((response) => {
       reportStatus(`Trip details loaded!`);
+      targetTripName = response.data.name;
       singleTripDetail.append(
         `<h1>DO YOU WANT TO GO TO HERE? YOU CAN GO TO HERE.</h1>
-        <h3>Name: ${response.data.name}</h3>
+        <h3>Name: ${targetTripName}</h3>
         <h4>Continent: ${response.data.continent}</h4>
         <h4>Category:  ${response.data.category}</h4>
         <h5>Weeks: ${response.data.weeks}</h5>
         <h5>Cost: ${response.data.cost}</h5>
         <h5>About: </h5>
         <p>${response.data.about}</p>
-        <h6>Trip ID: ${targetTrip}</h6>`);
+        <h6>Trip ID: ${targetTripId}</h6>`);
     })
     .catch((error) => {
       reportStatus(`Encountered an error while loading trip details: ${error.message}`);
@@ -84,36 +86,104 @@ const getTripDetail = function getTripDetail(tripID) {
 };
 
 
-// const makeReservation = function makeReservation {
+const FORM_FIELDS = ['name', 'age', 'owner'];
+const inputField = name => $(`#pet-form input[name="${name}"]`);
+
+const readFormData = () => {
+  const getInput = name => {
+    const input = inputField(name).val();
+    return input ? input : undefined;
+  };
+
+  const formData = {};
+  FORM_FIELDS.forEach((field) => {
+    formData[field] = getInput(field);
+  });
+
+  return formData;
+};
+
+const clearForm = () => {
+  FORM_FIELDS.forEach((field) => {
+    inputField(field).val('');
+  });
+}
+
+
+
+
+const callReservationScreen = function callReservationScreen() {
+
+    reportStatus('Pulling up reservation screen');
+
+    const reservationScreen = $('#reservation-box');
+    reservationScreen.empty();
+
+    reservationScreen.append(
+      `<section id="reservation-interface">
+        <h1> MAKE A PLAN TO GO HERE </h1>
+        <h3> The Trip You Want To Go On Is: ${targetTripName}</h3>
+        <form id='reservation-form' name='reservation-form'>
+          <label for='traveller-name'>Name:</label>
+          <input type='text' id='traveller-name' name='traveller-name'><br>
+          <label for='traveller-age'>Age:</label>
+          <input type='number' id='traveller-age' name='traveller-age'><br>
+          <label for='traveller-email'>Email:</label>
+          <input type='email' id='traveller-email' name='traveller-email'><br>
+          <label>&nbsp;</label>
+          <input type='submit' id='submit-reservation-info' value='Make It So I Go Here.'><br>
+        </form>
+      </section>`
+    )
+  };
+    //
+    // const RESERVATION_FORM_FIELDS = ['name', ];
+    // const reservationInputField = name => $(`#reservation-form input[name="${name}"]`);
+    //
+    // const readFormData = () => {
+    //   const getInput = name => {
+    //     const input = inputField(name).val();
+    //     return input ? input : undefined;
+    //   };
+    //
+    //   const formData = {};
+    //   FORM_FIELDS.forEach((field) => {
+    //     formData[field] = getInput(field);
+    //   });
+    //
+    //   return formData;
+    // };
+
+
 //
-//   reportStatus('Pulling up reservation screen');
+// const makeReservation = function makeReservation() {
 //
-//   const singleTripDetail = $('#trip-deets');
-//   singleTripDetail.empty();
+//     let reserveTripUrl = BASE_URL.concat("/").concat(targetTrip).concat("/reservations")
 //
-//   let tripDetailUrl = BASE_URL.concat("/").concat(tripID)
+//     axios.post(reserveTripUrl) =
 //
-//   console.log(`${tripDetailUrl}`);
-//
-//   axios.get(tripDetailUrl)
-//     .then((response) => {
-//       reportStatus(`Trip details loaded!`);
-//       singleTripDetail.append(
-//         `<h3>Name: ${response.data.name}</h3>
-//         <h4>Continent: ${response.data.continent}</h4>
-//         <h4>Continent: ${response.data.continent}</h4>
-//         <h4>Category:  ${response.data.category}</h4>
-//         <h5>Weeks: ${response.data.weeks}</h5>
-//         <h5>Cost: ${response.data.cost}</h5>
-//         <h5>About: </h5>
-//         <p>${response.data.about}</p>
-//         <h6>Trip ID: ${response.data.id}</h6>`
-//     })
-//     .catch((error) => {
-//       reportStatus(`Encountered an error while loading trip details: ${error.message}`);
-//       console.log(error);
-//     });
 // };
+
+
+  // axios.get(tripDetailUrl)
+  //   .then((response) => {
+  //     reportStatus(`Trip details loaded!`);
+  //     singleTripDetail.append(
+  //       `<h3>Name: ${response.data.name}</h3>
+  //       <h4>Continent: ${response.data.continent}</h4>
+  //       <h4>Continent: ${response.data.continent}</h4>
+  //       <h4>Category:  ${response.data.category}</h4>
+  //       <h5>Weeks: ${response.data.weeks}</h5>
+  //       <h5>Cost: ${response.data.cost}</h5>
+  //       <h5>About: </h5>
+  //       <p>${response.data.about}</p>
+  //       <h6>Trip ID: ${response.data.id}</h6>`
+  //   })
+  //   .catch((error) => {
+  //     reportStatus(`Encountered an error while loading trip details: ${error.message}`);
+  //     console.log(error);
+  //   });
+
 
 
 
@@ -184,14 +254,14 @@ $(document).ready(() => {
      getTripDetail(this.id)
    });
  $('#reserve-button').on('click', 'button', function(event) {
-    makeReservation()
+    callReservationScreen()
   });
    // $('#every-trip').on('click', 'li', function(event) {
    //    alert(`Got a click on an <li> containing "${$(this).html()}"`);
    //  });
    // $('#every-trip').on('click', 'li', getTripDetail(this.class));
    // $("ul#every-trip li").click(getTripDetail(this.class));
-   // $('#pet-form').submit(createPet);
+   // $('#reservation-form').submit(createPet);
 })
 
 
