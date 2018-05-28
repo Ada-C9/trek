@@ -17,26 +17,65 @@ header {
  grid-row-start: 1;
  display: flex;
  justify-content: center;
- /* background-color: ; */
- color: black;
+ background-color: black;
+ color: white;
 }
 
 .grid-container {
   display: grid;
-  grid-template-rows: .25fr 25fr .25fr;
+  grid-template-rows: 10% 85% 5%;
 }
 main {
   display: grid;
-  grid-template-columns: 5% 40% 5% 50%;
+  grid-template-columns: 50% 50%;
   grid-row-start: 2;
   background-color: grey;
 }
 
 #right-aside {
-  grid-column-start: 4;
-  border: 3px solid black;
+  display: grid;
+  grid-template-rows: 25% 75%;
+  grid-column-start: 2;
+}
+
+#hide{
+  grid-column-row: 2;
+
+  /* border: .25px solid black; */
 }
 
 .list {
-  grid-column-start: 2;
+  grid-column-start: 1;
+  display: flex;
+  justify-content: center;
+  border: 3px solid black;
+}
+
+
+.footer-center{
+  grid-row: 3;
+  display: flex;
+}
+
+.footer-center ul {
+  display: flex;
+}
+
+ .parallax {
+   grid-column-start: 1;
+
+
+  /* The image used */
+  background-image: url("https://picsum.photos/500/");
+
+  /* Set a specific height */
+  height: 50em;
+  overflow: scroll;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
