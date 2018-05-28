@@ -2,34 +2,48 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>Tripsssssssss</title>
+  <title>Trek Trip Finder</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed" rel="stylesheet">
 </head>
 <body>
   <section id="status-message"></section>
 
+  <header>
+    <h1 id="header-title">Trek Trip Finder</h1>
+  </header>
   <main>
-
     <section class="current-trips">
-      <h1>List-o-Trips</h1>
-      <button id="load">Get Trips!</button>
-      <ul id="trips-list"></ul>
-    </section>
+        <button id="load"><h3>Get Trips!</h3></button>
+        <ul id="trips-list"></ul>
+      </section>
 
-    <section class="trip-details-section">
-      <ul id="trip-details"></ul>
-      <div class="reserve-trip-form"></div>
-    </section>
+      <section class="trip-details-section">
+        <ul id="trip-details"></ul>
+        <section class="reserve-trip-form">
+          <h2>Reserve Trip</h2>
+          <form>
+            <div>
+              <label for="name">Name</label>
+              <input type="text" name="name" />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="text" name="email" />
+            </div>
+            <p><strong>Trip Name:  </strong><span class="trip-name"></span></p>
+            <input type="submit" name="reserve-trip" value="Reserve"/>
+          </form>
+        </section>
+      </section>
+    </main>
 
-  </main>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
 
-  <script type="text/javascript" src="index.js"></script>
-
-</body>
-</html>
+  </body>
+  </html>
