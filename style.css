@@ -1,23 +1,13 @@
-body {
-  font-family: sans-serif;
+.trip-details cell medium-8 medium-cell-block-y {
+
 }
 
-main {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+html, body {
+  box-sizing: border-box;
+  min-height: 100%;
+  background-image: url('images/background.png');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-/* table {
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid black;
-}
-
-td, th {
-    height: 50px;
-}
-
-td {
-  text-align: center;
-} */
