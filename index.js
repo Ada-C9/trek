@@ -68,7 +68,7 @@ const showReservation = (trip) => {
       name: $('input[name="name"]').val(),
       email: $('input[name="email"]').val()
     }
-    reserveTrip(trip, formData);
+    reserveTrip(event, trip, formData);
   })
 };
 
