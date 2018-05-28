@@ -25,7 +25,6 @@ const loadTrips = function loadTrips() {
 
   axios.get(allTripsUrl)
   .then((response) => {
-    console.log('inside the .then');
     response.data.forEach((trip) => {
       console.log(trip);
       tripList.append(`<li><a class="trip" data-id="${trip.id}" href="#">${trip.name}</a></li>`);
@@ -107,6 +106,12 @@ const reserveTrip = (event) => {
           }
         });
 };
+
+// make method for getting the reservation object once it's clicked OR
+// event listener in the reservation section, listening for a click on a trip
+
+
+
 
 $(document).ready(() => {
   $('#load').click(loadTrips);

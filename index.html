@@ -12,8 +12,23 @@
 
 <body>
   <h1 id="banner">Trek the World</h1>
+
   <main>
-    <section id="new-reserve" style= "display:none">
+    <section id="status-message"></section>
+
+    <section class="trips">
+      <button id="load">See all trips</button>
+      <table>
+        <tbody>
+          <tr>
+            <ul>
+            </ul>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="new-reserve">
       <h1>Reserve a spot</h1>
       <form id="trip-form" action="index.html" method="post">
 
@@ -23,6 +38,8 @@
 
           <label for="email">Email</label>
           <input type="text" name="email">
+
+          <p>Trip (goes here)</p>
         </div>
 
         <input type="submit" name="reserve-trip" value="Ready to travel" />
@@ -34,20 +51,7 @@
       </section>
     </div>
 
-    <section class="trips">
-      <table>
-        <tbody>
-          <tr>
-            <ul id="trip-list">
-              <td>
-
-              </td>
-            </ul>
-          </tr>
-        </tbody>
-      </table>
-    </section>
   </main>
-  <button id="load">See all trips</button>
+
 </body>
 </html>

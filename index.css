@@ -41,6 +41,7 @@ main {
 #new-reserve {
   grid-column: 2;
   grid-row: 1;
+  display: none;
 }
 
 #details {
