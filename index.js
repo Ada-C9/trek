@@ -19,16 +19,21 @@ const reportError = (message, errors) => {
 //LOAD all/specific trips based on url params
 const getTrips = (url) => {
   const tripList = $('#trip-list');
+  tripList.show();
   tripList.empty();
 
   reportStatus('Loading trips, please wait...');
 
   axios.get(url)
     .then((response) => {
+      let header = $(`<h4>All Trips</h4>`)
+      tripList.append(header);
+
       response.data.forEach((trip) => {
         let item = $(`<li>${trip.name}</li>`).attr('id', `${trip.id}`);
         tripList.append(item);
       });
+
       reportStatus(`Successfully loaded ${response.data.length} trips`)
     })
     .catch((error) => {

@@ -10,25 +10,25 @@
     <section id="status-message"></section>
     <h1>Trek</h1>
     <div>
-      <h1>Welcome To Trek</h1>
+      <h3>Welcome To Trek</h3>
       <h4>Your destination for planning a fabulous trip to... another destination.</h4>
     </div>
     <main>
       <section class="buttons">
-        <button class="trips" id="load">See All Trips</button>
-        <button class="trips" id="asia">Asia</button>
-        <button class="trips" id="africa">Africa</button>
-        <button class="trips" id="antartica">Antartica</button>
-        <button class="trips" id="australasia">Australasia</button>
-        <button class="trips" id="europe">Europe</button>
-        <button class="trips" id="north-amer">North America</button>
-        <button class="trips" id="south-amer">South America</button>
+        <button id="load">See ALL Trips</button>
+        <button id="asia">Asia</button>
+        <button id="africa">Africa</button>
+        <button id="antartica">Antartica</button>
+        <button id="australasia">Australasia</button>
+        <button id="europe">Europe</button>
+        <button id="north-amer">North America</button>
+        <button id="south-amer">South America</button>
       </section>
       <div class="container">
         <div>
-          <ul class="trips" id="trip-list"></ul>
+          <ul class="trips hidden" id="trip-list"></ul>
         </div>
-        <section class="hidden">
+        <section class="hidden trip-detail">
           <h3>Trip Details</h3>
           <div id="trip-detail-section" class="trip-detail-section">
           </div>
@@ -43,13 +43,12 @@
                 <label for="email">Email</label>
                 <input type="text" name="email" />
               </div>
-              <input id="reserve-trip-button" type="submit" name="add-trip" value="Reserve Trip" />
+              <input class="button" type="submit" name="add-trip" value="Reserve Trip" />
             </form>
           </div>
         </section>
       </div>
     </main>
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="index.js"></script>
