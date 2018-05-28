@@ -85,19 +85,17 @@ const clearForm = () => {
 const reserveTrip = (event) => {
   event.preventDefault();
 
-  console.log(`THIS IS AN EVENT`);
-
   const reserveData = readFormData()
   console.log(reserveData);
 
   axios.post(reserveUrl, reserveData)
     .then((response) => {
-      console.log(`SUCCESS: ${$response.data.id}`);
-      reportStatus(`Successfully added a reservation with ID ${response.data.id}!`);
+      console.log(`SUCCESS`);
+      reportStatus(`Successfully added a reservation with ID ${response.data.trip_id}!`);
       clearForm();
     })
     .catch((error) => {
-        console.log(`FAIL!: ${response.data.id}`);
+        console.log(`FAIL`);
           console.log(error.response);
           if (error.response.data && error.response.data.errors) {
             reportError(
