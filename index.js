@@ -55,7 +55,7 @@ const loadTrip = (trip) => {
       <p><strong> Continent:</strong> ${response.data.continent}</p>
       <p><strong> About:</strong> ${response.data.about}</p>
       <p><strong> Category:</strong> ${response.data.category}</p>
-      <p><strong> Cost:</strong> ${response.data.weeks}</p>`);
+      <p><strong> Cost:</strong> $${response.data.cost}</p><p><strong> Weeks:</strong> ${response.data.weeks}</p>`);
       tripDetails.html(tripItem);
 
       $('#selected-name').text(response.data.name)

@@ -17,9 +17,6 @@ color: darkblue;
   display: none;
 }
 
-#trip-details {
-  /* border: solid; */
-}
 
 #trips-list li {
   border-bottom: solid;
