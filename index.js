@@ -12,19 +12,18 @@ const reportStatus = (message) => {
   $('#status-message').html(message);
 };
 
-// const reportError = (message, errors) => {
-//   let content = `<p>${message}</p><ul>`;
-//   for (const field in errors) {
-//     for (const problem of errors[field]) {
-//       content += `<li>${field}: ${problem}</li>`;
-//     }
-//   }
-//   content += "</ul>";
-//   reportStatus(content);
-// };
-//
-// Loading Trips
-//
+const reportError = (message, errors) => {
+  let content = `<p>${message}</p><ul>`;
+  for (const field in errors) {
+    for (const problem of errors[field]) {
+      content += `<li>${field}: ${problem}</li>`;
+    }
+  }
+  content += "</ul>";
+  reportStatus(content);
+};
+
+
 const loadTrips = () => {
   reportStatus('Loading trips...');
 
@@ -120,69 +119,129 @@ const callReservationScreen = function callReservationScreen() {
     reservationScreen.empty();
 
     reservationScreen.append(
-      `<section id="reservation-interface">
-        <h1> MAKE A PLAN TO GO HERE </h1>
+      ` <h1> MAKE A PLAN TO GO HERE </h1>
         <h3> The Trip You Want To Go On Is: ${targetTripName}</h3>
         <form id='reservation-form' name='reservation-form'>
-          <label for='traveller-name'>Name:</label>
-          <input type='text' id='traveller-name' name='traveller-name'><br>
-          <label for='traveller-age'>Age:</label>
-          <input type='number' id='traveller-age' name='traveller-age'><br>
-          <label for='traveller-email'>Email:</label>
-          <input type='email' id='traveller-email' name='traveller-email'><br>
+          <label for='name'>Name:</label>
+          <input type='text' id='name' name='name'><br>
+          <label for='age'>Age:</label>
+          <input type='number' id='age' name='age'><br>
+          <label for='email'>Email:</label>
+          <input type='email' id='email' name='email'><br>
           <label>&nbsp;</label>
           <input type='submit' id='submit-reservation-info' value='Make It So I Go Here.'><br>
-        </form>
-      </section>`
+        </form>`
     )
   };
-    //
-    // const RESERVATION_FORM_FIELDS = ['name', ];
-    // const reservationInputField = name => $(`#reservation-form input[name="${name}"]`);
-    //
-    // const readFormData = () => {
-    //   const getInput = name => {
-    //     const input = inputField(name).val();
-    //     return input ? input : undefined;
-    //   };
-    //
-    //   const formData = {};
-    //   FORM_FIELDS.forEach((field) => {
-    //     formData[field] = getInput(field);
-    //   });
-    //
-    //   return formData;
-    // };
 
+const createReservation = (e) => {
 
-//
-// const makeReservation = function makeReservation() {
-//
-//     let reserveTripUrl = BASE_URL.concat("/").concat(targetTrip).concat("/reservations")
-//
-//     axios.post(reserveTripUrl) =
-//
-// };
+  e.preventDefault()
 
+  console.log('in the Create Reservation method!')
 
-  // axios.get(tripDetailUrl)
-  //   .then((response) => {
-  //     reportStatus(`Trip details loaded!`);
-  //     singleTripDetail.append(
-  //       `<h3>Name: ${response.data.name}</h3>
-  //       <h4>Continent: ${response.data.continent}</h4>
-  //       <h4>Continent: ${response.data.continent}</h4>
-  //       <h4>Category:  ${response.data.category}</h4>
-  //       <h5>Weeks: ${response.data.weeks}</h5>
-  //       <h5>Cost: ${response.data.cost}</h5>
-  //       <h5>About: </h5>
-  //       <p>${response.data.about}</p>
-  //       <h6>Trip ID: ${response.data.id}</h6>`
+  console.log(`Here is the targetTripId: ${targetTripId}`)
+  console.log(`Here is the targetTripName: ${targetTripName}`)
+
+  const reserveTripUrl = BASE_URL.concat("/").concat(targetTripId).concat("/reservations")
+
+  console.log(`Here is the reservation-posting URL: ${reserveTripUrl}`)
+
+  const reservationData = {
+    name: 'Herkimer',
+    email: 'herkimer@herkulator.ru'
+  }
+
+  axios.post(reserveTripUrl, reservationData)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+};
+
+// .then(function (response) {
+//   resultElement.innerHTML = generateSuccessHTMLOutput(response);
+// })
+// .catch(function (error) {
+//   resultElement.innerHTML = generateErrorHTMLOutput(error);
+// });
+//
+// e.preventDefault();
+
+  // console.log('In the reservation-making method!')
+  // console.log(`Here is the targetTripId: ${targetTripId}`)
+  // console.log(`Here is the targetTripName: ${targetTripName}`)
+  //
+  // const reserveTripUrl = BASE_URL.concat("/").concat(targetTripId).concat("/reservations")
+  //
+  // console.log(`Here is the reservation-posting URL: ${reserveTripUrl}`)
+  //
+  // const reservationData = {
+  //   name: 'Herkimer',
+  //   email: 'herkimer@herkulator.ru'
+  // }
+  //
+  // console.log(`Here is the reservation info: ${reservationData} ${reservationData.name}, ${reservationData.email}`)
+
+  // axios.post('https://ada-backtrek-api.herokuapp.com/trips/1/reservations', {
+  //   name: 'Black Philip',
+  //   email: 'always@deliciouslyliving.com'
   //   })
-  //   .catch((error) => {
-  //     reportStatus(`Encountered an error while loading trip details: ${error.message}`);
-  //     console.log(error);
-  //   });
+  //     .then((response) => {
+  //       console.log(response);
+  //       reportStatus(`Successfully sending Black Philip someplace"!`);
+  //       // clearForm();
+  //     })
+  //     .catch((error) => {
+  //       console.log('Whoops!');
+  //       console.log(error.response);
+  //       reportStatus(`Encountered an error: ${error.message}`);
+  //           });
+        // if (error.response.data && error.response.data.errors) {
+        //   reportError(
+        //     `Encountered an error: ${error.message}`,
+        //     error.response.data.errors
+        //   );
+        // } else {
+        //   reportStatus(`Encountered an error: ${error.message}`);
+        // }
+  // reportStatus(`Attempting to reserve a spot in "${targetTripName}". `)
+
+//   axios.post(reserveTripUrl, reservationData)
+//     .then((response) => {
+//       console.log(response);
+//       reportStatus(`Successfully created a reservation with ID "${reservationData.name}"!`);
+//       // clearForm();
+//     })
+//     .catch((error) => {
+//       console.log('Whoops!');
+//       console.log(error.response);
+//       reportStatus(`Encountered an error: ${error.message}`);
+//       // if (error.response.data && error.response.data.errors) {
+//       //   reportError(
+//       //     `Encountered an error: ${error.message}`,
+//       //     error.response.data.errors
+//       //   );
+//       // } else {
+//       //   reportStatus(`Encountered an error: ${error.message}`);
+//       // }
+//     });
+//
+
+// axios.post('https://ada-backtrek-api.herokuapp.com/trips/1/reservations', {
+//   name: 'Black Philip',
+//   email: 'always@deliciouslyliving.com',
+// })
+
+
+
+
+
+
+
+
 
 
 
@@ -218,33 +277,7 @@ const callReservationScreen = function callReservationScreen() {
 //   });
 // }
 //
-// const createPet = (event) => {
-//   // Note that createPet is a handler for a `submit`
-//   // event, which means we need to call `preventDefault`
-//   // to avoid a page reload
-//   event.preventDefault();
-//
-//   const petData = readFormData();
-//   console.log(petData);
-//
-//   reportStatus('Sending pet data...');
-//
-//   axios.post(URL, petData)
-//     .then((response) => {
-//       reportStatus(`Successfully added a pet with ID ${response.data.id}!`);
-//       clearForm();
-//     })
-//     .catch((error) => {
-//       console.log(error.response);
-//       if (error.response.data && error.response.data.errors) {
-//         reportError(
-//           `Encountered an error: ${error.message}`,
-//           error.response.data.errors
-//         );
-//       } else {
-//         reportStatus(`Encountered an error: ${error.message}`);
-//       }
-//     });
+
 
 
 
@@ -256,12 +289,13 @@ $(document).ready(() => {
  $('#reserve-button').on('click', 'button', function(event) {
     callReservationScreen()
   });
-   // $('#every-trip').on('click', 'li', function(event) {
-   //    alert(`Got a click on an <li> containing "${$(this).html()}"`);
-   //  });
-   // $('#every-trip').on('click', 'li', getTripDetail(this.class));
-   // $("ul#every-trip li").click(getTripDetail(this.class));
-   // $('#reservation-form').submit(createPet);
+  $('#reservation-box').on('submit', 'form', function(event) {
+    createReservation(event)
+  });
+  // $('#reservation-box').on('submit', 'form', function(event) {
+  //   event.preventDefault;
+  //   createReservation(event);
+  //  });
 })
 
 
