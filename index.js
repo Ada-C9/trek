@@ -17,13 +17,6 @@ const reportError = (message, errors) => {
   reportStatus(content);
 };
 
-// TODO implement this when the 'create trip' is implemented
-// const clearForm = () => {
-//   FORM_FIELDS.forEach(field => {
-//     inputField(field).val("");
-//   });
-// };
-
 // To call more than one trip
 const loadTrips = () => {
   reportStatus('Loading trips...');
@@ -57,22 +50,25 @@ const loadTrips = () => {
 // To call only one trip
 const loadTrip = function loadTrip(selectedTripID) {
   reportStatus('Loading one trip...');
+
   axios.get(TRIP_URL + `${selectedTripID}`)
   .then(response => {
-    // reportStatus(`Successfully added trip with ID ${response.data.id}!`);
-    // clearForm(); // TODO <-- do we need this???
+
     console.log(response);
     const tripDetails = $('#trip-details');
 
     tripDetails.empty();
 
-    tripDetails.append(`<li><strong>ID: </strong>${response.data.id}</li><br>`);
+    tripDetails.append(`<li><strong>Trip ID: </strong>${response.data.id}</li><br>`);
     tripDetails.append(`<li><strong>Trip Name: </strong>${response.data.name}</li><br>`);
     tripDetails.append(`<li><strong>Continent: </strong>${response.data.continent}</li><br>`);
     tripDetails.append(`<li><strong>About: </strong>${response.data.about}</li><br>`);
     tripDetails.append(`<li><strong>Category: </strong>${response.data.category}</li><br>`);
-    tripDetails.append(`<li><strong>Weeks: </strong>${response.data.weeks}</li><br>`);
-    tripDetails.append(`<li><strong>Cost: </strong>${response.data.cost}</li><br>`);
+    tripDetails.append(`<li><strong>Duration (weeks): </strong>${response.data.weeks}</li><br>`);
+    tripDetails.append(`<li><strong>Cost: $</strong>${response.data.cost}</li><br>`);
+
+    reportStatus('Loaded trip details...')
+    loadResForm(response.data.name);
   })
 
   .catch(error => {
@@ -81,46 +77,53 @@ const loadTrip = function loadTrip(selectedTripID) {
   });
 }; // ends const loadTrip
 
-const FORM_FIELDS = ["name", "email", "trip name"];
-const inputField = name => $(`trip-form-input[name="${name}"]`);
+const FORM_FIELDS = ["name", "email"];
+const inputField = name => $(`.reserve-trip-form input[name="${name}"]`);
 
-// const readFormData = () => {
-//   const getInput = name => {
-//     const input = inputField(name).val();
-//     return input ? input : undefined;
-//   };
-//
-//   const formData = {};
-//   FORM_FIELDS.forEach(field => {
-//     formData[field] = getInput(field);
-//   });
-//
-//   return formData;
-// };
-//
-// const clearForm = () => {
-//   FORM_FIELDS.forEach(field => {
-//     inputField(field).val("");
-//   });
-// };
+const clearForm = () => {
+  FORM_FIELDS.forEach(field => {
+    inputField(field).val("");
+  });
+};
 
 const loadResForm = function loadResForm(tripName) {
-  const reserveTripForm = $(`.reserve-trip-form`);
-  const tripForm =
-    `<form>
-      <div>
-          <label for="name">Name</label>
-          <input type="text" name="name" />
-      </div>
-      <div>
-          <label for="email">Email</label>
-          <input type="text" name="email" />
-      </div>
-      <p>${tripName}</p>
-    <input type="submit" name="reserve-trip" value="Reserve" />
-    </form>`
-    // figure out how to hide and show???
-  reserveTripForm.html(tripForm);
+  // hide the form using CSS (display-none)
+  // show the form
+  $('.reserve-trip-form').show();
+  $('.reserve-trip-form .trip-name').text(tripName);
+};
+
+const createRes = function createRes(tripID) {
+  // get info from form, send to Rails API, say make a new res
+  let resData = {
+    name: $('.reserve-trip-form input[name="name"]').val(),
+    email: $('.reserve-trip-form input[name="email"]').val()
+
+  };
+
+  axios.post(TRIP_URL + tripID + "/reservations", resData)
+    // get the trip ID
+
+  .then(function(response) {
+    // set the status message to say that we successfully added a res
+    // clear the res form
+    reportStatus(`Successfully added a trip with ID ${response.data.trip_id}!`);
+    clearForm();
+  })
+
+  .catch(function(error) {
+    // display the error messages
+    console.log(error.response);
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error: ${error.message}`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Encountered an error: ${error.message}`);
+      }
+  });
+
 };
 
 $(document).ready(() => {
@@ -129,11 +132,14 @@ $(document).ready(() => {
     let selectedTripID = (this.id)
     loadTrip(selectedTripID);
 
-    let tripName = $(`#${this.id}`).text();
-    console.log(tripName);
-    loadResForm(tripName);
+    // clear out the handlers prior to adding submit handler
+    $('.reserve-trip-form form').off( "submit");
+
+    $('.reserve-trip-form form').submit(function (event) {
+      event.preventDefault();
+      createRes(selectedTripID); // <- a closure!!!
+    });
+
   });
 
 }); // ends (document).ready
-
-// When we add li to the page we can include the id attribute or class or data attribute that you can put in the DOM using "data-name" or "data-owner"
