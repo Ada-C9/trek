@@ -5,7 +5,6 @@ const reportStatus = (message) => {
 }
 
 const loadTrips = () => {
-  // const tripList = $('#trip-list');
   $('#trips-table').empty();
 
   reportStatus("Loading trips...")
@@ -19,7 +18,7 @@ const loadTrips = () => {
 
       $('td').click(function() {
         if (event.target.innerHTML === trip.name){
-          showTrip(trip.id)
+          showTrip(trip.id);
         }
       })
     })
@@ -44,29 +43,50 @@ const showTrip = (id) => {
 
       tripInfo.append(`<p> <strong>${item}:</strong> ${info} </p>`);
     })
-    makeReservation(response.data);
+    showReservation(response.data);
   })
   .catch((error) => {
     reportStatus(`Error: ${error.message}`);
   })
 };
 
-const makeReservation = (trip) => {
+const showReservation = (trip) => {
   $('.reservation-container').empty();
 
   $('.reservation-container').append(`<form></form>`);
   $(`form`).append(`<h2>Reserve Trip</h2>`);
   $(`form`).append(`<label for="name">Your Name:</label>`);
-  $(`form`).append(`<input type="text" name="name"></input>`);
+  $(`form`).append(`<input type="text" name="name"></input><br/>`);
+  $(`form`).append(`<label for="email">Email:</label>`);
+  $(`form`).append(`<input type="text" name="email"></input>`);
   $(`form`).append(`<p>Trip: ${trip.name}</p>`);
   $(`form`).append(`<input type="submit" name="reserve" value="Reserve"></input>`);
 
 
-
+  $('form').submit(function() {
+    const formData = {
+      name: $('input[name="name"]').val(),
+      email: $('input[name="email"]').val()
+    }
+    reserveTrip(trip, formData);
+  })
 };
 
 
+const reserveTrip = function reserveTrip(event, trip, formData) {
+  event.preventDefault();
+  const postURL =  URL + trip.id + '/' + 'reservations';
 
+  axios.post(postURL, formData)
+  .then((response) => {
+    console.log(response.data);
+    reportStatus('Trip reserved!');
+  })
+  .catch((error) => {
+    console.log(error.response);
+    reportStatus(`Error: ${error.message}`);
+  })
+};
 
 $(document).ready(() => {
   $('#get-trips').click(loadTrips);
