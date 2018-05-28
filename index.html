@@ -13,32 +13,41 @@
       <h1>Welcome To Trek</h1>
       <h4>Your destination for planning a fabulous trip to... another destination.</h4>
     </div>
-    <main class="container">
-      <section>
-        <button id="load">See All Trips</button>
+    <main>
+      <section class="buttons">
+        <button class="trips" id="load">See All Trips</button>
+        <button class="trips" id="asia">Asia</button>
+        <button class="trips" id="africa">Africa</button>
+        <button class="trips" id="antartica">Antartica</button>
+        <button class="trips" id="australasia">Australasia</button>
+        <button class="trips" id="europe">Europe</button>
+        <button class="trips" id="north-amer">North America</button>
+        <button class="trips" id="south-amer">South America</button>
+      </section>
+      <div class="container">
         <div>
-          <ul id="trip-list"></ul>
+          <ul class="trips" id="trip-list"></ul>
         </div>
-      </section>
-      <section class="hidden">
-        <h3>Trip Details</h3>
-        <div id="trip-detail-section" class="trip-detail-section">
-        </div>
-        <div class="reserve-trip">
-          <h3>Reserve Trip</h3>
-          <form id="trip-form">
-            <div>
-              <label for="name">Name</label>
-              <input type="text" name="name" />
-            </div>
-            <div>
-              <label for="email">Email</label>
-              <input type="text" name="email" />
-            </div>
-            <input type="submit" name="add-trip" value="Reserve Trip" />
-          </form>
-        </div>
-      </section>
+        <section class="hidden">
+          <h3>Trip Details</h3>
+          <div id="trip-detail-section" class="trip-detail-section">
+          </div>
+          <div class="reserve-trip">
+            <h3>Reserve Trip</h3>
+            <form id="trip-form">
+              <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input type="text" name="email" />
+              </div>
+              <input id="reserve-trip-button" type="submit" name="add-trip" value="Reserve Trip" />
+            </form>
+          </div>
+        </section>
+      </div>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
