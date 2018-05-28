@@ -32,7 +32,7 @@ const loadTrips = () => {
 
     console.log(location);
 
-    reportStatus(`Yay we successfully added ${response.data.length} trip(s)!`);
+    reportStatus(`Successfully added ${response.data.length} trip(s)!`);
 
     response.data.forEach(trip => {
       console.log(trip);
@@ -59,8 +59,8 @@ const loadTrip = function loadTrip(selectedTripID) {
 
     tripDetails.empty();
 
-    tripDetails.append(`<li><strong>Trip ID: </strong>${response.data.id}</li><br>`);
     tripDetails.append(`<li><strong>Trip Name: </strong>${response.data.name}</li><br>`);
+    tripDetails.append(`<li><strong>Trip ID: </strong>${response.data.id}</li><br>`);
     tripDetails.append(`<li><strong>Continent: </strong>${response.data.continent}</li><br>`);
     tripDetails.append(`<li><strong>About: </strong>${response.data.about}</li><br>`);
     tripDetails.append(`<li><strong>Category: </strong>${response.data.category}</li><br>`);

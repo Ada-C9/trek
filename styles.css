@@ -6,22 +6,38 @@
 main {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  /* grid-template-rows: 1fr 10fr; */
   grid-column-gap: 10px;
 }
 
-
+#header-title {
+  text-align: center;
+}
 h1 {
-  font-weight: 400;
+  font-weight: 700;
   font-size-adjust: auto;
 }
 
 ul {
-  font-weight: medium;
+  font-weight: bold;
   list-style-type: none;
 }
 
-.trip-details-section, .current-trips {
+li {
+  font-weight: lighter;
+
+}
+
+#trips-list li:hover {
+  color: green;
+}
+
+.trip-details-section, .current-trips, .reserve-trip-form {
   border-style: solid;
   border-color: black;
   padding: 30px;
+}
+
+.reserve-trip-form {
+  display: none;
 }
