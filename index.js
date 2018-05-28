@@ -5,7 +5,7 @@ const reportStatus = (message) => {
 }
 
 const loadTrips = () => {
-  $('#trip-list').show();
+
   const tripList = $('#trip-list');
   tripList.empty();
 
@@ -23,7 +23,7 @@ const loadTrips = () => {
   })
 }
 const loadTrip = (id) => {
-  $('.trip-container').show();
+
   const tripInfo = $('#trip');
   tripInfo.empty();
   const reservationInfo = $('#reservation');
@@ -33,11 +33,12 @@ const loadTrip = (id) => {
 
   axios.get(URL + `${id}`)
   .then((response) => {
+
     let data = response.data;
     console.log(data.name);
 
-    tripInfo.append(`<li>ID: ${data.id}</li>`);
-    tripInfo.append(`<li>Name: ${data.name}</li>`);
+
+    tripInfo.append(`<li><strong>Name: </strong>${data.name}</li>`);
     tripInfo.append(`<li>Continent: ${data.continent}</li>`);
     tripInfo.append(`<li>Category:${data.category}</li>`);
     tripInfo.append(`<li>Weeks: ${data.weeks}</li>`);
@@ -47,13 +48,14 @@ const loadTrip = (id) => {
 
     reservationInfo.append(
       `<label class="user"> Name:</label>
-      <input type="text" name="name" class="form"/>`
+      <input type="text" name="name" class="form"/><br>`
+
     );
     reservationInfo.append(
       `<label class="user">Email:</label>
-      <input type="text" name="email" class="form"/>`
+      <input type="text" name="email" class="form"/><br>`
     );
-    reservationInfo.append(`<label>Trip: ${data.name}</label>`);
+    reservationInfo.append(`<label>Trip: ${data.name}</label><br>`);
     reservationInfo.append(
       `<input type="submit" name="reserve-trip" class="reserve" id="reserve${data.id}"/>`
     );
