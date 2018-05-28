@@ -21,13 +21,13 @@ const reportError = (message, errors) => {
 };
 
 const loadTrips = function loadTrips() {
-  let tripList = $('.trips');
+  let tripList = $('#trip-list');
 
   axios.get(allTripsUrl)
   .then((response) => {
     response.data.forEach((trip) => {
       console.log(trip);
-      tripList.append(`<li><a class="trip" data-id="${trip.id}" href="#">${trip.name}</a></li>`);
+      tripList.append(`<tr><td><a class="trip" data-id="${trip.id}" href="#">${trip.name}</a></td></tr>`);
     });
     reportStatus('Trips Loaded!');
   })
