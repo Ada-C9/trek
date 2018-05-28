@@ -27,3 +27,7 @@ main {
 .make_reservation {
   display: block;
 }
+
+.reservation-result {
+  display: block;
+}

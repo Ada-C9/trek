@@ -124,8 +124,6 @@ const callReservationScreen = function callReservationScreen() {
         <form id='reservation-form' name='reservation-form'>
           <label for='name'>Name:</label>
           <input type='text' id='name' name='name'><br>
-          <label for='age'>Age:</label>
-          <input type='number' id='age' name='age'><br>
           <label for='email'>Email:</label>
           <input type='email' id='email' name='email'><br>
           <label>&nbsp;</label>
@@ -147,109 +145,46 @@ const createReservation = (e) => {
 
   console.log(`Here is the reservation-posting URL: ${reserveTripUrl}`)
 
+  const reservationResult = $('#result-box');
+  reservationResult.empty();
+
   const reservationData = {
-    name: 'Herkimer',
-    email: 'herkimer@herkulator.ru'
+    // name: 'Mona VanDerWaal',
+    // email: 'scarysmart@happycrazy.ru'
+    name: $('#name').val(),
+    email: $('#email').val()
   }
 
+  console.log(`Here is the name for the reservation ${reservationData.name}`)
+  console.log(`Here is the email for the reservation ${reservationData.email}`)
+
+  reportStatus(`Submitting a request to reserve a slot in ${targetTripName}.`);
+
   axios.post(reserveTripUrl, reservationData)
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+    .then((response) => {
+      console.log(response);
+      reservationResult.append(`<h2>YOUR RESERVATION HAS BEEN CREATED!</h2>`)
+      reportStatus(`Successfully reservered a slot in Trip Number
+         ${response.data.trip_id} for
+         ${response.data.name}!`
+       );
+      // clearForm();
+    })
+      .catch((error) => {
+        console.log(error.response);
+        if (error.response.data && error.response.data.errors) {
+          reportError(
+            `Encountered an error: ${error.message}`,
+            error.response.data.errors
+          );
+        } else {
+          reportStatus(`Encountered an error: ${error.message}`);
+        }
+      });
+
+
+
 };
-
-// .then(function (response) {
-//   resultElement.innerHTML = generateSuccessHTMLOutput(response);
-// })
-// .catch(function (error) {
-//   resultElement.innerHTML = generateErrorHTMLOutput(error);
-// });
-//
-// e.preventDefault();
-
-  // console.log('In the reservation-making method!')
-  // console.log(`Here is the targetTripId: ${targetTripId}`)
-  // console.log(`Here is the targetTripName: ${targetTripName}`)
-  //
-  // const reserveTripUrl = BASE_URL.concat("/").concat(targetTripId).concat("/reservations")
-  //
-  // console.log(`Here is the reservation-posting URL: ${reserveTripUrl}`)
-  //
-  // const reservationData = {
-  //   name: 'Herkimer',
-  //   email: 'herkimer@herkulator.ru'
-  // }
-  //
-  // console.log(`Here is the reservation info: ${reservationData} ${reservationData.name}, ${reservationData.email}`)
-
-  // axios.post('https://ada-backtrek-api.herokuapp.com/trips/1/reservations', {
-  //   name: 'Black Philip',
-  //   email: 'always@deliciouslyliving.com'
-  //   })
-  //     .then((response) => {
-  //       console.log(response);
-  //       reportStatus(`Successfully sending Black Philip someplace"!`);
-  //       // clearForm();
-  //     })
-  //     .catch((error) => {
-  //       console.log('Whoops!');
-  //       console.log(error.response);
-  //       reportStatus(`Encountered an error: ${error.message}`);
-  //           });
-        // if (error.response.data && error.response.data.errors) {
-        //   reportError(
-        //     `Encountered an error: ${error.message}`,
-        //     error.response.data.errors
-        //   );
-        // } else {
-        //   reportStatus(`Encountered an error: ${error.message}`);
-        // }
-  // reportStatus(`Attempting to reserve a spot in "${targetTripName}". `)
-
-//   axios.post(reserveTripUrl, reservationData)
-//     .then((response) => {
-//       console.log(response);
-//       reportStatus(`Successfully created a reservation with ID "${reservationData.name}"!`);
-//       // clearForm();
-//     })
-//     .catch((error) => {
-//       console.log('Whoops!');
-//       console.log(error.response);
-//       reportStatus(`Encountered an error: ${error.message}`);
-//       // if (error.response.data && error.response.data.errors) {
-//       //   reportError(
-//       //     `Encountered an error: ${error.message}`,
-//       //     error.response.data.errors
-//       //   );
-//       // } else {
-//       //   reportStatus(`Encountered an error: ${error.message}`);
-//       // }
-//     });
-//
-
-// axios.post('https://ada-backtrek-api.herokuapp.com/trips/1/reservations', {
-//   name: 'Black Philip',
-//   email: 'always@deliciouslyliving.com',
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //
 // // Creating Pets
@@ -292,10 +227,6 @@ $(document).ready(() => {
   $('#reservation-box').on('submit', 'form', function(event) {
     createReservation(event)
   });
-  // $('#reservation-box').on('submit', 'form', function(event) {
-  //   event.preventDefault;
-  //   createReservation(event);
-  //  });
 })
 
 
