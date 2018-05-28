@@ -7,3 +7,23 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+.all_trips {
+  display: inline-block;
+  }
+
+.trip_specifics {
+  display: inline-block;
+  }
+
+.single-trip-detail {
+  display: block;
+}
+
+.reservation-opt-in {
+  display: block;
+}
+
+.make_reservation {
+  display: block;
+}

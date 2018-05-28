@@ -1,4 +1,8 @@
-const BASE_URL = 'https://ada-backtrek-api.herokuapp.com/';
+
+
+let targetTrip = null
+
+const BASE_URL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
 //
 // Status Management
@@ -26,13 +30,13 @@ const loadTrips = () => {
   const allTrips = $('#every-trip');
   allTrips.empty();
 
-  let allTripsUrl = BASE_URL.concat('trips')
+  let allTripsUrl = BASE_URL
 
   axios.get(allTripsUrl)
     .then((response) => {
       reportStatus(`Successfully loaded ${response.data.length} trips`);
       response.data.forEach((trip) => {
-        allTrips.append(`<li>${trip.name}</li>`);
+        allTrips.append(`<li id="${trip.id}">${trip.name}</li>`);
       });
     })
     .catch((error) => {
@@ -40,6 +44,83 @@ const loadTrips = () => {
       console.log(error);
     });
 };
+
+const getTripDetail = function getTripDetail(tripID) {
+
+  reportStatus('Getting trip details.');
+
+  targetTrip = tripID
+
+  const singleTripDetail = $('#trip-deets');
+  singleTripDetail.empty();
+
+  let tripDetailUrl = BASE_URL.concat("/").concat(tripID)
+
+  const reserveButton = $('#reserve-button');
+
+  console.log(`${tripDetailUrl}`);
+
+  axios.get(tripDetailUrl)
+    .then((response) => {
+      reportStatus(`Trip details loaded!`);
+      singleTripDetail.append(
+        `<h1>DO YOU WANT TO GO TO HERE? YOU CAN GO TO HERE.</h1>
+        <h3>Name: ${response.data.name}</h3>
+        <h4>Continent: ${response.data.continent}</h4>
+        <h4>Category:  ${response.data.category}</h4>
+        <h5>Weeks: ${response.data.weeks}</h5>
+        <h5>Cost: ${response.data.cost}</h5>
+        <h5>About: </h5>
+        <p>${response.data.about}</p>
+        <h6>Trip ID: ${targetTrip}</h6>`);
+    })
+    .catch((error) => {
+      reportStatus(`Encountered an error while loading trip details: ${error.message}`);
+      console.log(error);
+    });
+    if (singleTripDetail.length > 0 ) {
+      reserveButton.append(`<button id="reservation">YesPleaseIWantToGoHere</button>` )
+    }
+};
+
+
+// const makeReservation = function makeReservation {
+//
+//   reportStatus('Pulling up reservation screen');
+//
+//   const singleTripDetail = $('#trip-deets');
+//   singleTripDetail.empty();
+//
+//   let tripDetailUrl = BASE_URL.concat("/").concat(tripID)
+//
+//   console.log(`${tripDetailUrl}`);
+//
+//   axios.get(tripDetailUrl)
+//     .then((response) => {
+//       reportStatus(`Trip details loaded!`);
+//       singleTripDetail.append(
+//         `<h3>Name: ${response.data.name}</h3>
+//         <h4>Continent: ${response.data.continent}</h4>
+//         <h4>Continent: ${response.data.continent}</h4>
+//         <h4>Category:  ${response.data.category}</h4>
+//         <h5>Weeks: ${response.data.weeks}</h5>
+//         <h5>Cost: ${response.data.cost}</h5>
+//         <h5>About: </h5>
+//         <p>${response.data.about}</p>
+//         <h6>Trip ID: ${response.data.id}</h6>`
+//     })
+//     .catch((error) => {
+//       reportStatus(`Encountered an error while loading trip details: ${error.message}`);
+//       console.log(error);
+//     });
+// };
+
+
+
+
+
+
+
 
 //
 // // Creating Pets
@@ -94,11 +175,26 @@ const loadTrips = () => {
 //         reportStatus(`Encountered an error: ${error.message}`);
 //       }
 //     });
-// };
+
+
+
+$(document).ready(() => {
+  $('#load').click(loadTrips);
+  $('#every-trip').on('click', 'li', function(event) {
+     getTripDetail(this.id)
+   });
+ $('#reserve-button').on('click', 'button', function(event) {
+    makeReservation()
+  });
+   // $('#every-trip').on('click', 'li', function(event) {
+   //    alert(`Got a click on an <li> containing "${$(this).html()}"`);
+   //  });
+   // $('#every-trip').on('click', 'li', getTripDetail(this.class));
+   // $("ul#every-trip li").click(getTripDetail(this.class));
+   // $('#pet-form').submit(createPet);
+})
+
+
 
 
 //
-$(document).ready(() => {
-  $('#load').click(loadTrips);
-  // $('#pet-form').submit(createPet);
-});
