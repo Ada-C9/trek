@@ -6,7 +6,6 @@ const reportStatus = (message) => {
 
 const loadTrips = () => {
   $('#trips-table').empty();
-
   reportStatus("Loading trips...")
 
   axios.get(URL)
@@ -17,12 +16,12 @@ const loadTrips = () => {
       $('#trips-table').append(`<tr><td>${trip.name}</td></tr>`);
 
       $('td').click(function() {
-        if (event.target.innerHTML === trip.name){
+        if (this.innerText === trip.name){
           showTrip(trip.id);
         }
       })
     })
-    reportStatus('Trips loaded :)');
+    reportStatus('Trips loaded!');
   })
   .catch((error) => {
     reportStatus(`Error: ${error.message}`);
@@ -33,6 +32,7 @@ const showTrip = (id) => {
   const tripInfo = $('#details');
   tripInfo.empty();
   tripInfo.append(`<h2>Trip Details</h2>`)
+  reportStatus('Retrieving trip...')
 
   axios.get(URL + id)
   .then((response) => {
@@ -40,9 +40,9 @@ const showTrip = (id) => {
 
     tripData.forEach((item) => {
       let info = response.data[item];
-
       tripInfo.append(`<p> <strong>${item}:</strong> ${info} </p>`);
     })
+    reportStatus('Trip retrieved!')
     showReservation(response.data);
   })
   .catch((error) => {
@@ -59,9 +59,8 @@ const showReservation = (trip) => {
   $(`form`).append(`<input type="text" name="name"></input><br/>`);
   $(`form`).append(`<label for="email">Email:</label>`);
   $(`form`).append(`<input type="text" name="email"></input>`);
-  $(`form`).append(`<p>Trip: ${trip.name}</p>`);
-  $(`form`).append(`<input type="submit" name="reserve" value="Reserve"></input>`);
-
+  $(`form`).append(`<p><strong>Trip:</strong> ${trip.name}</p>`);
+  $(`form`).append(`<input type="submit" class="btn btn-success" name="reserve" value="Reserve"></input>`);
 
   $('form').submit(function() {
     const formData = {
@@ -72,18 +71,17 @@ const showReservation = (trip) => {
   })
 };
 
-
 const reserveTrip = function reserveTrip(event, trip, formData) {
   event.preventDefault();
   const postURL =  URL + trip.id + '/' + 'reservations';
+  reportStatus('Making reservation...');
 
   axios.post(postURL, formData)
   .then((response) => {
     console.log(response.data);
-    reportStatus('Trip reserved!');
+    reportStatus(`Trip to ${trip.name} for ${formData.name} reserved!`);
   })
   .catch((error) => {
-    console.log(error.response);
     reportStatus(`Error: ${error.message}`);
   })
 };

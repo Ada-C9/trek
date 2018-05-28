@@ -1,7 +1,7 @@
 body {
   font-family: sans-serif;
   background-color: #f5f7f2;
-  /* background-image: url("http://freeuse.io/img_highres/5513-flight-sky-clouds-airplane.jpg"); */
+  background-image: url("http://www.flymetotaiwan.com/wp-content/uploads/2015/10/Background.jpg");
 }
 
 h1, h2 {
@@ -11,12 +11,17 @@ h1, h2 {
   margin: 0;
 }
 
+h2 {
+  margin-bottom: .5em;
+}
+
 .table {
   max-width: 20%;
   text-align: center;
+  border: black;
 }
 
-.btn.btn-info {
+.btn.btn-success {
   margin-bottom: 2em;
   margin-top: 1em;
   margin-left: 1em;
@@ -54,7 +59,22 @@ main {
   height: max-content;
 }
 
-.colum2 {
+.column2 {
   display: flex;
   flex-direction: column;
+  /* width: 100%; */
+}
+
+label {
+  font-weight: bold;
+  padding-right: .5em;
+}
+
+p, label, input {
+  padding-left: .5em;
+}
+
+#status-message {
+  background-color: rgb(220, 242, 191);
+  padding-left: .5em;
 }
