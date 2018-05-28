@@ -1,4 +1,4 @@
-main {
+.container {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -7,6 +7,37 @@ main {
   display: none;
 }
 
-.trip-detail-section {
-  border: .5px solid black;
+.trip-detail-section{
+  margin-bottom: 0.5em;
 }
+
+.trip-detail-section, .reserve-trip{
+  border: .5px solid black;
+  padding: 0 1em 1em 1em;
+}
+
+.trips, span {
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+
+#trip-form > div {
+  margin-bottom: 0.5em;
+}
+
+button {
+  margin: 0.5em;
+}
+
+#reserve-trip-button {
+  margin-top: 1em;
+}
+
+@media screen and (max-width: 630px) {
+  .container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .trips, .trip-detail-section {
+  }
