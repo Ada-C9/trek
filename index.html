@@ -3,19 +3,20 @@
 <head>
   <meta charset="utf-8">
   <title>Trek</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/foundation/6.2.3/foundation.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <section id="status-message"></section>
-  <main>
-    <!-- <section class="trips"> -->
-    <!-- <section class="grid-y medium-grid-frame">
-    <section class="cell shrink header medium-cell-block-container"> -->
-    <div class="all-trips cell medium-4 medium-cell-block-y">
+  <header>
+    <h1>Trek the World</h1>
+    <button id="load" class="button">See All Trips</button>
+  </header>
 
-      <h1>List-of-Trips</h1>
-      <button class="button" id="load">Get trips!</button>
+  <section id="status-message"></section>
+
+  <main class="row">
+    <section class="small-6 columns trips-container">
       <table id="table">
         <thead>
           <tr>
@@ -25,40 +26,32 @@
         </thead>
         <tbody id="tbody"></tbody>
       </table>
-    </div>
-    <!-- </section> -->
-    <div class="trip-details cell medium-8 medium-cell-block-y">
-      <section id="details">
-        <table>
-          <thead>
-            <tr>
-              <th>
-                Trip Details
-              </th>
-            </tr>
-          </thead>
-          <tbody id="trip-info"></tbody>
-        </table>
-        
-        <section class="button">
-          <div class="reserve"><strong>Reserve Trip</strong></div>
-          <section id="reservation-form">
-          </section>
-        </section>
-      </section>
-    </div>
-    <!-- </section> -->
+    </section>
+
+    <section class="small-6 columns trips-container">
+      <table id="details">
+        <thead>
+          <tr>
+            <th>
+              Trip Details
+            </th>
+          </tr>
+        </thead>
+        <tbody id="trip-info"></tbody>
+      </table>
+
+      <button id="reservation-form" class="button">Reserve Trip</button>
+      
+    </section>
   </main>
+
+  <footer>
+    <h5>Nicoleta Brandolini @2018</h5>
+  </footer>
 
   <script
   src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="text/javascript" src="trek.js"></script>
-
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
-
-
-  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script>
 </body>
 </html>

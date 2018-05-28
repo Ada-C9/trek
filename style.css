@@ -2,12 +2,44 @@
 
 }
 
-html, body {
-  box-sizing: border-box;
-  min-height: 100%;
+body {
+  text-align: center;
+  padding: 2rem;
+  height: 100%;
   background-image: url('images/background.png');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+#status-message {
+  font-size: 1rem;
+  color: white;
+  padding-bottom: 20px;
+}
+
+h1 {
+  font-size: 4rem;
+  color: #077b93;
+}
+
+th {
+  color: #077b93
+}
+
+.button {
+  font-size: 1rem;
+  background-color: #077b93;
+  margin: 15px;
+  padding: 10px;
+}
+
+footer {
+  color: white;
+  padding: 20px 0 10px 0;
+}
+
+.submit-container {
+  color: #077b93
 }

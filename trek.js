@@ -104,6 +104,5 @@ $(document).ready(() => {
         $('#reservation-form').on('click', '.reserve', function () {
           let id = $(this).attr('id').substr(7);
           reserveTrip(id);
-          $(document).foundation();
         });
       });
