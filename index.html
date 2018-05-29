@@ -19,7 +19,21 @@
       <section id='status-message'></section>
 
       <section id='current-trips'>
-        <button type="button" id='load' class='button'>See All Trips</button>
+
+        <section id='filters'>
+          <button type="button" id='load' class='button'>See All Trips</button>
+          <div class="dropdown">
+            <button type="button" class='dropbtn button'>Search by</button>
+            <div class="dropdown-content" id="search-by">
+              <p id='continent'>Continent</p>
+              <p id='budget'>Max Budget</p>
+              <p id='weeks'>Max Weeks</p>
+            </div>
+          </div>
+          <div id='search-filters'></div>
+        </section>
+
+
 
         <div class='trip-table'>
           <table id='trip-list'></table>

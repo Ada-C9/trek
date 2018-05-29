@@ -21,6 +21,21 @@ const reportError = (message, errors) => {
 
 const baseURL = 'https://ada-backtrek-api.herokuapp.com/trips';
 
+const buildTripTable = function buildTripTable(input) {
+
+  $('#trip-list').append('<tbody>');
+
+  input.data.forEach( (trip) => {
+    let content = '<tr>';
+    content += `<td id=${trip.id}>${trip.name}</td>`;
+    content += `</tr>`;
+    $('#trip-list').append(content);
+  });
+
+  $('#trip-list').append('</tbody>');
+  reportStatus(`${input.data.length} trips loaded`, 'success');
+}
+
 const getTrips = () => {
   const tripList = $('#trip-list');
   tripList.empty();
@@ -29,18 +44,9 @@ const getTrips = () => {
 
   axios.get(baseURL)
     .then((response) => {
+      $('#trip-list').empty();
       $('#trip-list').append('<h3>All Trips<h3>');
-      $('#trip-list').append('<tbody>')
-
-      response.data.forEach( (trip) => {
-        let content = '<tr>';
-        content += `<td id=${trip.id}>${trip.name}</td>`;
-        content += `</tr>`;
-        $('#trip-list').append(content);
-      });
-
-      $('#trip-list').append('</tbody>');
-      reportStatus(`${response.data.length} trips loaded`, 'success');
+      buildTripTable(response);
     })
     .catch((error) => {
       // this might not be right
@@ -59,8 +65,8 @@ const buildForm = function buildForm(id, name) {
   let formContent = '';
   formContent += `<h3>Reserve Trip: ${name}</h3>`;
   formContent += `<form action=${baseURL}>`;
-  formContent += '<div><label for="name">Name</label><input type="text" name="name" /></div>';
-  formContent += '<div><label for="email">Email</label><input type="text" name="email" /></div>';
+  formContent += '<div><label for="name">Name&emsp;</label> <input type="text" name="name" /></div>';
+  formContent += '<div><label for="email">Email&emsp;</label> <input type="text" name="email" /></div>';
   formContent += `<input type='hidden' name='id' value=${id}>`;
   formContent += '<button type="submit" class="button">Reseve Trip!</button>';
 
@@ -137,10 +143,105 @@ const reserveTrip = function reserveTrip (event) {
   $('#trip-form').empty();
 };
 
+const searchBySection = function searchBy (event) {
+  let target = event.target;
+  let searchCat = target.id;
+
+  switch(searchCat) {
+    case 'continent':
+      $('#search-filters').html(
+        `<div class='dropdown'>
+          <button type='button' class='dropbtn button filter-button'> ${searchCat} <i class="arrow down"></i> </button>
+
+          <div class='dropdown-content' id='continent-search'>
+            <p>Asia</p>
+            <p>North America</p>
+            <p>South America</p>
+            <p>Australiasia</p>
+            <p>Europe</p>
+            <p>Africa</p>
+            <p>Antarctica</p>
+          </div>
+        </div>`
+      );
+      break;
+    case 'budget':
+      $('#search-filters').html(
+        `<div class='dropdown'>
+          <button type='button' class='dropbtn button'> ${searchCat} <i class="arrow down"></i> </button>
+
+          <div class='dropdown-content'>
+            <form id='budget-form'>
+              <label for='budget'>Set your budget (USD)</label>
+              <input type='text' name='budget' />
+              <input type="submit" value="Submit">
+            </form>
+          </div>
+
+        </div>`
+      );
+      break;
+    case 'weeks':
+      $('#search-filters').html(
+        `<div class='dropdown'>
+          <button type='button' class='dropbtn button'> ${searchCat} <i class="arrow down"></i> </button>
+
+          <div class='dropdown-content'>
+            <form id='weeks-form'>
+              <label for='weeks'>Number of weeks</label>
+              <input type='number' name='weeks' min="0"/>
+              <input type="submit" value="Submit">
+            </form>
+        </div>`
+      );
+      break;
+  }
+
+}
+
+const getSearch = function getSearch(event) {
+  if ()
+}
+
+const searchContinent = function searchContinent(event) {
+  let target = event.target;
+  let cont = target.innerHTML;
+
+  // I tried separating this into params and couldn't get anywhere
+  let contURL = baseURL + '/continent' + `?query=${cont}`;
+
+  axios.get(contURL)
+    .then((response) => {
+      $('#trip-list').empty();
+      $('#trip-list').append(`<h3>${cont} Trips<h3>`);
+      if (response.data === undefined || response.data.length < 1) {
+        $('#trip-list').append('No trips at this time');
+      } else {
+        buildTripTable(response);
+      }
+    })
+    .catch((error) =>{
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error:`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Error: ${error.message}`, 'failure');
+      }
+    });
+
+
+
+};
+
 
 
 $(document).ready( () => {
   $('#load').click(getTrips);
   $('#trip-list').on('click', 'td', getTripInfo);
   $('#trip-form').submit(reserveTrip);
+  $('#search-by').on('click', 'p', searchBySection);
+  $('#search-filter').on('click', 'p', searchContinent);
+
 });
