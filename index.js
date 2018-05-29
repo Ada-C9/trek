@@ -214,15 +214,22 @@ const getSearch = function getSearch(event) {
 
     searchContinent(target);
 
-  } else if (selector.id === 'budget-form' && target.defaultValue === 'Submit') {
-    let budget = $('input[name="budget"]').val();
-    searchBudget(budget);
-  } else if (selector.id === 'weeks-form' && target.defaultValue === 'Submit') {
-    let weeks = $('input[name="weeks"]').val();
-    searchWeeks(weeks);
+  } else if (target.defaultValue === 'Submit') {
+    let input = '';
+    let type = '';
+    if (selector.id === 'budget-form') {
+      input = $('input[name="budget"]').val();
+      type = 'budget';
+    } else if (selector.id === 'weeks-form') {
+      input = $('input[name="weeks"]').val();
+      type = 'weeks';
+    }
+
+    searchWeeksOrBudget(input, type);
   }
 };
 
+// INDIVIDUAL API QUERY SEARCH TYPES
 const searchContinent = function searchContinent(input) {
   let cont = input.innerHTML;
 
@@ -251,13 +258,18 @@ const searchContinent = function searchContinent(input) {
     });
 };
 
-const searchBudget = function searchBudget(input) {
-  let contURL = baseURL + '/budget' + `?query=${input.toString()}`;
-
+const searchWeeksOrBudget = function searchWeeksOrBudget(input, type) {
+  let contURL = baseURL + `/${type}` + `?query=${input.toString()}`;
+  let header = '';
+  if (type === 'budget') {
+    header = `<h3>Trips under $ ${input.toString()}<h3>`;
+  } else {
+    header = `<h3>Trips under ${input.toString()} Weeks <h3>`;
+  }
   axios.get(contURL)
     .then((response) => {
       $('#trip-list').empty();
-      $('#trip-list').append(`<h3>Trips under $ ${input.toString()}<h3>`);
+      $('#trip-list').append(header);
       if (response.data === undefined || response.data.length < 1) {
         $('#trip-list').append('No trips at this time');
       } else {
@@ -274,33 +286,7 @@ const searchBudget = function searchBudget(input) {
         reportStatus(`Error: ${error.message}`, 'failure');
       }
     });
-};
-
-const searchWeeks = function searchWeeks(input) {
-  let contURL = baseURL + '/weeks' + `?query=${input.toString()}`;
-
-  axios.get(contURL)
-    .then((response) => {
-      $('#trip-list').empty();
-      $('#trip-list').append(`<h3>Trips under ${input.toString()} Weeks <h3>`);
-      if (response.data === undefined || response.data.length < 1) {
-        $('#trip-list').append('No trips at this time');
-      } else {
-        buildTripTable(response);
-      }
-    })
-    .catch((error) =>{
-      if (error.response.data && error.response.data.errors) {
-        reportError(
-          `Encountered an error:`,
-          error.response.data.errors
-        );
-      } else {
-        reportStatus(`Error: ${error.message}`, 'failure');
-      }
-    });
-};
-
+}
 
 
 $(document).ready( () => {
