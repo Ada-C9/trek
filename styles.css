@@ -15,7 +15,9 @@ header {
   box-shadow: 2px 5px #331100;
   margin: 0;
   margin-bottom: 25px;
-  background-color: #ffddcc;
+  color: #ffddcc;
+  background-image: url("header_img.JPG");
+  background-size: cover;
 }
 
 h1, h2, h3, table tr th {
