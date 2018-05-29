@@ -142,22 +142,6 @@ const reserveTrip = (event) => {
   $('form')[0].reset();
 };
 
-const buildTrip = () => {
-
-};
-
-const createTrip = () => {
-  const createURL = 'https://ada-backtrek-api.herokuapp.com/trips';
-  const tripData = ''
-  axios.post(`${createURL}${tripData}`)
-
-  .then((response) => {
-
-  })
-  .catch((error) => {
-
-  });
-};
 
 
 $(document).ready(()=>{
