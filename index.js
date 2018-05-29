@@ -122,14 +122,13 @@ const reserveTrip = function reserveTrip (event) {
   reportStatus('Attempting to book trip...');
 
   axios.post(reservationURL, tripData)
-    .then((response) => {
+    .then(() => {
       $('input[name="name"]').val(''); // clearing text field
       $('input[name="email"]').val('');
 
       reportStatus('Successfully booked trip!', 'success');
     })
     .catch((error) => {
-      console.log(error);
       if (error.response.data && error.response.data.errors) {
         reportError(
           `Encountered an error:`,
@@ -275,10 +274,9 @@ const searchWeeksOrBudget = function searchWeeksOrBudget(input, type) {
       }
     })
     .catch((error) =>{
-      if (error.response.data && error.response.data.errors) {
+      if (error.response.status === 500) {
         reportError(
-          `Encountered an error:`,
-          error.response.data.errors
+          'Encountered an error: please enter a value'
         );
       } else {
         reportStatus(`Error: ${error.message}`, 'failure');
