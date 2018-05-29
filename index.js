@@ -57,6 +57,7 @@ const getTripDetail = function getTripDetail(tripID) {
   let tripDetailUrl = BASE_URL.concat("/").concat(tripID)
 
   const reserveButton = $('#reserve-button');
+  reserveButton.empty();
 
   console.log(`${tripDetailUrl}`);
 
@@ -65,50 +66,26 @@ const getTripDetail = function getTripDetail(tripID) {
       reportStatus(`Trip details loaded!`);
       targetTripName = response.data.name;
       singleTripDetail.append(
-        `<h1>DO YOU WANT TO GO TO HERE? YOU CAN GO TO HERE.</h1>
-        <h3>Name: ${targetTripName}</h3>
-        <h4>Continent: ${response.data.continent}</h4>
-        <h4>Category:  ${response.data.category}</h4>
-        <h5>Weeks: ${response.data.weeks}</h5>
-        <h5>Cost: ${response.data.cost}</h5>
-        <h5>About: </h5>
-        <p>${response.data.about}</p>
-        <h6>Trip ID: ${targetTripId}</h6>`);
+        `<h1>HERE'S ONE GOOD WAY TO GET TREKKED UP:</h1>
+        <section class="details_box" >
+          <h3>Name: ${targetTripName}</h3>
+          <h4>Continent: ${response.data.continent}</h4>
+          <h4>Category:  ${response.data.category}</h4>
+          <h5>Weeks: ${response.data.weeks}</h5>
+          <h5>Cost: ${response.data.cost}</h5>
+          <h5>About: </h5>
+          <p>${response.data.about}</p>
+          <h6>Trip ID: ${targetTripId}</h6>
+        </section>`);
     })
     .catch((error) => {
       reportStatus(`Encountered an error while loading trip details: ${error.message}`);
       console.log(error);
     });
     if (singleTripDetail.length > 0 ) {
-      reserveButton.append(`<button id="reservation">YesPleaseIWantToGoHere</button>` )
+      reserveButton.append(`<button id="reservation">I Would Like To Trek Up in This Manner</button>` )
     }
 };
-
-
-const FORM_FIELDS = ['name', 'age', 'owner'];
-const inputField = name => $(`#pet-form input[name="${name}"]`);
-
-const readFormData = () => {
-  const getInput = name => {
-    const input = inputField(name).val();
-    return input ? input : undefined;
-  };
-
-  const formData = {};
-  FORM_FIELDS.forEach((field) => {
-    formData[field] = getInput(field);
-  });
-
-  return formData;
-};
-
-const clearForm = () => {
-  FORM_FIELDS.forEach((field) => {
-    inputField(field).val('');
-  });
-}
-
-
 
 
 const callReservationScreen = function callReservationScreen() {
@@ -119,15 +96,16 @@ const callReservationScreen = function callReservationScreen() {
     reservationScreen.empty();
 
     reservationScreen.append(
-      ` <h1> MAKE A PLAN TO GO HERE </h1>
-        <h3> The Trip You Want To Go On Is: ${targetTripName}</h3>
-        <form id='reservation-form' name='reservation-form'>
+      ` <h1> SECURE YOUR OPPORTUNITY TO TREK UP ROYALLY: </h1>
+        <h3 class="details_box"> The Trip You Want To Go On Is: ${targetTripName}</h3>
+        <form class="details_box" id='reservation-form' name='reservation-form'>
           <label for='name'>Name:</label>
           <input type='text' id='name' name='name'><br>
           <label for='email'>Email:</label>
           <input type='email' id='email' name='email'><br>
           <label>&nbsp;</label>
-          <input type='submit' id='submit-reservation-info' value='Make It So I Go Here.'><br>
+          <input type='submit' id='submit-reservation-info'
+          value='I hereby commit to unapologetically trekking up my life'><br>
         </form>`
     )
   };
@@ -163,7 +141,8 @@ const createReservation = (e) => {
   axios.post(reserveTripUrl, reservationData)
     .then((response) => {
       console.log(response);
-      reservationResult.append(`<h2>YOUR RESERVATION HAS BEEN CREATED!</h2>`)
+      reservationScreen.empty();
+      reservationResult.append(`<section class="success_message"><h2>YOUR RESERVATION HAS BEEN CREATED!</h2><h3>Now nothing can stop you from trekking up everything!</h3></section>`)
       reportStatus(`Successfully reservered a slot in Trip Number
          ${response.data.trip_id} for
          ${response.data.name}!`
@@ -181,39 +160,7 @@ const createReservation = (e) => {
           reportStatus(`Encountered an error: ${error.message}`);
         }
       });
-
-
-
 };
-
-//
-// // Creating Pets
-// //
-// const FORM_FIELDS = ['name', 'age', 'owner'];
-// const inputField = name => $(`#pet-form input[name="${name}"]`);
-//
-// const readFormData = () => {
-//   const getInput = name => {
-//     const input = inputField(name).val();
-//     return input ? input : undefined;
-//   };
-//
-//   const formData = {};
-//   FORM_FIELDS.forEach((field) => {
-//     formData[field] = getInput(field);
-//   });
-//
-//   return formData;
-// };
-//
-// const clearForm = () => {
-//   FORM_FIELDS.forEach((field) => {
-//     inputField(field).val('');
-//   });
-// }
-//
-
-
 
 
 $(document).ready(() => {
@@ -228,8 +175,3 @@ $(document).ready(() => {
     createReservation(event)
   });
 })
-
-
-
-
-//
