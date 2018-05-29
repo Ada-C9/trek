@@ -4,6 +4,17 @@ const reportStatus = (message) => {
   $('#status-message').html(message).removeClass('hidden');
 }
 
+const reportError = (message, errors) => {
+  let content = `<p>${message}</p><ul>`;
+  for (const field in errors) {
+    for (const problem of errors[field]) {
+      content += `<li>${field}: ${problem}</li>`;
+    }
+  }
+  content += "</ul>";
+  reportStatus(content);
+};
+
 const loadTrips = () => {
   reportStatus('Loading Trips! Thank you for waiting...');
 
@@ -37,7 +48,7 @@ const generateTrip = (trip) => {
     $('#trip-details').removeClass('hidden');
     $('.reservations-form').removeClass('hidden');
 
-    $('#submit-button').off('click');
+    // $('#submit-button').off('click');
     $('#submit-button').click(function(event) {
       createReservation(event, trip.id);
     });
@@ -59,7 +70,7 @@ const getTripData = (trip_id) => {
       <li><h3>Trip: ${response.data.name}</h3></li>
       <li> Travel Category: ${response.data.category}</li>
       <li> Continent: ${response.data.continent}</li>
-      <li> Cost: ${response.data.cost}</li>
+      <li> Cost: $${response.data.cost}</li>
       <li> Trip Length: ${response.data.weeks} weeks</li>
       `)
       // <li>${response.data.about}</li>
@@ -108,7 +119,7 @@ const getTripData = (trip_id) => {
     console.log(tripURL)
     axios.post(tripURL, reservationData)
       .then((response) => {
-        reportStatus(`Successfully added a reservation for trip: ${response.data.name}!`);
+        reportStatus(`Successfully added a reservation for: ${response.data.name}!`);
         clearForm();
       })
 
