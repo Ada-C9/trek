@@ -1,0 +1,348 @@
+/* Fields */
+input[type=text], input[type=number] {
+  background-color: transparent; /* Remove background fill */
+  text-transform: uppercase; /* Make text all uppercase */
+  border-radius: 0; /* Remove corner curve */
+  border: 2px solid #000; /* 2px white border */
+  color: #000; /* White text */
+  height: 35px; /* Increase input height */
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color:    #000;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+ color:    #000;
+ opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+ color:    #000;
+ opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color:    #000;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+ color:    #000;
+}
+
+/* Button */
+input[type=submit] {
+  text-transform: uppercase;
+  padding: 10px 60px;
+  color: white;
+  background: #444;
+  font-weight: normal;
+  margin-top: 10px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+}
+
+* {
+  margin: 0px;
+  font-family: 'Gudea';
+}
+
+main {
+  display: grid;
+  border-bottom: 1px solid grey;
+  grid-template-rows: 375px 375px;
+  grid-template-areas:
+    "top"
+    "bottom";
+}
+
+.hidden {
+  display: none;
+}
+
+#title {
+  grid-area: top;
+  align-self: end;
+  font-size: 5rem;
+  padding-left: 5px;
+  padding-bottom: 5px;
+}
+
+#navbar div button {
+  font-size: 1.5rem;
+}
+
+#navbar div button:hover {
+  cursor: pointer;
+}
+
+header {
+  grid-area: top;
+}
+
+header img {
+  height: 100%;
+  width: 100%;
+}
+
+#status-message {
+  grid-area: top;
+  align-self: start;
+  font-size: 1.1rem;
+  padding-top:3px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+}
+
+#information-container {
+  grid-area: bottom;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 33% 45% 22%;
+  grid-template-areas:
+    "left center right";
+}
+
+#welcome {
+  grid-area: bottom;
+  text-align: center;
+  font-size: 5rem;
+  padding-top: 100px
+}
+
+#trip-list-container {
+  grid-area: left;
+  height: 375px;
+  width: 100%
+  margin-bottom: 20px;
+  overflow: scroll;
+}
+
+#trip-list h2 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#trip-list li {
+  list-style-type: none;
+  font-size:1.25rem;
+  padding-top: 5px;
+  padding-bototm: 5px;
+}
+
+#trip-list li:hover {
+  cursor: pointer;
+}
+
+#trip-details {
+  grid-area: center;
+  height: 365px;
+  width: 100%;
+  overflow: scroll;
+  margin-bottom: 25px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+#description {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+#reservation-container {
+  grid-area: right;
+  height: 368px;
+  width: 100%;
+  overflow: scroll;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#reservation-container h2 {
+  margin-top: 10px;
+}
+
+.trip-form {
+  text-align: center;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.trip-form div {
+  margin-top: 10px;
+}
+
+/* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: grey;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/* body {
+  background-color: #EEEEEE;
+  margin: 0px;
+}
+main {
+  font-family: sans-serif;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+  "one two"
+  "three two";
+}
+
+#title-text {
+  text-align: right;
+  font-size: 3rem;
+  padding-right: 100px;
+}
+
+#status-message {
+  grid-area: one;
+}
+
+li:hover {
+  cursor: default;
+}
+
+.all-trips {
+  grid-area: three;
+  background: yellow; }
+
+#load {
+  padding: 10px;
+  margin: 10px;
+}
+
+#trip-details {
+  position: fixed;
+  overflow-y: scroll;
+  height: 400px;
+  width: 90%;
+  background-color: white;
+  }
+
+#detail-container {
+  justify-content: center;
+  align-items: center;
+}
+
+.reserve-trip {
+  border-bottom: 2px solid black;
+  position: fixed;
+  top: 580px;
+  background-color: #FFFFFF;
+  height: 200px;
+  overflow-y: none;
+}
+
+.hidden-display {
+  display: none;
+}
+
+.trip-form-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-left: 750px;
+}
+
+.trip-form {
+  text-align: center;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+.trip-form div {
+  text-align: center;
+  padding: 10px;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+}
+
+#trip-list {
+  margin-top: 0px;
+}
+
+h2 {
+  color: white;
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
+}  */

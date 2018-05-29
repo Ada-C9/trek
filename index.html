@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<link href='https://fonts.googleapis.com/css?family=Gudea' rel='stylesheet' />
+<link rel="stylesheet" href="index.css">
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Trippy Finder</title>
+  </head>
+
+  <body>
+    <nav class="navbar" id="navbar">
+      <div class="dropdown">
+        <button class="dropbtn load-all">See Trips
+          <i class="fa fa-caret-down"></i>
+        </button>
+      </div>
+
+    </nav>
+
+    <main>
+      <header>
+        <img src= "https://images.pexels.com/photos/185933/pexels-photo-185933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+      </header>
+      <h3 id="status-message"></h3>
+      <h2 id="title">Trippy Finder</h2>
+      <span id="welcome">Where will we take you?</span>
+      <section id="information-container">
+
+        <div id="trip-list-container">
+          <ul id="trip-list"></ul>
+        </div>
+
+        <section id="trip-details">
+          <h2 id="name"></h2>
+          <h3 id="place"></h2>
+          <p id="description"></p>
+          <h4 id="category"></h4>
+          <h4 id="weeks"></h4>
+          <h4 id="price"></h4>
+        </section>
+
+        <section class="reserve-trip hidden" id="reservation-container">
+          <h2>Reserve This Trip</h2>
+          <form class="trip-form">
+            <div>
+              <label for="name">Name</label><br>
+              <input type="text" name="name" />
+            </div>
+          <div>
+            <label for="age">Age</label><br>
+            <input type="number" name="age" min="18"/>
+          </div>
+
+          <div>
+            <label for="email">Email</label><br>
+            <input type="text" name="email" />
+          </div>
+
+
+            <input type="submit" name="reserve-trip" id/>
+
+          </form>
+        </section>
+
+      </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+  </main>
+  </body>
+</html>
