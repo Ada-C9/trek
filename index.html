@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Trek</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
+</head>
+<body>
+  <section id="status-message"></section>
+
+  <main>
+    <button class="button" id="create-trip-button">Create a trip</button>
+    <form id="create-trip">
+      <div class="large-4 columns">
+        <label for="name-create">Trip Name</label>
+        <input type="text" name="name-create"/>
+      </div>
+      <div>
+        <label for="continent">Continent</label>
+        <input type="text" name="continent"/>
+      </div>
+      <div>
+        <label for="about">About</label>
+        <input type="text" name="about" />
+      </div>
+      <div>
+        <label for="category">Category</label>
+        <input type="text" name="category"/>
+      </div>
+      <div>
+        <label for="weeks">Weeks</label>
+        <input type="number" name="weeks"/>
+      </div>
+      <div>
+        <label for="cost">Cost</label>
+        <input type="text" name="cost"/>
+      </div>
+      <input type="submit" name="create-trip" value="Submit" id="submit-trip"/>
+    </form>
+
+    <div class="grid-x grid-padding-x">
+      <div class="medium-6 small 12 cell">
+        <section class="current-pets">
+          <h1>Trek</h1>
+          <button class="button expanded" id="load">Get All Trips</button>
+          <ol id="all-trips"></ol>
+        </section>
+      </div>
+      <div class="medium-6 small 12 cell">
+        <ul id="trip-details"></ul>
+        <form id="book-trip-form">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" name="name"/>
+          </div>
+          <div id="cust-email">
+            <label for="email">Email</label>
+            <input type="text" name="email" />
+          </div>
+          <div id="div-for-trips">
+          </div>
+          <input class="button" type="submit" name="add-reservation" value="Make a Reservation" id="submit-button"/>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
