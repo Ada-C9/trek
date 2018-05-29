@@ -1,0 +1,186 @@
+body {
+  margin: 0;
+  background: linear-gradient(to bottom, rgba(193, 205, 193, 0.5), rgba(000, 000, 000, 0.7));
+  background-repeat: no-repeat;
+  font-family: 'Kavivanar', cursive;
+  color: rgb(25, 76, 53);
+  font-size: 1.25em;
+}
+
+header,
+footer {
+  background: rgb(146,159,173);
+  color: rgb(245,245,245);
+}
+
+header {
+  top: 0;
+  padding: 4em;
+  height: 8em;
+  background-image: url(header.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 8.5em;
+  margin: -.25em 0 0 1.25em;
+  letter-spacing: .1em;
+  text-shadow:
+  0px 4px 3px rgba(14,98,81,0.4),
+  0px 8px 13px rgba(14,98,81,0.4),
+  0px 18px 23px rgba(14,98,81,0.4);
+}
+#status-message {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  height: 10vh;
+  text-align: center;
+  margin: 1em 0 0 0;
+  font-style: italic;
+}
+
+button {
+  text-align: center;
+  font-size: 1em;
+  font-family: 'Kavivanar', cursive;
+  font-weight: bold;
+  padding: .5em 2em;
+  margin: .5em;
+  border: 1px solid rgb(25, 76, 53);
+  border-radius: 2%;
+  cursor: pointer;
+  color: rgb(25, 76, 53);
+  background: radial-gradient(rgba(193, 205, 193, 0.7), rgba(245, 245, 245, 0.7));
+}
+
+form {
+  line-height: 2em;
+}
+
+form h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+input {
+  width: 30em;
+  margin: 1em;
+  height: 2em;
+}
+
+#trip-btn {
+  margin-left: 3em;
+  padding: .25em;
+  margin-bottom: 2em;
+  width: 17em;
+}
+
+main {
+  display: grid;
+  grid-template: 1fr 2fr 2fr/ 1fr 1fr;
+  grid-row-gap: 0;
+  height: 40em;
+}
+
+#current-trips {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 1;
+  grid-row-end: -1;
+  text-align: center;
+}
+
+td {
+  border: 2px solid rgb(25, 76, 53);
+  cursor: pointer;
+  background: radial-gradient(rgba(193, 205, 193, 0.7), rgba(245, 245, 245, 0.7));
+}
+
+td a {
+  color: rgb(25, 76, 53);
+}
+
+td a:hover {
+  font-size: 1.3em;
+}
+
+#table-wrapper {
+  position:relative;
+}
+
+#table-scroll {
+  height: 30em;
+  overflow:auto;
+}
+
+#trip-list {
+  margin: 0 auto;
+  width: 5%;
+}
+
+td {
+  padding: .5em;
+}
+
+#trip-details {
+  grid-column-start: 2;
+  grid-column-end: -1;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  width: 90%;
+  height: 25em;
+  overflow-x: scroll;
+  margin: .25em;
+}
+
+.background {
+  border: 2px solid rgb(25, 76, 53);
+  background: radial-gradient(rgba(193, 205, 193, 0.7), rgba(245, 245, 245, 0.7));
+}
+
+#details-title {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-left: 1.9em;
+}
+
+#trip-details ul {
+  list-style: none;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+#trip-form {
+  grid-column-start: 2;
+  grid-column-end: -1;
+  grid-row-start: 2;
+  grid-row-end: -1;
+  padding: 1em;
+}
+
+#trip-form-location {
+  width: 90%;
+  height: 80%;
+  margin: .25em;
+}
+
+footer {
+  padding: 4em;
+  background: linear-gradient( rgba(20, 20, 20, .5), rgba(20, 20, 20, .5)), url(footer.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  bottom: 0;
+  font-size: 1em;
+}
+
+footer p {
+  float: right;
+}
