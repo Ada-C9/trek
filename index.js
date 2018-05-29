@@ -123,5 +123,4 @@ const loadTrip = (trip) => {
 
   $(document).ready(() => {
     $('#load').click(loadTrips);
-    $('#trip-details').click(loadTrip);
   });
