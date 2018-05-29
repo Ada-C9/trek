@@ -39,6 +39,12 @@ const loadTrips = () => {
     reportStatus(`Encountered an error while loading trips: ${error.message}`);
     console.log(error);
   });
+
+
+  //  Scrow to the bottom:
+  $('html, body').animate({scrollTop:$(document).height()/2}, 'slow');
+  // $(window).scrollTop($('#status-message').offset().top-20)
+
 };
 
 //______________________________________________________
@@ -55,6 +61,12 @@ const loadATrip = (tripID) => {
   .then((response) => {
     reportStatus(`Successfully loaded <strong>${response.data.name}</strong> trip details`);
     // response.data.forEach((trip) => {
+
+    if (!response.data.about ) {
+      response.data.about = "No details available.";
+    }
+
+
     tripDetails.append(`<h3>${response.data.name}</h3>
       <div><h5>Continent</h5><p>${response.data.continent}</p></div>
       <div><h5>Category</h5><p>${response.data.category}</p></div>
@@ -66,7 +78,7 @@ const loadATrip = (tripID) => {
       // Trip name on the 'reserve trip' section:
       // $('#trip-name').html(response.data.name);
       $('#trip-id').html(response.data.id);
-      $('#makeReservation-button').val(`Reserve ${response.data.name} Trip!`)
+      $('#makeReservation-button').val(`Reserve '${response.data.name}' Trip!`)
     })
     .catch((error) => {
       reportStatus(`Encountered an error while loading trips: ${error.message}`);
@@ -139,6 +151,9 @@ const loadATrip = (tripID) => {
     // EVENTS:
     $(document).ready(() => {
 
+      // Start page with focus on header, specifically on top button:
+      $(".top-button").focus();
+
       // Load Trips:
       $('#load').click(loadTrips);
 
@@ -160,9 +175,9 @@ const loadATrip = (tripID) => {
         $(".cell.medium-auto.medium-cell-block-container").css("display", "contents");
       });
 
-      // $('li.trip').on('click', function(event) {
-      //   $(".trip-details").css("display", "contents");
-      // });
+      $('#trip-list').on('click', function(event) {
+        $(".make-reser-btn").css("display", "contents");
+      });
 
 
     });
