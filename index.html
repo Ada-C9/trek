@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>TREK</title>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+
+<body>
+
+  <header>
+    <h1>TREK</h1>
+    <section id="status-message"></section>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Search for a Trip</h2>
+
+      <content class="">
+        <button id="search-all">Search All</button>
+        <ul id="trip-list"></ul>
+      </content>
+    </section>
+
+
+    <section id="trip">
+      <h2>Trip Details<h2>
+        <content>
+          <div id='trip-details'></div>
+
+          <form class='hidden' id="reserve-form">
+            <p>Reserve Trip</p>
+            <div>
+              <label for="name">Name</label>
+              <input type="text" name="name" />
+            </div>
+
+            <div>
+              <label for="age">Age</label>
+              <input type="number" name="age" />
+            </div>
+
+            <div>
+              <label for="email">E-mail</label>
+              <input type="text" name="email" />
+            </div>
+
+            <input type="submit" name="reserve-trip" value="Reserve Trip"/>
+          </form>
+        </content>
+      </section>
+
+    </main>
+
+    <footer>
+      <p>&copy; 2018 Angela Hu</p>
+    </footer>
+
+  </body>
+  </html>
