@@ -15,7 +15,7 @@ main {
   grid-gap: 1em;
 }
 
-.current-trip {
+.trips {
   grid-area: 2/1/4/2;
 
 }
@@ -44,6 +44,11 @@ main {
   height: 30vh;
   overflow: scroll;
 
+}
+
+.trip-color {
+  background-color: #ebebe0;
+  border-style: solid;
 }
 
 .new-reservation {

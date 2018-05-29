@@ -52,7 +52,7 @@ const individualTrip = (id) => {
     trip.append(
       `
       <tr><th>Trip Details:</th></tr>
-      <tr><th>${response.data.name}</th></tr>
+      <tr><th>Name: ${response.data.name}</th></tr>
       <tr><th>Continent:</th><td>${response.data.continent}</td></tr>
       <tr><th>Category:</th><td>${response.data.category}</td></tr>
       <tr><th>Cost:</th><td>${response.data.cost}</td></tr>
@@ -60,6 +60,7 @@ const individualTrip = (id) => {
       <tr><th>About:</th><td>${response.data.about}</td></tr>
       `
     );
+    $('#trip').addClass('trip-color')
     reserve.addClass(id);
     reserve.html(
       `<h1>Reservation</h1>
@@ -73,7 +74,7 @@ const individualTrip = (id) => {
       <input type="text" name="email" />
       </div>
 
-      <input type="submit" name="add-reservation" value="Add Reservation" />
+      <input type="submit" name="add-reservation" value="Submit Reservation" />
       `
     );
 
