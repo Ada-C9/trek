@@ -24,12 +24,14 @@ const loadTrips = () => {
   axios.get(URL)
   .then((response) => {
     reportStatus(`Successfully loaded ${response.data.length} trips`);
+    $('.box-header').remove();
+    tripList.before(`<h2 class="box-header">All Trips</h2>`);
     response.data.forEach((trip) => {
       tripList.append(`<li class="trip" id="${trip.id}" tabindex="0">${trip.name}</li>`);
     });
   })
   .catch((error) => {
-    reportError(`Encountered an error while loading trips: ${error.message}`);
+    reportError(`There was a problem while loading trips: ${error.message}`);
     console.log(error);
   });
 };
@@ -46,81 +48,140 @@ const loadTrip = function loadTrip() {
   axios.get(URL + `/${trip_id}`)
   .then((response) => {
     reportStatus(`Successfully loaded trip with id: ${response.data.id}`);
+    $('#trip-details').remove();
+    showTrip.before(`<h2 class="box-header" id="trip-details">Trip Details</h2>`);
+
     let trip = response.data
     let cost = parseInt(trip.cost).toLocaleString('en-US', {style: 'currency', currency: 'USD' });
-    showTrip.append(`
-      <ul class='trip-details'>
-      <li class='name'>Name: ${trip.name}</li>
-      <li class='continent'>Continent: ${trip.continent}</li>
-      <li class='category'>Category: ${trip.category}</li>
-      <li class='weeks'>Weeks: ${trip.weeks}</li>
-      <li class='cost'>Cost: ${cost}</li>
-      <li class='about'>About: ${trip.about}</li>
-      </ul>
-      `);
+    showTrip.html(`
+      <li><strong>Name:</strong> ${trip.name}</li>
+      <li><strong>Continent:</strong> ${trip.continent}</li>
+      <li><strong>Category:</strong> ${trip.category}</li>
+      <li><strong>Weeks:</strong> ${trip.weeks}</li>
+      <li><strong>Cost:</strong> ${cost}</li>
+      <li class='about'><strong>About:</strong> ${trip.about}</li>
+      `
+    );
 
-      reserveTrip.append(`
-        <h1>Reserve Trip:</h1>
-        <h2>${trip.name}</h2>
-        <form id="reservation-form">
-        <div>
-        <label for="name">Name</label>
-        <input type="text" name="name" />
-        </div>
+    reserveTrip.html(`
+      <h2 class="box-header">Reserve Trip: </h2>
+      <form id="reservation-form">
+      <div>
+      <label for="name">Name</label>
+      <input type="text" name="name" />
+      </div>
 
-        <div>
-        <label for="email">Email</label>
-        <input type="text" name="email" />
-        </div>
+      <div>
+      <label for="email">Email</label>
+      <input type="text" name="email" />
+      </div>
 
-        <input type="submit" name="reserve-trip" value="make reservation" />
-        </form>
-        `);
+      <div id="trip-name">
+      <strong>Trip Name:</strong> ${trip.name}
+      </div>
 
-        const createReservation = (event) => {
-          event.preventDefault();
-          // const reservationData = readFormData();
-          // console.log(reservationData);
+      <input type="submit" name="reserve-trip" value="make reservation" />
+      </form>
+      `
+    );
 
-          const reservationData = {
-            name: $('input[name="name"]').val(),
-            email: $('input[name="name"]').val(),
-          };
+    const createReservation = (event) => {
+      event.preventDefault();
+      // const reservationData = readFormData();
+      // console.log(reservationData);
 
-          reportStatus(`Attempting to Add ${reservationData.name}`);
-          console.log(this);
-          axios.post(URL + `/${this['id']}/reservations`, reservationData)
-          .then((response) => {
-            $('input[name="name"]').val('');
-            $('input[name="email"]').val('');
-
-            console.log(response);
-            reportStatus(`Successfully added ${reservationData.name}
-              with ID:  ${response.data.trip_id}`);
-            })
-            .catch((error) => {
-              console.log('There was a problem');
-              if (error.response.data && error.response.data.errors ) {
-                console.log(error.response);
-                reportError(error.message, error.response.data.errors);
-              } else {
-                reportStatus(`Encountered an Error: ${error.message}`)
-              }
-            });
-          };
-          $('#reservation-form').submit(createReservation);
-
-        })
-        .catch((error) => {
-          reportError(`Encountered an error while loading trips: ${error.message}`);
-          console.log(error);
-        });
-
+      const reservationData = {
+        name: $('input[name="name"]').val(),
+        email: $('input[name="name"]').val(),
       };
 
+      reportStatus(`Attempting to Add ${reservationData.name}`);
+      console.log(this);
 
-      $(document).ready(() => {
-        $('#load').click(loadTrips);
-        $('#trip-list').on('click', 'li', loadTrip);
+      axios.post(URL + `/${this.id}/reservations`, reservationData)
+      .then((response) => {
+        $('input[name="name"]').val('');
+        $('input[name="email"]').val('');
 
+        console.log(response);
+        reportStatus(`Successfully added ${reservationData.name}
+          with ID:  ${response.data.trip_id}`);
+        }
+      )
+      .catch((error) => {
+        console.log('There was a problem');
+        if (error.response.data && error.response.data.errors ) {
+          console.log(error.response);
+          reportError(error.message, error.response.data.errors);
+        } else {
+          reportStatus(`Encountered an Error: ${error.message}`);
+        }
       });
+    };
+    $('#reservation-form').submit(createReservation);
+
+  })
+  .catch((error) => {
+    reportError(`There was a problem while loading trips: ${error.message}`);
+    console.log(error);
+  });
+
+};
+
+// adding a trip, didn't finish
+
+// const FORM_FIELDS = ['name', 'continent', 'about', 'category', 'weeks', 'cost' ];
+// const inputField = name => $(`#trip-form input[name="${name}"]`);
+//
+// const readFormData = () => {
+//   const getInput = name => {
+//     const input = inputField(name).val();
+//     return input ? input : undefined;
+//   };
+//
+//   const formData = {};
+//   FORM_FIELDS.forEach((field) => {
+//     formData[field] = getInput(field);
+//   });
+//
+//   return formData;
+// };
+//
+// const clearForm = () => {
+//   FORM_FIELDS.forEach((field) => {
+//     inputField(field).val('');
+//   });
+// }
+//
+//
+// const createTrip = (event) => {
+//   event.preventDefault();
+//
+//   const tripData = readFormData();
+//   console.log(tripData);
+//
+//   reportStatus('Sending trip data...');
+//
+//   axios.post(URL, tripData)
+//   .then((response) => {
+//     reportStatus(`Successfully added a trip with ID ${response.data.id}!`);
+//     clearForm();
+//   })
+//   .catch((error) => {
+//     console.log(error.response);
+//     if (error.response.data && error.response.data.errors) {
+//       reportError(
+//         `There was a problem: ${error.message}`,
+//         error.response.data.errors
+//       );
+//     } else {
+//       reportStatus(`There was a problem: ${error.message}`);
+//     }
+//   });
+// };
+
+
+$(document).ready(() => {
+  $('#load').click(loadTrips);
+  $('#trip-list').on('click', 'li', loadTrip);
+});
