@@ -4,8 +4,19 @@ body {
 
 main {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 'left right';
 }
+
+.trips {
+  grid-area: left;
+}
+
+.details {
+  grid-area: right;
+  margin: 1em;
+}
+
+
 h1 {
   display: block;
   font-size: 2em;
@@ -51,16 +62,22 @@ table, th, td {
 }
 
 #trip-details {
-  margin: 1em;
   text-align: left;
 }
 
-.detail-header {
+.detail-header, #reserve-trip {
   text-align: center;
   border: 1px solid black;
   padding: 1em;
   font-weight: bold;
 }
 p {
+  font-weight: bold;
+}
+
+.reserve {
+  text-align: center;
+  border: 1px solid black;
+  padding: 1em;
   font-weight: bold;
 }
