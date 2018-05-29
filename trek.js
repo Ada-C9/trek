@@ -38,7 +38,7 @@ const loadTrips = () => {
 const individualTrip = (id) => {
   console.log(id);
   reportStatus("Loading trip details...");
-  const reserve = $('#trip-form');
+  const reserve = $('#reservation-form');
   const trip = $('#trip');
   trip.empty();
   reserve.empty();
@@ -60,7 +60,7 @@ const individualTrip = (id) => {
       <tr><th>About:</th><td>${response.data.about}</td></tr>
       `
     );
-    $('#trip').addClass('trip-color')
+    $('#trip').addClass('trip-details');
     reserve.addClass(id);
     reserve.html(
       `<h1>Reservation</h1>
@@ -77,9 +77,10 @@ const individualTrip = (id) => {
       <input type="submit" name="add-reservation" value="Submit Reservation" />
       `
     );
+        $('#reservation-form').addClass('reservation');
 
 
-    $('#trip-form').submit(function(event) {
+    $('#reservation-form').submit(function(event) {
       console.log(event);
       event.preventDefault();
       createReservation(urlTrip);
@@ -93,7 +94,7 @@ const individualTrip = (id) => {
 };
 
 const FORM_FIELDS = ['name', 'email'];
-const inputField = name => $(`#trip-form input[name="${name}"]`);
+const inputField = name => $(`#reservation-form input[name="${name}"]`);
 
 const readFormData = () => {
   const getInput = name => {
@@ -136,11 +137,11 @@ const createReservation = (urlTrip) => {
     console.log(error.response);
     if (error.response.data && error.response.data.errors) {
       reportError(
-        `Encountered an error: ${error.message}`,
+        `Encountered an error while trying to reserve the trip: ${error.message}`,
         error.response.data.errors
       );
     } else {
-      reportStatus(`Encountered an error: ${error.message}`);
+      reportStatus(`Was not able to reserve your trip: ${error.message}`);
     }
   });
 };
