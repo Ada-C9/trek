@@ -77,7 +77,7 @@ const individualTrip = (id) => {
       <input type="submit" name="add-reservation" value="Submit Reservation" />
       `
     );
-        $('#reservation-form').addClass('reservation');
+    $('#reservation-form').addClass('reservation');
 
 
     $('#reservation-form').submit(function(event) {
