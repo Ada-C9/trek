@@ -1,5 +1,5 @@
 body {
-  background-color: #ffddcc;
+  background-color: #cc4400;
   color: #331100;
   margin: 0;
   padding: 0;
@@ -15,6 +15,7 @@ header {
   box-shadow: 2px 5px #331100;
   margin: 0;
   margin-bottom: 25px;
+  background-color: #ffddcc;
 }
 
 h1, h2, h3, table tr th {
@@ -35,6 +36,7 @@ main {
 
 aside {
   grid-column: 3 / span 1;
+  min-width: 425px;
 }
 
 main, aside {
@@ -46,9 +48,14 @@ main h3 {
   padding: 15px 0 5px;
 }
 
-main h3, ul, ul li, aside > section {
+h3, ul, ul li, aside > section {
   border: 2px solid #331100;
   box-shadow: 2px 5px #331100;
+  background-color: #ffddcc;
+}
+
+h3 {
+  padding-top: 10px;
 }
 
 ul {
@@ -92,7 +99,7 @@ ul li:hover {
 }
 
 aside h3 {
-  margin: 10px 0;
+  margin: 15px 0;
 }
 
 aside p {
@@ -139,5 +146,6 @@ span#specific-trip {
 }
 
 aside > section {
-  padding: 15px;
+  padding: 0 15px 15px;
+  background-color: #ffddcc;
 }
