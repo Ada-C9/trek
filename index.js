@@ -16,7 +16,6 @@ const reportError = (message, errors) => {
 };
 
 // Loading Trips
-//
 const loadTrips = () => {
   reportStatus('Loading trips...');
 
@@ -66,35 +65,35 @@ const getTripData = (trip_id) => {
       <li>Cost: $${response.data.cost}</li>
       <li>Week(s) of Travel: ${response.data.weeks}</li>`);
     })
-    .catch((error) => {
+  .catch((error) => {
       reportStatus(`Encountered an error while trying to load the trip: ${error.message}`);
       console.log(error);
+  });
+  }
+
+  // reservation form:
+  const FORM_FIELDS = ['name', 'email'];
+  const inputField = name => $(`#reservation-form input[name="${name}"]`);
+
+  const readFormData = () => {
+    const getInput = name => {
+      const input = inputField(name).val();
+      return input ? input : undefined;
+    };
+    const formData = {};
+    FORM_FIELDS.forEach((field) => {
+      formData[field] = getInput(field);
+    });
+
+    return formData;
+  };
+  const clearForm = () => {
+    FORM_FIELDS.forEach((field) => {
+      inputField(field).val('');
     });
   }
 
-  // const showReservationForm = (trip_id) => {
-    const FORM_FIELDS = ['name', 'email'];
-    const inputField = name => $(`#reservation-form input[name="${name}"]`);
-
-    const readFormData = () => {
-      const getInput = name => {
-        const input = inputField(name).val();
-        return input ? input : undefined;
-      };
-      const formData = {};
-      FORM_FIELDS.forEach((field) => {
-        formData[field] = getInput(field);
-      });
-
-      return formData;
-    };
-    const clearForm = () => {
-      FORM_FIELDS.forEach((field) => {
-        inputField(field).val('');
-      });
-    }
-  // }
-
+  //
   const createRes = (event, trip_id) => {
     event.preventDefault();
 
@@ -106,7 +105,7 @@ const getTripData = (trip_id) => {
     console.log(resURL)
     axios.post(resURL, resData)
     .then((response) => {
-      reportStatus(`Successfully added a new reservation ith ID ${response.data.name}!`);
+      reportStatus(`Successfully added a new reservation for ${response.data.name}!`);
       clearForm();
     })
     .catch((error) => {
@@ -121,8 +120,6 @@ const getTripData = (trip_id) => {
       }
     });
   };
-
-
 
 
 
