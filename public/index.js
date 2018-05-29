@@ -125,61 +125,7 @@ const loadTrip = function loadTrip() {
     reportError(`There was a problem while loading trips: ${error.message}`);
     console.log(error);
   });
-
 };
-
-// adding a trip, didn't finish
-
-// const FORM_FIELDS = ['name', 'continent', 'about', 'category', 'weeks', 'cost' ];
-// const inputField = name => $(`#trip-form input[name="${name}"]`);
-//
-// const readFormData = () => {
-//   const getInput = name => {
-//     const input = inputField(name).val();
-//     return input ? input : undefined;
-//   };
-//
-//   const formData = {};
-//   FORM_FIELDS.forEach((field) => {
-//     formData[field] = getInput(field);
-//   });
-//
-//   return formData;
-// };
-//
-// const clearForm = () => {
-//   FORM_FIELDS.forEach((field) => {
-//     inputField(field).val('');
-//   });
-// }
-//
-//
-// const createTrip = (event) => {
-//   event.preventDefault();
-//
-//   const tripData = readFormData();
-//   console.log(tripData);
-//
-//   reportStatus('Sending trip data...');
-//
-//   axios.post(URL, tripData)
-//   .then((response) => {
-//     reportStatus(`Successfully added a trip with ID ${response.data.id}!`);
-//     clearForm();
-//   })
-//   .catch((error) => {
-//     console.log(error.response);
-//     if (error.response.data && error.response.data.errors) {
-//       reportError(
-//         `There was a problem: ${error.message}`,
-//         error.response.data.errors
-//       );
-//     } else {
-//       reportStatus(`There was a problem: ${error.message}`);
-//     }
-//   });
-// };
-
 
 $(document).ready(() => {
   $('#load').click(loadTrips);
