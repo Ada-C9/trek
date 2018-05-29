@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>TREK</title>
+
+  <link rel="stylesheet" href="index.css">
+
+  <header>
+    <section class="cover-image" height="" width=""><img src="./images/cover-pic2.jpg" alt="Cover image">
+      <button class="top-button button blink_me" id="load"  onclick="focusMethod()">Get trips!</button>
+    </section>
+
+    <section  id="status-message"></section>
+  </header>
+</head>
+<body >
+
+  <main >
+    <div class="grid-y medium-grid-frame">
+      <div class="cell shrink header medium-cell-block-container" >
+    </div>
+
+
+    <div class="cell medium-auto medium-cell-block-container" >
+      <div class="grid-x grid-padding-x ">
+
+        <!-- ____________________________________
+        ALL TRIPS: -->
+        <div class="all-trips cell medium-4 medium-cell-block-y">
+          <h2 class="blue-text" >All Trips</h2>
+          <ul id="trip-list"></ul>
+        </div>
+
+        <!-- ____________________________________
+        DETAILS OF A SPECIFIC TRIP: -->
+        <div class="trip-details cell medium-8 medium-cell-block-y">
+          <h2 class="blue-text" >Trip Details</h2>
+          <div class="trip-info">
+            <ul id="single-trip">
+              <li id="starting-text">Click on a trip to see details!</li>
+            </ul>
+
+            <div class="make-reser-btn">
+              <button class="button" data-open="reserveModal">Reserve this Trip!</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ____________________________________
+        MAKE A RESERVATION: -->
+
+        <div class="reveal reserve-trip" id="reserveModal" data-reveal>
+
+          <form id="reserve-block">
+            <div>
+              <label for="name">Your name:</label>
+              <input type="text" name="name" />
+            </div>
+
+            <div>
+              <label for="age">Your age:</label>
+              <input type="text" name="age" />
+            </div>
+
+            <div>
+              <label for="email">Your email:</label>
+              <input type="text" name="email" />
+            </div>
+
+            <div>
+              <!-- <label for="trip">Trip name:</label>
+              <label id="trip-name"></label> -->
+              <input id="makeReservation-button" class="button" type="submit" name="add-reservation" data-open="makeReservation" data-close aria-label="Close modal"/>
+              <!-- Submit the form to create a new reservation and closes the modal as well. Also calls for another modal to open with the confirmation that the reservation was created or not. -->
+            </div>
+          </form>
+
+          <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- Modal for confirmation/error message after reservation is created.  -->
+        <div class="reveal reserve-trip" id="makeReservation" data-reveal>
+          <h4 id="reservation-message"><!--  message will go here (see js)--></h4>
+          <button class="close-button" data-close aria-label="Close reveal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!-- trip id info for making a post request -->
+        <label class="hidden" id="trip-id"></label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ____________________________________
+  FOOTER: -->
+  <div class="cell shrink footer">
+    <!-- <h3>Footer</h3> -->
+  </div>
+</div>
+
+</main>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<!-- ____________________________________
+FOUNDATION: -->
+<!-- Compressed CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
+
+<!-- Compressed JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js" integrity="sha256-mRYlCu5EG+ouD07WxLF8v4ZAZYCA6WrmdIXyn1Bv9Vk= sha384-KzKofw4qqetd3kvuQ5AdapWPqV1ZI+CnfyfEwZQgPk8poOLWaabfgJOfmW7uI+AV sha512-0gHfaMkY+Do568TgjJC2iMAV0dQlY4NqbeZ4pr9lVUTXQzKu8qceyd6wg/3Uql9qA2+3X5NHv3IMb05wb387rA==" crossorigin="anonymous"></script>
+<!-- ________________________________-->
+
+
+<script type="text/javascript" src="index.js"></script>
+</body>
+</html>
