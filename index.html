@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Octo Trips</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Karla|Permanent+Marker" rel="stylesheet">
+
+
+
+  </head>
+  <body>
+    <header>
+      <h1>TREK</h1>
+      <div class="header-background"></div>
+    </header>
+
+    <main>
+      <section id='status-message'></section>
+
+      <section id='current-trips'>
+
+        <section id='filters'>
+          <button type="button" id='load' class='button'>See All Trips</button>
+          <div class="dropdown">
+            <button type="button" class='dropbtn button'>Search by</button>
+            <div class="dropdown-content" id="search-by">
+              <p id='continent'>Continent</p>
+              <p id='budget'>Max Budget</p>
+              <p id='weeks'>Max Weeks</p>
+            </div>
+          </div>
+          <div id='search-filters'></div>
+        </section>
+
+
+
+        <div class='trip-table'>
+          <table id='trip-list'></table>
+        </div>
+      </section>
+
+      <section id='trip-info'></section>
+
+      <section id='trip-form'></section>
+
+    </main>
+
+  </body>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script type="text/javascript" src="index.js"></script>
+</html>

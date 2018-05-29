@@ -1,0 +1,141 @@
+body, .button {
+  font-family: 'Karla', sans-serif;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 50% 1fr;
+  grid-template-rows: 5vh 50vh 1fr;
+  grid-column-gap: 1em;
+}
+
+h1 {
+  font-size: 2.25rem;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+header > h1, h3 {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.button {
+  width: 8rem;
+  height: 2rem;
+  font-size: 1rem;
+  background-color: white;
+  border-color: rgb(64, 96, 119);
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:hover {
+  background-color: rgb(240, 216, 232);
+}
+
+.header-background {
+  min-height: 0.9vh;
+  background-image: url('space-background.jpeg');
+}
+
+.trip-table, #trip-info {
+  overflow-x: scroll;
+}
+
+.trip-table {
+  max-height: 75vh;
+  margin-top: 2vh;
+}
+
+#status-message {
+  grid-column: 1 / span 2;
+}
+
+.success {
+  color: rgb(38, 175, 11);
+}
+
+.failure {
+  color: rgba(218, 52, 52, 0.65);
+}
+
+#current-trips {
+  grid-row: 2 / span 2;
+}
+
+#trip-info {
+  grid-column-start: 2;
+}
+
+#trip-list {
+  width: 100%;
+}
+
+#trip-list td {
+  cursor: pointer;
+}
+
+#trip-list tr:nth-child(odd) {
+  background-color: rgba(147, 147, 147, 0.16);
+}
+
+#trip-form {
+  grid-column-start: 2;
+  grid-row-start: 3;
+}
+
+#trip-form .button {
+  margin-top: 2vh;
+}
+
+#search-filters {
+  display: inline;
+}
+
+i {
+    border: solid black;
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-bottom: 3px;
+    margin-left: 5px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+/* DROPDOWN */
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content p {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0;
+    margin-top: 0
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content p:hover {background-color: rgb(240, 216, 232)}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
