@@ -1,10 +1,43 @@
+
+/* blink top button: */
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0.2;
+  }
+}
+
+/* hide main part for before loading trips: */
+.cell.medium-auto.medium-cell-block-container {
+  display: none;
+}
+
+div.trip-info, ul#trip-list {
+  background-color: rgba(215,236,250);
+  border: solid 20px rgba(255,255,255, 0.9);
+  padding: 20px;
+}
+
+.make-reser-btn {
+  display: none;
+}
+
+header {
+  margin: 0px;
+}
+
+#starting-text {
+  list-style: none;
+  margin-top: 30%
+}
+
 img{
   width: 100%;
   min-width: 100%;
-}
-
-.cell.medium-auto.medium-cell-block-container {
-  display: none;
+  opacity: .9;
 }
 
 .reserve-trip{
@@ -16,18 +49,11 @@ h2, .callout, h3, #reserve-block div{
   text-align: center;
 }
 
-header{
-  padding: 2px;
-  margin-bottom: 10px;
-}
-
-main {
-  border: ;
-}
 
 li.trip, #reservation-message li{
   list-style: none;
   padding-bottom: 10px;
+  color: #1779ba;
 }
 
 ul#single-trip div, ul#single-trip, ul#single-trip h5{
@@ -35,7 +61,6 @@ ul#single-trip div, ul#single-trip, ul#single-trip h5{
   padding: 15px;
   position: center;
   text-align: center;
-
 }
 
 ul#single-trip div p:first-letter, li.trip {
@@ -47,7 +72,7 @@ ul#single-trip div:last-of-type{
   text-align: left;
 }
 
-li.trip:hover{
+li.trip:hover, #starting-text{
   color: #1779ba;
   font-weight: bold;
   font-size: 120%;
@@ -61,11 +86,8 @@ li.trip:hover{
 div.header.medium-cell-block-container{
   margin-top: 12px;
 }
-/* div.all-trips, div.trip-details {
-border: 10px solid #1779ba;
-} */
 
-.make-reser-btn{
+div.make-reser-btn {
   text-align: center;
 }
 
@@ -74,9 +96,42 @@ border: 10px solid #1779ba;
 }
 
 div#makeReservation.reveal.reserve-trip{
-  background-color: #d7ecfa;
+  background-color: white;
   text-align: center;
 }
+
+.trip-info {
+  text-align: center;
+}
+
 #trip-id-confirm{
+  color: #1779ba;
+}
+
+.top-button.button {
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  font-size: 2em;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  padding: 12px 24px;
+  cursor: pointer;
+  size: 100%;
+  border: #d7ecfa;
+  opacity: .7;
+}
+
+.top-button.button:hover {
+  background-color: #fefefe;
+  color: #1779ba;
+  radius: 30%;
+}
+
+h4#reservation-message{
+  padding: 20px;
+}
+
+.blue-text {
   color: #1779ba;
 }

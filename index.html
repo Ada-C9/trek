@@ -7,48 +7,39 @@
   <link rel="stylesheet" href="index.css">
 
   <header>
-    <section class="cover-image" height="" width=""><img src="./images/cover-pic2.jpg" alt="Cover image"></section>
+    <section class="cover-image" height="" width=""><img src="./images/cover-pic2.jpg" alt="Cover image">
+      <button class="top-button button blink_me" id="load"  onclick="focusMethod()">Get trips!</button>
+    </section>
 
     <section  id="status-message"></section>
   </header>
 </head>
-<body>
+<body >
 
-
-  <main>
+  <main >
     <div class="grid-y medium-grid-frame">
-      <div class="cell shrink header medium-cell-block-container">
-        <!-- <h1>All Trips</h1> -->
-        <!-- <div class="grid-x grid-padding-x"> -->
-        <!-- <div class="cell medium-4"> -->
-        <button class="button" id="load">Get trips!</button>
-        <!-- </div> -->
-        <!-- <div class="cell medium-4 medium-cell-block"> -->
-        <!-- Trip Details -->
-        <!-- </div> -->
-        <!-- <div class="cell medium-4">
-        A medium 4 cell
-      </div> -->
-      <!-- </div> -->
+      <div class="cell shrink header medium-cell-block-container" >
     </div>
 
 
-    <div class="cell medium-auto medium-cell-block-container ">
+    <div class="cell medium-auto medium-cell-block-container" >
       <div class="grid-x grid-padding-x ">
 
         <!-- ____________________________________
         ALL TRIPS: -->
         <div class="all-trips cell medium-4 medium-cell-block-y">
-          <h2>All Trips</h2>
+          <h2 class="blue-text" >All Trips</h2>
           <ul id="trip-list"></ul>
         </div>
 
         <!-- ____________________________________
         DETAILS OF A SPECIFIC TRIP: -->
         <div class="trip-details cell medium-8 medium-cell-block-y">
-          <h2>Trip Details</h2>
+          <h2 class="blue-text" >Trip Details</h2>
           <div class="trip-info">
-            <ul id="single-trip"></ul>
+            <ul id="single-trip">
+              <li id="starting-text">Click on a trip to see details!</li>
+            </ul>
 
             <div class="make-reser-btn">
               <button class="button" data-open="reserveModal">Reserve this Trip!</button>
