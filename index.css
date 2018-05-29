@@ -1,0 +1,74 @@
+body {
+  background-color: #e6e6e6;
+  font-family: Arial;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+
+main {
+  padding: 4vh 0;
+  margin-bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: .6fr .3fr .1fr;
+  grid-gap: 1em;
+}
+
+.trips {
+  grid-area: 2/1/4/2;
+
+}
+
+
+#trips-list {
+  max-height: 80vh;
+  overflow-x: scroll;
+
+
+}
+
+.welcome {
+  grid-area: 1/1/2/3;
+  text-align: center;
+  padding-top: 10vh;
+  font-size: 50pt;
+  font-family: Luckiest Guy;
+  color: #cccc00;
+  background: url("road.jpg") no-repeat;
+  background-size: 100% 100%;
+}
+
+#trip {
+  display: grid;
+  grid-area: 2/2/3/3;
+  padding-top: 10vh;
+  height: 30vh;
+  overflow: scroll;
+
+}
+
+.trip-details {
+  background-color: #f3ffcc;
+  border-style: solid;
+  border-width:thin;
+}
+
+.new-reservation {
+  grid-area: 3/2/4/3;
+
+}
+
+.reservation {
+  margin-left: 30%;
+}
+
+button#load, input[type="submit"] {
+  background-color: #cccc00;
+  border-style: solid;
+  border-radius: 5pt;
+  margin: 0 auto 1em auto;
+  font-size: 1em;
+  padding: 5px 30px;
+
+}
