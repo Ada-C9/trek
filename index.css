@@ -1,0 +1,52 @@
+
+body {
+  font-family: sans-serif;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.all_trips {
+  display: inline-block;
+  }
+
+.trip_specifics {
+  display: inline-block;
+  }
+
+.single-trip-detail {
+  display: block;
+}
+
+.reservation-opt-in {
+  display: block;
+}
+
+.make_reservation {
+  display: block;
+}
+
+.reservation-result {
+  display: block;
+}
+
+ul {
+    list-style-type: none;
+}
+
+#every-trip li {
+  padding-top: 5px;
+}
+
+.details_box {
+  padding-left: 15px;
+}
+
+.success_message {
+  color: fuchsia;
+  background-color: khaki;
+  padding-left: 20px;
+
+}
