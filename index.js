@@ -16,7 +16,7 @@ const reportError = (message, errors) => {
     }
   }
   content += '</div>';
-  reportStatus(content);
+  reportStatus(content, 'failure');
 };
 
 const baseURL = 'https://ada-backtrek-api.herokuapp.com/trips';
@@ -140,8 +140,6 @@ const reserveTrip = function reserveTrip (event) {
       }
     });
 
-  $('#trip-info').empty();
-  $('#trip-form').empty();
 };
 
 
