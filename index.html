@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Trek</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/foundation/6.2.3/foundation.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header>
+      <h1>Trek</h1>
+      <button id="load" class="button">See All Trips</button>
+      <button id="search" class="button">Search Trips</button>
+      <button id="create" class="button">Create A Trip</button>
+    </header>
+
+    <section id="status-message"></section>
+
+    <main class="row">
+      <section class="small-6 columns trips-container">
+        <section id="search-trips-form"></section>
+        <section id="trips"></section>
+      </section>
+      <section class="small-6 columns trip-container">
+        <section id="create-trip-form"></section>
+        <section id="trip-details"></section>
+        <section id="reservation-form"></section>
+      </section>
+    </main>
+
+    <footer>
+      <h5>Zheng Cao ©2018</h5>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
