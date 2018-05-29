@@ -6,9 +6,7 @@ const reportStatus = function reportStatus(message) {
 
 const reportError = (message, errors) => {
   let content = `<p>${message}</p><ul>`;
-  // first loop through the keys of the errors object
   for (const field in errors) {
-    // then loop through the values of the errors object
     for (const problem of errors[field]) {
       content += `<li>${field}: ${problem}</li>`;
     }
