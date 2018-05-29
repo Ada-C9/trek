@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Trek Trip Planning</title>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="index.css" type="text/css">
+</head>
+
+
+
+<body>
+
+  <h1>Trek</h1>
+  <section id='status-message'> </section>
+  <button type="button" name="button" id="load">Get Trips!</button>
+
+  <main id="main">
+
+  <aside class="current-trips hidden" id ="current-trips">
+    <h2>All Trips</h2>
+
+    <ul id="trip-list"></ul>
+  </aside>
+
+  <aside class="view-trip hidden" id="view-trip">
+    <article id="trip-details">
+      <h2>Trip Details</h2>
+
+      <tablebody id="tablebody">
+
+      </tablebody>
+    </article>
+    <article id="reserve-trip">
+      <h2>Reserve Trip</h2>
+      <form id="reserve-form">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" name="name" />
+        </div>
+
+        <div>
+          <label for="age">Age</label>
+          <input type="number" name="age" />
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input type="text" name="email" />
+        </div>
+
+        <input type="submit" name="add-reservation" class="button" value="Reserve" />
+      </form>
+    </article>
+  </aside>
+    </main>
+
+</body>
+
+<script type="text/javascript" src="index.js"></script>
+
+</html>

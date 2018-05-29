@@ -1,0 +1,74 @@
+
+#main{
+  font-family: Arial;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+#status-message{
+  height: 20px;
+}
+
+
+header{
+  align-self: left;
+  font-weight: bold;
+  font-size: 2em;
+  border-bottom: 5px, solid, grey;
+}
+
+h1{
+  font-weight: bold;
+  font-size: 2em;
+  border-bottom: solid 1px;
+}
+
+
+
+#trip-details{
+text-align: left;
+margin: 1em;
+}
+
+.current-trips{
+  padding: 0;
+  border:solid;
+}
+
+div{
+  margin: 1em;
+}
+
+#load{
+  align-self: left;
+  margin:1em;
+  padding:1em;
+}
+
+
+
+#trip-list li{
+  padding: 2em;
+  border: solid 1px;
+  list-style: none;
+}
+
+ul{
+  width:100%;
+  padding-left: 0px;
+}
+
+h2{
+  text-align: center;
+}
+
+article{
+  border: solid;
+  margin: .5em;
+}
+
+.hidden{
+  display: none;
+}
