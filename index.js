@@ -86,7 +86,8 @@ const getTripInfo = function getTripInfo(event) {
         let content = '<table>';
         content += `<tr> <td>ID</td> <td> ${trip.id} </td></tr>`;
         content += `<tr> <td>NAME</td> <td> ${trip.name} </td></tr>`;
-        content += `<tr> <td>CONTINENT</td> <td> ${trip.continent} </td></tr>`;
+        content += `<tr> <td>COST</td> <td> $${trip.cost} </td></tr>`;
+        content += `<tr> <td>WEEKS</td> <td>${trip.weeks}</td> </tr>`
         content += `<tr> <td>CATEGORY</td> <td> ${trip.category} </td></tr>`;
         content += `<tr> <td id='about-trip'>ABOUT</td> <td> ${trip.about} </td></tr>`;
         content += '</table>';
@@ -143,6 +144,8 @@ const reserveTrip = function reserveTrip (event) {
   $('#trip-form').empty();
 };
 
+
+// QUERY SEARCHES
 const searchBySection = function searchBy (event) {
   let target = event.target;
   let searchCat = target.id;
@@ -151,13 +154,13 @@ const searchBySection = function searchBy (event) {
     case 'continent':
       $('#search-filters').html(
         `<div class='dropdown'>
-          <button type='button' class='dropbtn button filter-button'> ${searchCat} <i class="arrow down"></i> </button>
+          <button type='button' class='dropbtn button'> ${searchCat} <i class="arrow down"></i> </button>
 
-          <div class='dropdown-content' id='continent-search'>
+          <div class='dropdown-content filter-content' id='continent-search'>
             <p>Asia</p>
             <p>North America</p>
             <p>South America</p>
-            <p>Australiasia</p>
+            <p>Australasia</p>
             <p>Europe</p>
             <p>Africa</p>
             <p>Antarctica</p>
@@ -170,8 +173,8 @@ const searchBySection = function searchBy (event) {
         `<div class='dropdown'>
           <button type='button' class='dropbtn button'> ${searchCat} <i class="arrow down"></i> </button>
 
-          <div class='dropdown-content'>
-            <form id='budget-form'>
+          <div class='dropdown-content filter-content' id='budget-form'>
+            <form>
               <label for='budget'>Set your budget (USD)</label>
               <input type='text' name='budget' />
               <input type="submit" value="Submit">
@@ -186,12 +189,13 @@ const searchBySection = function searchBy (event) {
         `<div class='dropdown'>
           <button type='button' class='dropbtn button'> ${searchCat} <i class="arrow down"></i> </button>
 
-          <div class='dropdown-content'>
-            <form id='weeks-form'>
+          <div class='dropdown-content filter-content' id='weeks-form'>
+            <form>
               <label for='weeks'>Number of weeks</label>
-              <input type='number' name='weeks' min="0"/>
+              <input type='number' name='weeks' min="1"/>
               <input type="submit" value="Submit">
             </form>
+          </div>
         </div>`
       );
       break;
@@ -200,12 +204,27 @@ const searchBySection = function searchBy (event) {
 }
 
 const getSearch = function getSearch(event) {
-  if ()
-}
-
-const searchContinent = function searchContinent(event) {
+  event.preventDefault();
+  let selector = event.currentTarget;
   let target = event.target;
-  let cont = target.innerHTML;
+
+  console.log(event);
+
+  if (selector.id === 'continent-search') {
+
+    searchContinent(target);
+
+  } else if (selector.id === 'budget-form' && target.defaultValue === 'Submit') {
+    let budget = $('input[name="budget"]').val();
+    searchBudget(budget);
+  } else if (selector.id === 'weeks-form' && target.defaultValue === 'Submit') {
+    let weeks = $('input[name="weeks"]').val();
+    searchWeeks(weeks);
+  }
+};
+
+const searchContinent = function searchContinent(input) {
+  let cont = input.innerHTML;
 
   // I tried separating this into params and couldn't get anywhere
   let contURL = baseURL + '/continent' + `?query=${cont}`;
@@ -230,9 +249,56 @@ const searchContinent = function searchContinent(event) {
         reportStatus(`Error: ${error.message}`, 'failure');
       }
     });
+};
 
+const searchBudget = function searchBudget(input) {
+  let contURL = baseURL + '/budget' + `?query=${input.toString()}`;
 
+  axios.get(contURL)
+    .then((response) => {
+      $('#trip-list').empty();
+      $('#trip-list').append(`<h3>Trips under $ ${input.toString()}<h3>`);
+      if (response.data === undefined || response.data.length < 1) {
+        $('#trip-list').append('No trips at this time');
+      } else {
+        buildTripTable(response);
+      }
+    })
+    .catch((error) =>{
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error:`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Error: ${error.message}`, 'failure');
+      }
+    });
+};
 
+const searchWeeks = function searchWeeks(input) {
+  let contURL = baseURL + '/weeks' + `?query=${input.toString()}`;
+
+  axios.get(contURL)
+    .then((response) => {
+      $('#trip-list').empty();
+      $('#trip-list').append(`<h3>Trips under ${input.toString()} Weeks <h3>`);
+      if (response.data === undefined || response.data.length < 1) {
+        $('#trip-list').append('No trips at this time');
+      } else {
+        buildTripTable(response);
+      }
+    })
+    .catch((error) =>{
+      if (error.response.data && error.response.data.errors) {
+        reportError(
+          `Encountered an error:`,
+          error.response.data.errors
+        );
+      } else {
+        reportStatus(`Error: ${error.message}`, 'failure');
+      }
+    });
 };
 
 
@@ -242,6 +308,6 @@ $(document).ready( () => {
   $('#trip-list').on('click', 'td', getTripInfo);
   $('#trip-form').submit(reserveTrip);
   $('#search-by').on('click', 'p', searchBySection);
-  $('#search-filter').on('click', 'p', searchContinent);
+  $('#search-filters').on('click', '.filter-content', getSearch);
 
 });
