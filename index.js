@@ -78,7 +78,7 @@ const loadTripDetails = (id) => {
 
     let detail = response.data;
     tripDetails.append(`<tr><td>Name: ${detail.name}</td></tr>`);
-    tripDetails.append(`<tr><td>Trip Id:${detail.id}</td></tr>`);
+    tripDetails.append(`<tr><td>Trip Id: ${detail.id}</td></tr>`);
     tripDetails.append(`<tr><td>Continent: ${detail.continent}</td></tr>`);
     tripDetails.append(`<tr><td>Category: ${detail.category}</td></tr>`);
     tripDetails.append(`<tr><td>Weeks: ${detail.weeks}</td></tr>`);

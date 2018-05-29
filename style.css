@@ -1,3 +1,33 @@
 .ReserveTrip {
   display: none;
 }
+
+#title {
+  background-color: green;
+  color: white;
+  text-align: center;
+}
+
+#userMessages {
+  font-size: 12pt;
+  font-style: italic;
+  color: grey;
+  text-align: center;
+}
+
+#showtrips {
+  background-color: #8FBC8F;
+}
+
+#tripDetails {
+  background-color: #98FB98;
+}
+
+.ReserveTrip {
+  background-color: #20B2AA;
+  text-align: center;
+}
+
+#travellerName {
+  padding: 1rem;
+}
