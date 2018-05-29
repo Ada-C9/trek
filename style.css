@@ -1,14 +1,21 @@
 
 body{
 
-background-color: lightblue;
+/* background-color: lightblue; */
+  background-image: url("trips.jpeg");
+  height: 100%;
+  padding: 2rem;
 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
 
 header{
-  background-image: url("https://unsplash.com/photos/czGBuGdu89s");
+
 
 }
 *{
@@ -20,6 +27,7 @@ header{
   align-content: space-around;
   /* border: 1px solid black; */
   font-size: 12px;
+  
 
 }
 .buttoncontainer{
