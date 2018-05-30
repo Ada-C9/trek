@@ -1,0 +1,50 @@
+
+body{
+
+/* background-color: lightblue; */
+  background-image: url("trips.jpeg");
+  height: 100%;
+  padding: 2rem;
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+header{
+
+
+}
+*{
+  list-style-type: none;
+}
+.tripcontainer{
+  display: grid;
+  grid-template-columns: auto auto;
+  align-content: space-around;
+  /* border: 1px solid black; */
+  font-size: 12px;
+  
+
+}
+.buttoncontainer{
+  grid-column: 1/3;
+  border: 1px solid black;
+}
+.triplist{
+  grid-row: 2/5;
+  border: 1px solid black;
+  text-decoration: underline;
+
+}
+.tripdetail{
+  border: 1px solid black;
+  padding:5px;
+}
+.tripreservation{
+border: 1px solid black;
+padding:5px;
+}
