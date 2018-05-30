@@ -1,0 +1,89 @@
+ul {
+  list-style-type: none;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  display: grid;
+}
+
+header button {
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 5%;
+  color: white;
+  font-size: 2em;
+}
+
+header button:hover {
+  background-color: rgb(101, 128, 110);
+  opacity: 90%;
+  cursor: pointer;
+}
+
+header h1 {
+  font-size: 5em;
+}
+
+header h3 {
+  padding-top: 3em;
+}
+
+header {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/croatia.jpg');
+  background-attachment: fixed;
+}
+
+.trip-link:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.reservation input[type="submit"]:hover {
+  cursor: pointer;
+}
+
+.alltrips {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  max-height: 70vh;
+}
+
+.details p {
+  text-align: left;
+  margin: 1em;
+}
+
+.details {
+  padding: 0;
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.details ul {
+  padding: 0;
+}
+
+.reservation {
+  grid-row: 2;
+  grid-column: 2;
+  align-content: center;
+}
+
+.reservation input[type="submit"] {
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5%;
+  color: black;
+  font-size: 0.75em;
+  align-content: center;
+}
