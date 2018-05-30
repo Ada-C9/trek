@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Get Outta Here</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Trek</h1>
+      </header>
+
+      <button class="hollow button" id="trips-button">See All Trips</button>
+      <!-- <button class="hollow button" id="create-trip-button">Create a Trip</button> -->
+      <p class="status-message"></p>
+
+      <section class="data grid-container">
+        <section class="all-trips display-none">
+          <h2>All Trips</h2>
+          <div id="trip-list"></div>
+        </section>
+
+        <aside class="trip-details">
+          <section class="details display-none" id="details"></section>
+
+          <section class="reserve-form  display-none" id="reserve">
+            <h2>Reserve Trip</h2>
+            <form id="reserve-form">
+              <div class="grid-container">
+                <label for="name">Your Name:</label>
+                <input type="text" name="name" />
+              </div>
+              <div class="grid-container">
+                <label for="email">Your Email:</label>
+                <input type="email" name="email" />
+              </div>
+              <div id="trip-reservation-num"></div>
+              <div class="reserve">
+                <input class="hollow button" type="submit" name="reserve" value="Reserve" />
+              </div>
+            </form>
+          </section>
+          <p id="reservation-status"></p>
+
+          <section class="trip-creation display-none">
+            <h2>Create New Trip</h2>
+            <form id="new-trip-form">
+              <div class="grid-container">
+                <label for="name">Trip Name:</label>
+                <input type="text" name="name" />
+              </div>
+              <div class="grid-container">
+                <label for="continent">Continent:</label>
+                <input type="text" name="continent" />
+              </div>
+              <div class="grid-container">
+                <label for="category">Category:</label>
+                <input type="text" name="category" />
+              </div>
+              <div class="grid-container">
+                <label for="weeks">Weeks:</label>
+                <input type="text" name="weeks" />
+              </div>
+              <div class="grid-container">
+                <label for="cost">Cost:</label>
+                <input type="text" name="cost" />
+              </div>
+              <div class="grid-container">
+                <label for="about">About:</label>
+                <textarea name="about" rows="8" cols="80"></textarea>
+              </div>
+              <div class="create">
+                <input class="hollow button" type="submit" name="create" value="Create" />
+              </div>
+            </form>
+          </section>
+          <p id="creation-status"></p>
+        </aside>
+      </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
