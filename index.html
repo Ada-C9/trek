@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Ada Trek</title>
+    <!-- <link rel="stylesheet" href="foundation.css"> -->
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
+  </head>
+
+<body>
+    <section id="fail"></section>
+    <button id="all-trips" class="button">View All Trips</button>
+
+<!-- All Trips -->
+    <section id="trips" class="all-trip-list">
+  <ul><h4></h4></ul>
+</section>
+
+<!-- Single Trip view -->
+<article id="trip" class="trip-info-list">
+  <h1 id="trip-name"></h1>
+  <ul id="trip-summary"></ul>
+</article>
+
+
+<!-- Reserve a trip -->
+
+<div id="reserve-trip" class="reserve-trip-form">
+  <form action="#" method="post" id="reservation-form">
+    <section>
+      <label>Name: </label>
+      <input type="text" id="name" name="name"></input>
+    </section>
+    <section>
+      <label>Age: </label>
+      <input type="number" id="age" name="age"></input>
+    </section>
+    <section>
+      <label>Email: </label>
+      <input type="text" id="email" name="email"></input>
+    </section>
+
+      <button id="submit-reservation" type="submit" class="button">Make Reservation</button>
+  </form>
+</div>
+
+
+<!-- Script tags -->
+        <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js">
+    </script>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
