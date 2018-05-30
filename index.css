@@ -1,0 +1,87 @@
+
+body {
+  background-color: #cfcec7;
+}
+
+body main {
+  display: grid;
+  grid-template-columns:  1fr 1fr 1fr 1fr;
+  grid-template-rows:  1fr 1fr 1fr 1fr;
+  justify-content: space-between;
+  /*background-color: #cacbc2;*/
+
+}
+button {
+  background-color: #ffffff;
+}
+nav ul {
+  display:flex;
+  background-color: hotpink;
+}
+ul {
+  list-style: none;
+  display:flex;
+}
+
+.table {
+  max-height: 70vh;
+  max-width: 60vw;
+  overflow-x: scroll;
+  /*border: solid 2px purple;*/
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 3;
+  /*margin: 10px;*/
+  padding: 20px;
+}
+.table a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.table td {
+  text-align: center;
+  padding: 10px;
+  border: solid 1px purple;
+}
+
+#details {
+  max-height: 50vh;
+  max-width: 40vw;
+  overflow-x: scroll;
+  grid-column: 3 / span 2;
+  grid-row: 1 / span 2;
+  float:right;
+  border: solid 2px purple;
+  margin: 10px;
+  padding-left: 10px;
+}
+
+
+
+
+#reserve {
+  max-height: 25vh;
+  max-width: 40vw;
+  /*text-align: center;*/
+  float: right;
+  grid-column: 3 / span 2;
+  grid-row: 3 / span 4;
+  border: solid 2px purple;
+  margin: 10px;
+  padding-left: 10px;
+}
+#reserve h2 {
+  border-bottom:  solid 2px purple;
+}
+
+footer {
+  background-color: hotpink;
+}
+
+em {
+  color:rgb(27, 89, 8);
+}
+
+#res-form div {
+  padding: 5px;
+}

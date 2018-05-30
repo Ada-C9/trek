@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Trek</title>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <!-- <link href=“http://cdn.foundation5.zurb.com/foundation.css” /> -->
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li>
+          <h1>Trek<button id="all-trips"> See All Trips </button></h1>
+
+        </li>
+      </ul>
+
+
+    </nav>
+    <em id="status-message" ></em>
+    <main >
+
+
+      <section class="table">
+        <table id="trip-table">
+          <thead>
+
+          </thead>
+          <tbody id="trips-body">
+
+          </tbody>
+        </table>
+
+      </section>
+
+      <section id="details">
+
+      </section>
+
+      <section id='reserve'>
+        <h2></h2>
+        <p></p>
+        <form id='res-form'>
+          <div>
+            <label for="name">Name:</label>
+            <input type="text" name="name" placeholder="enter name"/>
+          </div>
+          <div>
+            <label for="age">Age:</label>
+            <input type="number" age="age" placeholder="enter age" />
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="text" email="email" placeholder="enter email" />
+          </div>
+            <input type="submit" name="res" value="reserve spot"/>
+        </form>
+      </section>
+
+    </main>
+    <footer>©Kiera Thomasson</footer>
+
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
