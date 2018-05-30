@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Trek</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  </head>
+  <body>
+
+    <header id="top-nav">
+      <h1>Trek</h1>
+      <button id="display-trips">Display All Trips</button>
+      <section id="display-status">
+      </section>
+    </header><!-- top nav -->
+
+    <section id="trips-info" class="hidden">
+      <h2>All Trips</h2>
+      <ul id="all-trips"></ul>
+    </section><!-- trips info -->
+
+    <section id="trip-info" class="hidden">
+      <h2>Trip Details</h2>
+
+      <section id="trip"></section>
+
+      <section id="reservation">
+        <form id="reservation-form">
+          <div>
+            <!-- <label for="name">Name</label> -->
+            <input type="text" name="name" placeholder="Name" />
+          </div>
+          <div>
+            <!-- <label for="email">Email</label> -->
+            <input type="text" name="email" placeholder="Email" />
+          </div>
+          <input type="submit" name="make-reservation" value="Reserve" />
+        </form>
+      </section><!-- reservation form -->
+
+      <section id="about-trip"></section>
+
+    </section><!-- trip info -->
+
+    <!-- JS -->
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+
+  </body>
+</html>
