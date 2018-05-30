@@ -1,0 +1,187 @@
+/* ***************ALL BODY ****************/
+
+body {
+  background-color: lightgrey;
+}
+
+/* *********** HEADER AND FOOTER *************/
+
+header, footer {
+  background-color: lightpink;
+  position: fixed;
+  width: 100vw;
+  right: 0;
+}
+
+header {
+  top: 0;
+  max-height: 8vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+header h1 {
+  margin: 1vh 2vw;
+}
+
+footer {
+  bottom: 0;
+  text-align: center;
+  margin: 0;
+}
+
+/* *************** MAIN ****************/
+
+main {
+  padding: 8vh 0;
+  margin-bottom: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: .75fr 6fr 6fr;
+}
+
+
+/* ************* ALL SECTIONS ************ */
+
+h2 {
+  margin: 0;
+  padding: 2vh;
+  text-align: center;
+}
+
+/* *************** TOP SECTION ************** */
+
+section:first-child {
+  grid-area: 1 / 1 / 2 / 3;
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  font-size: 1em;
+  background: linear-gradient(lightpink, grey);
+  font-weight: bold;
+  padding: .5em;
+}
+
+button:hover {
+  background: linear-gradient(grey, lightpink);
+}
+
+#status-message {
+  background-color: darkgrey;
+  font-style: italic;
+  font-weight: bold;
+  margin: 0 5vw;
+}
+
+
+
+/* ********** ALL TRIPS SECTION *********** */
+
+#all-trips {
+  grid-area: 2 / 1 / 4 / 2;
+  text-align: center;
+  margin: 1vw;
+  padding: 0;
+  max-width: 45vw;
+}
+
+
+#trip-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 70vh;
+  overflow-x: scroll;
+}
+
+#trip-list li {
+  padding: 2vh;
+}
+
+#trip-list li a {
+  color: black;
+  font-size: 1.15em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#trip-list li a:hover {
+  text-decoration: underline;
+  font-size: 1.4em;
+}
+
+
+/* *********** TRIP DETAIL SECTION ************* */
+
+#trip-details {
+  margin: 1vw;
+  grid-area: 2 / 2 / 3 / 3;
+}
+
+#trip-details ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 35vh;
+  overflow-x: scroll;
+}
+
+#trip-details li {
+  margin: .5vw;
+  font-size: 1.15em;
+}
+-
+#trip-details li:first-child {
+  font-size: 1.3em;
+}
+
+/* ********* TRIP RESERVATION SECTION ********* */
+
+#trip-reservation {
+  grid-area: 3 / 2 / 4 / 3 ;
+  margin: 1vw;
+}
+
+#trip-reservation form {
+  padding: 2vw;
+  font-size: 1.15em;
+}
+
+#trip-reservation form submit {
+  font-size: 1em;
+  background: linear-gradient(lightpink, grey);
+  font-weight: bold;
+  padding: .5em;
+}
+
+/* ********* STYLES USED BY JQUERY ********** */
+
+.bordered {
+  border: solid black .25px;
+}
+
+.bordered-bottom {
+  border-bottom: solid black .5px;
+}
+
+.success {
+  color: green;
+  padding: 1vw;
+}
+
+.err {
+  color: red;
+  padding: auto 1vw;
+}
+
+.err p {
+  margin: 0;
+}
+
+.err ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0
+}
