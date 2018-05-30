@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Trek</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Compressed CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="grid-x grid-padding-x">
+  <h1 class="small-12 medium-12 cell" id="title">Trek</h1>
+  <h3 class="small-12 medium-12 cell" id="userMessages"><h3>
+
+  <button type="button" class="button secondary" id="seetrips">See All Trips</button>
+</div>
+
+  <div class="grid-x grid-padding-x">
+    <div class="small-12 medium-6 cell">
+      <div class="table-scroll">
+        <table id="showtrips" class="hover">
+        </table>
+      </div>
+    </div>
+    <div class="small-12 medium-6 cell">
+      <div class="Trip">
+        <table id="tripDetails">
+        </table>
+
+        <div class="ReserveTrip">
+          <h1>Reserve Trip</h1>
+          <form id="reservationForm">
+            <div>
+              <label for="name">Your Name: </label>
+              <input type="text" name="name" id="travellerName"/>
+              <label for="email">Your Email: </label>
+              <input type="text" name="email" id="travellerEmail"/>
+            </div>
+            <div id="tripName">
+            </div>
+            <input type="submit" name="reserve-trip" value="Reserve Trip" />
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
