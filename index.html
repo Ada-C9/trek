@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Trek</title>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <h1><a href="index.html">Trek!</a></h1>
+    </nav>
+  </header>
+  <section id="status-message"></section>
+  <button id="load-all-trips">See All Trips</button>
+  <main>
+
+    <section class="trips">
+
+      <table id="trip-table">
+        <tr>
+          <td id="trip"></td>
+        </tr>
+      </table>
+    </section>
+    <section>
+      <section class="specific-trip">
+        <h3>Trip Details</h3>
+        <ul id="single-trip"></ul>
+      </section>
+
+      <section class="reserve-trip">
+        <h3>Reserve Trip</h3>
+        <form id="reserve-trip">
+          <div>
+            <label for"name"><span class="important">Your Name</span></label>
+            <input type="text" name="name" />
+          </div>
+          <div>
+            <label for"email"><span class="important">Your Email</span></label>
+            <input type="text" name="email" />
+          </div>
+          <div>
+            <label for"trip"><span class="important">Trip</span></label>
+            <input type="text" id="trip_name" name="trip" disabled>
+          </div>
+          <div>
+            <input type="hidden" id="trip_id" name="trip_id" value="">
+          </div>
+
+          <input class="button" type="submit" name="reserve-trip" value="Reserve Trip" />
+        </form>
+      </section>
+    </section>
+
+  </main>
+
+  <footer>
+  </footer>
+</body>

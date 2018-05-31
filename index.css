@@ -1,0 +1,97 @@
+/* Mobile Ready */
+@media screen and (max-width: 760px) {
+
+    [class*="col-"] {
+        width: 100%;
+    }
+
+}
+
+/* All */
+* {
+  font-family: 'Playfair Display', serif;
+}
+
+button {
+  background-color: lightgrey;
+  border: 2px solid darkgrey;
+  border-radius: 10px;
+  color: white;
+  display: inline-block;
+  padding: 5px 5px;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+button:hover {
+  color: deepskyblue;
+}
+
+/* Top-Nav */
+nav {
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  border-bottom: darkgrey 5px solid;
+  margin: 0 0 2em 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  color: deepskyblue;
+}
+
+/* Main */
+
+
+#status-message {
+  margin: 0 0 2em 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.important {
+  font-weight: bold;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+}
+
+#trip-table tr:nth-child(odd) {
+  background-color: darkblue;
+  color: white;
+}
+
+#trip-table td {
+  border-radius: 5px;
+}
+
+.trips {
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
+.button {
+  background-color: lightgrey;
+  border: 2px solid darkgrey;
+  border-radius: 10px;
+  color: white;
+  display: inline-block;
+  padding: 5px 5px;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.button:hover {
+  color: deepskyblue;
+}
