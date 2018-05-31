@@ -1,0 +1,43 @@
+body {
+  background-color: rgb(140, 213, 90);
+  font-family: 'Scada', sans-serif;
+}
+
+header {
+  border-bottom: solid;
+}
+
+main {
+  min-height: 80vh;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: space-around;
+}
+
+
+footer {
+  border-top: solid;
+}
+
+section {
+    max-height: 80vh;
+    width: 45vw;
+    overflow: scroll;
+    padding: .5em
+}
+
+.button {
+  background-color: rgb(140, 213, 90);
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+}
+
+#selected-trip{
+  max-height: 55vh;
+  overflow: scroll;
+}
+
+#trip-booking{
+  max-height: 25vh;
+  overflow: scroll;
+}
