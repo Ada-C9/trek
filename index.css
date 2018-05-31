@@ -1,0 +1,72 @@
+h1 {
+  border-bottom: solid;
+  color: darkblue;
+}
+
+li {
+  list-style-type: none;
+}
+
+h2 {
+margin-left: 40px;
+color: darkblue;
+}
+
+
+#new-trip, #trip-details, #hidden {
+  display: none;
+}
+
+
+#trips-list li {
+  border-bottom: solid;
+  border-color: darkblue;
+  padding: 1em;
+}
+
+#trips-list li:hover {
+  color: gray;
+}
+
+
+div#new-trip {
+    width:  45%;
+}
+
+input[type="text"] {
+    background-color:  lightblue;
+    margin: 1.2em;
+}
+
+#load {
+  padding: 1.2em;
+  background-color:  lightgrey;
+}
+
+#trip-name {
+  border-top: solid;
+  margin: 2em;
+}
+
+#selected-name {
+  color: darkblue;
+}
+
+main {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: space-around;
+}
+
+form#trip-form div :nth-child(even) {
+    width: 80%;
+}
+
+
+input[type="submit"] {
+    width: 15vw;
+    height: 6vh;
+    padding: 1.2em;
+    border-radius: 0%;
+    background-color:  lightgrey;
+}
