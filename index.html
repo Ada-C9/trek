@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Trek</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <img src="world.png">
+    <h1>Trek</h1>
+  </header>
+  <section id="status-message"></section>
+  <main class="container">
+    <section class="button-container">
+      <button class="button" id="load">See All Trips</button>
+    </section>
+    <section class="trips">
+      <table id="table">
+        <thead>
+          <tr>
+            <th id="table-th">
+              All Trips
+            </th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+      </table>
+    </section>
+
+    <section id="trip-info">
+      <table id="trip-details">
+        <thead>
+          <tr>
+            <th class="detail-header">
+              Trip Details
+            </th>
+          </tr>
+        </thead>
+        <tbody id="detailBody">
+        </tbody>
+      </table>
+
+      <section class="new-reservation">
+        <div class="reserve">Reserve Trip</div>
+        <form id="reservation-form">
+          <div id="trip-name">
+            <label for="name">Trip:</label>
+          </div>
+          <div>
+            <label for="name">Name: </label>
+            <input type="text" name="name" />
+          </div>
+          <div>
+            <label for="email">Email: </label>
+            <input type="text" name="email" />
+          </div>
+          <div class="submit-container">
+            <input type="submit" name="add-reservation" value="Reserve" class="submit"/>
+          </div>
+        </form>
+      </section>
+    </section>
+  </main>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+  <script type="text/javascript"> $("#table").hide(); </script>
+  <script type="text/javascript"> $("#trip-info").hide(); </script>
+</body>
+</html>
