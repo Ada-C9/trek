@@ -1,0 +1,53 @@
+
+#banner {
+  position: relative;
+  height: 300px;
+  width: auto;
+  object-fit: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  color: white;
+  background-image: url("train.jpg");
+  background-size: cover;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: lavender;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* .trips {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 2;
+} */
+
+#aside {
+  display: grid;
+}
+
+#new-reserve {
+  grid-column: 2;
+  grid-row: 1;
+  display: none;
+}
+
+#details {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 15px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
