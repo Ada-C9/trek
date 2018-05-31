@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Trekitup</title>
+  <link rel="stylesheet" href="html.css">
+</head>
+<body class="grid-container">
+
+  <header>
+    <h1>Get Trekkin!</h1>
+    <div id="status-message">
+
+    </div>
+
+  </header>
+
+  <main>
+    <section class="list parallax">
+      <h1 id="load">See all trips</h1>
+      <ul id="tripList">
+
+      </ul>
+    </section>
+
+    <aside id="right-aside">
+      <section id="hide">
+        <h3>Trip Details</h3>
+
+        <ul id="details">
+
+        </ul>
+
+        <form id="tripForm">
+          <div>
+            <label for="name">name</label>
+            <input type="text" name="name"/>
+          </div>
+          <div>
+            <label for="age">age</label>
+            <input id="age" type="text" name="age"/>
+          </div>
+          <div>
+            <label for="email">email</label>
+            <input type="integer" name="email"/>
+          </div>
+
+          <input type="submit" name="reserve" value="reserve">
+        </form>
+
+      </section>
+    </aside>
+
+  </main>
+
+  <footer class="footer-center">
+    <h5>&copy; Trekitup 2018</h5>
+    <ul>
+      <li><small><a href="about.html">contact me!</a></small></li>
+      <li><small><a href="about.html">Help</a></small></li>
+    </ul>
+  </footer>
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+
+</body>
+</html>
