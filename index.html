@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Treker</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+  </head>
+
+  <body>
+
+
+    <header>
+      <img id="logo" src="images/travel.png" alt="Globe with plane logo">
+      <h1>Trekking's Travels</h1>
+    </header>
+
+    <section class="sub-header">
+      <button id="load">View All Trips</button>
+      <div id="status-message"></div>
+    </section>
+
+    <main>
+
+      <ul id="trip-list"></ul>
+
+      <section>
+
+        <section id="reserve-trip">
+          <form id="reserve-form">
+            <input type="hidden" name="tripID" id="tripToRes"/>
+
+            <div>
+              <label for="name">Name: </label>
+              <input type="string" name="name" />
+            </div>
+
+            <div>
+              <label for="age">Age: </label>
+              <input type="number" name="age" />
+            </div>
+
+            <div>
+              <label for="email">Email: </label>
+              <input type="string" name="email" />
+            </div>
+
+            <input id="submit" type="submit" name="add-reservation" />
+          </form>
+        </section>
+
+        <section id="trip-details">
+          <div id="name"></div>
+          <div id="continent"></div>
+          <div id="about"></div>
+          <div id="weeks"></div>
+          <div id="cost"></div>
+          <div id="category"></div>
+        </section>
+
+      </section>
+
+    </main>
+
+  </body>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+
+</html>
