@@ -1,0 +1,68 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+}
+
+button, .button {
+  margin: 0.5em;
+  background: linear-gradient(#F0F0F0, #7C7B7B);
+  color: #FFFFFF;
+  border-radius: 5px;
+  font-size: 0.85em;
+  padding: 0.8em;
+  cursor: pointer;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.hidden {
+  display: none;
+}
+
+.trip-detail h3 {
+  text-align: center;
+}
+
+.trip-detail-section {
+  margin-bottom: 0.5em;
+}
+
+.trip-detail-section, .reserve-trip{
+  border: .5px solid black;
+  padding: 0 1em 1em 1em;
+}
+
+.trips, span {
+  cursor: pointer;
+  margin-bottom: 1em;
+}
+
+.trips li {
+  padding: 0.5em;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+#trip-form > div {
+  margin-bottom: 0.5em;
+}
+
+#reserve-trip-button {
+  margin-top: 1em;
+}
+
+.more {
+  background-color: lightgrey;
+}
+
+@media screen and (max-width: 630px) {
+  .container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .trips, .trip-detail-section {
+  }

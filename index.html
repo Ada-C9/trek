@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Trek</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <section id="status-message"></section>
+    <h1>Trek</h1>
+    <div>
+      <h3>Welcome To Trek</h3>
+      <h4>Your destination for planning a fabulous trip to... another destination.</h4>
+    </div>
+    <main>
+      <section class="buttons">
+        <button id="load">See ALL Trips</button>
+        <button id="asia">Asia</button>
+        <button id="africa">Africa</button>
+        <button id="antartica">Antartica</button>
+        <button id="australasia">Australasia</button>
+        <button id="europe">Europe</button>
+        <button id="north-amer">North America</button>
+        <button id="south-amer">South America</button>
+      </section>
+      <div class="container">
+        <div>
+          <ul class="trips hidden" id="trip-list"></ul>
+        </div>
+        <section class="hidden trip-detail">
+          <h3>Trip Details</h3>
+          <div id="trip-detail-section" class="trip-detail-section">
+          </div>
+          <div class="reserve-trip">
+            <h3>Reserve Trip</h3>
+            <form id="trip-form">
+              <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input type="text" name="email" />
+              </div>
+              <input class="button" type="submit" name="add-trip" value="Reserve Trip" />
+            </form>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
