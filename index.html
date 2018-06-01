@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Trek</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/foundation/6.2.3/foundation.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Trek the World</h1>
+    <button id="load" class="button">See All Trips</button>
+  </header>
+
+  <section id="status-message"></section>
+
+  <main class="row">
+    <section class="small-6 columns trips-container">
+      <table id="table">
+        <thead>
+          <tr>
+            <th>Trip Id</th>
+            <th>Trip Name</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </section>
+
+    <section class="small-6 columns trips-container">
+      <table id="details">
+        <thead>
+          <tr>
+            <th>
+              Trip Details
+            </th>
+          </tr>
+        </thead>
+        <tbody id="trip-info"></tbody>
+      </table>
+
+      <button id="reservation-form" class="button">Reserve Trip</button>
+      
+    </section>
+  </main>
+
+  <footer>
+    <h5>Nicoleta Brandolini @2018</h5>
+  </footer>
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="trek.js"></script>
+</body>
+</html>
