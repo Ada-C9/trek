@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>TREbeK</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.4/foundation.min.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <header class="header-flex">
+      <h1>TREK</h1>
+      <button id="all-trips" type="button" name="all-trips" class="button">All Trips</button>
+
+      <button id="add-trip" type="button" name="add-trip" class="button">Add Trip</button>
+    </header>
+
+    <section id="status-message"></section>
+
+    <main class="main-flex">
+
+      <div class="vertical-panels left">
+        <ul id="trip-list"></ul>
+      </div>
+
+      <div class="vertical-panels right">
+        <section id="show-trip"></section>
+
+        <section id="reserve-trip">
+          <h3>Reserve Trip: <span id="reserve-trip-id"></span></h3>
+
+          <form id="reserve-form">
+            <div>
+              <label for="name">Name</label>
+              <input type="text" name="reservation-name">
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="text" name="email">
+            </div>
+            <input type="submit" name="reserve-spot" value="Reserve">
+          </form>
+        </section>
+
+        <!-- <section id="homescreen">
+          <p>Test</p>
+        </section> -->
+
+        <section id="new-trip">
+          <h3>Add Trip</h3>
+          <form id="add-trip-form">
+            <div>
+              <label for="name">Name</label>
+              <input type="text" name="name">
+            </div>
+            <div>
+              <label for="continent">Continent</label>
+              <input type="text" name="continent">
+            </div>
+            <div>
+              <label for="category">Category</label>
+              <input type="text" name="category">
+            </div>
+            <div>
+              <label for="weeks">Weeks</label>
+              <input type="number" name="weeks">
+            </div>
+            <div>
+              <label for="cost">Cost</label>
+              <input type="number" step="0.01" name="cost">
+            </div>
+            <div>
+              <label for="about">About</label>
+              <input type="text" name="about">
+            </div>
+            <input type="submit" name="add-trip" value="Add">
+          </form>
+        </section>
+      </div>
+
+    </main>
+
+    <footer>
+      <p>Powered by: ada-backtrek-api</p>
+    </footer>
+
+    <!-- JS scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>

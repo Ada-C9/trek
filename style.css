@@ -1,0 +1,114 @@
+/* OVERALL PAGE */
+body {
+  margin-left: 4em;
+  margin-right: 4em;
+  /* background: url(https://images.unsplash.com/photo-1499123785106-343e69e68db1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f946973b7550539f4be0f89693b5cb1c&auto=format&fit=crop&w=1953&q=80);
+  background-repeat: no-repeat;
+  background-size: cover; */
+}
+
+.header-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* HEADER */
+header, main, section, footer {
+  /* border: black 1px dashed; */
+}
+
+header {
+  /* background-color: #ffffff85; */
+  background-color: gray;
+}
+
+h1, button[name] {
+  margin: 10px 40px;
+}
+
+/* SECTION */
+#status-message {
+  text-align: center;
+  background-color: lightgreen;
+  opacity: 0.7;
+}
+
+/* MAIN */
+.main-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+#trip-list {
+  list-style-type: none;
+}
+
+#trip-list li {
+  /* margin: 1em 0em; */
+  height: 40px;
+}
+
+#trip-list li:first-child {
+  margin-top: 0;
+}
+
+.right, .left {
+  margin-top: 1em;
+}
+
+div.left {
+  margin-left: 4em;
+  overflow: auto;
+  max-height: 100vh;
+  width: 30vw;
+}
+
+div.right {
+  margin-right: 4em;
+  width: 50vw;
+}
+
+button.trip {
+  width: 100%;
+  border-bottom: black 1px solid;
+}
+
+section#show-trip {
+  height: 40vh;
+  overflow: auto;
+}
+
+/* display none until single trip is clicked */
+section#reserve-trip {
+  display: none;
+  border-top: 1px solid black;
+  padding-top: 2em;
+  border-bottom: 1px solid black;
+  padding-bottom: 2em;
+}
+
+/* display none until add trip is clicked */
+section#new-trip {
+  display: none;
+}
+
+button#add-trip {
+  margin-top: 2em;
+  margin-left: 0;
+}
+
+/* FOOTER */
+footer {
+  position: fixed;
+  height: 30px;
+  text-align: center;
+  /* background-color: #ffffff85; */
+  background-color: gray;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-left: 4em;
+  margin-right: 4em;
+  margin-bottom: 0px;
+}
