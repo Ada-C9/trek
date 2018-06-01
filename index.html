@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="style.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow|Playfair+Display+SC" rel="stylesheet">
+    <title>TREK</title>
+  </head>
+
+  <body>
+    <main class="page-wrap">
+      <header class="img">
+        <h1 class="title">Trip Finder</h1>
+      </header>
+      <section class="navigation">
+        <button class="trips" id="load">All Trips</button>
+        <button class="trips" id="asia">Asia</button>
+        <button class="trips" id="africa">Africa</button>
+        <button class="trips" id="antartica">Antartica</button>
+        <button class="trips" id="australasia">Australasia</button>
+        <button class="trips" id="europe">Europe</button>
+        <button class="trips" id="n-amer">North America</button>
+        <button class="trips" id="s-amer">South America</button>
+          <button id="create-trip" class="trips">
+            ADD TRIP</button>
+            <section id="tripModal" class="modal">
+              <form id="new-form">
+                <div class="modal-content">
+                  <span id="close" class="exit" title="Close">&times;</span>
+                  <h1>🌎 Make a Trip! 🌏</h1>
+                  <section id="status-message-two"></section>
+                  <div>
+                    <label for="name">Trip name: </label>
+                    <input type="text" name="name" />
+                  </div>
+                  <div>
+                    <label for="continent">Continent: </label>
+                    <input type="text" name="continent" />
+                  </div>
+                  <div>
+                    <label for="Category">Category: </label>
+                    <input type="text" name="category" />
+                  </div>
+                  <div>
+                    <label for="about">About: </label>
+                    <input type="text" name="about" />
+                  </div>
+                  <div>
+                    <label for="weeks">Weeks: </label>
+                    <input type="integer" name="weeks" />
+                  </div>
+                  <div>
+                    <label for="cost">Cost: </label>
+                    <input type="cloat" name="cost" />
+                  </div>
+                  <input type="submit" name="create-trip" value="Create Trip" />
+                </div>
+              </form>
+            </section>
+        <section id="status-message"></section>
+      </section>
+
+      <section class="bulk">
+        <article class="content-split">
+          <ul id='trips-list'>
+          </ul>
+        </article>
+        <article id="additionals" class="hidden content-split">
+          <div id="chosen-trip">
+          </div>
+          <div id="reserve-trip">
+            <form id="trip-form" class="rez">
+              <h1>🚀 Reserve Your Spot! 🚀</h1>
+                  <div id="trip-id">
+                  </div>
+                  <div>
+                    <label for="name">Your name: </label>
+                    <input type="text" name="name" />
+                  </div>
+                  <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" />
+                  </div>
+                  <input type="submit" name="make-reservation" value="Make Reservation" />
+            </form>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer id="footer" class="site-footer">
+      <section class="colophon">
+        Bon Voyage!
+      </section>
+    </footer>
+  </body>
+</html>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script
+    src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="index.js"></script>
