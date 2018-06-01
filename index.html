@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Trek</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Belleza" rel="stylesheet">
+  </head>
+  <body>
+    <div class='head'>
+    <header>
+      <h1>TREK</h1>
+    </header>
+
+    <section class='buttons'>
+    <button id="load">All Trips</button>
+    <button id="north-america" class='continent'>North America</button>
+    <button id="south-america" class='continent'>South America</button>
+    <button id="Asia" class='continent'>Asia</button>
+    <button id="Africa" class='continent'>Africa</button>
+    <button id="Europe" class='continent'>Europe</button>
+    <button id="Australia" class='continent'>Australasia</button>
+    <button id="Antartica" class='continent'>Antartica</button>
+  </section>
+
+    <section id='refine-trips'>
+      <h3>Refine your Search</h3>
+      <div class='budget'>
+        <label for="budget">Max Budget: $</label>
+        <input type="text" name="budget" />
+        <button id="budget">Find Trips</button>
+      </div>
+    </section>
+
+    <section id="status-message"></section>
+
+    </div>
+    <main>
+
+      <section class='all-trips'>
+
+        <ul id="trip-list"></ul>
+
+      </section>
+
+      <div id='trip-info'>
+        <section id='trip'>
+
+        </section>
+
+        <section id='reservations'>
+          <form id="reserve">
+
+            <div class='trip-name'>
+              <label for="trip-name"></label>
+            </div>
+
+            <div class='name'>
+                <label for="name"></label>
+            </div>
+            <div class='email'>
+              <label for="email"></label>
+
+            </div>
+
+            </form>
+        </section>
+      </div>
+
+      </main>
+
+      <script
+    src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
